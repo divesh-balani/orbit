@@ -4,7 +4,7 @@ import type { SeoPageContent } from "../../seo/types";
 export const screenRecorderContent: SeoPageContent = {
 	title: "Screen Recorder: High-Quality, User-Friendly, and 100% Free Locally",
 	description:
-		"Cap is a powerful, user-friendly screen recorder and is 100% free locally with no usage limits. Perfect for team collaboration, creating tutorials, or recording professional presentations with ease and precision.",
+		"Orbit is a powerful, user-friendly screen recorder and is 100% free locally with no usage limits. Perfect for team collaboration, creating tutorials, or recording professional presentations with ease and precision.",
 
 	featuresTitle: "Key Features",
 	featuresDescription:
@@ -24,7 +24,7 @@ export const screenRecorderContent: SeoPageContent = {
 		{
 			title: "Cross-Platform Support",
 			description:
-				"Whether you need to <a href='/screen-recorder-mac'>screen record on Mac</a> or use a <a href='/screen-recorder-windows'>Windows screen recorder</a>, Cap works perfectly on both platforms.",
+				"Whether you need to <a href='/screen-recorder-mac'>screen record on Mac</a> or use a <a href='/screen-recorder-windows'>Windows screen recorder</a>, Orbit works perfectly on both platforms.",
 		},
 		{
 			title: "Completely Free",
@@ -44,13 +44,13 @@ export const screenRecorderContent: SeoPageContent = {
 		{
 			title: "Professional Software",
 			description:
-				"Cap is professional-grade <a href='/screen-recording-software'>screen recording software</a> that's both powerful and easy to use.",
+				"Orbit is professional-grade <a href='/screen-recording-software'>screen recording software</a> that's both powerful and easy to use.",
 		},
 	],
 
 	useCasesTitle: "Popular Uses",
 	useCasesDescription:
-		"Explore how Cap can support your team's productivity and streamline your workflow",
+		"Explore how Orbit can support your team's productivity and streamline your workflow",
 
 	useCases: [
 		{
@@ -78,42 +78,42 @@ export const screenRecorderContent: SeoPageContent = {
 	faqsTitle: "Frequently Asked Questions",
 	faqs: [
 		{
-			question: "Is Cap a free screen recorder?",
+			question: "Is Orbit a free screen recorder?",
 			answer:
-				"Yes, Cap offers a powerful free version, making it one of the best free screen recorders available. The local version is 100% free with no usage limits, but Cap Pro is available for users who need additional features.",
+				"Yes, Orbit offers a powerful free version, making it one of the best free screen recorders available. The local version is 100% free with no usage limits, but Orbit Pro is available for users who need additional features.",
 		},
 		{
-			question: "How does Cap compare to OBS?",
+			question: "How does Orbit compare to OBS?",
 			answer:
-				"Cap is designed to be highly user-friendly while delivering high recording quality. It’s a simpler, yet powerful, alternative to OBS for users seeking an intuitive experience.",
+				"Orbit is designed to be highly user-friendly while delivering high recording quality. It’s a simpler, yet powerful, alternative to OBS for users seeking an intuitive experience.",
 		},
 		{
-			question: "Can I download Cap on multiple devices?",
+			question: "Can I download Orbit on multiple devices?",
 			answer:
-				"Yes, Cap is cross-platform and can be downloaded on macOS and Windows, allowing you to use it across multiple devices.",
+				"Yes, Orbit is cross-platform and can be downloaded on macOS and Windows, allowing you to use it across multiple devices.",
 		},
 		{
-			question: "What platforms does Cap support?",
+			question: "What platforms does Orbit support?",
 			answer:
-				"Cap is compatible with <a href='/screen-recorder-mac'>macOS</a> and <a href='/screen-recorder-windows'>Windows</a>, making it versatile for any user or team. Our <a href='/free-screen-recorder'>free screen recorder</a> works great on both platforms.",
+				"Orbit is compatible with <a href='/screen-recorder-mac'>macOS</a> and <a href='/screen-recorder-windows'>Windows</a>, making it versatile for any user or team. Our <a href='/free-screen-recorder'>free screen recorder</a> works great on both platforms.",
 		},
 		{
-			question: "How does Cap improve team productivity?",
+			question: "How does Orbit improve team productivity?",
 			answer:
-				"Cap’s advanced collaboration features make it easy to share, review, and provide feedback on screen recordings, helping teams work more effectively together.",
+				"Orbit’s advanced collaboration features make it easy to share, review, and provide feedback on screen recordings, helping teams work more effectively together.",
 		},
 	],
 
 	video: {
-		url: "/videos/cap-demo.mp4",
-		thumbnail: "/videos/cap-demo-thumbnail.png",
-		alt: "Cap screen recorder demo showing high-quality and user-friendly features",
+		url: "/videos/orbit-demo.mp4",
+		thumbnail: "/videos/orbit-demo-thumbnail.png",
+		alt: "Orbit screen recorder demo showing high-quality and user-friendly features",
 	},
 
 	cta: {
 		title:
-			"Get Started with Cap – The Easy, High-Quality, and Free Screen Recorder",
-		buttonText: "Download Cap Free",
+			"Get Started with Orbit – The Easy, High-Quality, and Free Screen Recorder",
+		buttonText: "Download Orbit Free",
 	},
 };
 

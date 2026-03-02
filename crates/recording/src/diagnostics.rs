@@ -81,7 +81,7 @@ pub fn collect_displays() -> Vec<DisplayDiagnostics> {
     displays
         .into_iter()
         .enumerate()
-        .map(|(idx, (cap_display, display))| {
+        .map(|(idx, (orbit_display, display))| {
             let physical_size = display.physical_size();
             let logical_size = display.logical_size();
 
@@ -95,11 +95,11 @@ pub fn collect_displays() -> Vec<DisplayDiagnostics> {
             };
 
             DisplayDiagnostics {
-                id: cap_display.id.to_string(),
-                name: cap_display.name,
+                id: orbit_display.id.to_string(),
+                name: orbit_display.name,
                 width,
                 height,
-                refresh_rate: cap_display.refresh_rate,
+                refresh_rate: orbit_display.refresh_rate,
                 scale_factor,
                 is_primary: idx == 0,
             }
@@ -222,7 +222,7 @@ mod windows_impl {
     }
 
     fn get_windows_version_info() -> Option<WindowsVersionInfo> {
-        scap_direct3d::WindowsVersion::detect().map(|v| WindowsVersionInfo {
+        sorbit_direct3d::WindowsVersion::detect().map(|v| WindowsVersionInfo {
             major: v.major,
             minor: v.minor,
             build: v.build,
@@ -232,7 +232,7 @@ mod windows_impl {
         })
     }
 
-    fn gpu_info_to_diag(info: &cap_frame_converter::GpuInfo) -> GpuInfoDiag {
+    fn gpu_info_to_diag(info: &orbit_frame_converter::GpuInfo) -> GpuInfoDiag {
         GpuInfoDiag {
             vendor: info.vendor_name().to_string(),
             description: info.description.clone(),
@@ -245,11 +245,11 @@ mod windows_impl {
     }
 
     fn get_gpu_info() -> Option<GpuInfoDiag> {
-        cap_frame_converter::detect_primary_gpu().map(gpu_info_to_diag)
+        orbit_frame_converter::detect_primary_gpu().map(gpu_info_to_diag)
     }
 
     fn get_all_gpus_info() -> Option<AllGpusInfo> {
-        let all_gpus = cap_frame_converter::get_all_gpus();
+        let all_gpus = orbit_frame_converter::get_all_gpus();
 
         if all_gpus.is_empty() {
             return None;
@@ -257,7 +257,7 @@ mod windows_impl {
 
         let gpus: Vec<GpuInfoDiag> = all_gpus.iter().map(gpu_info_to_diag).collect();
 
-        let primary_gpu = cap_frame_converter::detect_primary_gpu();
+        let primary_gpu = orbit_frame_converter::detect_primary_gpu();
         let primary_gpu_index = primary_gpu.and_then(|primary| {
             all_gpus
                 .iter()
@@ -268,10 +268,10 @@ mod windows_impl {
         let has_discrete = all_gpus.iter().any(|g| {
             matches!(
                 g.vendor,
-                cap_frame_converter::GpuVendor::Nvidia
-                    | cap_frame_converter::GpuVendor::Amd
-                    | cap_frame_converter::GpuVendor::Qualcomm
-                    | cap_frame_converter::GpuVendor::Arm
+                orbit_frame_converter::GpuVendor::Nvidia
+                    | orbit_frame_converter::GpuVendor::Amd
+                    | orbit_frame_converter::GpuVendor::Qualcomm
+                    | orbit_frame_converter::GpuVendor::Arm
             ) && !g.is_software_adapter
         });
 
@@ -349,11 +349,11 @@ mod windows_impl {
     }
 
     fn check_graphics_capture_support() -> bool {
-        scap_direct3d::is_supported().unwrap_or(false)
+        sorbit_direct3d::is_supported().unwrap_or(false)
     }
 
     fn check_d3d11_video_processor() -> bool {
-        use cap_frame_converter::ConversionConfig;
+        use orbit_frame_converter::ConversionConfig;
 
         let test_config = ConversionConfig::new(
             ffmpeg::format::Pixel::BGRA,
@@ -364,7 +364,7 @@ mod windows_impl {
             1080,
         );
 
-        match cap_frame_converter::D3D11Converter::new(test_config) {
+        match orbit_frame_converter::D3D11Converter::new(test_config) {
             Ok(converter) => {
                 tracing::debug!(
                     "D3D11 video processor check passed: {} ({})",

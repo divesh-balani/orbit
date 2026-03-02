@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import clsx from "clsx";
 import { useDetectPlatform } from "hooks/useDetectPlatform";
 import { Clapperboard, Zap } from "lucide-react";
@@ -100,7 +100,7 @@ const RecordingModes = () => {
 							}}
 						>
 							<iframe
-								src="https://cap.so/embed/8cq21vmz12tm1zf"
+								src="https://orbit.so/embed/8cq21vmz12tm1zf"
 								frameBorder="0"
 								allowFullScreen
 								style={{
@@ -125,7 +125,7 @@ const RecordingModes = () => {
 							}}
 						>
 							<iframe
-								src="https://cap.so/embed/qk8gt56e1q1r735"
+								src="https://orbit.so/embed/qk8gt56e1q1r735"
 								frameBorder="0"
 								allowFullScreen
 								style={{

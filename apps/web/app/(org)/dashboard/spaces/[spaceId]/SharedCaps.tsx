@@ -1,8 +1,8 @@
 "use client";
 
-import type { VideoMetadata } from "@cap/database/types";
-import { Button } from "@cap/ui";
-import type { Organisation, Space, User, Video } from "@cap/web-domain";
+import type { VideoMetadata } from "@orbit/database/types";
+import { Button } from "@orbit/ui";
+import type { Organisation, Space, User, Video } from "@orbit/web-domain";
 import { faFolderPlus, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -77,7 +77,7 @@ export const SharedCaps = ({
 	const limit = 15;
 	const [openNewFolderDialog, setOpenNewFolderDialog] = useState(false);
 	const totalPages = Math.ceil(count / limit);
-	const [isDraggingCap, setIsDraggingCap] = useState({
+	const [isDraggingOrbit, setIsDraggingCap] = useState({
 		isOwner: false,
 		isDragging: false,
 	});
@@ -163,7 +163,7 @@ export const SharedCaps = ({
 
 	return (
 		<div className="flex relative flex-col w-full h-full">
-			{isDraggingCap.isDragging && (
+			{isDraggingOrbit.isDragging && (
 				<div className="fixed inset-0 z-50 pointer-events-none">
 					<div className="flex justify-center items-center w-full h-full">
 						<div className="flex gap-2 items-center px-5 py-3 text-sm font-medium text-white rounded-xl bg-blue-12">
@@ -172,7 +172,7 @@ export const SharedCaps = ({
 								icon={faInfoCircle}
 							/>
 							<p className="text-white">
-								{isDraggingCap.isOwner
+								{isDraggingOrbit.isOwner
 									? " Drag to a space to share or folder to move"
 									: "Only the video owner can drag and move the video"}
 							</p>
@@ -249,15 +249,15 @@ export const SharedCaps = ({
 				<>
 					<h1 className="mb-4 text-2xl font-medium text-gray-12">Videos</h1>
 					<div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-						{data.map((cap) => {
-							const isOwner = cap.ownerId === currentUserId;
+						{data.map((orbit) => {
+							const isOwner = orbit.ownerId === currentUserId;
 							return (
 								<SharedCapCard
-									key={cap.id}
-									cap={cap}
+									key={orbit.id}
+									orbit={orbit}
 									hideSharedStatus
 									isLoadingAnalytics={analyticsQuery.isLoading}
-									analytics={analytics[cap.id] || 0}
+									analytics={analytics[orbit.id] || 0}
 									organizationName={activeOrganization?.organization.name || ""}
 									spaceName={spaceData?.name || ""}
 									userId={currentUserId}

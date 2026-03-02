@@ -1,5 +1,5 @@
 use crate::{UploadProgress, api::S3VideoMeta, web_api::AuthedApiError};
-use cap_project::{S3UploadMeta, VideoUploadInfo};
+use orbit_project::{S3UploadMeta, VideoUploadInfo};
 use flume::Receiver;
 use serde::Serialize;
 use specta::Type;

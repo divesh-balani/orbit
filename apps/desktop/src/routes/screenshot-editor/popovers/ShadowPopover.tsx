@@ -1,6 +1,6 @@
 import { Popover } from "@kobalte/core/popover";
 import { batch } from "solid-js";
-import IconCapShadow from "~icons/cap/shadow";
+import IconOrbitShadow from "~icons/orbit/shadow";
 import { useScreenshotEditorContext } from "../context";
 import { EditorButton, Slider } from "../ui";
 import ShadowSettings from "./ShadowSettings";
@@ -23,7 +23,7 @@ export function ShadowPopover() {
 				onClick={() =>
 					setActivePopover(activePopover() === "shadow" ? null : "shadow")
 				}
-				leftIcon={<IconCapShadow class="size-4" />}
+				leftIcon={<IconOrbitShadow class="size-4" />}
 				tooltipText="Shadow"
 				kbd={["H"]}
 			/>

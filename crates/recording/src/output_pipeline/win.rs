@@ -1,8 +1,8 @@
 use crate::{AudioFrame, AudioMuxer, Muxer, TaskPool, VideoFrame, VideoMuxer, screen_capture};
 use anyhow::{Context, anyhow};
-use cap_enc_ffmpeg::aac::AACEncoder;
-use cap_media_info::{AudioInfo, VideoInfo};
-use cap_timestamp::Timestamp;
+use orbit_enc_ffmpeg::aac::AACEncoder;
+use orbit_media_info::{AudioInfo, VideoInfo};
+use orbit_timestamp::Timestamp;
 use futures::channel::oneshot;
 use std::{
     path::PathBuf,
@@ -18,7 +18,7 @@ use tracing::*;
 const DEFAULT_MUXER_BUFFER_SIZE: usize = 240;
 
 fn get_muxer_buffer_size() -> usize {
-    std::env::var("CAP_MUXER_BUFFER_SIZE")
+    std::env::var("ORBIT_MUXER_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(DEFAULT_MUXER_BUFFER_SIZE)
@@ -148,7 +148,7 @@ impl Muxer for WindowsMuxer {
         let mut output = ffmpeg::format::output(&output_path)?;
 
         if fragmented {
-            cap_mediafoundation_ffmpeg::set_fragmented_mp4_options(&mut output, frag_duration_us)?;
+            orbit_mediafoundation_ffmpeg::set_fragmented_mp4_options(&mut output, frag_duration_us)?;
         }
         let audio_encoder = audio_config
             .map(|config| AACEncoder::init(config, &mut output))
@@ -162,7 +162,7 @@ impl Muxer for WindowsMuxer {
             let pause_flag = pause_flag.clone();
 
             tasks.spawn_thread("windows-encoder", move || {
-                cap_mediafoundation_utils::thread_init();
+                orbit_mediafoundation_utils::thread_init();
 
                 let encoder_preferences = &config.encoder_preferences;
 
@@ -198,7 +198,7 @@ impl Muxer for WindowsMuxer {
                             }
                         };
 
-                        cap_enc_ffmpeg::h264::H264Encoder::builder(video_config)
+                        orbit_enc_ffmpeg::h264::H264Encoder::builder(video_config)
                             .with_output_size(fallback_width, fallback_height)
                             .and_then(|builder| builder.build(&mut output_guard))
                             .map(either::Right)
@@ -209,7 +209,7 @@ impl Muxer for WindowsMuxer {
                         return fallback(None);
                     }
 
-                    match cap_enc_mediafoundation::H264Encoder::new_with_scaled_output(
+                    match orbit_enc_mediafoundation::H264Encoder::new_with_scaled_output(
                         &config.d3d_device,
                         config.pixel_format,
                         input_size,
@@ -254,9 +254,9 @@ impl Muxer for WindowsMuxer {
                                     }
                                 };
 
-                                cap_mediafoundation_ffmpeg::H264StreamMuxer::new(
+                                orbit_mediafoundation_ffmpeg::H264StreamMuxer::new(
                                     &mut output_guard,
-                                    cap_mediafoundation_ffmpeg::MuxerConfig {
+                                    orbit_mediafoundation_ffmpeg::MuxerConfig {
                                         width,
                                         height,
                                         fps: config.frame_rate,
@@ -564,7 +564,7 @@ fn duration_to_timespan(duration: Duration) -> TimeSpan {
 pub struct NativeCameraFrame {
     pub buffer:
         std::sync::Arc<std::sync::Mutex<windows::Win32::Media::MediaFoundation::IMFMediaBuffer>>,
-    pub pixel_format: cap_camera_windows::PixelFormat,
+    pub pixel_format: orbit_camera_windows::PixelFormat,
     pub width: u32,
     pub height: u32,
     pub is_bottom_up: bool,
@@ -583,14 +583,14 @@ impl VideoFrame for NativeCameraFrame {
 impl NativeCameraFrame {
     pub fn dxgi_format(&self) -> DXGI_FORMAT {
         match self.pixel_format {
-            cap_camera_windows::PixelFormat::NV12 => DXGI_FORMAT_NV12,
-            cap_camera_windows::PixelFormat::YUYV422 | cap_camera_windows::PixelFormat::UYVY422 => {
+            orbit_camera_windows::PixelFormat::NV12 => DXGI_FORMAT_NV12,
+            orbit_camera_windows::PixelFormat::YUYV422 | orbit_camera_windows::PixelFormat::UYVY422 => {
                 DXGI_FORMAT_YUY2
             }
-            cap_camera_windows::PixelFormat::ARGB | cap_camera_windows::PixelFormat::RGB32 => {
+            orbit_camera_windows::PixelFormat::ARGB | orbit_camera_windows::PixelFormat::RGB32 => {
                 DXGI_FORMAT_B8G8R8A8_UNORM
             }
-            cap_camera_windows::PixelFormat::RGB24 => DXGI_FORMAT_R8G8B8A8_UNORM,
+            orbit_camera_windows::PixelFormat::RGB24 => DXGI_FORMAT_R8G8B8A8_UNORM,
             _ => DXGI_FORMAT_NV12,
         }
     }
@@ -681,7 +681,7 @@ impl Muxer for WindowsCameraMuxer {
         let mut output = ffmpeg::format::output(&output_path)?;
 
         if fragmented {
-            cap_mediafoundation_ffmpeg::set_fragmented_mp4_options(&mut output, frag_duration_us)?;
+            orbit_mediafoundation_ffmpeg::set_fragmented_mp4_options(&mut output, frag_duration_us)?;
         }
 
         let audio_encoder = audio_config
@@ -702,7 +702,7 @@ impl Muxer for WindowsCameraMuxer {
             let encoder_preferences = config.encoder_preferences;
 
             tasks.spawn_thread("windows-camera-encoder", move || {
-                cap_mediafoundation_utils::thread_init();
+                orbit_mediafoundation_utils::thread_init();
 
                 let d3d_device = match crate::capture_pipeline::create_d3d_device() {
                     Ok(device) => device,
@@ -735,7 +735,7 @@ impl Muxer for WindowsCameraMuxer {
                             }
                         };
 
-                        cap_enc_ffmpeg::h264::H264Encoder::builder(video_config)
+                        orbit_enc_ffmpeg::h264::H264Encoder::builder(video_config)
                             .with_output_size(output_width, output_height)
                             .and_then(|builder| builder.build(&mut output_guard))
                             .map(either::Right)
@@ -746,7 +746,7 @@ impl Muxer for WindowsCameraMuxer {
                         return fallback(None);
                     }
 
-                    match cap_enc_mediafoundation::H264Encoder::new_with_scaled_output(
+                    match orbit_enc_mediafoundation::H264Encoder::new_with_scaled_output(
                         &d3d_device,
                         input_format,
                         input_size,
@@ -771,9 +771,9 @@ impl Muxer for WindowsCameraMuxer {
                                     }
                                 };
 
-                                cap_mediafoundation_ffmpeg::H264StreamMuxer::new(
+                                orbit_mediafoundation_ffmpeg::H264StreamMuxer::new(
                                     &mut output_guard,
-                                    cap_mediafoundation_ffmpeg::MuxerConfig {
+                                    orbit_mediafoundation_ffmpeg::MuxerConfig {
                                         width: output_width,
                                         height: output_height,
                                         fps: frame_rate,
@@ -1198,24 +1198,24 @@ fn convert_uyvy_to_yuyv(src: &[u8], width: u32, height: u32) -> Vec<u8> {
 }
 
 pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpeg::frame::Video> {
-    use cap_mediafoundation_utils::IMFMediaBufferExt;
+    use orbit_mediafoundation_utils::IMFMediaBufferExt;
 
-    if frame.pixel_format == cap_camera_windows::PixelFormat::MJPEG {
+    if frame.pixel_format == orbit_camera_windows::PixelFormat::MJPEG {
         return decode_mjpeg_frame(frame);
     }
 
     let ffmpeg_format = match frame.pixel_format {
-        cap_camera_windows::PixelFormat::NV12 => ffmpeg::format::Pixel::NV12,
-        cap_camera_windows::PixelFormat::YUYV422 => ffmpeg::format::Pixel::YUYV422,
-        cap_camera_windows::PixelFormat::UYVY422 => ffmpeg::format::Pixel::UYVY422,
-        cap_camera_windows::PixelFormat::ARGB | cap_camera_windows::PixelFormat::RGB32 => {
+        orbit_camera_windows::PixelFormat::NV12 => ffmpeg::format::Pixel::NV12,
+        orbit_camera_windows::PixelFormat::YUYV422 => ffmpeg::format::Pixel::YUYV422,
+        orbit_camera_windows::PixelFormat::UYVY422 => ffmpeg::format::Pixel::UYVY422,
+        orbit_camera_windows::PixelFormat::ARGB | orbit_camera_windows::PixelFormat::RGB32 => {
             ffmpeg::format::Pixel::BGRA
         }
-        cap_camera_windows::PixelFormat::RGB24 => ffmpeg::format::Pixel::BGR24,
-        cap_camera_windows::PixelFormat::BGR24 => ffmpeg::format::Pixel::BGR24,
-        cap_camera_windows::PixelFormat::YUV420P => ffmpeg::format::Pixel::YUV420P,
-        cap_camera_windows::PixelFormat::YV12 => ffmpeg::format::Pixel::YUV420P,
-        cap_camera_windows::PixelFormat::NV21 => ffmpeg::format::Pixel::NV12,
+        orbit_camera_windows::PixelFormat::RGB24 => ffmpeg::format::Pixel::BGR24,
+        orbit_camera_windows::PixelFormat::BGR24 => ffmpeg::format::Pixel::BGR24,
+        orbit_camera_windows::PixelFormat::YUV420P => ffmpeg::format::Pixel::YUV420P,
+        orbit_camera_windows::PixelFormat::YV12 => ffmpeg::format::Pixel::YUV420P,
+        orbit_camera_windows::PixelFormat::NV21 => ffmpeg::format::Pixel::NV12,
         other => anyhow::bail!("Unsupported camera pixel format: {:?}", other),
     };
 
@@ -1230,7 +1230,7 @@ pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpe
 
     let converted_data_storage;
     let (final_data, final_format): (&[u8], ffmpeg::format::Pixel) =
-        if frame.pixel_format == cap_camera_windows::PixelFormat::UYVY422 {
+        if frame.pixel_format == orbit_camera_windows::PixelFormat::UYVY422 {
             converted_data_storage = convert_uyvy_to_yuyv(data, frame.width, frame.height);
             (
                 converted_data_storage.as_slice(),
@@ -1246,7 +1246,7 @@ pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpe
     let height = frame.height as usize;
 
     match frame.pixel_format {
-        cap_camera_windows::PixelFormat::NV12 => {
+        orbit_camera_windows::PixelFormat::NV12 => {
             let y_size = width * height;
             let uv_size = y_size / 2;
             if final_data.len() >= y_size + uv_size {
@@ -1270,7 +1270,7 @@ pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpe
                 );
             }
         }
-        cap_camera_windows::PixelFormat::NV21 => {
+        orbit_camera_windows::PixelFormat::NV21 => {
             let y_size = width * height;
             let uv_size = y_size / 2;
             if final_data.len() >= y_size + uv_size {
@@ -1300,7 +1300,7 @@ pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpe
                 }
             }
         }
-        cap_camera_windows::PixelFormat::YUYV422 | cap_camera_windows::PixelFormat::UYVY422 => {
+        orbit_camera_windows::PixelFormat::YUYV422 | orbit_camera_windows::PixelFormat::UYVY422 => {
             let row_bytes = width * 2;
             let size = row_bytes * height;
             if final_data.len() >= size {
@@ -1315,7 +1315,7 @@ pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpe
                 );
             }
         }
-        cap_camera_windows::PixelFormat::ARGB | cap_camera_windows::PixelFormat::RGB32 => {
+        orbit_camera_windows::PixelFormat::ARGB | orbit_camera_windows::PixelFormat::RGB32 => {
             let row_bytes = width * 4;
             let size = row_bytes * height;
             if final_data.len() >= size {
@@ -1330,7 +1330,7 @@ pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpe
                 );
             }
         }
-        cap_camera_windows::PixelFormat::RGB24 | cap_camera_windows::PixelFormat::BGR24 => {
+        orbit_camera_windows::PixelFormat::RGB24 | orbit_camera_windows::PixelFormat::BGR24 => {
             let row_bytes = width * 3;
             let size = row_bytes * height;
             if final_data.len() >= size {
@@ -1345,7 +1345,7 @@ pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpe
                 );
             }
         }
-        cap_camera_windows::PixelFormat::YUV420P => {
+        orbit_camera_windows::PixelFormat::YUV420P => {
             let y_size = width * height;
             let uv_size = y_size / 4;
             if final_data.len() >= y_size + uv_size * 2 {
@@ -1378,7 +1378,7 @@ pub fn camera_frame_to_ffmpeg(frame: &NativeCameraFrame) -> anyhow::Result<ffmpe
                 );
             }
         }
-        cap_camera_windows::PixelFormat::YV12 => {
+        orbit_camera_windows::PixelFormat::YV12 => {
             let y_size = width * height;
             let uv_size = y_size / 4;
             if final_data.len() >= y_size + uv_size * 2 {
@@ -1431,7 +1431,7 @@ fn copy_plane(src: &[u8], dst: &mut [u8], width: usize, height: usize, stride: u
 }
 
 fn decode_mjpeg_frame(frame: &NativeCameraFrame) -> anyhow::Result<ffmpeg::frame::Video> {
-    use cap_mediafoundation_utils::IMFMediaBufferExt;
+    use orbit_mediafoundation_utils::IMFMediaBufferExt;
 
     let buffer_guard = frame
         .buffer
@@ -1467,9 +1467,9 @@ fn decode_mjpeg_frame(frame: &NativeCameraFrame) -> anyhow::Result<ffmpeg::frame
 fn flip_buffer_size(
     width: usize,
     height: usize,
-    pixel_format: cap_camera_windows::PixelFormat,
+    pixel_format: orbit_camera_windows::PixelFormat,
 ) -> usize {
-    use cap_camera_windows::PixelFormat;
+    use orbit_camera_windows::PixelFormat;
 
     match pixel_format {
         PixelFormat::NV12 | PixelFormat::NV21 => {
@@ -1514,9 +1514,9 @@ fn flip_camera_buffer_into(
     dst: &mut [u8],
     width: usize,
     height: usize,
-    pixel_format: cap_camera_windows::PixelFormat,
+    pixel_format: orbit_camera_windows::PixelFormat,
 ) {
-    use cap_camera_windows::PixelFormat;
+    use orbit_camera_windows::PixelFormat;
 
     match pixel_format {
         PixelFormat::NV12 | PixelFormat::NV21 => {
@@ -1604,7 +1604,7 @@ pub fn upload_mf_buffer_to_texture(
     frame: &NativeCameraFrame,
     buffers: &mut CameraBuffers,
 ) -> windows::core::Result<windows::Win32::Graphics::Direct3D11::ID3D11Texture2D> {
-    use cap_mediafoundation_utils::IMFMediaBufferExt;
+    use orbit_mediafoundation_utils::IMFMediaBufferExt;
     use windows::Win32::Graphics::Direct3D11::{
         D3D11_BIND_SHADER_RESOURCE, D3D11_SUBRESOURCE_DATA, D3D11_TEXTURE2D_DESC,
         D3D11_USAGE_DEFAULT,
@@ -1613,10 +1613,10 @@ pub fn upload_mf_buffer_to_texture(
 
     let dxgi_format = frame.dxgi_format();
     let bytes_per_pixel: u32 = match frame.pixel_format {
-        cap_camera_windows::PixelFormat::NV12 => 1,
-        cap_camera_windows::PixelFormat::YUYV422 | cap_camera_windows::PixelFormat::UYVY422 => 2,
-        cap_camera_windows::PixelFormat::ARGB | cap_camera_windows::PixelFormat::RGB32 => 4,
-        cap_camera_windows::PixelFormat::RGB24 => 3,
+        orbit_camera_windows::PixelFormat::NV12 => 1,
+        orbit_camera_windows::PixelFormat::YUYV422 | orbit_camera_windows::PixelFormat::UYVY422 => 2,
+        orbit_camera_windows::PixelFormat::ARGB | orbit_camera_windows::PixelFormat::RGB32 => 4,
+        orbit_camera_windows::PixelFormat::RGB24 => 3,
         _ => 2,
     };
 
@@ -1627,7 +1627,7 @@ pub fn upload_mf_buffer_to_texture(
     let lock = buffer_guard.lock()?;
     let original_data = &*lock;
 
-    let needs_uyvy_conversion = frame.pixel_format == cap_camera_windows::PixelFormat::UYVY422;
+    let needs_uyvy_conversion = frame.pixel_format == orbit_camera_windows::PixelFormat::UYVY422;
     let needs_flip = frame.is_bottom_up;
 
     let data: &[u8] = match (needs_uyvy_conversion, needs_flip) {

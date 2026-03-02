@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import MuxPlayer from "@mux/mux-player-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -295,7 +295,7 @@ export const BlogTemplate = ({ content }: { content: BlogPost }) => {
 					<figure className="overflow-hidden rounded-xl shadow-lg">
 						<MuxPlayer
 							playbackId="A6oZoUWVZjOIVZB6XnBMLagYnXE6xhDhp8Hcyky018hk"
-							metadataVideoTitle="Cap Demo"
+							metadataVideoTitle="Orbit Demo"
 							accentColor="#5C9FFF"
 							style={{ aspectRatio: "16/9", width: "100%" }}
 						/>

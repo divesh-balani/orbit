@@ -23,7 +23,7 @@ export async function generateMetadata(
 
 	if (!CONVERSION_CONFIGS[conversionPath]) {
 		return {
-			title: "Conversion Not Supported | Cap",
+			title: "Conversion Not Supported | Orbit",
 			description:
 				"This conversion type is not supported by our free online tools.",
 		};
@@ -35,7 +35,7 @@ export async function generateMetadata(
 	const targetUpper = targetFormat.toUpperCase();
 
 	return {
-		title: `${sourceUpper} to ${targetUpper} Converter | Free Online Tool | Cap`,
+		title: `${sourceUpper} to ${targetUpper} Converter | Free Online Tool | Orbit`,
 		description: `${config.description(
 			sourceFormat,
 			targetFormat,
@@ -48,12 +48,12 @@ export async function generateMetadata(
 					url: "/og.png",
 					width: 1200,
 					height: 630,
-					alt: `Cap ${sourceUpper} to ${targetUpper} Converter Tool`,
+					alt: `Orbit ${sourceUpper} to ${targetUpper} Converter Tool`,
 				},
 			],
 		},
 		alternates: {
-			canonical: `https://cap.so/tools/convert/${conversionPath}`,
+			canonical: `https://orbit.so/tools/convert/${conversionPath}`,
 		},
 	};
 }
@@ -115,20 +115,20 @@ export default async function ConversionPage(props: ConversionPageProps) {
 			},
 		],
 		cta: {
-			title: "Cap is the open source Loom alternative",
+			title: "Orbit is the open source Loom alternative",
 			description:
-				"Record, edit, and share video messages with Cap. 100% open source and privacy focused.",
-			buttonText: "Download Cap Free",
+				"Record, edit, and share video messages with Orbit. 100% open source and privacy focused.",
+			buttonText: "Download Orbit Free",
 		},
 	};
 
 	const breadcrumbSchema = createBreadcrumbSchema([
-		{ name: "Home", url: "https://cap.so" },
-		{ name: "Tools", url: "https://cap.so/tools" },
-		{ name: "Convert", url: "https://cap.so/tools/convert" },
+		{ name: "Home", url: "https://orbit.so" },
+		{ name: "Tools", url: "https://orbit.so/tools" },
+		{ name: "Convert", url: "https://orbit.so/tools/convert" },
 		{
 			name: config.title(sourceFormat, targetFormat),
-			url: `https://cap.so/tools/convert/${conversionPath}`,
+			url: `https://orbit.so/tools/convert/${conversionPath}`,
 		},
 	]);
 

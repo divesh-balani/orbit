@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { makePersisted } from "@solid-primitives/storage";
 import { createTimer } from "@solid-primitives/timer";
 import { getCurrentWindow } from "@tauri-apps/api/window";
@@ -132,7 +132,7 @@ export default function () {
 
 			<Show when={currentStep() === "permissions"}>
 				<div class="flex flex-col items-center">
-					<IconCapLogo class="size-14 mb-3" />
+					<IconOrbitLogo class="size-14 mb-3" />
 					<h1 class="text-[1.2rem] font-[700] mb-1 text-[--text-primary]">
 						Permissions Required
 					</h1>
@@ -194,7 +194,7 @@ export default function () {
 
 			<Show when={currentStep() === "mode"}>
 				<div class="flex flex-col items-center">
-					<IconCapLogo class="size-14 mb-3" />
+					<IconOrbitLogo class="size-14 mb-3" />
 					<h1 class="text-[1.2rem] font-[700] mb-1 text-[--text-primary]">
 						Select Recording Mode
 					</h1>
@@ -509,7 +509,7 @@ function Startup(props: { onClose: () => void }) {
 								onClick={handleLogoClick}
 								class="cursor-pointer inline-block"
 							>
-								<IconCapLogo
+								<IconOrbitLogo
 									class={`w-20 h-24 mx-auto drop-shadow-[0_0_100px_rgba(0,0,0,0.2)]
                   ${isLogoAnimating() ? "logo-bounce" : ""}`}
 								/>

@@ -7,7 +7,7 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>cap</string>
+				<string>orbit</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>icon.icns</string>

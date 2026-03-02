@@ -1,7 +1,7 @@
-import { db } from "@cap/database";
-import { s3Buckets, videos } from "@cap/database/schema";
-import { S3Buckets } from "@cap/web-backend";
-import type { Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { s3Buckets, videos } from "@orbit/database/schema";
+import { S3Buckets } from "@orbit/web-backend";
+import type { Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Effect, Option } from "effect";
 import { ImageResponse } from "next/og";
@@ -24,7 +24,7 @@ export async function generateVideoOgImage(videoId: Video.VideoId) {
 						"radial-gradient(90.01% 80.01% at 53.53% 49.99%,#d3e5ff 30.65%,#4785ff 88.48%,#fff 100%)",
 				}}
 			>
-				<h1 style={{ fontSize: "60px" }}>Cap not found</h1>
+				<h1 style={{ fontSize: "60px" }}>Orbit not found</h1>
 				<p style={{ fontSize: "30px" }}>
 					The video you are looking for does not exist or has moved.
 				</p>

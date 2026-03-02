@@ -4,7 +4,7 @@ use crate::{
     output_pipeline::{SetupCtx, VideoSource},
 };
 use anyhow::anyhow;
-use cap_media_info::VideoInfo;
+use orbit_media_info::VideoInfo;
 use futures::{FutureExt, channel::mpsc, future::BoxFuture};
 use std::sync::{
     Arc,

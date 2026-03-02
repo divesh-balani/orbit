@@ -7,24 +7,24 @@ import {
 import { createFAQSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "Open Source Screen Recorder — Free, Private, Self-Hostable | Cap",
+	title: "Open Source Screen Recorder — Free, Private, Self-Hostable | Orbit",
 	description:
-		"Cap is the leading open-source screen recorder for Mac and Windows. Audit the code, self-host your recordings, and own your data. MIT-licensed, 4K quality, no watermarks.",
+		"Orbit is the leading open-source screen recorder for Mac and Windows. Audit the code, self-host your recordings, and own your data. MIT-licensed, 4K quality, no watermarks.",
 	alternates: {
-		canonical: "https://cap.so/open-source-screen-recorder",
+		canonical: "https://orbit.so/open-source-screen-recorder",
 	},
 	openGraph: {
-		title: "Open Source Screen Recorder — Free, Private, Self-Hostable | Cap",
+		title: "Open Source Screen Recorder — Free, Private, Self-Hostable | Orbit",
 		description:
-			"Cap is the leading open-source screen recorder for Mac and Windows. MIT-licensed, 4K quality, instant sharing, self-hostable storage. No watermarks, no vendor lock-in.",
-		url: "https://cap.so/open-source-screen-recorder",
-		siteName: "Cap",
+			"Orbit is the leading open-source screen recorder for Mac and Windows. MIT-licensed, 4K quality, instant sharing, self-hostable storage. No watermarks, no vendor lock-in.",
+		url: "https://orbit.so/open-source-screen-recorder",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap: Open Source Screen Recorder",
+				alt: "Orbit: Open Source Screen Recorder",
 			},
 		],
 		locale: "en_US",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Open Source Screen Recorder — Free, Private, Self-Hostable | Cap",
+		title: "Open Source Screen Recorder — Free, Private, Self-Hostable | Orbit",
 		description:
-			"Cap is the leading open-source screen recorder for Mac and Windows. MIT-licensed, 4K quality, instant sharing, self-hostable storage. No watermarks, no vendor lock-in.",
-		images: ["https://cap.so/og.png"],
+			"Orbit is the leading open-source screen recorder for Mac and Windows. MIT-licensed, 4K quality, instant sharing, self-hostable storage. No watermarks, no vendor lock-in.",
+		images: ["https://orbit.so/og.png"],
 	},
 };
 

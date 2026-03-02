@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import {
 	isPermissionGranted,
 	requestPermission,
@@ -264,10 +264,10 @@ function Inner(props: { initialStore: GeneralSettingsStore | null }) {
 
 	const isManagedWindowsApp = (window: CaptureWindow) => {
 		const bundle = window.bundle_identifier?.toLowerCase() ?? "";
-		if (bundle.includes("so.cap.desktop")) {
+		if (bundle.includes("so.orbit.desktop")) {
 			return true;
 		}
-		return window.owner_name.toLowerCase().includes("cap");
+		return window.owner_name.toLowerCase().includes("orbit");
 	};
 
 	const isWindowAvailable = (window: CaptureWindow) => {
@@ -375,7 +375,7 @@ function Inner(props: { initialStore: GeneralSettingsStore | null }) {
 						);
 						return option ? option.text : currentValue;
 					})()}
-					<IconCapChevronDown class="size-4" />
+					<IconOrbitChevronDown class="size-4" />
 				</button>
 			</SettingItem>
 		);
@@ -681,13 +681,13 @@ function DefaultProjectNameCard(props: {
 				/>
 
 				<div class="w-full flex items-center py-2 px-2 rounded-lg bg-gray-transparent-50 border border-dashed border-gray-5">
-					<IconCapLogo class="size-4 pointer-events-none mr-2" />
+					<IconOrbitLogo class="size-4 pointer-events-none mr-2" />
 					<p class="whitespace-pre-wrap">{preview()}</p>
 				</div>
 
 				<Collapsible class="w-full rounded-lg">
 					<Collapsible.Trigger class="group inline-flex items-center w-full text-xs rounded-lg outline-none px-0.5 py-1">
-						<IconCapChevronDown class="size-4 ui-group-expanded:rotate-180 transition-transform duration-300 ease-in-out" />
+						<IconOrbitChevronDown class="size-4 ui-group-expanded:rotate-180 transition-transform duration-300 ease-in-out" />
 						<p class="py-0.5 px-1">How to customize?</p>
 					</Collapsible.Trigger>
 

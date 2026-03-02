@@ -9,7 +9,7 @@ edition = "2024"
 workspace = true
 
 [lib]
-name = "cap_desktop_lib"
+name = "orbit_desktop_lib"
 crate-type = ["lib", "cdylib", "staticlib"]
 
 [build-dependencies]
@@ -77,28 +77,28 @@ whisper-rs = "0.11.0"
 lazy_static = "1.4.0"
 log = "0.4.20"
 
-cap-audio = { path = "../../../crates/audio" }
-cap-camera = { path = "../../../crates/camera", features = ["serde", "specta"] }
-cap-utils = { path = "../../../crates/utils" }
-cap-project = { path = "../../../crates/project" }
-cap-rendering = { path = "../../../crates/rendering" }
-cap-editor = { path = "../../../crates/editor" }
-cap-media = { path = "../../../crates/media" }
-cap-flags = { path = "../../../crates/flags" }
-cap-recording = { path = "../../../crates/recording" }
-cap-export = { path = "../../../crates/export" }
-cap-enc-ffmpeg = { path = "../../../crates/enc-ffmpeg" }
-cap-media-info = { path = "../../../crates/media-info" }
-scap-targets = { path = "../../../crates/scap-targets" }
-scap-screencapturekit = { path = "../../../crates/scap-screencapturekit" }
-scap-direct3d = { path = "../../../crates/scap-direct3d" }
+orbit-audio = { path = "../../../crates/audio" }
+orbit-camera = { path = "../../../crates/camera", features = ["serde", "specta"] }
+orbit-utils = { path = "../../../crates/utils" }
+orbit-project = { path = "../../../crates/project" }
+orbit-rendering = { path = "../../../crates/rendering" }
+orbit-editor = { path = "../../../crates/editor" }
+orbit-media = { path = "../../../crates/media" }
+orbit-flags = { path = "../../../crates/flags" }
+orbit-recording = { path = "../../../crates/recording" }
+orbit-export = { path = "../../../crates/export" }
+orbit-enc-ffmpeg = { path = "../../../crates/enc-ffmpeg" }
+orbit-media-info = { path = "../../../crates/media-info" }
+sorbit-targets = { path = "../../../crates/sorbit-targets" }
+sorbit-screencapturekit = { path = "../../../crates/sorbit-screencapturekit" }
+sorbit-direct3d = { path = "../../../crates/sorbit-direct3d" }
 
 flume.workspace = true
 tracing-subscriber = "0.3.19"
 tracing-appender = "0.2.3"
 dirs = "6.0.0"
 relative-path = "1.9.3"
-cap-fail = { version = "0.1.0", path = "../../../crates/fail" }
+orbit-fail = { version = "0.1.0", path = "../../../crates/fail" }
 tokio-stream = { version = "0.1.17", features = ["sync"] }
 md5 = "0.7.0"
 tokio-util = "0.7.15"

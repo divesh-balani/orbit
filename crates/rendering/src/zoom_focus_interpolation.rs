@@ -1,4 +1,4 @@
-use cap_project::{CursorEvents, ScreenMovementSpring, XY, ZoomSegment};
+use orbit_project::{CursorEvents, ScreenMovementSpring, XY, ZoomSegment};
 
 use crate::{
     Coord, RawDisplayUVSpace,

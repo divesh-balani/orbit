@@ -7,7 +7,7 @@ use std::{
     time::Duration,
 };
 
-use cap_media_info::{AudioInfo, AudioInfoError};
+use orbit_media_info::{AudioInfo, AudioInfoError};
 use ffmpeg::{ChannelLayout, codec as avcodec, format as avformat, packet::Mut as PacketMut};
 
 use crate::audio::opus::{OpusEncoder, OpusEncoderError};

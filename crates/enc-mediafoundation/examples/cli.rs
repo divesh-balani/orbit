@@ -6,9 +6,9 @@ fn main() {
 #[cfg(windows)]
 mod win {
     use args::Args;
-    use cap_enc_mediafoundation::{d3d::create_d3d_device, media::MF_VERSION, video::H264Encoder};
+    use orbit_enc_mediafoundation::{d3d::create_d3d_device, media::MF_VERSION, video::H264Encoder};
     use clap::Parser;
-    use scap_targets::Display;
+    use sorbit_targets::Display;
     use std::{
         path::Path,
         sync::{Arc, atomic::AtomicBool},
@@ -83,9 +83,9 @@ mod win {
             let (frame_tx, frame_rx) = std::sync::mpsc::channel();
 
             let mut first_time = None;
-            let mut capturer = scap_direct3d::Capturer::new(
+            let mut capturer = sorbit_direct3d::Capturer::new(
                 item,
-                scap_direct3d::Settings {
+                sorbit_direct3d::Settings {
                     is_border_required: Some(false),
                     ..Default::default()
                 },

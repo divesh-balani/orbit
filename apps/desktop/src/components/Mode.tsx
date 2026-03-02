@@ -24,7 +24,7 @@ const Mode = () => {
 							: "bg-gray-3 hover:bg-gray-7"
 					}`}
 				>
-					<IconCapFilmCut class="size-3.5 invert dark:invert-0" />
+					<IconOrbitFilmCut class="size-3.5 invert dark:invert-0" />
 				</div>
 			</Tooltip>
 
@@ -45,7 +45,7 @@ const Mode = () => {
 							: "bg-gray-3 hover:bg-gray-7"
 					}`}
 				>
-					<IconCapScreenshot class="size-3.5 invert dark:invert-0" />
+					<IconOrbitScreenshot class="size-3.5 invert dark:invert-0" />
 				</div>
 			</Tooltip>
 		</div>

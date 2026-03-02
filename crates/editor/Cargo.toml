@@ -1,5 +1,5 @@
 [package]
-name = "cap-editor"
+name = "orbit-editor"
 version = "0.1.0"
 edition = "2024"
 
@@ -15,11 +15,11 @@ name = "playback-pipeline-benchmark"
 path = "examples/playback-pipeline-benchmark.rs"
 
 [dependencies]
-cap-media = { path = "../media" }
-cap-project = { path = "../project" }
-cap-rendering = { path = "../rendering" }
-cap-audio = { path = "../audio" }
-cap-media-info = { path = "../media-info" }
+orbit-media = { path = "../media" }
+orbit-project = { path = "../project" }
+orbit-rendering = { path = "../rendering" }
+orbit-audio = { path = "../audio" }
+orbit-media-info = { path = "../media-info" }
 
 tokio = { workspace = true, features = ["macros", "process", "fs"] }
 cpal.workspace = true

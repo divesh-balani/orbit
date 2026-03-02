@@ -9,20 +9,20 @@ import { createFAQSchema } from "@/utils/web-schema";
 export const metadata: Metadata = {
 	title: "Screen Recorder: High-Quality, User-Friendly, and 100% Free Locally",
 	description:
-		"Cap is a powerful, user-friendly screen recorder and is 100% free locally with no usage limits. Perfect for team collaboration, creating tutorials, or recording professional presentations.",
+		"Orbit is a powerful, user-friendly screen recorder and is 100% free locally with no usage limits. Perfect for team collaboration, creating tutorials, or recording professional presentations.",
 	openGraph: {
 		title:
 			"Screen Recorder: High-Quality, User-Friendly, and 100% Free Locally",
 		description:
-			"Cap is a powerful, user-friendly screen recorder and is 100% free locally with no usage limits.",
-		url: "https://cap.so/screen-recorder",
-		siteName: "Cap",
+			"Orbit is a powerful, user-friendly screen recorder and is 100% free locally with no usage limits.",
+		url: "https://orbit.so/screen-recorder",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap: Free Screen Recorder",
+				alt: "Orbit: Free Screen Recorder",
 			},
 		],
 		locale: "en_US",
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
 		title:
 			"Screen Recorder: High-Quality, User-Friendly, and 100% Free Locally",
 		description:
-			"Cap is a powerful, user-friendly screen recorder and is 100% free locally with no usage limits.",
-		images: ["https://cap.so/og.png"],
+			"Orbit is a powerful, user-friendly screen recorder and is 100% free locally with no usage limits.",
+		images: ["https://orbit.so/og.png"],
 	},
 	alternates: {
-		canonical: "https://cap.so/screen-recorder",
+		canonical: "https://orbit.so/screen-recorder",
 	},
 };
 

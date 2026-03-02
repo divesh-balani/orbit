@@ -1,5 +1,5 @@
-import { isEmailAllowedByRestriction } from "@cap/utils";
-import { Policy, Video } from "@cap/web-domain";
+import { isEmailAllowedByRestriction } from "@orbit/utils";
+import { Policy, Video } from "@orbit/web-domain";
 import { Array, Effect, Option } from "effect";
 
 import { Database } from "../Database.ts";

@@ -1,8 +1,8 @@
-use cap_project::{
+use orbit_project::{
     ProjectConfiguration, RecordingMeta, RecordingMetaInner, StudioRecordingMeta,
     TimelineConfiguration, TimelineSegment, XY,
 };
-use cap_rendering::{
+use orbit_rendering::{
     FrameRenderer, ProjectRecordingsMeta, ProjectUniforms, RenderVideoConstants, RendererLayers,
     ZoomFocusInterpolator, decoder::spawn_decoder,
     spring_mass_damper::SpringMassDamperSimulationConfig,
@@ -109,7 +109,7 @@ async fn load_recording(
         let timeline_segments = match meta.as_ref() {
             StudioRecordingMeta::SingleSegment { segment } => {
                 let display_path = recording_meta.path(&segment.display.path);
-                let duration = match cap_rendering::Video::new(&display_path, 0.0) {
+                let duration = match orbit_rendering::Video::new(&display_path, 0.0) {
                     Ok(v) => v.duration,
                     Err(_) => 5.0,
                 };
@@ -126,7 +126,7 @@ async fn load_recording(
                 .enumerate()
                 .filter_map(|(i, segment)| {
                     let display_path = recording_meta.path(&segment.display.path);
-                    let duration = match cap_rendering::Video::new(&display_path, 0.0) {
+                    let duration = match orbit_rendering::Video::new(&display_path, 0.0) {
                         Ok(v) => v.duration,
                         Err(_) => 5.0,
                     };
@@ -261,7 +261,7 @@ async fn run_full_pipeline_benchmark(
         render_constants.is_software_adapter
     );
 
-    let segments = match cap_editor::create_segments(recording_meta, meta, false).await {
+    let segments = match orbit_editor::create_segments(recording_meta, meta, false).await {
         Ok(s) => s,
         Err(e) => {
             eprintln!("Failed to create segments: {e}");
@@ -423,7 +423,7 @@ async fn run_scrubbing_benchmark(
         }
     };
 
-    let segments = match cap_editor::create_segments(recording_meta, meta, false).await {
+    let segments = match orbit_editor::create_segments(recording_meta, meta, false).await {
         Ok(s) => s,
         Err(e) => {
             eprintln!("Failed to create segments: {e}");
@@ -592,7 +592,7 @@ async fn main() {
         .unwrap_or(300);
 
     println!("{}", "=".repeat(60));
-    println!("  CAP PLAYBACK PIPELINE BENCHMARK");
+    println!("  ORBIT PLAYBACK PIPELINE BENCHMARK");
     println!("{}", "=".repeat(60));
     println!();
     println!("Recording: {}", recording_path.display());

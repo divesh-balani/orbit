@@ -1,4 +1,4 @@
-# Cap Playback Performance Findings
+# Orbit Playback Performance Findings
 
 > **SELF-HEALING DOCUMENT**: This file is designed to maintain complete context for playback performance work. After any work session, UPDATE this file with your findings before ending.
 
@@ -13,14 +13,14 @@
 3. Ensure test recordings exist (or create them):
    ```bash
    # Check for existing recordings
-   ls /tmp/cap-real-device-tests/
+   ls /tmp/orbit-real-device-tests/
 
    # If none exist, create them first:
-   cargo run -p cap-recording --example real-device-test-runner -- baseline --keep-outputs
+   cargo run -p orbit-recording --example real-device-test-runner -- baseline --keep-outputs
    ```
 4. Run a quick playback benchmark to verify current state:
    ```bash
-   cargo run -p cap-recording --example playback-test-runner -- full
+   cargo run -p orbit-recording --example playback-test-runner -- full
    ```
 5. Continue work from "Next Steps" section below
 
@@ -86,26 +86,26 @@
 
 ```bash
 # Full playback validation (RECOMMENDED)
-cargo run -p cap-recording --example playback-test-runner -- full
+cargo run -p orbit-recording --example playback-test-runner -- full
 
 # Test specific categories
-cargo run -p cap-recording --example playback-test-runner -- decoder
-cargo run -p cap-recording --example playback-test-runner -- playback
-cargo run -p cap-recording --example playback-test-runner -- audio-sync
-cargo run -p cap-recording --example playback-test-runner -- camera-sync
+cargo run -p orbit-recording --example playback-test-runner -- decoder
+cargo run -p orbit-recording --example playback-test-runner -- playback
+cargo run -p orbit-recording --example playback-test-runner -- audio-sync
+cargo run -p orbit-recording --example playback-test-runner -- camera-sync
 
 # List available recordings
-cargo run -p cap-recording --example playback-test-runner -- list
+cargo run -p orbit-recording --example playback-test-runner -- list
 
 # Test a specific recording
-cargo run -p cap-recording --example playback-test-runner -- --recording-path /path/to/recording full
+cargo run -p orbit-recording --example playback-test-runner -- --recording-path /path/to/recording full
 
 # Save benchmark results to PLAYBACK-BENCHMARKS.md
-cargo run -p cap-recording --example playback-test-runner -- full --benchmark-output
+cargo run -p orbit-recording --example playback-test-runner -- full --benchmark-output
 
 # Combined workflow: record then playback
-cargo run -p cap-recording --example real-device-test-runner -- baseline --keep-outputs && \
-cargo run -p cap-recording --example playback-test-runner -- full
+cargo run -p orbit-recording --example real-device-test-runner -- baseline --keep-outputs && \
+cargo run -p orbit-recording --example playback-test-runner -- full
 ```
 
 **Note**: Playback tests require recordings to exist. Run the recording test runner with `--keep-outputs` first.

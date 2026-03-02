@@ -1,10 +1,10 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { encrypt, hashPassword, verifyPassword } from "@cap/database/crypto";
-import { videos } from "@cap/database/schema";
-import type { Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { encrypt, hashPassword, verifyPassword } from "@orbit/database/crypto";
+import { videos } from "@orbit/database/schema";
+import type { Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -98,7 +98,7 @@ export async function verifyVideoPassword(
 
 		if (!valid) throw new Error("Invalid password");
 
-		(await cookies()).set("x-cap-password", await encrypt(video.password));
+		(await cookies()).set("x-orbit-password", await encrypt(video.password));
 
 		return { success: true, value: "Password verified" };
 	} catch (error) {

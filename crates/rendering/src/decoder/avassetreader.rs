@@ -77,7 +77,7 @@ impl ImageBufProcessor {
 
     fn extract_raw(&self, image_buf: &mut R<cv::ImageBuf>) -> (Vec<u8>, PixelFormat, u32, u32) {
         let pixel_format =
-            cap_video_decode::avassetreader::pixel_format_to_pixel(image_buf.pixel_format());
+            orbit_video_decode::avassetreader::pixel_format_to_pixel(image_buf.pixel_format());
 
         unsafe {
             image_buf
@@ -205,7 +205,7 @@ impl CachedFrame {
         let height = image_buf.height() as u32;
 
         let pixel_format =
-            cap_video_decode::avassetreader::pixel_format_to_pixel(image_buf.pixel_format());
+            orbit_video_decode::avassetreader::pixel_format_to_pixel(image_buf.pixel_format());
 
         match pixel_format {
             format::Pixel::NV12
@@ -331,13 +331,13 @@ impl DecoderHealth {
 }
 
 struct DecoderInstance {
-    inner: cap_video_decode::AVAssetReaderDecoder,
+    inner: orbit_video_decode::AVAssetReaderDecoder,
     is_done: bool,
     frames_iter_valid: bool,
     health: DecoderHealth,
     path: PathBuf,
     tokio_handle: TokioHandle,
-    keyframe_index: Option<Arc<cap_video_decode::avassetreader::KeyframeIndex>>,
+    keyframe_index: Option<Arc<orbit_video_decode::avassetreader::KeyframeIndex>>,
 }
 
 impl DecoderInstance {
@@ -345,10 +345,10 @@ impl DecoderInstance {
         path: PathBuf,
         tokio_handle: TokioHandle,
         start_time: f32,
-        keyframe_index: Option<Arc<cap_video_decode::avassetreader::KeyframeIndex>>,
+        keyframe_index: Option<Arc<orbit_video_decode::avassetreader::KeyframeIndex>>,
     ) -> Result<Self, String> {
         Ok(Self {
-            inner: cap_video_decode::AVAssetReaderDecoder::new_with_keyframe_index(
+            inner: orbit_video_decode::AVAssetReaderDecoder::new_with_keyframe_index(
                 path.clone(),
                 tokio_handle.clone(),
                 start_time,
@@ -391,7 +391,7 @@ impl DecoderInstance {
             "Recreating decoder instance due to poor health"
         );
 
-        self.inner = cap_video_decode::AVAssetReaderDecoder::new_with_keyframe_index(
+        self.inner = orbit_video_decode::AVAssetReaderDecoder::new_with_keyframe_index(
             self.path.clone(),
             self.tokio_handle.clone(),
             start_time,
@@ -418,7 +418,7 @@ pub struct AVAssetReaderDecoder {
 
 impl AVAssetReaderDecoder {
     fn new(path: PathBuf, tokio_handle: TokioHandle) -> Result<Self, String> {
-        let keyframe_index = cap_video_decode::avassetreader::KeyframeIndex::build(&path).ok();
+        let keyframe_index = orbit_video_decode::avassetreader::KeyframeIndex::build(&path).ok();
         let fps = keyframe_index
             .as_ref()
             .map(|kf| kf.fps() as u32)

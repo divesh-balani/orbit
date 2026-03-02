@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input } from "@cap/ui";
+import { Button, Input } from "@orbit/ui";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -74,7 +74,7 @@ export const ImportLoomPage = () => {
 				</Link>
 				<h1 className="text-2xl font-medium text-gray-12">Import from Loom</h1>
 				<p className="mt-1 text-sm text-gray-10">
-					Paste a Loom video URL to import it to Cap.
+					Paste a Loom video URL to import it to Orbit.
 				</p>
 			</div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, LogoBadge } from "@cap/ui";
+import { Button, LogoBadge } from "@orbit/ui";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@tanstack/react-query";
@@ -225,7 +225,7 @@ export function VerifyOTPForm({
 
 			<p className="mt-6 text-xs text-center text-gray-9">
 				By entering your email, you acknowledge that you have both read and
-				agree to Cap's{" "}
+				agree to Orbit's{" "}
 				<Link
 					href="/terms"
 					target="_blank"

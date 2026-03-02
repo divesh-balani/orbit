@@ -75,7 +75,7 @@ export default function MicrophoneSelect(props: {
 						/>
 					)}
 				</Show>
-				<IconCapMicrophone class="text-gray-10 size-4" />
+				<IconOrbitMicrophone class="text-gray-10 size-4" />
 				<p class="flex-1 text-sm text-left truncate">
 					{props.value ?? NO_MICROPHONE}
 				</p>
@@ -188,7 +188,7 @@ export function MicrophoneSelectBase(props: {
 						/>
 					)}
 				</Show>
-				<IconCapMicrophone class={props.iconClass} />
+				<IconOrbitMicrophone class={props.iconClass} />
 				<p class="flex-1 text-sm text-left truncate">
 					{props.value ?? NO_MICROPHONE}
 				</p>

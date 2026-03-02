@@ -1,8 +1,8 @@
-import type { comments as commentsSchema } from "@cap/database/schema";
-import type { VideoMetadata } from "@cap/database/types";
-import { NODE_ENV } from "@cap/env";
-import { Logo } from "@cap/ui";
-import type { ImageUpload } from "@cap/web-domain";
+import type { comments as commentsSchema } from "@orbit/database/schema";
+import type { VideoMetadata } from "@orbit/database/types";
+import { NODE_ENV } from "@orbit/env";
+import { Logo } from "@orbit/ui";
+import type { ImageUpload } from "@orbit/web-domain";
 import { useTranscript } from "hooks/use-transcript";
 import {
 	forwardRef,

@@ -42,16 +42,16 @@ function parseDownloadsFromBody(body: string): ReleaseDownloads {
 }
 
 function extractVersionFromTag(tagName: string): string {
-	return tagName.replace(/^cap-v/, "").replace(/^v/, "");
+	return tagName.replace(/^orbit-v/, "").replace(/^v/, "");
 }
 
 export async function getGitHubReleases(): Promise<Release[]> {
 	const response = await fetch(
-		"https://api.github.com/repos/CapSoftware/Cap/releases?per_page=100",
+		"https://api.github.com/repos/CapSoftware/Orbit/releases?per_page=100",
 		{
 			headers: {
 				Accept: "application/vnd.github.v3+json",
-				"User-Agent": "Cap-Web",
+				"User-Agent": "Orbit-Web",
 			},
 			next: {
 				revalidate: 3600,
@@ -67,7 +67,7 @@ export async function getGitHubReleases(): Promise<Release[]> {
 
 	return data
 		.filter((release) => !release.draft && !release.prerelease)
-		.filter((release) => release.tag_name.startsWith("cap-v"))
+		.filter((release) => release.tag_name.startsWith("orbit-v"))
 		.map((release) => ({
 			version: extractVersionFromTag(release.tag_name),
 			tagName: release.tag_name,

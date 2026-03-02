@@ -1,8 +1,8 @@
 "use client";
 
-import { buildEnv } from "@cap/env";
-import { Button, Switch } from "@cap/ui";
-import type { Organisation } from "@cap/web-domain";
+import { buildEnv } from "@orbit/env";
+import { Button, Switch } from "@orbit/ui";
+import type { Organisation } from "@orbit/web-domain";
 import NumberFlow from "@number-flow/react";
 import { Fit, Layout, useRive } from "@rive-app/react-canvas";
 import { useMutation } from "@tanstack/react-query";
@@ -32,7 +32,7 @@ const RANGE_OPTIONS: { value: AnalyticsRange; label: string }[] = [
 const ProRiveArt = memo(() => {
 	const { RiveComponent: ProModal } = useRive({
 		src: "/rive/main.riv",
-		artboard: "cap-pro-modal",
+		artboard: "orbit-pro-modal",
 		animations: ["animation"],
 		layout: new Layout({
 			fit: Fit.Cover,
@@ -58,7 +58,7 @@ export function AnalyticsDashboard() {
 	const [isAnnual, setIsAnnual] = useState(true);
 	const [proQuantity, setProQuantity] = useState(1);
 
-	const showOverlay = buildEnv.NEXT_PUBLIC_IS_CAP === "true" && !user?.isPro;
+	const showOverlay = buildEnv.NEXT_PUBLIC_IS_ORBIT === "true" && !user?.isPro;
 	const pricePerUser = isAnnual ? 8.16 : 12;
 	const totalPrice = pricePerUser * proQuantity;
 	const billingText = isAnnual ? "billed annually" : "billed monthly";
@@ -88,7 +88,7 @@ export function AnalyticsDashboard() {
 			}
 
 			if (data.subscription === true) {
-				toast.success("You are already on the Cap Pro plan");
+				toast.success("You are already on the Orbit Pro plan");
 				return;
 			}
 
@@ -187,11 +187,11 @@ export function AnalyticsDashboard() {
 					onSpaceChange={setSelectedSpaceId}
 					hideCapsSelect={!!capId}
 					capId={capId}
-					capName={analytics?.capName ?? null}
+					capName={analytics?.orbitName ?? null}
 				/>
 				<StatsChart
 					counts={{
-						caps: analytics?.counts.caps ?? 0,
+						caps: analytics?.counts.orbits ?? 0,
 						views: analytics?.counts.views ?? 0,
 						comments: analytics?.counts.comments ?? 0,
 						reactions: analytics?.counts.reactions ?? 0,
@@ -231,7 +231,7 @@ export function AnalyticsDashboard() {
 								<div className="flex relative flex-col flex-1 justify-center items-center py-6 w-full bg-gray-2 bg-opacity-75 backdrop-blur-md">
 									<div className="flex flex-col items-center">
 										<h1 className="text-3xl font-medium text-gray-12">
-											Upgrade to unlock Cap Analytics
+											Upgrade to unlock Orbit Analytics
 										</h1>
 									</div>
 									<p className="mt-1 text-lg text-center text-gray-11">
@@ -314,7 +314,7 @@ export function AnalyticsDashboard() {
 									>
 										{proCheckoutMutation.isPending
 											? "Loading..."
-											: "Upgrade to Cap Pro"}
+											: "Upgrade to Orbit Pro"}
 									</Button>
 								</div>
 							</div>

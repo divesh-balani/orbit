@@ -13,34 +13,34 @@ import {
 
 const homePageFAQs = [
 	{
-		question: "What is Cap?",
+		question: "What is Orbit?",
 		answer:
-			"Cap is an open-source screen recording software that offers beautiful, lightweight recordings with instant sharing capabilities. It's the privacy-focused alternative to Loom.",
+			"Orbit is an open-source screen recording software that offers beautiful, lightweight recordings with instant sharing capabilities. It's the privacy-focused alternative to Loom.",
 	},
 	{
-		question: "How much does Cap cost?",
+		question: "How much does Orbit cost?",
 		answer:
-			"Cap offers a generous free plan with Studio mode for personal use and 5-minute shareable links. The Pro plan starts at just $8.16/month per user, which is less than half the price of Loom.",
+			"Orbit offers a generous free plan with Studio mode for personal use and 5-minute shareable links. The Pro plan starts at just $8.16/month per user, which is less than half the price of Loom.",
 	},
 	{
-		question: "Is Cap available for Windows and Mac?",
+		question: "Is Orbit available for Windows and Mac?",
 		answer:
-			"Yes, Cap is available for both macOS and Windows, providing consistent performance and features across both platforms.",
+			"Yes, Orbit is available for both macOS and Windows, providing consistent performance and features across both platforms.",
 	},
 	{
-		question: "Can I use my own storage with Cap?",
+		question: "Can I use my own storage with Orbit?",
 		answer:
-			"Yes, Cap allows you to connect your own S3 storage and custom domain, giving you 100% ownership and control over your content.",
+			"Yes, Orbit allows you to connect your own S3 storage and custom domain, giving you 100% ownership and control over your content.",
 	},
 	{
-		question: "What makes Cap different from other screen recorders?",
+		question: "What makes Orbit different from other screen recorders?",
 		answer:
-			"Cap is fully open-source, privacy-focused, and offers unique features like Studio mode (free for personal use), 4K recording at 60fps, built-in thread commenting, and the ability to use your own storage and domain.",
+			"Orbit is fully open-source, privacy-focused, and offers unique features like Studio mode (free for personal use), 4K recording at 60fps, built-in thread commenting, and the ability to use your own storage and domain.",
 	},
 	{
-		question: "Does Cap support team collaboration?",
+		question: "Does Orbit support team collaboration?",
 		answer:
-			"Yes, Cap includes built-in thread commenting on shareable links, making it easy to collaborate with teammates and collect feedback directly on your recordings.",
+			"Yes, Orbit includes built-in thread commenting on shareable links, making it easy to collaborate with teammates and collect feedback directly on your recordings.",
 	},
 ];
 
@@ -50,7 +50,7 @@ const createHomePageSchema = () => {
 		createWebSiteSchema(),
 		createSoftwareApplicationSchema(testimonials),
 		createProductSchema(),
-		createBreadcrumbSchema([{ name: "Home", url: "https://cap.so" }]),
+		createBreadcrumbSchema([{ name: "Home", url: "https://orbit.so" }]),
 		createFAQSchema(homePageFAQs),
 	];
 

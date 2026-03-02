@@ -1,4 +1,4 @@
-import { Button, Switch } from "@cap/ui";
+import { Button, Switch } from "@orbit/ui";
 import {
 	faCloud,
 	faCreditCard,
@@ -24,15 +24,15 @@ export const ProCard = () => {
 	const [isAnnually, setIsAnnually] = useState(true);
 	const proArtRef = useRef<ProArtRef>(null);
 
-	const CAP_PRO_ANNUAL_PRICE_PER_USER = homepageCopy.pricing.pro.pricing.annual;
-	const CAP_PRO_MONTHLY_PRICE_PER_USER =
+	const ORBIT_PRO_ANNUAL_PRICE_PER_USER = homepageCopy.pricing.pro.pricing.annual;
+	const ORBIT_PRO_MONTHLY_PRICE_PER_USER =
 		homepageCopy.pricing.pro.pricing.monthly;
 
 	const currentTotalPricePro =
 		users *
 		(isAnnually
-			? CAP_PRO_ANNUAL_PRICE_PER_USER
-			: CAP_PRO_MONTHLY_PRICE_PER_USER);
+			? ORBIT_PRO_ANNUAL_PRICE_PER_USER
+			: ORBIT_PRO_MONTHLY_PRICE_PER_USER);
 	const billingCycleTextPro = isAnnually
 		? "per user, billed annually"
 		: "per user, billed monthly";
@@ -81,7 +81,7 @@ export const ProCard = () => {
 			}
 
 			if (data.subscription === true) {
-				toast.success("You are already on the Cap Pro plan");
+				toast.success("You are already on the Orbit Pro plan");
 			}
 
 			if (data.url) {
@@ -128,7 +128,7 @@ export const ProCard = () => {
 						<p className="text-base text-gray-8">
 							or,{" "}
 							<NumberFlow
-								value={CAP_PRO_MONTHLY_PRICE_PER_USER * users}
+								value={ORBIT_PRO_MONTHLY_PRICE_PER_USER * users}
 								className="text-base tabular-nums"
 								format={{
 									notation: "compact",
@@ -155,7 +155,7 @@ export const ProCard = () => {
 						<p className="text-base text-gray-8">
 							or,{" "}
 							<NumberFlow
-								value={CAP_PRO_ANNUAL_PRICE_PER_USER * users}
+								value={ORBIT_PRO_ANNUAL_PRICE_PER_USER * users}
 								className="text-base tabular-nums"
 								format={{
 									notation: "compact",
@@ -228,7 +228,7 @@ export const ProCard = () => {
 								onCheckedChange={setIsAnnually}
 								aria-label="Billing Cycle For Pro"
 								className="scale-75"
-								id="billing-cycle-cap-pro"
+								id="billing-cycle-orbit-pro"
 							/>
 							<span
 								className={clsx(
@@ -280,7 +280,7 @@ export const ProCard = () => {
 							style={{ fontSize: "14px", minWidth: "14px" }}
 						/>
 						<span className="text-gray-4">
-							Connect a custom domain, e.g. cap.yourdomain.com
+							Connect a custom domain, e.g. orbit.yourdomain.com
 						</span>
 					</li>
 					<li className="flex items-center text-sm text-gray-1">
@@ -308,7 +308,7 @@ export const ProCard = () => {
 				onClick={() => planCheckout.mutate()}
 				disabled={planCheckout.isPending || guestCheckout.isPending}
 				className="w-full font-medium"
-				aria-label="Purchase Cap Pro License"
+				aria-label="Purchase Orbit Pro License"
 			>
 				{planCheckout.isPending || guestCheckout.isPending
 					? "Loading..."

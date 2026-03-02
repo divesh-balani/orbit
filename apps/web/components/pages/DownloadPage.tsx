@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import { useDetectPlatform } from "hooks/useDetectPlatform";
 import Link from "next/link";
 import {
@@ -19,7 +19,7 @@ export const DownloadPage = () => {
 		<div className="py-32 md:py-40 wrapper wrapper-sm">
 			<div className="space-y-4 text-center">
 				<h1 className="text-2xl fade-in-down animate-delay-1 md:text-4xl">
-					Download Cap
+					Download Orbit
 				</h1>
 				<p className="px-4 text-sm fade-in-down text-gray-11 animate-delay-2 md:text-base md:px-0">
 					The quickest way to share your screen. Pin to your dock and record in
@@ -54,8 +54,8 @@ export const DownloadPage = () => {
 									style={{ maxWidth: "300px" }}
 								/>
 								<p className="mt-2 text-sm text-gray-8">
-									Whilst Cap for Windows is in early beta, after downloading and
-									running the app, follow the steps above to whitelist Cap on
+									Whilst Orbit for Windows is in early beta, after downloading and
+									running the app, follow the steps above to whitelist Orbit on
 									your PC.
 								</p>
 							</div>

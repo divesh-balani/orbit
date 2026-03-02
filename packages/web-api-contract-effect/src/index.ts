@@ -72,7 +72,7 @@ export class AuthMiddleware extends HttpApiMiddleware.Tag<AuthMiddleware>()(
 	{ provides: Authentication },
 ) {}
 
-export class ApiContract extends HttpApi.make("cap-web-api")
+export class ApiContract extends HttpApi.make("orbit-web-api")
 	.add(
 		HttpApiGroup.make("video")
 			.add(
@@ -195,7 +195,7 @@ export class ApiContract extends HttpApi.make("cap-web-api")
 	.addError(HttpApiError.InternalServerError)
 	.prefix("/api") {}
 
-export class LicenseApiContract extends HttpApi.make("cap-license-api").add(
+export class LicenseApiContract extends HttpApi.make("orbit-license-api").add(
 	HttpApiGroup.make("license")
 		.add(
 			HttpApiEndpoint.post("activateCommercialLicense", "/commercial/activate")

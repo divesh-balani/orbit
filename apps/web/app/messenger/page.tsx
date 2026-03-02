@@ -1,4 +1,4 @@
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { createMessengerConversation } from "@/actions/messenger";
@@ -21,7 +21,7 @@ const relativeTime = (date: Date | null) => {
 };
 
 export default async function MessengerPage() {
-	if (buildEnv.NEXT_PUBLIC_IS_CAP !== "true") notFound();
+	if (buildEnv.NEXT_PUBLIC_IS_ORBIT !== "true") notFound();
 
 	const { viewer, conversations } = await listViewerMessengerConversations();
 
@@ -52,7 +52,7 @@ export default async function MessengerPage() {
 						</svg>
 					</div>
 					<h1 className="text-2xl font-bold tracking-tight text-white">
-						Cap Support
+						Orbit Support
 					</h1>
 					<p className="mt-1.5 text-sm text-blue-100/80">
 						How can we help you today?

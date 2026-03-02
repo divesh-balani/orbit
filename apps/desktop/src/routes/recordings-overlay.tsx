@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import Tooltip from "@corvu/tooltip";
 import { createElementBounds } from "@solid-primitives/bounds";
 import { makePersisted } from "@solid-primitives/storage";
@@ -25,7 +25,7 @@ import { TransitionGroup } from "solid-transition-group";
 import { createTauriEventListener } from "~/utils/createEventListener";
 import { exportVideo } from "~/utils/export";
 import { commands, events, type FramesRendered } from "~/utils/tauri";
-import IconCapEditor from "~icons/cap/editor";
+import IconOrbitEditor from "~icons/orbit/editor";
 import IconLucideClock from "~icons/lucide/clock";
 import IconLucideEye from "~icons/lucide/eye";
 import { FPS, OUTPUT_SIZE } from "./editor/context";
@@ -59,7 +59,7 @@ export default function () {
 				if (state.some((entry) => entry.path === path)) return;
 				const fileName = path.split("/").pop() || "";
 				const match = fileName.match(
-					/(?:Orbit|Cap) (\d{4}-\d{2}-\d{2} at \d{2}\.\d{2}\.\d{2})/,
+					/(?:Orbit|Orbit) (\d{4}-\d{2}-\d{2} at \d{2}\.\d{2}\.\d{2})/,
 				);
 				const prettyName = match ? match[1].replace(/\./g, ":") : fileName;
 				state.unshift({ path, prettyName, isNew: true, type });
@@ -268,7 +268,7 @@ export default function () {
 															);
 														}}
 													>
-														<IconCapCircleX class="size-[1rem]" />
+														<IconOrbitCircleX class="size-[1rem]" />
 													</TooltipIconButton>
 													{isRecording ? (
 														<TooltipIconButton
@@ -294,7 +294,7 @@ export default function () {
 																});
 															}}
 														>
-															<IconCapEditor class="size-[1rem]" />
+															<IconOrbitEditor class="size-[1rem]" />
 														</TooltipIconButton>
 													) : (
 														<TooltipIconButton
@@ -318,7 +318,7 @@ export default function () {
 														tooltipPlacement="left"
 														onClick={() => copy.mutate()}
 													>
-														<IconCapCopy class="size-[1rem]" />
+														<IconOrbitCopy class="size-[1rem]" />
 													</TooltipIconButton>
 													<div class="flex absolute inset-0 justify-center items-center">
 														<Button
@@ -346,7 +346,7 @@ export default function () {
 															)}
 														>
 															<span class="flex items-center">
-																<IconCapCamera class="w-[16px] h-[16px] mr-1.5" />
+																<IconOrbitCamera class="w-[16px] h-[16px] mr-1.5" />
 																{Math.floor(metadata().duration / 60)}:
 																{Math.floor(metadata().duration % 60)
 																	.toString()
@@ -585,7 +585,7 @@ function createRecordingMutations(media: MediaEntry) {
 
 			const defaultName = isRecording
 				? "Orbit Recording"
-				: media.path.split(".cap/")[1];
+				: media.path.split(".orbit/")[1];
 			const suggestedName = meta.pretty_name || defaultName;
 
 			const fileType = isRecording ? "recording" : "screenshot";

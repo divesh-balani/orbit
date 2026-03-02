@@ -83,7 +83,7 @@ export const PricingPage = () => {
 							variants={fadeIn}
 							custom={2}
 						>
-							Cap is currently in public beta, and we're offering special early
+							Orbit is currently in public beta, and we're offering special early
 							adopter pricing to our first users. This pricing will be locked in
 							for the lifetime of your subscription. Switching from Loom? Import
 							all your existing videos with our built-in Loom importer.
@@ -117,7 +117,7 @@ export const PricingPage = () => {
 					</motion.div>
 				</div>
 
-				{/* Comparison Table (Cap Pro vs Desktop License) */}
+				{/* Comparison Table (Orbit Pro vs Desktop License) */}
 				<div>
 					<ComparePlans />
 				</div>
@@ -129,8 +129,8 @@ export const PricingPage = () => {
 				<div className="mb-32 wrapper" id="testimonials">
 					<Testimonials
 						amount={24}
-						title="What our users say about Cap after hitting record"
-						subtitle="Don't just take our word for it. Here's what our users are saying about their experience with Cap."
+						title="What our users say about Orbit after hitting record"
+						subtitle="Don't just take our word for it. Here's what our users are saying about their experience with Orbit."
 					/>
 				</div>
 			</div>

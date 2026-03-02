@@ -1,10 +1,10 @@
-import { getCurrentUser } from "@cap/database/auth/session";
+import { getCurrentUser } from "@orbit/database/auth/session";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { VerifyOTPForm } from "./form";
 
 export const metadata = {
-	title: "Verify Code | Cap",
+	title: "Verify Code | Orbit",
 };
 
 export default async function VerifyOTPPage(props: {

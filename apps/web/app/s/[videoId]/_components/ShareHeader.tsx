@@ -1,7 +1,7 @@
 "use client";
 
-import { buildEnv, NODE_ENV } from "@cap/env";
-import { Button } from "@cap/ui";
+import { buildEnv, NODE_ENV } from "@orbit/env";
+import { Button } from "@orbit/ui";
 import {
 	faChartSimple,
 	faChevronDown,
@@ -99,14 +99,14 @@ export const ShareHeader = ({
 			return `https://${customDomain}/s/${data.id}`;
 		} else if (NODE_ENV === "development" && !customDomain && !domainVerified) {
 			return `${webUrl}/s/${data.id}`;
-		} else if (buildEnv.NEXT_PUBLIC_IS_CAP && customDomain && domainVerified) {
+		} else if (buildEnv.NEXT_PUBLIC_IS_ORBIT && customDomain && domainVerified) {
 			return `https://${customDomain}/s/${data.id}`;
 		} else if (
-			buildEnv.NEXT_PUBLIC_IS_CAP &&
+			buildEnv.NEXT_PUBLIC_IS_ORBIT &&
 			!customDomain &&
 			!domainVerified
 		) {
-			return `https://cap.link/${data.id}`;
+			return `https://orbit.link/${data.id}`;
 		} else {
 			return `${webUrl}/s/${data.id}`;
 		}
@@ -117,14 +117,14 @@ export const ShareHeader = ({
 			return `${customDomain}/s/${data.id}`;
 		} else if (NODE_ENV === "development" && !customDomain && !domainVerified) {
 			return `${webUrl}/s/${data.id}`;
-		} else if (buildEnv.NEXT_PUBLIC_IS_CAP && customDomain && domainVerified) {
+		} else if (buildEnv.NEXT_PUBLIC_IS_ORBIT && customDomain && domainVerified) {
 			return `${customDomain}/s/${data.id}`;
 		} else if (
-			buildEnv.NEXT_PUBLIC_IS_CAP &&
+			buildEnv.NEXT_PUBLIC_IS_ORBIT &&
 			!customDomain &&
 			!domainVerified
 		) {
-			return `cap.link/${data.id}`;
+			return `orbit.link/${data.id}`;
 		} else {
 			return `${webUrl}/s/${data.id}`;
 		}
@@ -193,7 +193,7 @@ export const ShareHeader = ({
 						size="sm"
 						variant="blue"
 					>
-						Upgrade To Cap Pro
+						Upgrade To Orbit Pro
 					</Button>
 				</div>
 			)}

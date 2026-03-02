@@ -13,8 +13,8 @@ import {
 	FormField,
 	Input,
 	Label,
-} from "@cap/ui";
-import type { ImageUpload } from "@cap/web-domain";
+} from "@orbit/ui";
+import type { ImageUpload } from "@orbit/web-domain";
 import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { zodResolver } from "@hookform/resolvers/zod";

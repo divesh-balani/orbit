@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fit, Layout, useRive } from "@rive-app/react-canvas";
@@ -19,7 +19,7 @@ export const UsageButton = memo(
 		const { sidebarCollapsed } = useDashboardContext();
 		if (subscribed) {
 			return (
-				<Tooltip position="right" content="Cap Pro">
+				<Tooltip position="right" content="Orbit Pro">
 					<Link
 						className="flex justify-center mx-auto w-full"
 						href="/dashboard/settings/workspace"
@@ -41,7 +41,7 @@ export const UsageButton = memo(
 								)}
 								icon={faCheck}
 							/>
-							{sidebarCollapsed ? null : <p className="text-white">Cap Pro</p>}
+							{sidebarCollapsed ? null : <p className="text-white">Orbit Pro</p>}
 						</Button>
 					</Link>
 				</Tooltip>

@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { NumberField } from "@kobalte/core/number-field";
 import { createElementBounds } from "@solid-primitives/bounds";
 import { trackDeep } from "@solid-primitives/deep";
@@ -740,7 +740,7 @@ function Dialogs() {
 													Full
 												</EditorButton>
 												<EditorButton
-													leftIcon={<IconCapCircleX />}
+													leftIcon={<IconOrbitCircleX />}
 													onClick={() => {
 														cropperRef?.reset();
 														setAspect(null);

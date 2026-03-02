@@ -1,16 +1,16 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
 const GITHUB_ORG = "CapSoftware";
-const _GITHUB_REPO = "Cap";
+const _GITHUB_REPO = "Orbit";
 const _GITHUB_APP_ID = "1196731";
 
-const VERCEL_PROJECT_NAME = "cap-web";
+const VERCEL_PROJECT_NAME = "orbit-web";
 const VERCEL_TEAM_SLUG = "mc-ilroy";
 const VERCEL_TEAM_ID = "team_vbZRU7UW78rpKKIj4c9PfFAC";
 
 const _CLOUDFLARE_ACCOUNT_ID = "3de2dd633194481d80f68f55257bdbaa";
 const AXIOM_API_TOKEN = "xaat-c0704be6-e942-4935-b068-3b491d7cc00f";
-const AXIOM_DATASET = "cap-otel";
+const AXIOM_DATASET = "orbit-otel";
 
 const parsedStage = () => {
 	if ($app.stage === "staging") return { variant: "staging" } as const;
@@ -26,7 +26,7 @@ const parsedStage = () => {
 export default $config({
 	app(input) {
 		return {
-			name: "cap",
+			name: "orbit",
 			removal: input?.stage === "production" ? "retain" : "remove",
 			protect: ["production"].includes(input?.stage),
 			home: "aws",
@@ -49,8 +49,8 @@ export default $config({
 	async run() {
 		const stage = parsedStage();
 		const WEB_URLS: Record<string, string> = {
-			production: "https://cap.so",
-			staging: "https://staging.cap.so",
+			production: "https://orbit.so",
+			staging: "https://staging.orbit.so",
 		};
 		const webUrl =
 			WEB_URLS[stage.variant] ??
@@ -73,9 +73,9 @@ export default $config({
 					allowedOrigins:
 						stage.variant === "production"
 							? [
-									"https://cap.so",
-									"https://cap.link",
-									"https://v.cap.so",
+									"https://orbit.so",
+									"https://orbit.link",
+									"https://v.orbit.so",
 									"https://dyk2p776s2gx5.cloudfront.net",
 								]
 							: ["http://localhost:*", "https://*.vercel.app", webUrl],
@@ -87,7 +87,7 @@ export default $config({
 		const vercelVariables = [
 			{ key: "NEXT_PUBLIC_AXIOM_TOKEN", value: AXIOM_API_TOKEN },
 			{ key: "NEXT_PUBLIC_AXIOM_DATASET", value: AXIOM_DATASET },
-			{ key: "CAP_AWS_BUCKET", value: recordingsBucket.bucket },
+			{ key: "ORBIT_AWS_BUCKET", value: recordingsBucket.bucket },
 			{ key: "DATABASE_URL", value: secrets.DATABASE_URL_MYSQL.value },
 		];
 
@@ -115,7 +115,7 @@ export default $config({
 			);
 
 		// vercelEnvVar("VercelCloudfrontEnv", {
-		// 	key: "CAP_CLOUDFRONT_DISTRIBUTION_ID",
+		// 	key: "ORBIT_CLOUDFRONT_DISTRIBUTION_ID",
 		// 	value: cloudfrontDistribution.id,
 		// });
 
@@ -260,7 +260,7 @@ type Secrets = ReturnType<typeof Secrets>;
 // 		handler: "../apps/discord-bot/src/index.ts",
 // 		transform: {
 // 			worker: (args) => {
-// 				args.name = "cap-discord-bot";
+// 				args.name = "orbit-discord-bot";
 // 				args.kvNamespaceBindings = [
 // 					{
 // 						name: "release_discord_interactions",
@@ -342,8 +342,8 @@ async function WorkflowCluster(bucket: aws.s3.BucketV2, secrets: Secrets) {
 	});
 
 	const commonEnvironment = {
-		CAP_AWS_REGION: bucket.region,
-		CAP_AWS_BUCKET: bucket.bucket,
+		ORBIT_AWS_REGION: bucket.region,
+		ORBIT_AWS_BUCKET: bucket.bucket,
 		SHARD_DATABASE_URL: $interpolate`mysql://${db.username}:${db.password}@${db.host}:${db.port}/${db.database}`,
 		DATABASE_URL: secrets.DATABASE_URL_MYSQL.value,
 		AXIOM_API_TOKEN,
@@ -405,7 +405,7 @@ async function WorkflowCluster(bucket: aws.s3.BucketV2, secrets: Secrets) {
 		containers: [
 			{
 				name: "shard-manager",
-				image: "ghcr.io/brendonovich/cap-web-cluster:latest",
+				image: "ghcr.io/brendonovich/orbit-web-cluster:latest",
 				command: ["src/shard-manager.ts"],
 				environment: {
 					...commonEnvironment,
@@ -423,7 +423,7 @@ async function WorkflowCluster(bucket: aws.s3.BucketV2, secrets: Secrets) {
 		memory: "1 GB",
 		architecture: "arm64",
 		serviceRegistry: { port: 42169 },
-		image: "ghcr.io/brendonovich/cap-web-cluster:latest",
+		image: "ghcr.io/brendonovich/orbit-web-cluster:latest",
 		command: ["src/runner/index.ts"],
 		health: {
 			command: ["CMD", "deno", "run", "--allow-all", "src/health-check.ts"],

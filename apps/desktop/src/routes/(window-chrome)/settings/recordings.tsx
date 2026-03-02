@@ -1,4 +1,4 @@
-import { Button, ProgressCircle } from "@cap/ui-solid";
+import { Button, ProgressCircle } from "@orbit/ui-solid";
 import Tooltip from "@corvu/tooltip";
 import {
 	createMutation,
@@ -48,12 +48,12 @@ const Tabs = [
 	},
 	{
 		id: "instant",
-		icon: <IconCapInstant class="invert size-3 dark:invert-0" />,
+		icon: <IconOrbitInstant class="invert size-3 dark:invert-0" />,
 		label: "Instant",
 	},
 	{
 		id: "studio",
-		icon: <IconCapFilmCut class="invert size-3 dark:invert-0" />,
+		icon: <IconOrbitFilmCut class="invert size-3 dark:invert-0" />,
 		label: "Studio",
 	},
 ] satisfies { id: string; label: string; icon?: JSX.Element }[];
@@ -346,9 +346,9 @@ function RecordingItem(props: {
 							)}
 						>
 							{mode() === "instant" ? (
-								<IconCapInstant class="invert size-2.5 dark:invert-0" />
+								<IconOrbitInstant class="invert size-2.5 dark:invert-0" />
 							) : (
-								<IconCapFilmCut class="invert size-2.5 dark:invert-0" />
+								<IconOrbitFilmCut class="invert size-2.5 dark:invert-0" />
 							)}
 							<p>{firstLetterUpperCase()}</p>
 						</div>
@@ -404,7 +404,7 @@ function RecordingItem(props: {
 								tooltipText="Open link"
 								onClick={() => shell.open(sharing().link)}
 							>
-								<IconCapLink class="size-4" />
+								<IconOrbitLink class="size-4" />
 							</TooltipIconButton>
 						)}
 					</Show>
@@ -467,7 +467,7 @@ function RecordingItem(props: {
 											tooltipText="Open link"
 											onClick={() => shell.open(sharing().link)}
 										>
-											<IconCapLink class="size-4" />
+											<IconOrbitLink class="size-4" />
 										</TooltipIconButton>
 									)}
 								</Show>
@@ -497,7 +497,7 @@ function RecordingItem(props: {
 						queryClient.refetchQueries(recordingsQuery);
 					}}
 				>
-					<IconCapTrash class="size-4" />
+					<IconOrbitTrash class="size-4" />
 				</TooltipIconButton>
 			</div>
 		</li>

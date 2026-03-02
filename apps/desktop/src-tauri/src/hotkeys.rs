@@ -4,7 +4,7 @@ use crate::{
     tray,
     windows::ShowCapWindow,
 };
-use cap_recording::screen_capture::ScreenCaptureTarget;
+use orbit_recording::screen_capture::ScreenCaptureTarget;
 use global_hotkey::HotKeyState;
 use serde::{Deserialize, Serialize};
 use specta::Type;
@@ -140,14 +140,14 @@ async fn handle_hotkey(app: AppHandle, action: HotkeyAction) -> Result<(), Strin
     match action {
         HotkeyAction::StartStudioRecording => {
             let _ = RequestStartRecording {
-                mode: cap_recording::RecordingMode::Studio,
+                mode: orbit_recording::RecordingMode::Studio,
             }
             .emit(&app);
             Ok(())
         }
         HotkeyAction::StartInstantRecording => {
             let _ = RequestStartRecording {
-                mode: cap_recording::RecordingMode::Instant,
+                mode: orbit_recording::RecordingMode::Instant,
             }
             .emit(&app);
             Ok(())
@@ -167,9 +167,9 @@ async fn handle_hotkey(app: AppHandle, action: HotkeyAction) -> Result<(), Strin
                 .unwrap_or_default();
 
             let next = match current {
-                cap_recording::RecordingMode::Studio => cap_recording::RecordingMode::Instant,
-                cap_recording::RecordingMode::Instant => cap_recording::RecordingMode::Screenshot,
-                cap_recording::RecordingMode::Screenshot => cap_recording::RecordingMode::Studio,
+                orbit_recording::RecordingMode::Studio => orbit_recording::RecordingMode::Instant,
+                orbit_recording::RecordingMode::Instant => orbit_recording::RecordingMode::Screenshot,
+                orbit_recording::RecordingMode::Screenshot => orbit_recording::RecordingMode::Studio,
             };
 
             RecordingSettingsStore::set_mode(&app, next)
@@ -205,7 +205,7 @@ async fn handle_hotkey(app: AppHandle, action: HotkeyAction) -> Result<(), Strin
             Ok(())
         }
         HotkeyAction::ScreenshotDisplay => {
-            use scap_targets::Display;
+            use sorbit_targets::Display;
 
             let display = Display::get_containing_cursor().unwrap_or_else(Display::primary);
             let target = ScreenCaptureTarget::Display { id: display.id() };
@@ -219,7 +219,7 @@ async fn handle_hotkey(app: AppHandle, action: HotkeyAction) -> Result<(), Strin
             }
         }
         HotkeyAction::ScreenshotWindow => {
-            use scap_targets::Window;
+            use sorbit_targets::Window;
 
             let target = {
                 let window = Window::get_topmost_at_cursor()
@@ -236,10 +236,10 @@ async fn handle_hotkey(app: AppHandle, action: HotkeyAction) -> Result<(), Strin
             }
         }
         HotkeyAction::ScreenshotArea => {
-            RecordingSettingsStore::set_mode(&app, cap_recording::RecordingMode::Screenshot)
+            RecordingSettingsStore::set_mode(&app, orbit_recording::RecordingMode::Screenshot)
                 .map_err(|e| format!("Failed to set screenshot mode: {e}"))?;
 
-            tray::update_tray_icon_for_mode(&app, cap_recording::RecordingMode::Screenshot);
+            tray::update_tray_icon_for_mode(&app, orbit_recording::RecordingMode::Screenshot);
 
             let _ = RequestOpenRecordingPicker {
                 target_mode: Some(RecordingTargetMode::Area),

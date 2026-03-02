@@ -1,7 +1,7 @@
 use crate::sources::audio_mixer::AudioMixer;
 use anyhow::{Context, anyhow};
-use cap_media_info::{AudioInfo, VideoInfo};
-use cap_timestamp::{Timestamp, Timestamps};
+use orbit_media_info::{AudioInfo, VideoInfo};
+use orbit_timestamp::{Timestamp, Timestamps};
 use futures::{
     FutureExt, SinkExt, StreamExt, TryFutureExt,
     channel::{mpsc, oneshot},
@@ -261,7 +261,7 @@ impl VideoDriftTracker {
 const DEFAULT_VIDEO_SOURCE_CHANNEL_CAPACITY: usize = 300;
 
 fn get_video_source_channel_capacity() -> usize {
-    std::env::var("CAP_VIDEO_SOURCE_BUFFER_SIZE")
+    std::env::var("ORBIT_VIDEO_SOURCE_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(DEFAULT_VIDEO_SOURCE_CHANNEL_CAPACITY)
@@ -283,10 +283,17 @@ pub struct TimestampAnomalyTracker {
     wall_clock_start: Option<Instant>,
     last_valid_wall_clock: Option<Instant>,
     wall_clock_confirmed_jumps: u64,
+    expected_frame_duration: Duration,
 }
 
 impl TimestampAnomalyTracker {
-    pub fn new(stream_name: &'static str) -> Self {
+    pub fn new(stream_name: &'static str, fps: f32) -> Self {
+        let expected_frame_duration = if fps > 0.0 {
+            Duration::from_secs_f64(1.0 / fps as f64)
+        } else {
+            Duration::from_millis(33)
+        };
+
         Self {
             stream_name,
             anomaly_count: 0,
@@ -303,6 +310,7 @@ impl TimestampAnomalyTracker {
             wall_clock_start: None,
             last_valid_wall_clock: None,
             wall_clock_confirmed_jumps: 0,
+            expected_frame_duration,
         }
     }
 
@@ -429,7 +437,7 @@ impl TimestampAnomalyTracker {
             self.max_forward_skew_secs = jump_secs;
         }
 
-        let expected_increment = Duration::from_millis(33);
+        let expected_increment = self.expected_frame_duration;
         let adjusted = last.saturating_add(expected_increment);
 
         let compensation_secs = current.as_secs_f64() - adjusted.as_secs_f64();
@@ -1103,6 +1111,8 @@ fn spawn_video_encoder<TMutex: VideoMuxer<VideoFrame = TVideo::Frame>, TVideo: V
     shared_pause: SharedWallClockPause,
     frame_counter: Arc<AtomicU64>,
 ) {
+    let video_info = video_source.video_info();
+
     setup_ctx.tasks().spawn("capture-video", {
         let stop_token = stop_token.clone();
         async move {
@@ -1123,9 +1133,11 @@ fn spawn_video_encoder<TMutex: VideoMuxer<VideoFrame = TVideo::Frame>, TVideo: V
 
         let mut first_tx = Some(first_tx);
         let mut frame_count = 0u64;
-        let mut anomaly_tracker = TimestampAnomalyTracker::new("video");
+        let mut anomaly_tracker = TimestampAnomalyTracker::new("video", video_info.fps() as f32);
         let mut drift_tracker = VideoDriftTracker::new();
         let mut dropped_during_pause: u64 = 0;
+
+
 
         let res = stop_token
             .run_until_cancelled(async {
@@ -1201,20 +1213,11 @@ fn spawn_video_encoder<TMutex: VideoMuxer<VideoFrame = TVideo::Frame>, TVideo: V
         if was_cancelled {
             info!("mux-video cancelled, draining remaining frames from channel");
             let drain_start = std::time::Instant::now();
-            let drain_timeout = Duration::from_secs(2);
-            let max_drain_frames = 500u64;
             let mut drained = 0u64;
             let mut skipped = 0u64;
 
-            let mut hit_limit = false;
-            while let Some(frame) = video_rx.next().await {
+            while let Ok(Some(frame)) = video_rx.try_next() {
                 frame_count += 1;
-
-                if drain_start.elapsed() > drain_timeout || drained >= max_drain_frames {
-                    hit_limit = true;
-                    break;
-                }
-
                 drained += 1;
 
                 let timestamp = frame.timestamp();
@@ -1248,14 +1251,18 @@ fn spawn_video_encoder<TMutex: VideoMuxer<VideoFrame = TVideo::Frame>, TVideo: V
                         skipped += 1;
                     }
                 }
+
+                if drained >= 500 || drain_start.elapsed() > Duration::from_secs(2) {
+                    warn!("Drain limit reached, dropping remaining frames");
+                    break;
+                }
             }
 
-            if drained > 0 || skipped > 0 || hit_limit {
+            if drained > 0 || skipped > 0 {
                 info!(
-                    "mux-video drain complete: {} frames processed, {} errors (limit hit: {}) in {:?}",
+                    "mux-video drain complete: {} frames processed, {} errors in {:?}",
                     drained,
                     skipped,
-                    hit_limit,
                     drain_start.elapsed()
                 );
             }
@@ -1361,7 +1368,7 @@ impl PreparedAudioSources {
                                     if gap_duration >= MAX_SILENCE_INSERTION {
                                         error!(
                                             gap_ms = gap_duration.as_millis(),
-                                            "Audio gap exceeded 1s cap, \
+                                            "Audio gap exceeded 1s orbit, \
                                              something may be seriously wrong"
                                         );
                                     }
@@ -2145,7 +2152,7 @@ mod tests {
 
         #[test]
         fn normal_frames_produce_no_anomalies() {
-            let mut tracker = TimestampAnomalyTracker::new("test");
+            let mut tracker = TimestampAnomalyTracker::new("test", 30.0);
             let timestamps = make_timestamps();
 
             for i in 0..10u64 {
@@ -2161,7 +2168,7 @@ mod tests {
 
         #[test]
         fn wall_clock_confirmed_forward_jump_not_counted_as_anomaly() {
-            let mut tracker = TimestampAnomalyTracker::new("test");
+            let mut tracker = TimestampAnomalyTracker::new("test", 30.0);
             let timestamps = make_timestamps();
 
             for i in 0..5u64 {
@@ -2183,7 +2190,7 @@ mod tests {
 
         #[test]
         fn spurious_forward_jump_counted_as_anomaly() {
-            let mut tracker = TimestampAnomalyTracker::new("test");
+            let mut tracker = TimestampAnomalyTracker::new("test", 30.0);
             let timestamps = make_timestamps();
 
             for i in 0..5u64 {
@@ -2203,7 +2210,7 @@ mod tests {
 
         #[test]
         fn resync_flag_set_on_both_confirmed_and_spurious_jumps() {
-            let mut tracker = TimestampAnomalyTracker::new("test");
+            let mut tracker = TimestampAnomalyTracker::new("test", 30.0);
             let timestamps = make_timestamps();
 
             for i in 0..5u64 {
@@ -2235,7 +2242,7 @@ mod tests {
 
         #[test]
         fn multiple_confirmed_jumps_tracked_separately() {
-            let mut tracker = TimestampAnomalyTracker::new("test");
+            let mut tracker = TimestampAnomalyTracker::new("test", 30.0);
             let timestamps = make_timestamps();
 
             for i in 0..3u64 {
@@ -2265,7 +2272,7 @@ mod tests {
 
         #[test]
         fn wall_clock_start_set_on_first_frame() {
-            let mut tracker = TimestampAnomalyTracker::new("test");
+            let mut tracker = TimestampAnomalyTracker::new("test", 30.0);
             let timestamps = make_timestamps();
 
             assert!(tracker.wall_clock_start.is_none());
@@ -2278,7 +2285,7 @@ mod tests {
 
         #[test]
         fn confirmed_jump_still_tracks_forward_skew() {
-            let mut tracker = TimestampAnomalyTracker::new("test");
+            let mut tracker = TimestampAnomalyTracker::new("test", 30.0);
             let timestamps = make_timestamps();
 
             for i in 0..3u64 {
@@ -2294,6 +2301,46 @@ mod tests {
             assert_eq!(tracker.wall_clock_confirmed_jumps, 1);
             assert_eq!(tracker.anomaly_count, 0);
             assert!(tracker.total_forward_skew_secs > 2.0);
+        }
+
+        #[test]
+        fn forward_jump_uses_dynamic_increment() {
+            // Test 60fps
+            let mut tracker = TimestampAnomalyTracker::new("test", 60.0);
+            let timestamps = make_timestamps();
+
+            let ts1 = make_timestamp(timestamps, Duration::ZERO);
+            let dur1 = tracker.process_timestamp(ts1, timestamps).unwrap();
+
+            // Large jump
+            let ts2 = make_timestamp(timestamps, Duration::from_secs(10));
+            let dur2 = tracker.process_timestamp(ts2, timestamps).unwrap();
+
+            // Should use 1/60s = 16.666ms increment
+            let expected_increment_ms = 1000 / 60;
+            let actual_increment_ms = dur2.as_millis() as i64 - dur1.as_millis() as i64;
+
+            assert!(
+                (actual_increment_ms - expected_increment_ms as i64).abs() <= 1,
+                "Expected ~{}ms increment for 60fps, got {}ms",
+                expected_increment_ms,
+                actual_increment_ms
+            );
+
+            // Test 30fps
+            let mut tracker_30 = TimestampAnomalyTracker::new("test", 30.0);
+            let dur1_30 = tracker_30.process_timestamp(ts1, timestamps).unwrap();
+            let dur2_30 = tracker_30.process_timestamp(ts2, timestamps).unwrap();
+
+            let expected_increment_ms_30 = 1000 / 30;
+            let actual_increment_ms_30 = dur2_30.as_millis() as i64 - dur1_30.as_millis() as i64;
+
+            assert!(
+                (actual_increment_ms_30 - expected_increment_ms_30 as i64).abs() <= 1,
+                "Expected ~{}ms increment for 30fps, got {}ms",
+                expected_increment_ms_30,
+                actual_increment_ms_30
+            );
         }
     }
 }

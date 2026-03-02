@@ -1,9 +1,9 @@
-use cap_export::{
+use orbit_export::{
     ExporterBase,
     gif::GifExportSettings,
     mp4::{ExportCompression, Mp4ExportSettings},
 };
-use cap_project::XY;
+use orbit_project::XY;
 use chrono::{Local, Utc};
 use clap::{Parser, Subcommand};
 use std::{
@@ -58,7 +58,7 @@ struct Cli {
     #[arg(
         long,
         global = true,
-        help = "Path to an existing Cap recording to use instead of generating synthetic video"
+        help = "Path to an existing Orbit recording to use instead of generating synthetic video"
     )]
     recording_path: Option<PathBuf>,
 }
@@ -352,7 +352,7 @@ fn generate_test_video(
     Ok(())
 }
 
-fn create_cap_project(project_dir: &Path, duration_secs: u32, fps: u32) -> Result<(), String> {
+fn create_orbit_project(project_dir: &Path, duration_secs: u32, fps: u32) -> Result<(), String> {
     let content_dir = project_dir.join("content");
     fs::create_dir_all(&content_dir).map_err(|e| format!("Failed to create content dir: {e}"))?;
 
@@ -991,7 +991,7 @@ async fn main() {
                 || !recording_path.join("project-config.json").exists()
             {
                 eprintln!(
-                    "ERROR: {:?} is not a valid Cap recording (missing meta files)",
+                    "ERROR: {:?} is not a valid Orbit recording (missing meta files)",
                     recording_path
                 );
                 std::process::exit(1);
@@ -1041,8 +1041,8 @@ async fn main() {
 
             println!("Setting up test project in {:?}", project_dir);
 
-            create_cap_project(&project_dir, duration_secs, SOURCE_VIDEO_FPS)
-                .expect("Failed to create cap project");
+            create_orbit_project(&project_dir, duration_secs, SOURCE_VIDEO_FPS)
+                .expect("Failed to create orbit project");
 
             let video_path = project_dir.join("content/display.mp4");
             println!(
@@ -1097,7 +1097,7 @@ async fn main() {
             .unwrap_or_default();
 
         let command = format!(
-            "cargo run -p cap-export --example export-benchmark-runner -- {command_name} --duration {duration_secs}{recording_flag} --benchmark-output"
+            "cargo run -p orbit-export --example export-benchmark-runner -- {command_name} --duration {duration_secs}{recording_flag} --benchmark-output"
         );
 
         let benchmark_md =

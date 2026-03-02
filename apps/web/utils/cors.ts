@@ -1,4 +1,4 @@
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 
 export const allowedOrigins = [
 	buildEnv.NEXT_PUBLIC_WEB_URL,
@@ -7,10 +7,10 @@ export const allowedOrigins = [
 	"tauri://localhost",
 	"http://tauri.localhost",
 	"https://tauri.localhost",
-	"https://cap.so",
-	"https://www.cap.so",
-	"https://cap.link",
-	"https://www.cap.link",
+	"https://orbit.so",
+	"https://www.orbit.so",
+	"https://orbit.link",
+	"https://www.orbit.link",
 ];
 
 export function getCorsHeaders(origin: string | null, originalOrigin: string) {

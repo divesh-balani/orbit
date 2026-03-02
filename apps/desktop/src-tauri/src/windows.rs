@@ -3,7 +3,7 @@
 
 use anyhow::anyhow;
 use futures::pin_mut;
-use scap_targets::{Display, DisplayId};
+use sorbit_targets::{Display, DisplayId};
 use serde::Deserialize;
 use specta::Type;
 use std::{
@@ -35,7 +35,7 @@ use crate::{
     target_select_overlay::WindowFocusManager,
     window_exclusion::WindowExclusion,
 };
-use cap_recording::feeds;
+use orbit_recording::feeds;
 
 #[cfg(target_os = "macos")]
 const DEFAULT_TRAFFIC_LIGHTS_INSET: LogicalPosition<f64> = LogicalPosition::new(12.0, 12.0);
@@ -82,19 +82,21 @@ fn is_system_dark_mode() -> bool {
     false
 }
 
-fn hide_recording_windows(app: &AppHandle) {
+pub fn hide_recording_windows(app: &AppHandle) {
     for (label, window) in app.webview_windows() {
-        if let Ok(id) = CapWindowId::from_str(&label)
-            && matches!(
-                id,
-                CapWindowId::TargetSelectOverlay { .. }
-                    | CapWindowId::Main
-                    | CapWindowId::Camera
-                    | CapWindowId::RecordingControls
-                    | CapWindowId::WindowCaptureOccluder { .. }
-            )
-        {
-            let _ = window.hide();
+        if let Ok(id) = OrbitWindowId::from_str(&label) {
+            match id {
+                OrbitWindowId::RecordingControls
+                | OrbitWindowId::TargetSelectOverlay { .. }
+                | OrbitWindowId::WindowCaptureOccluder { .. }
+                | OrbitWindowId::CaptureArea => {
+                    let _ = window.close();
+                }
+                OrbitWindowId::Main | OrbitWindowId::Camera => {
+                    let _ = window.hide();
+                }
+                _ => {}
+            }
         }
     }
 }
@@ -121,7 +123,7 @@ async fn cleanup_camera_window(
         let app_for_close = app.clone();
         app.run_on_main_thread(move || {
             use tauri_nspanel::ManagerExt;
-            let label = CapWindowId::Camera.label();
+            let label = OrbitWindowId::Camera.label();
             if let Ok(panel) = app_for_close.get_webview_panel(&label) {
                 panel.released_when_closed(false);
                 panel.close();
@@ -143,7 +145,7 @@ async fn cleanup_camera_window(
         })
         .ok();
         let _ = tokio::time::timeout(std::time::Duration::from_millis(500), destroy_rx).await;
-    } else if let Some(stale) = CapWindowId::Camera.get(app) {
+    } else if let Some(stale) = OrbitWindowId::Camera.get(app) {
         let (destroy_tx, destroy_rx) = tokio::sync::oneshot::channel();
         app.run_on_main_thread({
             let stale = stale.clone();
@@ -159,12 +161,12 @@ async fn cleanup_camera_window(
     if wait_for_removal {
         let start = std::time::Instant::now();
         let timeout = std::time::Duration::from_millis(2000);
-        while start.elapsed() < timeout && CapWindowId::Camera.get(app).is_some() {
+        while start.elapsed() < timeout && OrbitWindowId::Camera.get(app).is_some() {
             tokio::time::sleep(std::time::Duration::from_millis(100)).await;
         }
     }
 
-    let still_exists = CapWindowId::Camera.get(app).is_some();
+    let still_exists = OrbitWindowId::Camera.get(app).is_some();
     app.state::<CameraWindowCloseGate>().set_allow_close(false);
 
     !still_exists
@@ -357,7 +359,7 @@ fn is_position_on_any_screen(pos_x: f64, pos_y: f64) -> bool {
 }
 
 #[derive(Clone, Deserialize, Type)]
-pub enum CapWindowId {
+pub enum OrbitWindowId {
     // Contains onboarding + permissions
     Setup,
     Main,
@@ -375,7 +377,7 @@ pub enum CapWindowId {
     ScreenshotEditor { id: u32 },
 }
 
-impl FromStr for CapWindowId {
+impl FromStr for OrbitWindowId {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -420,7 +422,7 @@ impl FromStr for CapWindowId {
     }
 }
 
-impl std::fmt::Display for CapWindowId {
+impl std::fmt::Display for OrbitWindowId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Setup => write!(f, "setup"),
@@ -445,7 +447,7 @@ impl std::fmt::Display for CapWindowId {
     }
 }
 
-impl CapWindowId {
+impl OrbitWindowId {
     pub fn label(&self) -> String {
         self.to_string()
     }
@@ -583,7 +585,7 @@ impl ShowCapWindow {
                 }
             };
 
-            let window_label = CapWindowId::Editor { id: window_id }.label();
+            let window_label = OrbitWindowId::Editor { id: window_id }.label();
             PendingEditorInstances::start_prewarm(app, window_label, project_path.clone()).await;
         }
 
@@ -597,6 +599,25 @@ impl ShowCapWindow {
                         .counter
                         .fetch_add(1, std::sync::atomic::Ordering::SeqCst),
                 ));
+            }
+        }
+
+        // Only one primary window should be visible at a time
+        if matches!(
+            self,
+            Self::Main { .. }
+                | Self::Editor { .. }
+                | Self::ScreenshotEditor { .. }
+                | Self::Setup
+                | Self::Upgrade
+                | Self::ModeSelect
+                | Self::Settings { .. }
+        ) {
+            let target_label = self.id(app).label();
+            for (label, window) in app.webview_windows() {
+                if label != target_label {
+                    let _ = window.close();
+                }
             }
         }
 
@@ -807,8 +828,6 @@ impl ShowCapWindow {
         }
 
         if matches!(self, Self::Settings { .. }) {
-            hide_recording_windows(app);
-
             let is_recording = app
                 .state::<ArcLock<App>>()
                 .try_read()
@@ -974,7 +993,7 @@ impl ShowCapWindow {
                     return Box::pin(Self::Setup.show(app)).await;
                 }
 
-                let title = CapWindowId::Main.title();
+                let title = OrbitWindowId::Main.title();
                 let should_protect = should_protect_window(app, &title);
 
                 #[cfg(target_os = "macos")]
@@ -994,8 +1013,8 @@ impl ShowCapWindow {
                     .visible(false)
                     .initialization_script(format!(
                         "
-                        window.__CAP__ = window.__CAP__ ?? {{}};
-                        window.__CAP__.initialTargetMode = {}
+                        window.__ORBIT__ = window.__ORBIT__ ?? {{}};
+                        window.__ORBIT__.initialTargetMode = {}
                     ",
                         serde_json::to_string(init_target_mode)
                             .expect("Failed to serialize initial target mode")
@@ -1088,10 +1107,10 @@ impl ShowCapWindow {
                 display_id,
                 target_mode,
             } => {
-                let Some(display) = scap_targets::Display::from_id(display_id) else {
+                let Some(display) = sorbit_targets::Display::from_id(display_id) else {
                     return Err(tauri::Error::WindowNotFound);
                 };
-                let is_hovered_display = scap_targets::Display::get_containing_cursor()
+                let is_hovered_display = sorbit_targets::Display::get_containing_cursor()
                     .map(|d| d.id())
                     == Some(display.id());
 
@@ -1129,7 +1148,7 @@ impl ShowCapWindow {
                     .transparent(true)
                     .visible(false)
                     .initialization_script(format!(
-                        "window.__CAP__ = window.__CAP__ ?? {{}}; window.__CAP__.cameraWsPort = {};",
+                        "window.__ORBIT__ = window.__ORBIT__ ?? {{}}; window.__ORBIT__.cameraWsPort = {};",
                         camera_ws_port
                     ));
 
@@ -1265,8 +1284,6 @@ impl ShowCapWindow {
                 window
             }
             Self::Editor { .. } => {
-                hide_recording_windows(app);
-
                 #[cfg(target_os = "macos")]
                 app.set_activation_policy(tauri::ActivationPolicy::Regular)
                     .ok();
@@ -1296,8 +1313,6 @@ impl ShowCapWindow {
                 window
             }
             Self::ScreenshotEditor { path: _ } => {
-                hide_recording_windows(app);
-
                 #[cfg(target_os = "macos")]
                 app.set_activation_policy(tauri::ActivationPolicy::Regular)
                     .ok();
@@ -1333,7 +1348,7 @@ impl ShowCapWindow {
                 window
             }
             Self::Upgrade => {
-                if let Some(main) = CapWindowId::Main.get(app) {
+                if let Some(main) = OrbitWindowId::Main.get(app) {
                     let _ = main.hide();
                 }
 
@@ -1365,7 +1380,7 @@ impl ShowCapWindow {
                 window
             }
             Self::ModeSelect => {
-                if let Some(main) = CapWindowId::Main.get(app) {
+                if let Some(main) = OrbitWindowId::Main.get(app) {
                     let _ = main.hide();
                 }
 
@@ -1414,7 +1429,7 @@ impl ShowCapWindow {
                     let state = panel_manager.get_state(PanelWindowType::Camera).await;
                     warn!("Camera window creation blocked, current state: {:?}", state);
                     if state == PanelState::Ready
-                        && let Some(window) = CapWindowId::Camera.get(app)
+                        && let Some(window) = OrbitWindowId::Camera.get(app)
                     {
                         if *centered {
                             center_camera_window(app, &window);
@@ -1428,7 +1443,7 @@ impl ShowCapWindow {
                             std::time::Duration::from_millis(500),
                         )
                         .await;
-                    if let Some(window) = CapWindowId::Camera.get(app) {
+                    if let Some(window) = OrbitWindowId::Camera.get(app) {
                         if *centered {
                             center_camera_window(app, &window);
                         }
@@ -1473,9 +1488,9 @@ impl ShowCapWindow {
                         .skip_taskbar(true)
                         .initialization_script(format!(
                             "
-			                window.__CAP__ = window.__CAP__ ?? {{}};
-			                window.__CAP__.cameraWsPort = {};
-			                window.__CAP__.cameraOnlyMode = {};
+			                window.__ORBIT__ = window.__ORBIT__ ?? {{}};
+			                window.__ORBIT__.cameraWsPort = {};
+			                window.__ORBIT__.cameraOnlyMode = {};
 		                ",
                             state.camera_ws_port, centered
                         ))
@@ -1502,7 +1517,7 @@ impl ShowCapWindow {
                         }
                     };
 
-                    let camera_monitor = CapWindowId::Main
+                    let camera_monitor = OrbitWindowId::Main
                         .get(app)
                         .map(|w| CursorMonitorInfo::from_window(&w))
                         .unwrap_or(cursor_monitor);
@@ -1767,7 +1782,7 @@ impl ShowCapWindow {
                 );
 
                 // Hide the main window if the target monitor is the same
-                if let Some(main_window) = CapWindowId::Main.get(app)
+                if let Some(main_window) = OrbitWindowId::Main.get(app)
                     && let (Ok(outer_pos), Ok(outer_size)) =
                         (main_window.outer_position(), main_window.outer_size())
                     && let Ok(scale_factor) = main_window.scale_factor()
@@ -1917,7 +1932,7 @@ impl ShowCapWindow {
                 window
             }
             Self::RecordingsOverlay => {
-                let title = CapWindowId::RecordingsOverlay.title();
+                let title = OrbitWindowId::RecordingsOverlay.title();
                 let should_protect = should_protect_window(app, &title);
 
                 let window = self
@@ -2054,38 +2069,38 @@ impl ShowCapWindow {
         builder
     }
 
-    pub fn id(&self, app: &AppHandle) -> CapWindowId {
+    pub fn id(&self, app: &AppHandle) -> OrbitWindowId {
         match self {
-            ShowCapWindow::Setup => CapWindowId::Setup,
-            ShowCapWindow::Main { .. } => CapWindowId::Main,
-            ShowCapWindow::Settings { .. } => CapWindowId::Settings,
+            ShowCapWindow::Setup => OrbitWindowId::Setup,
+            ShowCapWindow::Main { .. } => OrbitWindowId::Main,
+            ShowCapWindow::Settings { .. } => OrbitWindowId::Settings,
             ShowCapWindow::Editor { project_path } => {
                 let state = app.state::<EditorWindowIds>();
                 let s = state.ids.lock().unwrap();
                 let id = s.iter().find(|(path, _)| path == project_path).unwrap().1;
-                CapWindowId::Editor { id }
+                OrbitWindowId::Editor { id }
             }
-            ShowCapWindow::RecordingsOverlay => CapWindowId::RecordingsOverlay,
+            ShowCapWindow::RecordingsOverlay => OrbitWindowId::RecordingsOverlay,
             ShowCapWindow::TargetSelectOverlay { display_id, .. } => {
-                CapWindowId::TargetSelectOverlay {
+                OrbitWindowId::TargetSelectOverlay {
                     display_id: display_id.clone(),
                 }
             }
             ShowCapWindow::WindowCaptureOccluder { screen_id } => {
-                CapWindowId::WindowCaptureOccluder {
+                OrbitWindowId::WindowCaptureOccluder {
                     screen_id: screen_id.clone(),
                 }
             }
-            ShowCapWindow::CaptureArea { .. } => CapWindowId::CaptureArea,
-            ShowCapWindow::Camera { .. } => CapWindowId::Camera,
-            ShowCapWindow::InProgressRecording { .. } => CapWindowId::RecordingControls,
-            ShowCapWindow::Upgrade => CapWindowId::Upgrade,
-            ShowCapWindow::ModeSelect => CapWindowId::ModeSelect,
+            ShowCapWindow::CaptureArea { .. } => OrbitWindowId::CaptureArea,
+            ShowCapWindow::Camera { .. } => OrbitWindowId::Camera,
+            ShowCapWindow::InProgressRecording { .. } => OrbitWindowId::RecordingControls,
+            ShowCapWindow::Upgrade => OrbitWindowId::Upgrade,
+            ShowCapWindow::ModeSelect => OrbitWindowId::ModeSelect,
             ShowCapWindow::ScreenshotEditor { path } => {
                 let state = app.state::<ScreenshotEditorWindowIds>();
                 let s = state.ids.lock().unwrap();
                 let id = s.iter().find(|(p, _)| p == path).unwrap().1;
-                CapWindowId::ScreenshotEditor { id }
+                OrbitWindowId::ScreenshotEditor { id }
             }
         }
     }
@@ -2125,7 +2140,7 @@ pub fn set_theme(window: tauri::Window, theme: AppTheme) {
     });
 
     #[cfg(target_os = "macos")]
-    match CapWindowId::from_str(window.label()) {
+    match OrbitWindowId::from_str(window.label()) {
         Ok(win) if win.traffic_lights_position().is_some() => position_traffic_lights(window, None),
         Ok(_) | Err(_) => {}
     }
@@ -2140,7 +2155,7 @@ pub fn position_traffic_lights(_window: tauri::Window, _controls_inset: Option<(
         &_window,
         _controls_inset.map(LogicalPosition::from).or_else(|| {
             // Attempt to get the default inset from the window's traffic lights position
-            CapWindowId::from_str(_window.label())
+            OrbitWindowId::from_str(_window.label())
                 .ok()
                 .and_then(|id| id.traffic_lights_position().flatten())
         }),
@@ -2186,7 +2201,7 @@ fn should_protect_window(app: &AppHandle<Wry>, window_title: &str) -> bool {
 #[instrument(skip(app))]
 pub fn refresh_window_content_protection(app: AppHandle<Wry>) -> Result<(), String> {
     for (label, window) in app.webview_windows() {
-        if let Ok(id) = CapWindowId::from_str(&label) {
+        if let Ok(id) = OrbitWindowId::from_str(&label) {
             let title = id.title();
             window
                 .set_content_protected(should_protect_window(&app, &title))

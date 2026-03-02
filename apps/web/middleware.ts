@@ -1,6 +1,6 @@
-import { db } from "@cap/database";
-import { organizations } from "@cap/database/schema";
-import { buildEnv, serverEnv } from "@cap/env";
+import { db } from "@orbit/database";
+import { organizations } from "@orbit/database/schema";
+import { buildEnv, serverEnv } from "@orbit/env";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { type NextRequest, NextResponse, userAgent } from "next/server";
@@ -11,8 +11,8 @@ const addHttps = (s?: string) => {
 };
 
 const mainOrigins = [
-	"https://cap.so",
-	"https://cap.link",
+	"https://orbit.so",
+	"https://orbit.link",
 	"http://localhost",
 	serverEnv().WEB_URL,
 	addHttps(serverEnv().VERCEL_URL_HOST),
@@ -30,14 +30,14 @@ export async function middleware(request: NextRequest) {
 		response.headers.set("X-Frame-Options", "SAMEORIGIN");
 		response.headers.set(
 			"Content-Security-Policy",
-			"frame-ancestors https://cap.so",
+			"frame-ancestors https://orbit.so",
 		);
 		return response;
 	}
 
 	const hostname = url.hostname;
 
-	if (buildEnv.NEXT_PUBLIC_IS_CAP !== "true") {
+	if (buildEnv.NEXT_PUBLIC_IS_ORBIT !== "true") {
 		if (
 			!(
 				path.startsWith("/s/") ||

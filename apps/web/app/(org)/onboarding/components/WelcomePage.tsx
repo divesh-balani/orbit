@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input } from "@cap/ui";
+import { Button, Input } from "@orbit/ui";
 import { useRouter } from "next/navigation";
 import { startTransition, useState } from "react";
 import { toast } from "sonner";
@@ -37,7 +37,7 @@ export function WelcomePage() {
 
 	return (
 		<Base
-			title="Welcome to Cap"
+			title="Welcome to Orbit"
 			description="Let's get you started"
 			hideBackButton
 		>

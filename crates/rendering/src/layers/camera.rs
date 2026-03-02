@@ -1,4 +1,4 @@
-use cap_project::XY;
+use orbit_project::XY;
 use std::sync::Arc;
 use wgpu::util::DeviceExt;
 

@@ -11,10 +11,10 @@ use crate::{
     sources::screen_capture::{ScreenCaptureConfig, ScreenCaptureTarget},
 };
 use anyhow::Context as _;
-use cap_media_info::{AudioInfo, VideoInfo};
-use cap_project::InstantRecordingMeta;
-use cap_timestamp::Timestamps;
-use cap_utils::ensure_dir;
+use orbit_media_info::{AudioInfo, VideoInfo};
+use orbit_project::InstantRecordingMeta;
+use orbit_timestamp::Timestamps;
+use orbit_utils::ensure_dir;
 use kameo::{Actor as _, prelude::*};
 use std::{
     path::PathBuf,
@@ -283,7 +283,7 @@ pub struct ActorBuilder {
     camera_feed: Option<Arc<crate::feeds::camera::CameraFeedLock>>,
     max_output_size: Option<u32>,
     #[cfg(target_os = "macos")]
-    excluded_windows: Vec<scap_targets::WindowId>,
+    excluded_windows: Vec<sorbit_targets::WindowId>,
 }
 
 impl ActorBuilder {
@@ -324,7 +324,7 @@ impl ActorBuilder {
     }
 
     #[cfg(target_os = "macos")]
-    pub fn with_excluded_windows(mut self, excluded_windows: Vec<scap_targets::WindowId>) -> Self {
+    pub fn with_excluded_windows(mut self, excluded_windows: Vec<sorbit_targets::WindowId>) -> Self {
         self.excluded_windows = excluded_windows;
         self
     }
@@ -366,7 +366,7 @@ pub async fn spawn_instant_recording_actor(
     let content_dir = ensure_dir(&recording_dir.join("content"))?;
 
     #[cfg(windows)]
-    cap_mediafoundation_utils::thread_init();
+    orbit_mediafoundation_utils::thread_init();
 
     let (mut pipeline, video_info) = match inputs.capture_target {
         ScreenCaptureTarget::CameraOnly => {

@@ -1,8 +1,8 @@
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { users, videos } from "@cap/database/schema";
-import type { VideoMetadata } from "@cap/database/types";
-import type { Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { users, videos } from "@orbit/database/schema";
+import type { VideoMetadata } from "@orbit/database/types";
+import type { Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { startAiGeneration } from "@/lib/generate-ai";

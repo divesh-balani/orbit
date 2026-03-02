@@ -74,7 +74,7 @@ windows-capture = "1.5.0"
 percent-encoding = "2.3.1"
 sysinfo = "0.32"
 
-# TODO: Reenable these: https://github.com/CapSoftware/Cap/issues/859
+# TODO: Reenable these: https://github.com/CapSoftware/Orbit/issues/859
 [workspace.lints.rust]
 deprecated = "allow"
 unexpected_cfgs = "allow"
@@ -103,7 +103,7 @@ opt-level = "s"   # Optimize for binary size
 debug = true
 
 [patch.crates-io]
-# screencapturekit = { git = "https://github.com/CapSoftware/screencapturekit-rs", rev = "7ff1e103742e56c8f6c2e940b5e52684ed0bed69" } # branch = "cap-main"
+# screencapturekit = { git = "https://github.com/CapSoftware/screencapturekit-rs", rev = "7ff1e103742e56c8f6c2e940b5e52684ed0bed69" } # branch = "orbit-main"
 cidre = { git = "https://github.com/CapSoftware/cidre", rev = "bf84b67079a8" }
 # https://github.com/gfx-rs/wgpu/pull/7550
 # wgpu = { git = "https://github.com/gfx-rs/wgpu", rev = "cd41a6e32a6239b65d1cecbeccde6a43a100914a" }

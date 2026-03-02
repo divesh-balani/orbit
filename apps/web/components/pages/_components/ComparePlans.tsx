@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { clsx } from "clsx";
@@ -29,7 +29,7 @@ const getButtonText = (planName: string): string => {
 			return "Download for free";
 		case "Desktop License":
 			return "Get Desktop License";
-		case "Cap Pro":
+		case "Orbit Pro":
 			return "Get started";
 		default:
 			return "Get started";
@@ -42,7 +42,7 @@ const getButtonVariant = (planName: string) => {
 			return "gray";
 		case "Desktop License":
 			return "dark";
-		case "Cap Pro":
+		case "Orbit Pro":
 			return "blue";
 		default:
 			return "gray";
@@ -71,7 +71,7 @@ const PlanIcon = ({
 		);
 	}
 
-	if (planName === "Cap Pro") {
+	if (planName === "Orbit Pro") {
 		return (
 			<div
 				onMouseEnter={() => proArtRef.current?.playHoverAnimation()}
@@ -119,7 +119,7 @@ export const ComparePlans = () => {
 				disabled: isDisabled,
 			},
 			{
-				name: "Cap Pro",
+				name: "Orbit Pro",
 				price:
 					"$8.16 /mo per user, billed annually or $12 /mo per user, billed monthly",
 				disabled: isDisabled,
@@ -159,7 +159,7 @@ export const ComparePlans = () => {
 				pro: true,
 			},
 			{
-				label: "Custom domain (cap.yourdomain.com)",
+				label: "Custom domain (orbit.yourdomain.com)",
 				free: false,
 				desktop: false,
 				pro: true,
@@ -274,7 +274,7 @@ export const ComparePlans = () => {
 			}
 
 			if (data.subscription === true) {
-				toast.success("You are already on the Cap Pro plan");
+				toast.success("You are already on the Orbit Pro plan");
 				return;
 			}
 

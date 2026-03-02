@@ -5,11 +5,11 @@ import { SeoPageTemplate } from "../../seo/SeoPageTemplate";
 export const freeScreenRecorderContent = {
 	title: "Free Screen Recorder: High-Quality Recording at No Cost",
 	description:
-		"Cap offers a top-rated, free screen recorder with high-quality video capture, making it perfect for creating tutorials, educational content, and professional demos without any hidden fees.",
+		"Orbit offers a top-rated, free screen recorder with high-quality video capture, making it perfect for creating tutorials, educational content, and professional demos without any hidden fees.",
 
-	featuresTitle: "Why Choose Cap's Free Screen Recorder?",
+	featuresTitle: "Why Choose Orbit's Free Screen Recorder?",
 	featuresDescription:
-		"Cap provides all the tools you need for powerful, no-cost screen recording",
+		"Orbit provides all the tools you need for powerful, no-cost screen recording",
 
 	features: [
 		{
@@ -25,7 +25,7 @@ export const freeScreenRecorderContent = {
 		{
 			title: "User-Friendly Interface",
 			description:
-				"Designed for ease of use, Cap makes it simple to record your screen in just a few clicks.",
+				"Designed for ease of use, Orbit makes it simple to record your screen in just a few clicks.",
 		},
 		{
 			title: "Unlimited Recording Time",
@@ -39,9 +39,9 @@ export const freeScreenRecorderContent = {
 		},
 	],
 
-	useCasesTitle: "Popular Uses for Cap's Free Screen Recorder",
+	useCasesTitle: "Popular Uses for Orbit's Free Screen Recorder",
 	useCasesDescription:
-		"Explore how Cap can support your recording needs, all at no cost",
+		"Explore how Orbit can support your recording needs, all at no cost",
 
 	useCases: [
 		{
@@ -69,41 +69,41 @@ export const freeScreenRecorderContent = {
 	faqsTitle: "Frequently Asked Questions",
 	faqs: [
 		{
-			question: "Is Cap really free?",
+			question: "Is Orbit really free?",
 			answer:
-				"Yes, Cap is completely free, with no hidden fees. You get access to professional-grade <a href='/screen-recorder'>screen recording</a> tools without a subscription.",
+				"Yes, Orbit is completely free, with no hidden fees. You get access to professional-grade <a href='/screen-recorder'>screen recording</a> tools without a subscription.",
 		},
 		{
 			question: "How long can I record for on the free plan?",
 			answer:
-				"Cap's free plan allows for unlimited recording time, so you can capture your screen without interruptions. Whether you're on <a href='/screen-recorder-mac'>Mac</a> or <a href='/screen-recorder-windows'>Windows</a>, there are no time limits.",
+				"Orbit's free plan allows for unlimited recording time, so you can capture your screen without interruptions. Whether you're on <a href='/screen-recorder-mac'>Mac</a> or <a href='/screen-recorder-windows'>Windows</a>, there are no time limits.",
 		},
 		{
 			question: "Can I store my recordings in the cloud?",
 			answer:
-				"Yes, from just $6/month, Cap offers unlimited cloud storage, making it easy to access and share recordings whenever needed.",
+				"Yes, from just $6/month, Orbit offers unlimited cloud storage, making it easy to access and share recordings whenever needed.",
 		},
 		{
-			question: "What makes Cap's free screen recorder different?",
+			question: "What makes Orbit's free screen recorder different?",
 			answer:
-				"Cap offers advanced features for free, such as high-quality video capture, easy sharing options, and an intuitive interface, making it ideal for professional use without any cost.",
+				"Orbit offers advanced features for free, such as high-quality video capture, easy sharing options, and an intuitive interface, making it ideal for professional use without any cost.",
 		},
 		{
-			question: "Do I need an account to use Cap's free screen recorder?",
+			question: "Do I need an account to use Orbit's free screen recorder?",
 			answer:
-				"Yes, creating a free account allows you to access Cap 100% free locally.",
+				"Yes, creating a free account allows you to access Orbit 100% free locally.",
 		},
 	],
 
 	video: {
-		url: "/videos/cap-free-screen-recorder-demo.mp4",
-		thumbnail: "/videos/cap-free-screen-recorder-thumbnail.png",
-		alt: "Cap free screen recorder demo showing high-quality features",
+		url: "/videos/orbit-free-screen-recorder-demo.mp4",
+		thumbnail: "/videos/orbit-free-screen-recorder-thumbnail.png",
+		alt: "Orbit free screen recorder demo showing high-quality features",
 	},
 
 	cta: {
-		title: "Get Started with Cap – Your Free, High-Quality Screen Recorder",
-		buttonText: "Download Cap Free",
+		title: "Get Started with Orbit – Your Free, High-Quality Screen Recorder",
+		buttonText: "Download Orbit Free",
 	},
 };
 

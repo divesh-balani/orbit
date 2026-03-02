@@ -1,8 +1,8 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { nanoId } from "@cap/database/helpers";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { nanoId } from "@orbit/database/helpers";
 import {
 	organizationMembers,
 	organizations,
@@ -10,8 +10,8 @@ import {
 	spaces,
 	spaceVideos,
 	videos,
-} from "@cap/database/schema";
-import type { Organisation, Space, Video } from "@cap/web-domain";
+} from "@orbit/database/schema";
+import type { Organisation, Space, Video } from "@orbit/web-domain";
 import { and, eq, inArray } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -21,7 +21,7 @@ interface ShareCapParams {
 	public?: boolean;
 }
 
-export async function shareCap({
+export async function shareOrbit({
 	capId,
 	spaceIds,
 	public: isPublic,
@@ -32,8 +32,8 @@ export async function shareCap({
 			return { success: false, error: "Unauthorized" };
 		}
 
-		const [cap] = await db().select().from(videos).where(eq(videos.id, capId));
-		if (!cap || cap.ownerId !== user.id) {
+		const [orbit] = await db().select().from(videos).where(eq(videos.id, capId));
+		if (!orbit || orbit.ownerId !== user.id) {
 			return { success: false, error: "Unauthorized" };
 		}
 
@@ -152,7 +152,7 @@ export async function shareCap({
 		revalidatePath(`/dashboard/caps/${capId}`);
 		return { success: true };
 	} catch (error) {
-		console.error("Error sharing cap:", error);
+		console.error("Error sharing orbit:", error);
 		return { success: false, error: "Failed to update sharing settings" };
 	}
 }

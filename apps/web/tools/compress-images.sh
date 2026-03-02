@@ -12,7 +12,7 @@ BLUE='\033[0;34m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
 
-echo -e "${BLUE}📦 Cap Image Compression Tool${NC}"
+echo -e "${BLUE}📦 Orbit Image Compression Tool${NC}"
 echo -e "${BLUE}---------------------------${NC}\n"
 
 PROJECT_ROOT=$(cd "$(dirname "$0")/.." && pwd)

@@ -1,5 +1,5 @@
-import { db } from "@cap/database";
-import { DatabaseError } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { DatabaseError } from "@orbit/web-domain";
 import { Effect } from "effect";
 
 export type DbClient = ReturnType<typeof db>;

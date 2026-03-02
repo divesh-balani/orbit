@@ -55,7 +55,7 @@ function AspectRatioSelect() {
 								</Show>
 							</KSelect.ItemLabel>
 							<KSelect.ItemIndicator class="ml-auto">
-								<IconCapCircleCheck />
+								<IconOrbitCircleCheck />
 							</KSelect.ItemIndicator>
 						</MenuItem>
 					);
@@ -65,10 +65,10 @@ function AspectRatioSelect() {
 				<EditorButton<typeof KSelect.Trigger>
 					as={KSelect.Trigger}
 					class="w-28"
-					leftIcon={<IconCapLayout />}
+					leftIcon={<IconOrbitLayout />}
 					rightIcon={
 						<KSelect.Icon>
-							<IconCapChevronDown />
+							<IconOrbitChevronDown />
 						</KSelect.Icon>
 					}
 					rightIconEnd={true}

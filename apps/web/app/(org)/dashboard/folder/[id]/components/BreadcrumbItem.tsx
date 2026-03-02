@@ -1,6 +1,6 @@
 "use client";
 
-import type { Folder, Space } from "@cap/web-domain";
+import type { Folder, Space } from "@orbit/web-domain";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -36,7 +36,7 @@ export function BreadcrumbItem({
 		e.stopPropagation();
 
 		// Check if the dragged item is a CapCard
-		if (e.dataTransfer.types.includes("application/cap")) {
+		if (e.dataTransfer.types.includes("application/orbit")) {
 			setIsDragOver(true);
 			e.dataTransfer.dropEffect = "move";
 		}
@@ -54,7 +54,7 @@ export function BreadcrumbItem({
 		setIsDragOver(false);
 
 		try {
-			const data = e.dataTransfer.getData("application/cap");
+			const data = e.dataTransfer.getData("application/orbit");
 			if (!data) return;
 
 			const capData = JSON.parse(data);

@@ -1,6 +1,6 @@
-# `@cap/web-domain`
+# `@orbit/web-domain`
 
-Types, functions, definitions, and more that comprise the domain of `@cap/web`.
+Types, functions, definitions, and more that comprise the domain of `@orbit/web`.
 All code in this package is designed to be shared across the client and server.
 
 Things in this package include but are not limited to:

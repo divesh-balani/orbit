@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import { useId, useState } from "react";
 import { toast } from "sonner";
 
@@ -54,7 +54,7 @@ export const LicenseDeactivationPage = () => {
 			<div className="mb-14 text-center page-intro">
 				<h1>Deactivate License</h1>
 				<p className="mt-4 text-lg text-gray-10">
-					Enter your license key and purchase email to deactivate your Cap
+					Enter your license key and purchase email to deactivate your Orbit
 					commercial license from its current device.
 				</p>
 			</div>

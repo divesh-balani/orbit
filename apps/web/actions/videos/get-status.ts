@@ -1,11 +1,11 @@
 "use server";
 
-import { db } from "@cap/database";
-import { users, videos, videoUploads } from "@cap/database/schema";
-import type { VideoMetadata } from "@cap/database/types";
-import { serverEnv } from "@cap/env";
-import { provideOptionalAuth, VideosPolicy } from "@cap/web-backend";
-import { Policy, type Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { users, videos, videoUploads } from "@orbit/database/schema";
+import type { VideoMetadata } from "@orbit/database/types";
+import { serverEnv } from "@orbit/env";
+import { provideOptionalAuth, VideosPolicy } from "@orbit/web-backend";
+import { Policy, type Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Effect, Exit } from "effect";
 import { startAiGeneration } from "@/lib/generate-ai";

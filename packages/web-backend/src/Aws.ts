@@ -12,8 +12,8 @@ export class AwsCredentials extends Effect.Service<AwsCredentials>()(
 		effect: Effect.gen(function* () {
 			const accessKeys = yield* Config.option(
 				Config.all([
-					Config.string("CAP_AWS_ACCESS_KEY"),
-					Config.string("CAP_AWS_SECRET_KEY"),
+					Config.string("ORBIT_AWS_ACCESS_KEY"),
+					Config.string("ORBIT_AWS_SECRET_KEY"),
 				]),
 			);
 			const vercelAwsRole = yield* Config.option(
@@ -30,7 +30,7 @@ export class AwsCredentials extends Effect.Service<AwsCredentials>()(
 					if (Option.isSome(accessKeys)) {
 						const [accessKeyId, secretAccessKey] = accessKeys.value;
 						yield* Effect.log(
-							"Using CAP_AWS_ACCESS_KEY and CAP_AWS_SECRET_KEY",
+							"Using ORBIT_AWS_ACCESS_KEY and ORBIT_AWS_SECRET_KEY",
 						);
 						return { accessKeyId, secretAccessKey };
 					}

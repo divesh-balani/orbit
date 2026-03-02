@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input } from "@cap/ui";
+import { Button, Input } from "@orbit/ui";
 import {
 	faEdit,
 	faLayerGroup,

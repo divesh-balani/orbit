@@ -1,5 +1,5 @@
 import ArrowUpIcon from "./ArrowUp";
-import CapIcon from "./Cap";
+import CapIcon from "./Orbit";
 import ChartLineIcon from "./ChartLine";
 import MessageCircleMoreIcon from "./Chat";
 import ChatIcon from "./Chat";

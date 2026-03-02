@@ -1,11 +1,11 @@
-use cap_enc_ffmpeg::{
+use orbit_enc_ffmpeg::{
     AudioEncoder,
     h264::{H264EncoderBuilder, H264Preset},
     opus::OpusEncoder,
     remux::{get_media_duration, probe_video_can_decode},
 };
-use cap_media_info::{AudioInfo, FFRational, Pixel, VideoInfo, ensure_even};
-use cap_project::{
+use orbit_media_info::{AudioInfo, FFRational, Pixel, VideoInfo, ensure_even};
+use orbit_project::{
     AudioMeta, Cursors, InstantRecordingMeta, MultipleSegment, MultipleSegments, Platform,
     RecordingMeta, RecordingMetaInner, StudioRecordingMeta, StudioRecordingStatus, VideoMeta,
 };
@@ -443,12 +443,12 @@ pub async fn start_video_import(app: AppHandle, source_path: PathBuf) -> Result<
 
     let project_name = generate_project_name(&source_path);
     let sanitized_name = sanitize_filename(&project_name);
-    let project_dir_name = format!("{sanitized_name}.cap");
+    let project_dir_name = format!("{sanitized_name}.orbit");
 
     let mut project_path = recordings_dir.join(&project_dir_name);
     let mut counter = 1;
     while project_path.exists() {
-        let new_name = format!("{sanitized_name} ({counter}).cap");
+        let new_name = format!("{sanitized_name} ({counter}).orbit");
         project_path = recordings_dir.join(new_name);
         counter += 1;
     }

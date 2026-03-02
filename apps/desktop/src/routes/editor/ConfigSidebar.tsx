@@ -383,27 +383,27 @@ export function ConfigSidebar() {
 			<KTabs.List class="flex overflow-hidden sticky top-0 z-[60] flex-row items-center h-16 text-lg border-b border-gray-3 shrink-0 bg-gray-1 dark:bg-gray-2">
 				<For
 					each={[
-						{ id: TAB_IDS.background, icon: IconCapImage },
+						{ id: TAB_IDS.background, icon: IconOrbitImage },
 						{
 							id: TAB_IDS.camera,
-							icon: IconCapCamera,
+							icon: IconOrbitCamera,
 							disabled: editorInstance.recordings.segments.every(
 								(s) => s.camera === null,
 							),
 						},
-						{ id: TAB_IDS.audio, icon: IconCapAudioOn },
+						{ id: TAB_IDS.audio, icon: IconOrbitAudioOn },
 						{
 							id: TAB_IDS.cursor,
-							icon: IconCapCursor,
+							icon: IconOrbitCursor,
 							disabled: !(
 								meta().type === "multiple" && (meta() as any).segments[0].cursor
 							),
 						},
 						{
 							id: "captions" as const,
-							icon: IconCapMessageBubble,
+							icon: IconOrbitMessageBubble,
 						},
-						// { id: "hotkeys" as const, icon: IconCapHotkeys },
+						// { id: "hotkeys" as const, icon: IconOrbitHotkeys },
 					].filter(Boolean)}
 				>
 					{(item) => (
@@ -506,7 +506,7 @@ export function ConfigSidebar() {
 										</KSelect.Value>
 										<KSelect.Icon<ValidComponent>
 											as={(props) => (
-												<IconCapChevronDown
+												<IconOrbitChevronDown
 													{...props}
 													class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180 text-[--gray-500]"
 												/>
@@ -544,7 +544,7 @@ export function ConfigSidebar() {
 					{meta().hasMicrophone && (
 						<Field
 							name="Microphone Volume"
-							icon={<IconCapMicrophone class="size-4" />}
+							icon={<IconOrbitMicrophone class="size-4" />}
 						>
 							<Slider
 								disabled={project.audio.mute}
@@ -584,7 +584,7 @@ export function ConfigSidebar() {
 				>
 					<Field
 						name="Cursor"
-						icon={<IconCapCursor />}
+						icon={<IconOrbitCursor />}
 						value={
 							<Toggle
 								checked={!project.cursor.hide}
@@ -595,7 +595,7 @@ export function ConfigSidebar() {
 						}
 					/>
 					<Show when={!project.cursor.hide}>
-						<Field name="Cursor Type" icon={<IconCapCursor />}>
+						<Field name="Cursor Type" icon={<IconOrbitCursor />}>
 							<RadioGroup
 								class="flex flex-col gap-2"
 								value={project.cursor.type}
@@ -624,7 +624,7 @@ export function ConfigSidebar() {
 								))}
 							</RadioGroup>
 						</Field>
-						<Field name="Size" icon={<IconCapEnlarge />}>
+						<Field name="Size" icon={<IconOrbitEnlarge />}>
 							<Slider
 								value={[project.cursor.size]}
 								onChange={(v) => setProject("cursor", "size", v[0])}
@@ -805,7 +805,7 @@ export function ConfigSidebar() {
           </Field> */}
 				</KTabs.Content>
 				<KTabs.Content value="hotkeys" class="flex flex-1 p-4 min-h-0">
-					<Field name="Hotkeys" icon={<IconCapHotkeys />}>
+					<Field name="Hotkeys" icon={<IconOrbitHotkeys />}>
 						<ComingSoonTooltip>
 							<Subfield name="Show hotkeys">
 								<Toggle disabled />
@@ -883,7 +883,7 @@ export function ConfigSidebar() {
 														value().segments.map((s) => s.index),
 													)
 												}
-												leftIcon={<IconCapTrash />}
+												leftIcon={<IconOrbitTrash />}
 											>
 												Delete
 											</EditorButton>
@@ -950,7 +950,7 @@ export function ConfigSidebar() {
 														value().segments.map((s) => s.index),
 													)
 												}
-												leftIcon={<IconCapTrash />}
+												leftIcon={<IconOrbitTrash />}
 											>
 												Delete
 											</EditorButton>
@@ -1017,7 +1017,7 @@ export function ConfigSidebar() {
 														value().segments.map((s) => s.index),
 													);
 												}}
-												leftIcon={<IconCapTrash />}
+												leftIcon={<IconOrbitTrash />}
 											>
 												Delete
 											</EditorButton>
@@ -1110,7 +1110,7 @@ export function ConfigSidebar() {
 																projectActions.deleteSceneSegment(idx);
 															});
 													}}
-													leftIcon={<IconCapTrash />}
+													leftIcon={<IconOrbitTrash />}
 												>
 													Delete
 												</EditorButton>
@@ -1176,7 +1176,7 @@ export function ConfigSidebar() {
 																projectActions.deleteClipSegment(idx);
 															});
 													}}
-													leftIcon={<IconCapTrash />}
+													leftIcon={<IconOrbitTrash />}
 												>
 													Delete
 												</EditorButton>
@@ -1361,7 +1361,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 
 	return (
 		<KTabs.Content value={TAB_IDS.background} class="flex flex-col gap-6 p-4">
-			<Field icon={<IconCapImage class="size-4" />} name="Background Image">
+			<Field icon={<IconOrbitImage class="size-4" />} name="Background Image">
 				<KTabs
 					value={project.background.source.type}
 					onChange={(v) => {
@@ -1674,7 +1674,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 									onClick={() => fileInput.click()}
 									class="p-6 bg-gray-2 text-[13px] w-full rounded-[0.5rem] border border-gray-5 border-dashed flex flex-col items-center justify-center gap-[0.5rem] hover:bg-gray-3 transition-colors duration-100"
 								>
-									<IconCapImage class="text-gray-11 size-6" />
+									<IconOrbitImage class="text-gray-11 size-6" />
 									<span class="text-gray-12">
 										Click to select or drag and drop image
 									</span>
@@ -1699,7 +1699,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 											}
 											class="p-2 text-white rounded-full transition-colors bg-black/50 hover:bg-black/70"
 										>
-											<IconCapCircleX class="w-4 h-4" />
+											<IconOrbitCircleX class="w-4 h-4" />
 										</button>
 									</div>
 								</div>
@@ -1960,7 +1960,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 				</KTabs>
 			</Field>
 
-			<Field name="Background Blur" icon={<IconCapBgBlur />}>
+			<Field name="Background Blur" icon={<IconOrbitBgBlur />}>
 				<Slider
 					value={[project.background.blur]}
 					onChange={(v) => setProject("background", "blur", v[0])}
@@ -1972,7 +1972,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 			</Field>
 			{/** Dashed divider */}
 			<div class="w-full border-t border-gray-300 border-dashed" />
-			<Field name="Padding" icon={<IconCapPadding class="size-4" />}>
+			<Field name="Padding" icon={<IconOrbitPadding class="size-4" />}>
 				<Slider
 					value={[project.background.padding]}
 					onChange={(v) => setProject("background", "padding", v[0])}
@@ -1982,7 +1982,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 					formatTooltip="%"
 				/>
 			</Field>
-			<Field name="Rounded Corners" icon={<IconCapCorners class="size-4" />}>
+			<Field name="Rounded Corners" icon={<IconOrbitCorners class="size-4" />}>
 				<div class="flex flex-col gap-3">
 					<Slider
 						value={[project.background.rounding]}
@@ -2013,7 +2013,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 			</Field>
 			<Field
 				name="Border"
-				icon={<IconCapSettings class="size-4" />}
+				icon={<IconOrbitSettings class="size-4" />}
 				value={
 					<Toggle
 						checked={project.background.border?.enabled ?? false}
@@ -2047,7 +2047,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 			<KCollapsible open={project.background.border?.enabled ?? false}>
 				<KCollapsible.Content class="overflow-hidden opacity-0 transition-opacity animate-collapsible-up ui-expanded:animate-collapsible-down ui-expanded:opacity-100">
 					<div class="flex flex-col gap-6 pb-6">
-						<Field name="Border Width" icon={<IconCapEnlarge class="size-4" />}>
+						<Field name="Border Width" icon={<IconOrbitEnlarge class="size-4" />}>
 							<Slider
 								value={[project.background.border?.width ?? 5.0]}
 								onChange={(v) =>
@@ -2067,7 +2067,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 								formatTooltip="px"
 							/>
 						</Field>
-						<Field name="Border Color" icon={<IconCapImage class="size-4" />}>
+						<Field name="Border Color" icon={<IconOrbitImage class="size-4" />}>
 							<RgbInput
 								value={project.background.border?.color ?? [0, 0, 0]}
 								onChange={(color) =>
@@ -2085,7 +2085,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 						</Field>
 						<Field
 							name="Border Opacity"
-							icon={<IconCapShadow class="size-4" />}
+							icon={<IconOrbitShadow class="size-4" />}
 						>
 							<Slider
 								value={[project.background.border?.opacity ?? 50.0]}
@@ -2109,7 +2109,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 					</div>
 				</KCollapsible.Content>
 			</KCollapsible>
-			<Field name="Shadow" icon={<IconCapShadow class="size-4" />}>
+			<Field name="Shadow" icon={<IconOrbitShadow class="size-4" />}>
 				<Slider
 					value={[project.background.shadow!]}
 					onChange={(v) => {
@@ -2175,7 +2175,7 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 				/>
 			</Field>
 			{/* <ComingSoonTooltip>
-            <Field name="Inset" icon={<IconCapInset />}>
+            <Field name="Inset" icon={<IconOrbitInset />}>
               <Slider
                 disabled
                 value={[project.background.inset]}
@@ -2197,7 +2197,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 			value={TAB_IDS.camera}
 			class="flex flex-col flex-1 gap-6 p-4 min-h-0"
 		>
-			<Field icon={<IconCapCamera class="size-4" />} name="Camera">
+			<Field icon={<IconOrbitCamera class="size-4" />} name="Camera">
 				<div class="flex flex-col gap-6">
 					<div>
 						<Subfield name="Position" />
@@ -2284,7 +2284,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 								</KSelect.Value>
 								<KSelect.Icon<ValidComponent>
 									as={(props) => (
-										<IconCapChevronDown
+										<IconOrbitChevronDown
 											{...props}
 											class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180 text-[--gray-500]"
 										/>
@@ -2315,7 +2315,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 			</Field>
 			{/** Dashed divider */}
 			<div class="w-full border-t border-dashed border-gray-5" />
-			<Field name="Size" icon={<IconCapEnlarge class="size-4" />}>
+			<Field name="Size" icon={<IconOrbitEnlarge class="size-4" />}>
 				<Slider
 					value={[project.camera.size]}
 					onChange={(v) => setProject("camera", "size", v[0])}
@@ -2325,7 +2325,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 					formatTooltip="%"
 				/>
 			</Field>
-			<Field name="Size During Zoom" icon={<IconCapEnlarge class="size-4" />}>
+			<Field name="Size During Zoom" icon={<IconOrbitEnlarge class="size-4" />}>
 				<Slider
 					value={[project.camera.zoomSize ?? 60]}
 					onChange={(v) => setProject("camera", "zoomSize", v[0])}
@@ -2335,7 +2335,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 					formatTooltip="%"
 				/>
 			</Field>
-			<Field name="Rounded Corners" icon={<IconCapCorners class="size-4" />}>
+			<Field name="Rounded Corners" icon={<IconOrbitCorners class="size-4" />}>
 				<div class="flex flex-col gap-3">
 					<Slider
 						value={[project.camera.rounding!]}
@@ -2352,7 +2352,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 					/>
 				</div>
 			</Field>
-			<Field name="Shadow" icon={<IconCapShadow class="size-4" />}>
+			<Field name="Shadow" icon={<IconOrbitShadow class="size-4" />}>
 				<div class="space-y-8">
 					<Slider
 						value={[project.camera.shadow!]}
@@ -2407,7 +2407,7 @@ function CameraConfig(props: { scrollRef: HTMLDivElement }) {
 				</div>
 			</Field>
 			{/* <ComingSoonTooltip>
-            <Field name="Shadow" icon={<IconCapShadow />}>
+            <Field name="Shadow" icon={<IconOrbitShadow />}>
               <Slider
                 disabled
                 value={[project.camera.shadow]}
@@ -2464,7 +2464,7 @@ function CornerStyleSelect(props: {
 					</KSelect.Value>
 					<KSelect.Icon<ValidComponent>
 						as={(iconProps) => (
-							<IconCapChevronDown
+							<IconOrbitChevronDown
 								{...iconProps}
 								class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180 text-[--gray-500]"
 							/>
@@ -2601,7 +2601,7 @@ function TextSegmentConfig(props: {
 					</div>
 				</div>
 			</Field>
-			<Field name="Size" icon={<IconCapEnlarge class="size-4" />}>
+			<Field name="Size" icon={<IconOrbitEnlarge class="size-4" />}>
 				<Slider
 					value={[clampNumber(props.segment.fontSize, 8, 200)]}
 					onChange={([value]) =>
@@ -2657,7 +2657,7 @@ function TextSegmentConfig(props: {
 									{selectItemProps.item.rawValue.label}
 								</KSelect.ItemLabel>
 								<KSelect.ItemIndicator class="ml-auto text-blue-9">
-									<IconCapCircleCheck />
+									<IconOrbitCircleCheck />
 								</KSelect.ItemIndicator>
 							</MenuItem>
 						)}
@@ -2679,7 +2679,7 @@ function TextSegmentConfig(props: {
 								}}
 							</KSelect.Value>
 							<KSelect.Icon>
-								<IconCapChevronDown class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180 text-[--gray-500]" />
+								<IconOrbitChevronDown class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180 text-[--gray-500]" />
 							</KSelect.Icon>
 						</KSelect.Trigger>
 						<KSelect.Portal>
@@ -3069,7 +3069,7 @@ function ZoomSegmentConfig(props: {
 					formatTooltip="x"
 				/>
 			</Field>
-			<Field name="Zoom Mode" icon={<IconCapSettings />}>
+			<Field name="Zoom Mode" icon={<IconOrbitSettings />}>
 				<KTabs
 					class="space-y-6"
 					value={props.segment.mode === "auto" ? "auto" : "manual"}
@@ -3382,7 +3382,7 @@ function ClipSegmentConfig(props: {
 							) ?? []
 						).length < 2
 					}
-					leftIcon={<IconCapTrash />}
+					leftIcon={<IconOrbitTrash />}
 				>
 					Delete
 				</EditorButton>
@@ -3548,7 +3548,7 @@ function SceneSegmentConfig(props: {
 					onClick={() => {
 						projectActions.deleteSceneSegment(props.segmentIndex);
 					}}
-					leftIcon={<IconCapTrash />}
+					leftIcon={<IconOrbitTrash />}
 				>
 					Delete
 				</EditorButton>

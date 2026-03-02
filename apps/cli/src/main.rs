@@ -5,8 +5,8 @@ use std::{
     path::PathBuf,
 };
 
-use cap_export::ExporterBase;
-use cap_project::XY;
+use orbit_export::ExporterBase;
+use orbit_project::XY;
 use clap::{Args, Parser, Subcommand};
 use record::RecordStart;
 use serde_json::json;
@@ -21,7 +21,7 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Export a '.cap' project to an mp4 file
+    /// Export a '.orbit' project to an mp4 file
     Export(Export),
     /// Start a recording or list available capture targets and devices
     Record(RecordArgs),
@@ -54,7 +54,7 @@ async fn main() -> Result<(), String> {
     // let (layer, handle) = tracing_subscriber::reload::Layer::new(None::<DynLoggingLayer>);
 
     let registry = tracing_subscriber::registry().with(tracing_subscriber::filter::filter_fn(
-        (|v| v.target().starts_with("cap_")) as fn(&tracing::Metadata) -> bool,
+        (|v| v.target().starts_with("orbit_")) as fn(&tracing::Metadata) -> bool,
     ));
 
     registry
@@ -76,7 +76,7 @@ async fn main() -> Result<(), String> {
         }
         Commands::Record(RecordArgs { command, args }) => match command {
             Some(RecordCommands::Screens) => {
-                let screens = cap_recording::screen_capture::list_displays();
+                let screens = orbit_recording::screen_capture::list_displays();
 
                 for (i, (screen, target)) in screens.iter().enumerate() {
                     println!(
@@ -93,7 +93,7 @@ screen {}:
                 }
             }
             Some(RecordCommands::Windows) => {
-                let windows = cap_recording::screen_capture::list_windows();
+                let windows = orbit_recording::screen_capture::list_windows();
 
                 for (i, (window, target)) in windows.iter().enumerate() {
                     println!(
@@ -110,7 +110,7 @@ window {}:
                 }
             }
             Some(RecordCommands::Cameras) => {
-                let cameras = cap_camera::list_cameras().collect::<Vec<_>>();
+                let cameras = orbit_camera::list_cameras().collect::<Vec<_>>();
 
                 let mut info = vec![];
                 for camera_info in cameras {
@@ -163,10 +163,10 @@ impl Export {
 
         let mut stdout = stdout();
 
-        let exporter_output_path = cap_export::mp4::Mp4ExportSettings {
+        let exporter_output_path = orbit_export::mp4::Mp4ExportSettings {
             fps: 60,
             resolution_base: XY::new(1920, 1080),
-            compression: cap_export::mp4::ExportCompression::Maximum,
+            compression: orbit_export::mp4::ExportCompression::Maximum,
             custom_bpp: None,
             force_ffmpeg_decoder: false,
         }

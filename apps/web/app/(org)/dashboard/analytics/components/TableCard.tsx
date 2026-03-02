@@ -8,7 +8,7 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@cap/ui";
+} from "@orbit/ui";
 import {
 	faAppleWhole,
 	faDesktop,
@@ -119,7 +119,7 @@ export interface TableCardProps {
 	title: string;
 	columns: string[];
 	tableClassname?: string;
-	type: "country" | "city" | "browser" | "os" | "device" | "cap";
+	type: "country" | "city" | "browser" | "os" | "device" | "orbit";
 	rows:
 		| CountryRowData[]
 		| CityRowData[]
@@ -152,7 +152,7 @@ const TableCard = ({
 	const showSkeletons = isLoading || !hasRows;
 
 	const handleCapNameClick = (capId: string | undefined) => {
-		if (capId && type === "cap") {
+		if (capId && type === "orbit") {
 			router.push(`/dashboard/analytics?capId=${capId}`);
 		}
 	};
@@ -194,9 +194,9 @@ const TableCard = ({
 							)}
 						>
 							{displayRows.map((row, index) => {
-								const capRow = type === "cap" ? (row as CapRowData) : null;
+								const capRow = type === "orbit" ? (row as CapRowData) : null;
 								const uniqueKey = `${row.name ?? `row-${index}`}-${index}`;
-								const isCap = type === "cap";
+								const isCap = type === "orbit";
 								const isClickable = isCap && capRow?.id && !showSkeletons;
 								return (
 									<TableRow className="w-full" key={uniqueKey}>
@@ -288,7 +288,7 @@ const getIconForRow = (
 				<FontAwesomeIcon icon={iconMap[device]} className="text-gray-12" />
 			);
 		}
-		case "cap":
+		case "orbit":
 			return <LogoBadge className="size-4" />;
 		default:
 			return null;

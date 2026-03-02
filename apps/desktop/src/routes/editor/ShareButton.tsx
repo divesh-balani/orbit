@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { Select as KSelect } from "@kobalte/core/select";
 import { createMutation } from "@tanstack/solid-query";
 import { Channel } from "@tauri-apps/api/core";
@@ -259,7 +259,7 @@ function ShareButton() {
 											>
 												<KSelect.Trigger class="flex justify-center items-center transition-colors duration-200 rounded-lg size-[22px] text-gray-12 bg-gray-6 hover:bg-gray-7 group focus:outline-none focus-visible:outline-none">
 													<KSelect.Icon>
-														<IconCapChevronDown class="size-4 transition-transform duration-200 group-data-[expanded]:rotate-180" />
+														<IconOrbitChevronDown class="size-4 transition-transform duration-200 group-data-[expanded]:rotate-180" />
 													</KSelect.Icon>
 												</KSelect.Trigger>
 												<KSelect.Portal>
@@ -283,7 +283,7 @@ function ShareButton() {
 											onClick={copyLink}
 										>
 											{!copyPressed() ? (
-												<IconCapCopy class="size-3" />
+												<IconOrbitCopy class="size-3" />
 											) : (
 												<IconLucideCheck class="size-3 svgpathanimation" />
 											)}

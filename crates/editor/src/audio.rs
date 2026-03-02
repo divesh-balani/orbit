@@ -1,9 +1,9 @@
-use cap_audio::{
+use orbit_audio::{
     AudioData, AudioRendererTrack, FromSampleBytes, StereoMode, cast_f32_slice_to_bytes,
 };
-use cap_media::MediaError;
-use cap_media_info::AudioInfo;
-use cap_project::{AudioConfiguration, ClipOffsets, ProjectConfiguration, TimelineConfiguration};
+use orbit_media::MediaError;
+use orbit_media_info::AudioInfo;
+use orbit_project::{AudioConfiguration, ClipOffsets, ProjectConfiguration, TimelineConfiguration};
 use ffmpeg::{
     ChannelLayout, Dictionary, format as avformat, frame::Audio as FFAudio, software::resampling,
 };
@@ -235,7 +235,7 @@ impl AudioRenderer {
             .collect::<Vec<_>>();
 
         let actual_sample_count =
-            cap_audio::render_audio(&track_datas, start.samples, samples, 0, &mut ret);
+            orbit_audio::render_audio(&track_datas, start.samples, samples, 0, &mut ret);
 
         self.elapsed_samples += actual_sample_count;
         self.cursor.samples += actual_sample_count;

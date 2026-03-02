@@ -1,5 +1,5 @@
-import { db } from "@cap/database";
-import { users, videos } from "@cap/database/schema";
+import { db } from "@orbit/database";
+import { users, videos } from "@orbit/database/schema";
 import { and, eq, isNotNull, isNull, sql } from "drizzle-orm";
 
 const CHUNK_SIZE = 500;

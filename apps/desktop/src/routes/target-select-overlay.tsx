@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { createEventListener } from "@solid-primitives/event-listener";
 import { createElementSize } from "@solid-primitives/resize-observer";
 import { useSearchParams } from "@solidjs/router";
@@ -301,7 +301,7 @@ function Inner() {
 						<Show when={displayInformation.data} keyed>
 							{(display) => (
 								<div class="flex flex-col items-center text-white">
-									<IconCapMonitor class="size-20 mb-3" />
+									<IconOrbitMonitor class="size-20 mb-3" />
 									<span class="mb-2 text-3xl font-semibold">
 										{display.name || "Monitor"}
 									</span>
@@ -948,7 +948,7 @@ function CameraPreviewInline() {
 	let reconnectTimeoutId: ReturnType<typeof setTimeout> | undefined;
 	let isCleanedUp = false;
 
-	const cameraWsPort = (window as any).__CAP__?.cameraWsPort;
+	const cameraWsPort = (window as any).__ORBIT__?.cameraWsPort;
 	const hasCameraSelected = () => rawOptions.cameraID !== null;
 
 	const scheduleReconnect = () => {
@@ -1126,7 +1126,7 @@ function CameraPreviewInline() {
 				when={hasCameraSelected()}
 				fallback={
 					<div class="flex flex-col items-center gap-2 text-center px-4">
-						<IconCapCamera class="size-8 text-gray-9 mb-2" />
+						<IconOrbitCamera class="size-8 text-gray-9 mb-2" />
 						<div class="text-sm text-gray-11">Please select a camera</div>
 					</div>
 				}
@@ -1309,7 +1309,7 @@ function RecordingControls(props: {
 							}}
 							class="flex justify-center items-center rounded-full transition-opacity bg-gray-12 size-9 hover:opacity-80"
 						>
-							<IconCapX class="invert will-change-transform size-3 dark:invert-0" />
+							<IconOrbitX class="invert will-change-transform size-3 dark:invert-0" />
 						</div>
 						<div
 							data-inactive={rawOptions.mode === "instant" && !auth.data}
@@ -1375,13 +1375,13 @@ function RecordingControls(props: {
 							>
 								<Switch>
 									<Match when={rawOptions.mode === "studio"}>
-										<IconCapFilmCut class="size-4 flex-shrink-0" />
+										<IconOrbitFilmCut class="size-4 flex-shrink-0" />
 									</Match>
 									<Match when={rawOptions.mode === "instant"}>
-										<IconCapInstant class="size-4 flex-shrink-0" />
+										<IconOrbitInstant class="size-4 flex-shrink-0" />
 									</Match>
 									<Match when={(rawOptions.mode as string) === "screenshot"}>
-										<IconCapCamera class="size-4 flex-shrink-0" />
+										<IconOrbitCamera class="size-4 flex-shrink-0" />
 									</Match>
 								</Switch>
 								<div class="flex flex-col mr-2 ml-3 min-w-0">
@@ -1404,7 +1404,7 @@ function RecordingControls(props: {
 								onMouseDown={(e) => showMenu(menuModes(), e)}
 								onClick={(e) => showMenu(menuModes(), e)}
 							>
-								<IconCapCaretDown class="pointer-events-none" />
+								<IconOrbitCaretDown class="pointer-events-none" />
 							</div>
 						</div>
 						<div
@@ -1412,7 +1412,7 @@ function RecordingControls(props: {
 							onMouseDown={(e) => showMenu(preRecordingMenu(), e)}
 							onClick={(e) => showMenu(preRecordingMenu(), e)}
 						>
-							<IconCapGear class="pointer-events-none will-change-transform size-5" />
+							<IconOrbitGear class="pointer-events-none will-change-transform size-5" />
 						</div>
 					</div>
 				</div>
@@ -1468,7 +1468,7 @@ function RecordingControls(props: {
 						"hover:opacity-60": !props.showBackground,
 					}}
 				>
-					<IconCapInfo class="opacity-70 will-change-transform size-3" />
+					<IconOrbitInfo class="opacity-70 will-change-transform size-3" />
 					<p class="text-sm text-white drop-shadow-md">
 						<span class="opacity-70">What is </span>
 						<span class="font-medium">{capitalize(rawOptions.mode)} Mode</span>?

@@ -23,12 +23,12 @@ const nextConfig = {
 		],
 	},
 	transpilePackages: [
-		"@cap/ui",
-		"@cap/utils",
-		"@cap/web-api-contract",
-		"@cap/web-domain",
-		"@cap/env",
-		"@cap/database",
+		"@orbit/ui",
+		"@orbit/utils",
+		"@orbit/web-api-contract",
+		"@orbit/web-domain",
+		"@orbit/env",
+		"@orbit/database",
 		"next-mdx-remote",
 	],
 	eslint: {
@@ -39,8 +39,8 @@ const nextConfig = {
 	},
 	experimental: {
 		optimizePackageImports: [
-			"@cap/ui",
-			"@cap/utils",
+			"@orbit/ui",
+			"@orbit/utils",
 			"lucide-react",
 			"framer-motion",
 			"motion",
@@ -67,7 +67,7 @@ const nextConfig = {
 			},
 			{
 				protocol: "https",
-				hostname: "l.cap.so",
+				hostname: "l.orbit.so",
 				port: "",
 				pathname: "**",
 			},
@@ -83,11 +83,11 @@ const nextConfig = {
 		return [
 			{
 				source: "/r/:path*",
-				destination: "https://dub.cap.link/:path*",
+				destination: "https://dub.orbit.link/:path*",
 			},
 			{
 				source: "/api/commercial/:path*",
-				destination: "https://l.cap.so/api/commercial/:path*",
+				destination: "https://l.orbit.so/api/commercial/:path*",
 			},
 			{
 				source: "/s/:videoId",
@@ -95,7 +95,7 @@ const nextConfig = {
 				has: [
 					{
 						type: "host",
-						value: "(?!cap.so|cap.link).*",
+						value: "(?!orbit.so|orbit.link).*",
 					},
 				],
 			},

@@ -1,4 +1,4 @@
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import { notFound } from "next/navigation";
 import { getMessengerConversationForViewer } from "@/lib/messenger/data";
 import { ChatWindow } from "./ChatWindow";
@@ -6,7 +6,7 @@ import { ChatWindow } from "./ChatWindow";
 export default async function MessengerConversationPage(
 	props: PageProps<"/messenger/[id]">,
 ) {
-	if (buildEnv.NEXT_PUBLIC_IS_CAP !== "true") notFound();
+	if (buildEnv.NEXT_PUBLIC_IS_ORBIT !== "true") notFound();
 
 	const params = await props.params;
 	const data = await getMessengerConversationForViewer({

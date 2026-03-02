@@ -44,8 +44,8 @@ describe("how-to-record-screen-on-windows blog post frontmatter", () => {
 });
 
 describe("how-to-record-screen-on-windows blog post content", () => {
-	it("mentions Cap as the recommended tool", () => {
-		expect(postSource).toContain("Cap");
+	it("mentions Orbit as the recommended tool", () => {
+		expect(postSource).toContain("Orbit");
 	});
 
 	it("covers Xbox Game Bar", () => {
@@ -74,7 +74,7 @@ describe("how-to-record-screen-on-windows blog post content", () => {
 	});
 
 	it("links to the download page", () => {
-		expect(postSource).toContain("cap.so/download");
+		expect(postSource).toContain("orbit.so/download");
 	});
 
 	it("mentions system audio", () => {

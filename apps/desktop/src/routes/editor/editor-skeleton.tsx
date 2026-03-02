@@ -87,7 +87,7 @@ function VideoPreviewSkeleton() {
 			<div class="relative w-full h-full flex justify-center items-center p-4">
 				<div class="relative bg-gray-3 dark:bg-gray-4 rounded-lg w-full max-w-[85%] aspect-video flex items-center justify-center">
 					<div class="animate-spin grayscale opacity-60">
-						<IconCapLogo class="size-[4rem] text-gray-6" />
+						<IconOrbitLogo class="size-[4rem] text-gray-6" />
 					</div>
 				</div>
 			</div>

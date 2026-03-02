@@ -1,8 +1,8 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { notifications } from "@cap/database/schema";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { notifications } from "@orbit/database/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 

@@ -1,6 +1,6 @@
-# Cap Export Benchmark Results
+# Orbit Export Benchmark Results
 
-This document tracks performance benchmarks for Cap's export system over time. Each benchmark run is timestamped, enabling comparison across different versions, configurations, and hardware.
+This document tracks performance benchmarks for Orbit's export system over time. Each benchmark run is timestamped, enabling comparison across different versions, configurations, and hardware.
 
 ## Quick Reference
 
@@ -29,19 +29,19 @@ This document tracks performance benchmarks for Cap's export system over time. E
 
 ```bash
 # Quick benchmark (3 core presets)
-cargo run -p cap-export --example export-benchmark-runner -- quick
+cargo run -p orbit-export --example export-benchmark-runner -- quick
 
 # Full benchmark (all presets, writes to this file)
-cargo run -p cap-export --example export-benchmark-runner -- full --benchmark-output
+cargo run -p orbit-export --example export-benchmark-runner -- full --benchmark-output
 
 # MP4 only
-cargo run -p cap-export --example export-benchmark-runner -- mp4-only --benchmark-output
+cargo run -p orbit-export --example export-benchmark-runner -- mp4-only --benchmark-output
 
 # GIF only
-cargo run -p cap-export --example export-benchmark-runner -- gif-only --benchmark-output
+cargo run -p orbit-export --example export-benchmark-runner -- gif-only --benchmark-output
 
 # Custom duration (default: 30s)
-cargo run -p cap-export --example export-benchmark-runner -- full --duration 60 --benchmark-output
+cargo run -p orbit-export --example export-benchmark-runner -- full --duration 60 --benchmark-output
 ```
 
 ---
@@ -60,7 +60,7 @@ cargo run -p cap-export --example export-benchmark-runner -- full --duration 60 
 
 **Notes:** Final calibration: encoder_efficiency=0.5 applied, FPS tapering, real-world data
 
-**Command:** `cargo run -p cap-export --example export-benchmark-runner -- mp4-only --duration 72 --recording-path /Users/richie/Library/Application Support/so.cap.desktop.dev/recordings/Odyssey G93SC (Display) 2026-02-16 10.06 AM.cap --benchmark-output`
+**Command:** `cargo run -p orbit-export --example export-benchmark-runner -- mp4-only --duration 72 --recording-path /Users/richie/Library/Application Support/so.orbit.desktop.dev/recordings/Odyssey G93SC (Display) 2026-02-16 10.06 AM.orbit --benchmark-output`
 
 <details>
 <summary>System Information</summary>

@@ -38,16 +38,16 @@ importers:
       '@aerofoil/rive-solid-canvas':
         specifier: ^2.1.4
         version: 2.1.4
-      '@cap/database':
+      '@orbit/database':
         specifier: workspace:*
         version: link:../../packages/database
-      '@cap/ui-solid':
+      '@orbit/ui-solid':
         specifier: workspace:*
         version: link:../../packages/ui-solid
-      '@cap/utils':
+      '@orbit/utils':
         specifier: workspace:*
         version: link:../../packages/utils
-      '@cap/web-api-contract':
+      '@orbit/web-api-contract':
         specifier: workspace:*
         version: link:../../packages/web-api-contract
       '@corvu/tooltip':
@@ -314,7 +314,7 @@ importers:
 
   apps/storybook:
     dependencies:
-      '@cap/ui-solid':
+      '@orbit/ui-solid':
         specifier: workspace:*
         version: link:../../packages/ui-solid
       postcss-pseudo-companion-classes:
@@ -387,28 +387,28 @@ importers:
       '@aws-sdk/s3-request-presigner':
         specifier: ^3.485.0
         version: 3.804.0
-      '@cap/database':
+      '@orbit/database':
         specifier: workspace:*
         version: link:../../packages/database
-      '@cap/env':
+      '@orbit/env':
         specifier: workspace:*
         version: link:../../packages/env
-      '@cap/ui':
+      '@orbit/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@cap/utils':
+      '@orbit/utils':
         specifier: workspace:*
         version: link:../../packages/utils
-      '@cap/web-api-contract':
+      '@orbit/web-api-contract':
         specifier: workspace:*
         version: link:../../packages/web-api-contract
-      '@cap/web-api-contract-effect':
+      '@orbit/web-api-contract-effect':
         specifier: workspace:*
         version: link:../../packages/web-api-contract-effect
-      '@cap/web-backend':
+      '@orbit/web-backend':
         specifier: workspace:*
         version: link:../../packages/web-backend
-      '@cap/web-domain':
+      '@orbit/web-domain':
         specifier: workspace:*
         version: link:../../packages/web-domain
       '@deepgram/sdk':
@@ -829,10 +829,10 @@ importers:
 
   apps/web-cluster:
     dependencies:
-      '@cap/web-backend':
+      '@orbit/web-backend':
         specifier: workspace:*
         version: link:../../packages/web-backend
-      '@cap/web-domain':
+      '@orbit/web-domain':
         specifier: workspace:*
         version: link:../../packages/web-domain
       '@effect/cluster':
@@ -958,10 +958,10 @@ importers:
 
   packages/database:
     dependencies:
-      '@cap/env':
+      '@orbit/env':
         specifier: workspace:*
         version: link:../env
-      '@cap/web-domain':
+      '@orbit/web-domain':
         specifier: workspace:*
         version: link:../web-domain
       '@effect/sql-mysql2':
@@ -1019,10 +1019,10 @@ importers:
         specifier: ^3
         version: 3.25.76
     devDependencies:
-      '@cap/ui':
+      '@orbit/ui':
         specifier: workspace:*
         version: link:../ui
-      '@cap/utils':
+      '@orbit/utils':
         specifier: workspace:*
         version: link:../utils
       '@types/node':
@@ -1078,7 +1078,7 @@ importers:
 
   packages/ui:
     dependencies:
-      '@cap/utils':
+      '@orbit/utils':
         specifier: workspace:*
         version: link:../utils
       '@kobalte/tailwindcss':
@@ -1254,7 +1254,7 @@ importers:
       '@aws-sdk/client-s3':
         specifier: ^3.485.0
         version: 3.804.0
-      '@cap/env':
+      '@orbit/env':
         specifier: workspace:*
         version: link:../env
       clsx:
@@ -1324,16 +1324,16 @@ importers:
       '@aws-sdk/s3-request-presigner':
         specifier: ^3.485.0
         version: 3.804.0
-      '@cap/database':
+      '@orbit/database':
         specifier: workspace:*
         version: link:../database
-      '@cap/env':
+      '@orbit/env':
         specifier: workspace:*
         version: link:../env
-      '@cap/utils':
+      '@orbit/utils':
         specifier: workspace:*
         version: link:../utils
-      '@cap/web-domain':
+      '@orbit/web-domain':
         specifier: workspace:*
         version: link:../web-domain
       '@effect/cluster':

@@ -1,11 +1,11 @@
-// Ideally all the Notification-related types would be in @cap/web-domain
-// but @cap/web-api-contract is the closest we have right now
+// Ideally all the Notification-related types would be in @orbit/web-domain
+// but @orbit/web-api-contract is the closest we have right now
 
-import { db } from "@cap/database";
-import { nanoId } from "@cap/database/helpers";
-import { comments, notifications, users, videos } from "@cap/database/schema";
-import type { Notification, NotificationBase } from "@cap/web-api-contract";
-import { type Comment, Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { nanoId } from "@orbit/database/helpers";
+import { comments, notifications, users, videos } from "@orbit/database/schema";
+import type { Notification, NotificationBase } from "@orbit/web-api-contract";
+import { type Comment, Video } from "@orbit/web-domain";
 import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import type { UserPreferences } from "@/app/(org)/dashboard/dashboard-data";

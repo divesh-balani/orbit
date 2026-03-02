@@ -1,4 +1,4 @@
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import type { PropsWithChildren } from "react";
 import { formatStarCount, getGitHubStars } from "@/utils/github";
 import { MessengerWidget } from "../Layout/MessengerWidget";
@@ -14,7 +14,7 @@ export default async function Layout(props: PropsWithChildren) {
 			<Navbar stars={stars} />
 			{props.children}
 			<Footer />
-			{buildEnv.NEXT_PUBLIC_IS_CAP === "true" && <MessengerWidget />}
+			{buildEnv.NEXT_PUBLIC_IS_ORBIT === "true" && <MessengerWidget />}
 		</>
 	);
 }

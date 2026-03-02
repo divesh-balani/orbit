@@ -1,9 +1,9 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { users } from "@cap/database/schema";
-import { stripe } from "@cap/utils";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { users } from "@orbit/database/schema";
+import { stripe } from "@orbit/utils";
 import { eq } from "drizzle-orm";
 import type Stripe from "stripe";
 

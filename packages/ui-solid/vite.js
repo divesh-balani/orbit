@@ -13,7 +13,7 @@ export default [
 			IconsResolver({
 				prefix: "Icon",
 				extension: "jsx",
-				customCollections: ["cap"],
+				customCollections: ["orbit"],
 			}),
 		],
 		dts: fileURLToPath(new URL("./src/auto-imports.d.ts", import.meta.url)),
@@ -22,7 +22,7 @@ export default [
 		compiler: "solid",
 		enabledCollections: ["lucide"],
 		customCollections: {
-			cap: FileSystemIconLoader(
+			orbit: FileSystemIconLoader(
 				fileURLToPath(new URL("./icons", import.meta.url)),
 				// (svg) => svg.replace(/^<svg /, '<svg stroke="currentColor" ')
 			),

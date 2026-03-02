@@ -1,8 +1,8 @@
-use cap_camera::CameraInfo;
-use cap_camera_ffmpeg::*;
-use cap_fail::fail_err;
-use cap_media_info::VideoInfo;
-use cap_timestamp::Timestamp;
+use orbit_camera::CameraInfo;
+use orbit_camera_ffmpeg::*;
+use orbit_fail::fail_err;
+use orbit_media_info::VideoInfo;
+use orbit_timestamp::Timestamp;
 use futures::{
     FutureExt,
     future::{BoxFuture, Shared},
@@ -82,7 +82,7 @@ struct ConnectingState {
 struct AttachedState {
     #[allow(dead_code)]
     id: DeviceOrModelID,
-    camera_info: cap_camera::CameraInfo,
+    camera_info: orbit_camera::CameraInfo,
     video_info: VideoInfo,
     done_tx: mpsc::SyncSender<()>,
     pending_release: Option<mpsc::SyncSender<()>>,
@@ -151,13 +151,13 @@ impl Default for CameraFeed {
 #[derive(Reply)]
 pub struct CameraFeedLock {
     actor: ActorRef<CameraFeed>,
-    camera_info: cap_camera::CameraInfo,
+    camera_info: orbit_camera::CameraInfo,
     video_info: VideoInfo,
     drop_tx: Option<oneshot::Sender<()>>,
 }
 
 impl CameraFeedLock {
-    pub fn camera_info(&self) -> &cap_camera::CameraInfo {
+    pub fn camera_info(&self) -> &orbit_camera::CameraInfo {
         &self.camera_info
     }
 
@@ -185,11 +185,11 @@ impl Drop for CameraFeedLock {
 #[derive(serde::Serialize, serde::Deserialize, specta::Type, Clone, Debug, PartialEq)]
 pub enum DeviceOrModelID {
     DeviceID(String),
-    ModelID(cap_camera::ModelID),
+    ModelID(orbit_camera::ModelID),
 }
 
 impl DeviceOrModelID {
-    pub fn from_info(info: &cap_camera::CameraInfo) -> Self {
+    pub fn from_info(info: &orbit_camera::CameraInfo) -> Self {
         info.model_id()
             .map(|v| Self::ModelID(v.clone()))
             .unwrap_or_else(|| Self::DeviceID(info.device_id().to_string()))
@@ -219,7 +219,7 @@ pub struct Lock;
 #[derive(Clone)]
 struct InputConnected {
     done_tx: SyncSender<()>,
-    camera_info: cap_camera::CameraInfo,
+    camera_info: orbit_camera::CameraInfo,
     video_info: VideoInfo,
 }
 
@@ -237,7 +237,7 @@ struct InputConnectFailed {
 
 struct LockedCameraInputReconnected {
     id: DeviceOrModelID,
-    camera_info: cap_camera::CameraInfo,
+    camera_info: orbit_camera::CameraInfo,
     video_info: VideoInfo,
     done_tx: SyncSender<()>,
 }
@@ -398,24 +398,24 @@ pub enum SetInputError {
     Initialisation,
 }
 
-fn find_camera(selected_camera: &DeviceOrModelID) -> Option<cap_camera::CameraInfo> {
-    cap_camera::list_cameras().find(|c| match selected_camera {
+fn find_camera(selected_camera: &DeviceOrModelID) -> Option<orbit_camera::CameraInfo> {
+    orbit_camera::list_cameras().find(|c| match selected_camera {
         DeviceOrModelID::DeviceID(device_id) => c.device_id() == device_id,
         DeviceOrModelID::ModelID(model_id) => c.model_id() == Some(model_id),
     })
 }
 
 struct SetupCameraResult {
-    handle: cap_camera::CaptureHandle,
-    camera_info: cap_camera::CameraInfo,
+    handle: orbit_camera::CaptureHandle,
+    camera_info: orbit_camera::CameraInfo,
     video_info: VideoInfo,
 }
 
 static CAMERA_CALLBACK_COUNTER: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
 
 fn select_camera_format(
-    camera: &cap_camera::CameraInfo,
-) -> Result<cap_camera::Format, SetInputError> {
+    camera: &orbit_camera::CameraInfo,
+) -> Result<orbit_camera::Format, SetInputError> {
     let formats = camera.formats().ok_or(SetInputError::InvalidFormat)?;
     if formats.is_empty() {
         return Err(SetInputError::InvalidFormat);
@@ -471,7 +471,7 @@ async fn setup_camera(
             let callback_num =
                 CAMERA_CALLBACK_COUNTER.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
 
-            let timestamp = Timestamp::MachAbsoluteTime(cap_timestamp::MachAbsoluteTimestamp::new(
+            let timestamp = Timestamp::MachAbsoluteTime(orbit_timestamp::MachAbsoluteTimestamp::new(
                 cidre::cm::Clock::convert_host_time_to_sys_units(frame.native().sample_buf().pts()),
             ));
 
@@ -546,11 +546,11 @@ async fn setup_camera(
                 CAMERA_CALLBACK_COUNTER.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
 
             let timestamp = Timestamp::PerformanceCounter(
-                cap_timestamp::PerformanceCounterTimestamp::new(frame.native().perf_counter),
+                orbit_timestamp::PerformanceCounterTimestamp::new(frame.native().perf_counter),
             );
 
             if let Ok(bytes) = frame.native().bytes() {
-                use cap_mediafoundation_utils::IMFMediaBufferExt;
+                use orbit_mediafoundation_utils::IMFMediaBufferExt;
                 use windows::Win32::Media::MediaFoundation::MFCreateMemoryBuffer;
 
                 let data_len = bytes.len();

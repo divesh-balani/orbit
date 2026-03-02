@@ -1,5 +1,5 @@
 [package]
-name = "cap-cursor-capture"
+name = "orbit-cursor-capture"
 version = "0.1.0"
 edition = "2024"
 
@@ -7,7 +7,7 @@ edition = "2024"
 workspace = true
 
 [dependencies]
-scap-targets = { path = "../scap-targets" }
+sorbit-targets = { path = "../sorbit-targets" }
 
 device_query = "4.0.1"
 workspace-hack = { version = "0.1", path = "../workspace-hack" }

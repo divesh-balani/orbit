@@ -1,4 +1,4 @@
-import { serverEnv } from "@cap/env";
+import { serverEnv } from "@orbit/env";
 import Stripe from "stripe";
 
 const key = () => serverEnv().STRIPE_SECRET_KEY ?? "";
@@ -7,7 +7,7 @@ export const stripe = () =>
 	new Stripe(key(), {
 		apiVersion: "2023-10-16",
 		appInfo: {
-			name: "Cap",
+			name: "Orbit",
 			version: "0.1.0",
 		},
 	});

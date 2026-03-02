@@ -3,11 +3,11 @@ import {
 	CreateInvalidationCommand,
 } from "@aws-sdk/client-cloudfront";
 import type { PresignedPost } from "@aws-sdk/s3-presigned-post";
-import { db, updateIfDefined } from "@cap/database";
-import * as Db from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
-import { AwsCredentials, S3Buckets } from "@cap/web-backend";
-import { Video } from "@cap/web-domain";
+import { db, updateIfDefined } from "@orbit/database";
+import * as Db from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
+import { AwsCredentials, S3Buckets } from "@orbit/web-backend";
+import { Video } from "@orbit/web-domain";
 import { zValidator } from "@hono/zod-validator";
 import { and, eq } from "drizzle-orm";
 import { Effect, Option } from "effect";
@@ -67,14 +67,14 @@ app.post(
 			if (
 				!customBucket ||
 				!s3Config ||
-				customBucket.bucketName !== serverEnv().CAP_AWS_BUCKET
+				customBucket.bucketName !== serverEnv().ORBIT_AWS_BUCKET
 			) {
-				const distributionId = serverEnv().CAP_CLOUDFRONT_DISTRIBUTION_ID;
+				const distributionId = serverEnv().ORBIT_CLOUDFRONT_DISTRIBUTION_ID;
 				if (distributionId) {
 					console.log("Creating CloudFront invalidation for", fileKey);
 
 					const cloudfront = new CloudFrontClient({
-						region: serverEnv().CAP_AWS_REGION || "us-east-1",
+						region: serverEnv().ORBIT_AWS_REGION || "us-east-1",
 						credentials: await runPromise(
 							Effect.map(AwsCredentials, (c) => c.credentials),
 						),

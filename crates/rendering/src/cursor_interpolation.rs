@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 
-use cap_project::{ClickSpringConfig, CursorClickEvent, CursorEvents, CursorMoveEvent, XY};
+use orbit_project::{ClickSpringConfig, CursorClickEvent, CursorEvents, CursorMoveEvent, XY};
 
 use crate::{
     Coord, RawDisplayUVSpace,
@@ -79,7 +79,7 @@ struct CursorSpringContext<'a> {
 }
 
 impl<'a> CursorSpringContext<'a> {
-    fn new(clicks: &'a [cap_project::CursorClickEvent]) -> Self {
+    fn new(clicks: &'a [orbit_project::CursorClickEvent]) -> Self {
         Self {
             clicks,
             next_click_index: 0,

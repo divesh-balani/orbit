@@ -5,7 +5,7 @@ import {
 	isMediaServerConfigured,
 } from "@/lib/media-client";
 
-vi.mock("@cap/env", () => ({
+vi.mock("@orbit/env", () => ({
 	serverEnv: vi.fn(),
 }));
 
@@ -19,7 +19,7 @@ describe("media-client", () => {
 
 	describe("isMediaServerConfigured", () => {
 		it("returns true when MEDIA_SERVER_URL is set", async () => {
-			const { serverEnv } = await import("@cap/env");
+			const { serverEnv } = await import("@orbit/env");
 			vi.mocked(serverEnv).mockReturnValue({
 				MEDIA_SERVER_URL: "http://localhost:3456",
 			} as ReturnType<typeof serverEnv>);
@@ -28,7 +28,7 @@ describe("media-client", () => {
 		});
 
 		it("returns false when MEDIA_SERVER_URL is not set", async () => {
-			const { serverEnv } = await import("@cap/env");
+			const { serverEnv } = await import("@orbit/env");
 			vi.mocked(serverEnv).mockReturnValue({
 				MEDIA_SERVER_URL: undefined,
 			} as unknown as ReturnType<typeof serverEnv>);
@@ -37,7 +37,7 @@ describe("media-client", () => {
 		});
 
 		it("returns false when MEDIA_SERVER_URL is empty string", async () => {
-			const { serverEnv } = await import("@cap/env");
+			const { serverEnv } = await import("@orbit/env");
 			vi.mocked(serverEnv).mockReturnValue({
 				MEDIA_SERVER_URL: "",
 			} as unknown as ReturnType<typeof serverEnv>);
@@ -48,14 +48,14 @@ describe("media-client", () => {
 
 	describe("checkHasAudioTrackViaMediaServer", () => {
 		beforeEach(async () => {
-			const { serverEnv } = await import("@cap/env");
+			const { serverEnv } = await import("@orbit/env");
 			vi.mocked(serverEnv).mockReturnValue({
 				MEDIA_SERVER_URL: "http://localhost:3456",
 			} as ReturnType<typeof serverEnv>);
 		});
 
 		it("throws error when MEDIA_SERVER_URL is not configured", async () => {
-			const { serverEnv } = await import("@cap/env");
+			const { serverEnv } = await import("@orbit/env");
 			vi.mocked(serverEnv).mockReturnValue({
 				MEDIA_SERVER_URL: undefined,
 			} as unknown as ReturnType<typeof serverEnv>);
@@ -117,14 +117,14 @@ describe("media-client", () => {
 
 	describe("extractAudioViaMediaServer", () => {
 		beforeEach(async () => {
-			const { serverEnv } = await import("@cap/env");
+			const { serverEnv } = await import("@orbit/env");
 			vi.mocked(serverEnv).mockReturnValue({
 				MEDIA_SERVER_URL: "http://localhost:3456",
 			} as ReturnType<typeof serverEnv>);
 		});
 
 		it("throws error when MEDIA_SERVER_URL is not configured", async () => {
-			const { serverEnv } = await import("@cap/env");
+			const { serverEnv } = await import("@orbit/env");
 			vi.mocked(serverEnv).mockReturnValue({
 				MEDIA_SERVER_URL: undefined,
 			} as unknown as ReturnType<typeof serverEnv>);

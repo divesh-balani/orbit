@@ -1,6 +1,6 @@
 "use client";
 
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import Cookies from "js-cookie";
 import { redirect, usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -181,7 +181,7 @@ export function DashboardContexts({
 				{children}
 
 				{/* Global upgrade modal that persists regardless of navigation state */}
-				{buildEnv.NEXT_PUBLIC_IS_CAP && (
+				{buildEnv.NEXT_PUBLIC_IS_ORBIT && (
 					<UpgradeModal
 						open={upgradeModalOpen}
 						onOpenChange={setUpgradeModalOpen}

@@ -309,7 +309,7 @@ pub struct CursorMeta {
     pub image_path: RelativePathBuf,
     pub hotspot: XY<f64>,
     #[serde(default)]
-    pub shape: Option<cap_cursor_info::CursorShape>,
+    pub shape: Option<orbit_cursor_info::CursorShape>,
 }
 
 impl MultipleSegments {
@@ -322,11 +322,11 @@ impl MultipleSegments {
             Cursors::Correct(map) => map
                 .iter()
                 .filter_map(|(id, cursor)| match cursor.shape.as_ref() {
-                    Some(cap_cursor_info::CursorShape::MacOS(
-                        cap_cursor_info::CursorShapeMacOS::Arrow,
+                    Some(orbit_cursor_info::CursorShape::MacOS(
+                        orbit_cursor_info::CursorShapeMacOS::Arrow,
                     ))
-                    | Some(cap_cursor_info::CursorShape::Windows(
-                        cap_cursor_info::CursorShapeWindows::Arrow,
+                    | Some(orbit_cursor_info::CursorShape::Windows(
+                        orbit_cursor_info::CursorShapeWindows::Arrow,
                     )) => Some(id.clone()),
                     _ => None,
                 })
@@ -477,7 +477,7 @@ mod test {
     fn single_segment() {
         test_meta_deserialize(
             r#"{
-						  "pretty_name": "Cap 2024-11-15 at 16.35.36",
+						  "pretty_name": "Orbit 2024-11-15 at 16.35.36",
 						  "sharing": null,
 						  "display": {
 						    "path": "content/display.mp4"
@@ -496,7 +496,7 @@ mod test {
 
         test_meta_deserialize(
             r#"{
-	          "pretty_name": "Cap 2024-11-26 at 22.16.36",
+	          "pretty_name": "Orbit 2024-11-26 at 22.16.36",
 	          "sharing": null,
 	          "display": {
 	            "path": "content/display.mp4"
@@ -517,7 +517,7 @@ mod test {
     fn multi_segment() {
         test_meta_deserialize(
             r#"{
-              "pretty_name": "Cap 2024-11-26 at 22.29.30",
+              "pretty_name": "Orbit 2024-11-26 at 22.29.30",
               "sharing": null,
               "segments": [
                 {
@@ -543,7 +543,7 @@ mod test {
 
         test_meta_deserialize(
             r#"{
-	          "pretty_name": "Cap 2024-11-26 at 22.32.26",
+	          "pretty_name": "Orbit 2024-11-26 at 22.32.26",
 	          "sharing": null,
 	          "segments": [
 	            {

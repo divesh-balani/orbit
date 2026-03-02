@@ -1,4 +1,4 @@
-# Cap Export Performance Findings
+# Orbit Export Performance Findings
 
 > **SELF-HEALING DOCUMENT**: This file is designed to maintain complete context for export performance work. After any work session, UPDATE this file with your findings before ending.
 
@@ -12,7 +12,7 @@
 2. Read `EXPORT-BENCHMARKS.md` for latest raw benchmark data
 3. Run a quick export benchmark to verify current state:
    ```bash
-   cargo run -p cap-export --example export-benchmark-runner -- quick
+   cargo run -p orbit-export --example export-benchmark-runner -- quick
    ```
 4. Continue work from "Next Steps" section below
 
@@ -156,7 +156,7 @@ total_size = bytes_per_frame * total_frames
 
 ### Session 2026-02-16 (Real-World Calibration)
 
-**Goal**: Run benchmarks against real Cap recording and calibrate estimation algorithm
+**Goal**: Run benchmarks against real Orbit recording and calibrate estimation algorithm
 
 **What was done**:
 1. Ran full MP4 benchmark against real 71s recording (2 segments, camera, mic, system audio, zoom segments)

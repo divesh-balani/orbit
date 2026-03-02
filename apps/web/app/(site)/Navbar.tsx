@@ -10,8 +10,8 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle,
-} from "@cap/ui";
-import { classNames } from "@cap/utils";
+} from "@orbit/ui";
+import { classNames } from "@orbit/utils";
 import { Clapperboard, Zap } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -50,18 +50,18 @@ const Links = [
 			},
 			{
 				label: "Open Source",
-				sub: "Cap is open source and available on GitHub",
-				href: "https://github.com/CapSoftware/Cap",
+				sub: "Orbit is open source and available on GitHub",
+				href: "https://github.com/CapSoftware/Orbit",
 			},
 			{
-				label: "Self-host Cap",
-				sub: "Self-host Cap on your own infrastructure",
+				label: "Self-host Orbit",
+				sub: "Self-host Orbit on your own infrastructure",
 				href: "/self-hosting",
 			},
 			{
 				label: "Join the community",
-				sub: "Join the Cap community on Discord",
-				href: "https://cap.link/discord",
+				sub: "Join the Orbit community on Discord",
+				href: "https://orbit.link/discord",
 			},
 		],
 	},
@@ -78,18 +78,18 @@ const Links = [
 		dropdown: [
 			{
 				label: "Documentation",
-				sub: "Documentation for using Cap",
+				sub: "Documentation for using Orbit",
 				href: "/docs",
 			},
 			{
 				label: "FAQs",
-				sub: "Frequently asked questions about Cap",
+				sub: "Frequently asked questions about Orbit",
 				href: "/faq",
 			},
 			{
 				label: "Help Center",
 				sub: "Guides, tutorials, and more. Currently in progress.",
-				href: "https://help.cap.so",
+				href: "https://help.orbit.so",
 			},
 			{
 				label: "Chat support",
@@ -223,7 +223,7 @@ export const Navbar = ({ stars }: NavbarProps) => {
 									/>
 								}
 								target="_blank"
-								href="https://github.com/CapSoftware/Cap"
+								href="https://github.com/CapSoftware/Orbit"
 								size="sm"
 								className="w-full font-medium sm:w-auto"
 							>

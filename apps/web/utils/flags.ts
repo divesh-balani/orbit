@@ -1,4 +1,4 @@
-import { userIsPro } from "@cap/utils";
+import { userIsPro } from "@orbit/utils";
 
 export interface FeatureFlagUser {
 	email: string;

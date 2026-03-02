@@ -1,7 +1,7 @@
 #![cfg(windows)]
 #![allow(non_snake_case)]
 
-use cap_mediafoundation_utils::*;
+use orbit_mediafoundation_utils::*;
 use parking_lot::Mutex;
 use std::{
     ffi::OsString,
@@ -45,7 +45,7 @@ impl DeviceSourcesIterator {
         unsafe {
             attributes.SetGUID(
                 &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE,
-                &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_GUID,
+                &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDORBIT_GUID,
             )?;
         }
 
@@ -148,7 +148,7 @@ impl Device {
         unsafe {
             self.activate
                 .GetAllocatedString(
-                    &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK,
+                    &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDORBIT_SYMBOLIC_LINK,
                     &mut raw,
                     &mut length,
                 )

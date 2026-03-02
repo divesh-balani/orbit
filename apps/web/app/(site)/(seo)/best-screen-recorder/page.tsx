@@ -7,25 +7,25 @@ import {
 import { createFAQSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "Best Screen Recorder in 2026 — Free, No Watermark, 4K Quality | Cap",
+	title: "Best Screen Recorder in 2026 — Free, No Watermark, 4K Quality | Orbit",
 	description:
-		"Cap is the best screen recorder for Mac and Windows. Record in 4K with audio and webcam overlay, then share instantly. 100% free with no watermarks, no time limits in Studio Mode.",
+		"Orbit is the best screen recorder for Mac and Windows. Record in 4K with audio and webcam overlay, then share instantly. 100% free with no watermarks, no time limits in Studio Mode.",
 	alternates: {
-		canonical: "https://cap.so/best-screen-recorder",
+		canonical: "https://orbit.so/best-screen-recorder",
 	},
 	openGraph: {
 		title:
-			"Best Screen Recorder in 2026 — Free, No Watermark, 4K Quality | Cap",
+			"Best Screen Recorder in 2026 — Free, No Watermark, 4K Quality | Orbit",
 		description:
-			"Cap is the best screen recorder for Mac and Windows. Record in 4K with audio and webcam overlay, then share instantly. Free, open-source, no watermarks.",
-		url: "https://cap.so/best-screen-recorder",
-		siteName: "Cap",
+			"Orbit is the best screen recorder for Mac and Windows. Record in 4K with audio and webcam overlay, then share instantly. Free, open-source, no watermarks.",
+		url: "https://orbit.so/best-screen-recorder",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap: Best Screen Recorder for Mac and Windows",
+				alt: "Orbit: Best Screen Recorder for Mac and Windows",
 			},
 		],
 		locale: "en_US",
@@ -34,10 +34,10 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		title:
-			"Best Screen Recorder in 2026 — Free, No Watermark, 4K Quality | Cap",
+			"Best Screen Recorder in 2026 — Free, No Watermark, 4K Quality | Orbit",
 		description:
-			"Cap is the best screen recorder for Mac and Windows. Record in 4K with audio and webcam overlay, then share instantly. Free, open-source, no watermarks.",
-		images: ["https://cap.so/og.png"],
+			"Orbit is the best screen recorder for Mac and Windows. Record in 4K with audio and webcam overlay, then share instantly. Free, open-source, no watermarks.",
+		images: ["https://orbit.so/og.png"],
 	},
 };
 

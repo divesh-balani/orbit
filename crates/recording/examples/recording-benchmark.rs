@@ -1,11 +1,11 @@
-use cap_recording::{
+use orbit_recording::{
     CameraFeed,
     benchmark::{BenchmarkConfig, EncoderInfo},
     feeds::camera::{self, DeviceOrModelID},
     screen_capture::ScreenCaptureTarget,
 };
 use kameo::Actor;
-use scap_targets::Display;
+use sorbit_targets::Display;
 use std::{
     sync::Arc,
     time::{Duration, Instant},
@@ -22,7 +22,7 @@ async fn run_recording_benchmark(
     let dir = tempfile::tempdir()?;
     info!("Recording to: {}", dir.path().display());
 
-    let mut builder = cap_recording::studio_recording::Actor::builder(
+    let mut builder = orbit_recording::studio_recording::Actor::builder(
         dir.path().into(),
         ScreenCaptureTarget::Display {
             id: Display::primary().id(),
@@ -30,7 +30,7 @@ async fn run_recording_benchmark(
     );
 
     if include_camera {
-        if let Some(camera_info) = cap_camera::list_cameras().next() {
+        if let Some(camera_info) = orbit_camera::list_cameras().next() {
             println!("\nUsing camera: {}", camera_info.display_name());
 
             let feed = CameraFeed::spawn(CameraFeed::default());
@@ -56,7 +56,7 @@ async fn run_recording_benchmark(
     let handle = builder
         .build(
             #[cfg(target_os = "macos")]
-            Some(cap_recording::SendableShareableContent::from(
+            Some(orbit_recording::SendableShareableContent::from(
                 cidre::sc::ShareableContent::current().await?,
             )),
         )
@@ -109,7 +109,7 @@ async fn run_pause_resume_benchmark(duration_secs: u64) -> Result<(), Box<dyn st
 
     let dir = tempfile::tempdir()?;
 
-    let handle = cap_recording::studio_recording::Actor::builder(
+    let handle = orbit_recording::studio_recording::Actor::builder(
         dir.path().into(),
         ScreenCaptureTarget::Display {
             id: Display::primary().id(),
@@ -117,7 +117,7 @@ async fn run_pause_resume_benchmark(duration_secs: u64) -> Result<(), Box<dyn st
     )
     .build(
         #[cfg(target_os = "macos")]
-        Some(cap_recording::SendableShareableContent::from(
+        Some(orbit_recording::SendableShareableContent::from(
             cidre::sc::ShareableContent::current().await?,
         )),
     )
@@ -169,7 +169,7 @@ async fn stress_test_recording(
         let dir = tempfile::tempdir()?;
 
         let start = Instant::now();
-        let handle = cap_recording::studio_recording::Actor::builder(
+        let handle = orbit_recording::studio_recording::Actor::builder(
             dir.path().into(),
             ScreenCaptureTarget::Display {
                 id: Display::primary().id(),
@@ -177,7 +177,7 @@ async fn stress_test_recording(
         )
         .build(
             #[cfg(target_os = "macos")]
-            Some(cap_recording::SendableShareableContent::from(
+            Some(orbit_recording::SendableShareableContent::from(
                 cidre::sc::ShareableContent::current().await?,
             )),
         )
@@ -221,7 +221,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     unsafe { std::env::set_var("RUST_LOG", "info") };
     tracing_subscriber::fmt::init();
 
-    println!("=== Cap Recording Benchmark ===\n");
+    println!("=== Orbit Recording Benchmark ===\n");
 
     let args: Vec<String> = std::env::args().collect();
 

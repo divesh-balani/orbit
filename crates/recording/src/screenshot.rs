@@ -4,7 +4,7 @@ use anyhow::Context;
 use anyhow::anyhow;
 use image::{DynamicImage, RgbImage, RgbaImage};
 #[cfg(target_os = "macos")]
-use scap_ffmpeg::AsFFmpeg;
+use sorbit_ffmpeg::AsFFmpeg;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 use tokio::sync::oneshot;
@@ -15,10 +15,10 @@ use tracing::error;
 #[cfg(target_os = "macos")]
 use core_graphics::geometry::{CGPoint, CGRect, CGSize};
 #[cfg(target_os = "macos")]
-use scap_screencapturekit::{Capturer, StreamCfgBuilder};
+use sorbit_screencapturekit::{Capturer, StreamCfgBuilder};
 
 #[cfg(target_os = "windows")]
-use scap_direct3d::{Capturer, Frame, NewCapturerError, PixelFormat, Settings};
+use sorbit_direct3d::{Capturer, Frame, NewCapturerError, PixelFormat, Settings};
 #[cfg(target_os = "windows")]
 use std::sync::OnceLock;
 #[cfg(target_os = "windows")]
@@ -173,7 +173,7 @@ fn apply_window_rounded_corners(image: RgbImage, target: &ScreenCaptureTarget) -
 fn window_corner_radius_px(target: &ScreenCaptureTarget) -> f32 {
     match target {
         ScreenCaptureTarget::Window { id } => {
-            let scale = scap_targets::Window::from_id(id)
+            let scale = sorbit_targets::Window::from_id(id)
                 .and_then(|w| w.display())
                 .and_then(|d| {
                     let physical = d.physical_size()?.width();
@@ -244,7 +244,7 @@ fn try_fast_capture(target: &ScreenCaptureTarget) -> Option<DynamicImage> {
 
     let cg_image = match target {
         ScreenCaptureTarget::Display { id } => {
-            let display = scap_targets::Display::from_id(id)?;
+            let display = sorbit_targets::Display::from_id(id)?;
             let display_id = display.raw_handle().inner().id;
             let image = unsafe { CGDisplayCreateImage(display_id) };
             if image.is_null() {
@@ -255,7 +255,7 @@ fn try_fast_capture(target: &ScreenCaptureTarget) -> Option<DynamicImage> {
         ScreenCaptureTarget::Window { id } => {
             use core_graphics::display::CGRectNull;
 
-            let window = scap_targets::Window::from_id(id)?;
+            let window = sorbit_targets::Window::from_id(id)?;
             let window_id: CGWindowID = window.id().to_string().parse().ok()?;
 
             unsafe extern "C" {
@@ -282,7 +282,7 @@ fn try_fast_capture(target: &ScreenCaptureTarget) -> Option<DynamicImage> {
             unsafe { core_graphics::image::CGImage::from_ptr(image) }
         }
         ScreenCaptureTarget::Area { screen, bounds } => {
-            let display = scap_targets::Display::from_id(screen)?;
+            let display = sorbit_targets::Display::from_id(screen)?;
             let display_id = display.raw_handle().inner().id;
             let scale = display.raw_handle().scale().unwrap_or(1.0);
             let display_bounds = display.raw_handle().logical_bounds();
@@ -391,7 +391,7 @@ fn shared_d3d_device() -> anyhow::Result<&'static ID3D11Device> {
 fn windows_fast_path_available() -> bool {
     static AVAILABLE: OnceLock<bool> = OnceLock::new();
 
-    *AVAILABLE.get_or_init(|| match scap_direct3d::is_supported() {
+    *AVAILABLE.get_or_init(|| match sorbit_direct3d::is_supported() {
         Ok(true) => shared_d3d_device().is_ok(),
         _ => false,
     })
@@ -463,7 +463,7 @@ fn windows_capture_settings(target: &ScreenCaptureTarget) -> anyhow::Result<(Set
 
     if let ScreenCaptureTarget::Area { bounds, screen } = target {
         let display =
-            scap_targets::Display::from_id(screen).ok_or_else(|| anyhow!("Display not found"))?;
+            sorbit_targets::Display::from_id(screen).ok_or_else(|| anyhow!("Display not found"))?;
         let physical = display
             .physical_size()
             .ok_or_else(|| anyhow!("Physical size not found"))?;
@@ -585,7 +585,7 @@ fn bgra_to_rgb(buffer: Vec<u8>, width: usize, height: usize) -> anyhow::Result<R
 
 #[cfg(target_os = "windows")]
 fn capture_display_bounds(
-    bounds: scap_targets::bounds::PhysicalBounds,
+    bounds: sorbit_targets::bounds::PhysicalBounds,
 ) -> anyhow::Result<RgbImage> {
     let width = bounds.size().width().round() as i32;
     let height = bounds.size().height().round() as i32;
@@ -669,7 +669,7 @@ fn capture_window_print(hwnd: HWND, width: i32, height: i32) -> anyhow::Result<V
 fn capture_screenshot_fallback(target: ScreenCaptureTarget) -> anyhow::Result<RgbImage> {
     match target {
         ScreenCaptureTarget::Display { id } => {
-            let display = scap_targets::Display::from_id(&id).ok_or_else(unsupported_error)?;
+            let display = sorbit_targets::Display::from_id(&id).ok_or_else(unsupported_error)?;
             let bounds = display
                 .raw_handle()
                 .physical_bounds()
@@ -680,7 +680,7 @@ fn capture_screenshot_fallback(target: ScreenCaptureTarget) -> anyhow::Result<Rg
             Ok(image)
         }
         ScreenCaptureTarget::Window { id } => {
-            let window = scap_targets::Window::from_id(&id).ok_or_else(unsupported_error)?;
+            let window = sorbit_targets::Window::from_id(&id).ok_or_else(unsupported_error)?;
             let bounds = window
                 .raw_handle()
                 .physical_bounds()
@@ -703,7 +703,7 @@ fn capture_screenshot_fallback(target: ScreenCaptureTarget) -> anyhow::Result<Rg
             Ok(image)
         }
         ScreenCaptureTarget::Area { screen, .. } => {
-            let display = scap_targets::Display::from_id(&screen).ok_or_else(unsupported_error)?;
+            let display = sorbit_targets::Display::from_id(&screen).ok_or_else(unsupported_error)?;
             let bounds = display
                 .raw_handle()
                 .physical_bounds()
@@ -743,15 +743,15 @@ fn try_fast_capture(target: &ScreenCaptureTarget) -> Option<DynamicImage> {
 
     let item = match target.clone() {
         ScreenCaptureTarget::Display { id } => {
-            let display = scap_targets::Display::from_id(&id)?;
+            let display = sorbit_targets::Display::from_id(&id)?;
             display.raw_handle().try_as_capture_item().ok()?
         }
         ScreenCaptureTarget::Window { id } => {
-            let window = scap_targets::Window::from_id(&id)?;
+            let window = sorbit_targets::Window::from_id(&id)?;
             window.raw_handle().try_as_capture_item().ok()?
         }
         ScreenCaptureTarget::Area { screen, .. } => {
-            let display = scap_targets::Display::from_id(&screen)?;
+            let display = sorbit_targets::Display::from_id(&screen)?;
             display.raw_handle().try_as_capture_item().ok()?
         }
         ScreenCaptureTarget::CameraOnly => {
@@ -832,7 +832,7 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
 
         let content_filter = match target.clone() {
             ScreenCaptureTarget::Display { id } => {
-                let display = scap_targets::Display::from_id(&id)
+                let display = sorbit_targets::Display::from_id(&id)
                     .ok_or_else(|| anyhow!("Display not found"))?;
 
                 display
@@ -845,7 +845,7 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
                     .ok_or_else(|| anyhow!("Failed to get content filter"))?
             }
             ScreenCaptureTarget::Window { id } => {
-                let window = scap_targets::Window::from_id(&id)
+                let window = sorbit_targets::Window::from_id(&id)
                     .ok_or_else(|| anyhow!("Window not found"))?;
 
                 let sc_content = sc::ShareableContent::current()
@@ -859,7 +859,7 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
                 sc::ContentFilter::with_desktop_independent_window(sc_window.as_ref())
             }
             ScreenCaptureTarget::Area { screen, .. } => {
-                let display = scap_targets::Display::from_id(&screen)
+                let display = sorbit_targets::Display::from_id(&screen)
                     .ok_or_else(|| anyhow!("Display not found"))?;
 
                 display
@@ -877,15 +877,15 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
         };
 
         let width = match target.clone() {
-            ScreenCaptureTarget::Display { id } => scap_targets::Display::from_id(&id)
+            ScreenCaptureTarget::Display { id } => sorbit_targets::Display::from_id(&id)
                 .and_then(|d| d.physical_size())
                 .map(|s| s.width())
                 .unwrap_or(1920.0),
-            ScreenCaptureTarget::Window { id } => scap_targets::Window::from_id(&id)
+            ScreenCaptureTarget::Window { id } => sorbit_targets::Window::from_id(&id)
                 .and_then(|w| w.physical_size())
                 .map(|s| s.width())
                 .unwrap_or(1920.0),
-            ScreenCaptureTarget::Area { screen, .. } => scap_targets::Display::from_id(&screen)
+            ScreenCaptureTarget::Area { screen, .. } => sorbit_targets::Display::from_id(&screen)
                 .and_then(|d| d.physical_size())
                 .map(|s| s.width())
                 .unwrap_or(1920.0),
@@ -895,15 +895,15 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
         } as usize;
 
         let height = match target.clone() {
-            ScreenCaptureTarget::Display { id } => scap_targets::Display::from_id(&id)
+            ScreenCaptureTarget::Display { id } => sorbit_targets::Display::from_id(&id)
                 .and_then(|d| d.physical_size())
                 .map(|s| s.height())
                 .unwrap_or(1080.0),
-            ScreenCaptureTarget::Window { id } => scap_targets::Window::from_id(&id)
+            ScreenCaptureTarget::Window { id } => sorbit_targets::Window::from_id(&id)
                 .and_then(|w| w.physical_size())
                 .map(|s| s.height())
                 .unwrap_or(1080.0),
-            ScreenCaptureTarget::Area { screen, .. } => scap_targets::Display::from_id(&screen)
+            ScreenCaptureTarget::Area { screen, .. } => sorbit_targets::Display::from_id(&screen)
                 .and_then(|d| d.physical_size())
                 .map(|s| s.height())
                 .unwrap_or(1080.0),
@@ -925,14 +925,14 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
                 move |frame| {
                     if let Some(tx) = tx.lock().unwrap().take() {
                         let res = (|| {
-                            use scap_screencapturekit::Frame;
+                            use sorbit_screencapturekit::Frame;
                             let Frame::Screen(video_frame) = frame else {
                                 return Err(anyhow!("Not a screen frame"));
                             };
                             // Note: This requires VideoFrame to implement AsFFmpeg trait or similar logic.
-                            // Since scap_screencapturekit::VideoFrame doesn't directly implement it in all contexts,
+                            // Since sorbit_screencapturekit::VideoFrame doesn't directly implement it in all contexts,
                             // we might need to ensure we are using the correct types or traits.
-                            // Assuming scap_ffmpeg::AsFFmpeg is implemented for it if imported.
+                            // Assuming sorbit_ffmpeg::AsFFmpeg is implemented for it if imported.
                             let ff_frame = video_frame
                                 .as_ffmpeg()
                                 .map_err(|e| anyhow!("Failed to convert to ffmpeg: {e:?}"))?;
@@ -953,7 +953,7 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
     let mut capturer = {
         let item = match target.clone() {
             ScreenCaptureTarget::Display { id } => {
-                let display = scap_targets::Display::from_id(&id)
+                let display = sorbit_targets::Display::from_id(&id)
                     .ok_or_else(|| anyhow!("Display not found"))?;
                 display
                     .raw_handle()
@@ -961,7 +961,7 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
                     .map_err(|e| anyhow!("Failed to get capture item: {e:?}"))?
             }
             ScreenCaptureTarget::Window { id } => {
-                let window = scap_targets::Window::from_id(&id)
+                let window = sorbit_targets::Window::from_id(&id)
                     .ok_or_else(|| anyhow!("Window not found"))?;
                 window
                     .raw_handle()
@@ -969,7 +969,7 @@ pub async fn capture_screenshot(target: ScreenCaptureTarget) -> anyhow::Result<D
                     .map_err(|e| anyhow!("Failed to get capture item: {e:?}"))?
             }
             ScreenCaptureTarget::Area { screen, .. } => {
-                let display = scap_targets::Display::from_id(&screen)
+                let display = sorbit_targets::Display::from_id(&screen)
                     .ok_or_else(|| anyhow!("Display not found"))?;
                 display
                     .raw_handle()
@@ -1090,14 +1090,14 @@ fn crop_area_if_needed(
 
         #[cfg(target_os = "macos")]
         let scale = {
-            let display = scap_targets::Display::from_id(screen)
+            let display = sorbit_targets::Display::from_id(screen)
                 .ok_or_else(|| anyhow!("Display not found"))?;
             display.raw_handle().scale().unwrap_or(1.0)
         };
 
         #[cfg(target_os = "windows")]
         let scale = {
-            let display = scap_targets::Display::from_id(screen)
+            let display = sorbit_targets::Display::from_id(screen)
                 .ok_or_else(|| anyhow!("Display not found"))?;
             let physical_width = display.physical_size().map(|s| s.width()).unwrap_or(1.0);
             let logical_width = display.logical_size().map(|s| s.width()).unwrap_or(1.0);

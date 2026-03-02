@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Switch } from "@cap/ui";
+import { Button, Switch } from "@orbit/ui";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFlow from "@number-flow/react";
@@ -22,15 +22,15 @@ export function InviteTeamPage() {
 	const router = useRouter();
 	const rpc = useRpcClient();
 
-	const CAP_PRO_ANNUAL_PRICE_PER_USER = homepageCopy.pricing.pro.pricing.annual;
-	const CAP_PRO_MONTHLY_PRICE_PER_USER =
+	const ORBIT_PRO_ANNUAL_PRICE_PER_USER = homepageCopy.pricing.pro.pricing.annual;
+	const ORBIT_PRO_MONTHLY_PRICE_PER_USER =
 		homepageCopy.pricing.pro.pricing.monthly;
 
 	const currentTotalPrice =
 		users *
 		(isAnnually
-			? CAP_PRO_ANNUAL_PRICE_PER_USER
-			: CAP_PRO_MONTHLY_PRICE_PER_USER);
+			? ORBIT_PRO_ANNUAL_PRICE_PER_USER
+			: ORBIT_PRO_MONTHLY_PRICE_PER_USER);
 	const billingCycleText = isAnnually
 		? "per user, billed annually"
 		: "per user, billed monthly";
@@ -85,7 +85,7 @@ export function InviteTeamPage() {
 			}
 			const data = await response.json();
 			if (data.subscription === true) {
-				toast.success("You are already on the Cap Pro plan");
+				toast.success("You are already on the Orbit Pro plan");
 				return;
 			}
 
@@ -126,7 +126,7 @@ export function InviteTeamPage() {
 					<p className="text-base text-gray-10">
 						or,{" "}
 						<NumberFlow
-							value={CAP_PRO_MONTHLY_PRICE_PER_USER * users}
+							value={ORBIT_PRO_MONTHLY_PRICE_PER_USER * users}
 							className="text-sm tabular-nums lg:text-base text-gray-12"
 							format={{
 								notation: "compact",
@@ -150,7 +150,7 @@ export function InviteTeamPage() {
 					<p className="text-base text-gray-10">
 						or,{" "}
 						<NumberFlow
-							value={CAP_PRO_ANNUAL_PRICE_PER_USER * users}
+							value={ORBIT_PRO_ANNUAL_PRICE_PER_USER * users}
 							className="text-sm tabular-nums lg:text-base text-gray-12"
 							format={{
 								notation: "compact",

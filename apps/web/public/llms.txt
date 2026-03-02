@@ -1,10 +1,10 @@
-# Cap - Open Source Loom Alternative & Screen Recorder
+# Orbit - Open Source Loom Alternative & Screen Recorder
 
-Cap is a powerful, open-source screen recording and video messaging platform designed as a privacy-first alternative to Loom, Vidyard, and BombBomb. Record your screen, camera, or both with professional quality and share instantly or edit locally.
+Orbit is a powerful, open-source screen recording and video messaging platform designed as a privacy-first alternative to Loom, Vidyard, and BombBomb. Record your screen, camera, or both with professional quality and share instantly or edit locally.
 
-## What is Cap?
+## What is Orbit?
 
-Cap is a free and open-source screen recorder that combines the instant sharing capabilities of Loom with professional local editing tools. Built with privacy and performance in mind, Cap offers native desktop applications for macOS and Windows that don't compromise on features or quality.
+Orbit is a free and open-source screen recorder that combines the instant sharing capabilities of Loom with professional local editing tools. Built with privacy and performance in mind, Orbit offers native desktop applications for macOS and Windows that don't compromise on features or quality.
 
 ## Key Features
 
@@ -41,7 +41,7 @@ Provide visual answers to support tickets. Create help videos and documentation.
 - **Recording Quality**: Up to 4K resolution, 60fps, hardware-accelerated encoding
 - **File Formats**: MP4, WebM, with various codec options
 - **Performance**: Native Tauri apps (not Electron) for minimal resource usage
-- **Storage**: Local storage, Cap Cloud, or bring your own S3 bucket
+- **Storage**: Local storage, Orbit Cloud, or bring your own S3 bucket
 - **Sharing**: Instant links, embeddable players, download options
 
 ## Comparison to Alternatives
@@ -78,7 +78,7 @@ Provide visual answers to support tickets. Create help videos and documentation.
 
 - **Personal Use**: Free forever (5-minute recording limit)
 - **Desktop License**: $29/year or $58 lifetime (unlimited recording)
-- **Cap Pro**: $12/month ($8.16/month when billed annually) - includes cloud storage and AI features
+- **Orbit Pro**: $12/month ($8.16/month when billed annually) - includes cloud storage and AI features
 - **Teams**: Custom pricing for organizations
 
 ## Privacy & Security
@@ -91,7 +91,7 @@ Provide visual answers to support tickets. Create help videos and documentation.
 
 ## Technology Stack
 
-Cap is built with modern, performant technologies:
+Orbit is built with modern, performant technologies:
 - Desktop apps: Tauri (Rust) + SolidJS for native performance
 - Web platform: Next.js 14 + React 19 + TypeScript
 - Video processing: WebCodecs API for efficiency
@@ -101,21 +101,21 @@ Cap is built with modern, performant technologies:
 ## Installation
 
 ### macOS
-- Download from cap.so or install via Homebrew
+- Download from orbit.so or install via Homebrew
 - Supports macOS 11+ on Intel and Apple Silicon
 
 ### Windows
-- Download installer from cap.so
+- Download installer from orbit.so
 - Supports Windows 10/11
 
 ### Web
-- Access recordings at cap.link or your custom domain
+- Access recordings at orbit.link or your custom domain
 - No installation required for viewers
 
 ## Open Source
 
-Cap is proudly open source under fair licensing:
-- Source code: github.com/capso-io/cap
+Orbit is proudly open source under fair licensing:
+- Source code: github.com/CapSoftware/Orbit
 - Contributions welcome
 - Self-hosting documentation available
 - Active community on Discord

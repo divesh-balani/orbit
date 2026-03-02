@@ -1,7 +1,7 @@
 #![cfg(windows)]
 
-use cap_camera_directshow::{AM_MEDIA_TYPEVideoExt, AMMediaType};
-use cap_mediafoundation_utils::*;
+use orbit_camera_directshow::{AM_MEDIA_TYPEVideoExt, AMMediaType};
+use orbit_mediafoundation_utils::*;
 use std::{
     ffi::{OsStr, OsString},
     fmt::{Debug, Display},
@@ -168,8 +168,8 @@ pub struct VideoDeviceInfo {
 }
 
 pub enum CaptureHandle {
-    MediaFoundation(cap_camera_mediafoundation::CaptureHandle),
-    DirectShow(cap_camera_directshow::CaptureHandle),
+    MediaFoundation(orbit_camera_mediafoundation::CaptureHandle),
+    DirectShow(orbit_camera_directshow::CaptureHandle),
 }
 
 impl CaptureHandle {
@@ -184,9 +184,9 @@ impl CaptureHandle {
 #[derive(thiserror::Error, Debug)]
 pub enum StartCapturingError {
     #[error("{0}")]
-    MediaFoundation(#[from] cap_camera_mediafoundation::StartCapturingError),
+    MediaFoundation(#[from] orbit_camera_mediafoundation::StartCapturingError),
     #[error("{0}")]
-    DirectShow(#[from] cap_camera_directshow::StartCapturingError),
+    DirectShow(#[from] orbit_camera_directshow::StartCapturingError),
     #[error("Format/{0}")]
     Format(#[from] VideoFormatError),
 }
@@ -506,9 +506,9 @@ impl PixelFormat {
 #[derive(Clone)]
 enum VideoDeviceInfoInner {
     MediaFoundation {
-        device: cap_camera_mediafoundation::Device,
+        device: orbit_camera_mediafoundation::Device,
     },
-    DirectShow(cap_camera_directshow::VideoInputDevice),
+    DirectShow(orbit_camera_directshow::VideoInputDevice),
 }
 
 impl Debug for VideoDeviceInfoInner {
@@ -529,10 +529,10 @@ pub enum GetDevicesError {
 }
 
 pub fn get_devices() -> Result<Vec<VideoDeviceInfo>, GetDevicesError> {
-    let _ = cap_camera_directshow::initialize_directshow();
-    let _ = cap_camera_mediafoundation::initialize_mediafoundation();
+    let _ = orbit_camera_directshow::initialize_directshow();
+    let _ = orbit_camera_mediafoundation::initialize_mediafoundation();
 
-    let mf_devices = cap_camera_mediafoundation::DeviceSourcesIterator::new()
+    let mf_devices = orbit_camera_mediafoundation::DeviceSourcesIterator::new()
         .map_err(GetDevicesError::MFDeviceEnumerationFailed)?
         .map(|device| {
             let name = device.name()?;
@@ -557,7 +557,7 @@ pub fn get_devices() -> Result<Vec<VideoDeviceInfo>, GetDevicesError> {
         })
         .collect::<Vec<_>>();
 
-    let dshow_devices = cap_camera_directshow::VideoInputDeviceIterator::new()
+    let dshow_devices = orbit_camera_directshow::VideoInputDeviceIterator::new()
         .map_err(GetDevicesError::DSDeviceEnumerationFailed)?
         .map(|device| {
             let id = device.id()?;

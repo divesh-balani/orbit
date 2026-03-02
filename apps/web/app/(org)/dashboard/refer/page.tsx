@@ -1,11 +1,11 @@
-import { getCurrentUser } from "@cap/database/auth/session";
-import { serverEnv } from "@cap/env";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { serverEnv } from "@orbit/env";
 import { redirect } from "next/navigation";
 import ReferClient from "./ReferClient";
 
 export const metadata = {
-	title: "Refer - Cap",
-	description: "Earn rewards by referring friends to Cap",
+	title: "Refer - Orbit",
+	description: "Earn rewards by referring friends to Orbit",
 };
 
 async function generateEmbedToken(

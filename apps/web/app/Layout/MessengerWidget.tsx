@@ -59,7 +59,7 @@ function TypingDots() {
 					key={i}
 					className="h-1.5 w-1.5 rounded-full bg-gray-8"
 					style={{
-						animation: "cap-messenger-typing 1.4s ease-in-out infinite",
+						animation: "orbit-messenger-typing 1.4s ease-in-out infinite",
 						animationDelay: `${i * 0.15}s`,
 					}}
 				/>
@@ -95,7 +95,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
 							className="inline-block h-1.5 w-1.5 rounded-full"
 							style={{ backgroundColor: "var(--msngr-admin-dot)" }}
 						/>
-						Cap Team
+						Orbit Team
 					</span>
 				)}
 				<div
@@ -161,13 +161,13 @@ function PanelHeader({
 				className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
 				style={{ backgroundColor: "var(--msngr-accent-subtle)" }}
 			>
-				<Image src="/favicon.ico" alt="Cap Logo" width={32} height={32} />
+				<Image src="/favicon.ico" alt="Orbit Logo" width={32} height={32} />
 			</div>
 			<span
 				className="flex-1 text-[14px] font-semibold"
 				style={{ color: "var(--msngr-on-accent)" }}
 			>
-				Cap Support
+				Orbit Support
 			</span>
 			<button
 				type="button"
@@ -424,7 +424,7 @@ function ChatView({
 
 			if (hasNewReply) {
 				if (document.hidden) {
-					document.title = "New Reply — Cap";
+					document.title = "New Reply — Orbit";
 				}
 				const inputFocused = document.activeElement === inputRef.current;
 				if (document.hidden || (!inputFocused && !isHoveringRef.current)) {
@@ -515,7 +515,7 @@ function ChatView({
 					<div className="flex h-full flex-col px-4 pt-6">
 						<div className="flex justify-start">
 							<div className="max-w-[85%] rounded-[18px] bg-gray-3 px-4 py-2.5 text-[14px] leading-[1.6] text-gray-12">
-								Hey! I&apos;m Millie from Cap, ask me anything!
+								Hey! I&apos;m Millie from Orbit, ask me anything!
 							</div>
 						</div>
 						<div className="flex-1" />
@@ -729,11 +729,11 @@ export function MessengerWidget() {
 	return (
 		<>
 			<style>{`
-				@keyframes cap-messenger-typing {
+				@keyframes orbit-messenger-typing {
 					0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
 					30% { opacity: 1; transform: translateY(-3px); }
 				}
-				.cap-messenger-panel {
+				.orbit-messenger-panel {
 					position: fixed;
 					bottom: 88px;
 					right: 20px;
@@ -760,7 +760,7 @@ export function MessengerWidget() {
 					--msngr-link: #2563eb;
 					--msngr-link-hover: #3b82f6;
 				}
-				.dark .cap-messenger-panel {
+				.dark .orbit-messenger-panel {
 					box-shadow:
 						0 0 0 1px rgba(255,255,255,0.06),
 						0 8px 40px rgba(0,0,0,0.4),
@@ -801,7 +801,7 @@ export function MessengerWidget() {
 				.messenger-markdown a { color: var(--msngr-link); }
 				.messenger-markdown a:hover { color: var(--msngr-link-hover); }
 				@media (max-width: 480px) {
-					.cap-messenger-panel {
+					.orbit-messenger-panel {
 						width: 100vw;
 						height: 100dvh;
 						right: 0;
@@ -814,7 +814,7 @@ export function MessengerWidget() {
 			{isOpen && (
 				<div
 					ref={panelRef}
-					className={`cap-messenger-panel flex flex-col overflow-hidden rounded-2xl bg-gray-1 transition-all duration-200 ease-out ${
+					className={`orbit-messenger-panel flex flex-col overflow-hidden rounded-2xl bg-gray-1 transition-all duration-200 ease-out ${
 						isAnimating
 							? "opacity-100 translate-y-0 scale-100"
 							: "opacity-0 translate-y-3 scale-[0.97]"

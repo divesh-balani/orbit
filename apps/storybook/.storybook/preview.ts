@@ -1,4 +1,4 @@
-import "@cap/ui-solid/main.css";
+import "@orbit/ui-solid/main.css";
 
 const preview: Preview = {
 	parameters: {

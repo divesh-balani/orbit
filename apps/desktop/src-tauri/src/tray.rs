@@ -4,9 +4,9 @@ use crate::{
     recording_settings::{RecordingSettingsStore, RecordingTargetMode},
     windows::ShowCapWindow,
 };
-use cap_recording::RecordingMode;
+use orbit_recording::RecordingMode;
 
-use cap_project::{RecordingMeta, RecordingMetaInner};
+use orbit_project::{RecordingMeta, RecordingMetaInner};
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::{
     path::PathBuf,
@@ -206,7 +206,7 @@ fn load_single_item(
         .and_then(|m| m.created())
         .unwrap_or_else(|_| std::time::SystemTime::now());
 
-    let is_screenshot = path.extension().and_then(|s| s.to_str()) == Some("cap")
+    let is_screenshot = path.extension().and_then(|s| s.to_str()) == Some("orbit")
         && path.parent().map(|p| p == screenshots_dir).unwrap_or(false);
 
     let (thumbnail_path, item_type) = if is_screenshot {
@@ -269,7 +269,7 @@ fn load_all_previous_items(app: &AppHandle, load_thumbnails: bool) -> Vec<Cached
     {
         for entry in entries.flatten() {
             let path = entry.path();
-            if path.extension().and_then(|s| s.to_str()) == Some("cap")
+            if path.extension().and_then(|s| s.to_str()) == Some("orbit")
                 && let Some(item) = load_single_item(&path, &screenshots_dir, load_thumbnails)
             {
                 items.push(item);
@@ -554,7 +554,7 @@ fn handle_previous_item_click(app: &AppHandle, path_str: &str) {
     let path = PathBuf::from(path_str);
 
     let screenshots_dir = screenshots_path(app);
-    let is_screenshot = path.extension().and_then(|s| s.to_str()) == Some("cap")
+    let is_screenshot = path.extension().and_then(|s| s.to_str()) == Some("orbit")
         && path.parent().map(|p| p == screenshots_dir).unwrap_or(false);
 
     if is_screenshot {
@@ -699,8 +699,8 @@ pub fn create_tray(app: &AppHandle) -> tauri::Result<()> {
                 Ok(TrayItem::TakeScreenshot) => {
                     let app = app.clone();
                     tokio::spawn(async move {
-                        use cap_recording::screen_capture::ScreenCaptureTarget;
-                        use scap_targets::Display;
+                        use orbit_recording::screen_capture::ScreenCaptureTarget;
+                        use sorbit_targets::Display;
 
                         let display =
                             Display::get_containing_cursor().unwrap_or_else(Display::primary);

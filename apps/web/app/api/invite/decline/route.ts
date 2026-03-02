@@ -1,5 +1,5 @@
-import { db } from "@cap/database";
-import { organizationInvites } from "@cap/database/schema";
+import { db } from "@orbit/database";
+import { organizationInvites } from "@orbit/database/schema";
 import { eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 

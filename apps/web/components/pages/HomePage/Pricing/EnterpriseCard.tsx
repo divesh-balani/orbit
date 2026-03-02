@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import {
 	faDownload,
 	faHandshake,
@@ -41,7 +41,7 @@ export const EnterpriseCard = () => {
 	];
 
 	const handleBookCall = () => {
-		window.open("https://cal.com/cap.so/15min", "_blank");
+		window.open("https://cal.com/orbit.so/15min", "_blank");
 	};
 
 	return (
@@ -60,10 +60,10 @@ export const EnterpriseCard = () => {
 						<EnterpriseArt ref={enterpriseArtRef} />
 						<div>
 							<h3 className="mb-2 text-xl font-semibold text-center text-gray-12">
-								Cap for Enterprise
+								Orbit for Enterprise
 							</h3>
 							<p className="mb-4 text-base text-center text-gray-11">
-								Deploy Cap across your organization with enterprise-grade
+								Deploy Orbit across your organization with enterprise-grade
 								features, dedicated support, and custom integrations.
 							</p>
 						</div>

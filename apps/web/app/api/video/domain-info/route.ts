@@ -1,6 +1,6 @@
-import { db } from "@cap/database";
-import { organizations, sharedVideos, videos } from "@cap/database/schema";
-import { Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { organizations, sharedVideos, videos } from "@orbit/database/schema";
+import { Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import type { NextRequest } from "next/server";
 

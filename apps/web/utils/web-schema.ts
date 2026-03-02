@@ -1,26 +1,26 @@
 export const createOrganizationSchema = () => ({
 	"@context": "https://schema.org",
 	"@type": "Organization",
-	"@id": "https://cap.so/#organization",
-	name: "Cap",
-	url: "https://cap.so",
+	"@id": "https://orbit.so/#organization",
+	name: "Orbit",
+	url: "https://orbit.so",
 	logo: {
 		"@type": "ImageObject",
-		url: "https://cap.so/cap-logo.png",
+		url: "https://orbit.so/orbit-logo.png",
 		width: 512,
 		height: 512,
 	},
 	description:
-		"Cap is the open source alternative to Loom. Lightweight, powerful, and cross-platform screen recorder.",
+		"Orbit is the open source alternative to Loom. Lightweight, powerful, and cross-platform screen recorder.",
 	sameAs: [
-		"https://github.com/capsoftware/cap",
-		"https://twitter.com/cap",
-		"https://x.com/cap",
-		"https://www.producthunt.com/products/cap-3",
+		"https://github.com/capsoftware/orbit",
+		"https://twitter.com/orbit",
+		"https://x.com/orbit",
+		"https://www.producthunt.com/products/orbit-3",
 	],
 	contactPoint: {
 		"@type": "ContactPoint",
-		email: "hello@cap.so",
+		email: "hello@orbit.so",
 		contactType: "customer service",
 	},
 });
@@ -28,13 +28,13 @@ export const createOrganizationSchema = () => ({
 export const createWebSiteSchema = () => ({
 	"@context": "https://schema.org",
 	"@type": "WebSite",
-	"@id": "https://cap.so/#website",
-	url: "https://cap.so",
-	name: "Cap",
+	"@id": "https://orbit.so/#website",
+	url: "https://orbit.so",
+	name: "Orbit",
 	description:
 		"Beautiful screen recordings, owned by you. The open source alternative to Loom.",
 	publisher: {
-		"@id": "https://cap.so/#organization",
+		"@id": "https://orbit.so/#organization",
 	},
 });
 
@@ -76,19 +76,19 @@ export const createSoftwareApplicationSchema = (
 	return {
 		"@context": "https://schema.org",
 		"@type": "SoftwareApplication",
-		"@id": "https://cap.so/#software",
-		name: "Cap",
+		"@id": "https://orbit.so/#software",
+		name: "Orbit",
 		applicationCategory: "MultimediaApplication",
 		operatingSystem: ["macOS", "Windows"],
 		description:
-			"Cap is a powerful, open-source screen recording software that offers instant sharing, studio mode, and privacy-focused features.",
-		url: "https://cap.so",
-		downloadUrl: "https://cap.so/download",
+			"Orbit is a powerful, open-source screen recording software that offers instant sharing, studio mode, and privacy-focused features.",
+		url: "https://orbit.so",
+		downloadUrl: "https://orbit.so/download",
 		screenshot: [
 			{
 				"@type": "ImageObject",
-				url: "https://cap.so/og.png",
-				caption: "Cap screen recorder interface",
+				url: "https://orbit.so/og.png",
+				caption: "Orbit screen recorder interface",
 			},
 		],
 		featureList: [
@@ -133,7 +133,7 @@ export const createSoftwareApplicationSchema = (
 		},
 		review: reviews,
 		creator: {
-			"@id": "https://cap.so/#organization",
+			"@id": "https://orbit.so/#organization",
 		},
 	};
 };
@@ -168,7 +168,7 @@ export const createVideoObjectSchema = (video: {
 	duration: video.duration || "PT2M",
 	embedUrl: video.embedUrl,
 	publisher: {
-		"@id": "https://cap.so/#organization",
+		"@id": "https://orbit.so/#organization",
 	},
 });
 
@@ -190,12 +190,12 @@ export const createFAQSchema = (
 export const createProductSchema = () => ({
 	"@context": "https://schema.org",
 	"@type": "Product",
-	name: "Cap Screen Recorder",
+	name: "Orbit Screen Recorder",
 	description:
 		"Open-source screen recording software with instant sharing and studio mode capabilities",
 	brand: {
 		"@type": "Brand",
-		name: "Cap",
+		name: "Orbit",
 	},
 	offers: {
 		"@type": "AggregateOffer",
@@ -214,7 +214,7 @@ export const createProductSchema = () => ({
 export const createComparisonTableSchema = () => ({
 	"@context": "https://schema.org",
 	"@type": "Table",
-	about: "Feature comparison between Cap and Loom screen recorders",
+	about: "Feature comparison between Orbit and Loom screen recorders",
 	mainEntity: {
 		"@type": "ItemList",
 		itemListElement: [
@@ -224,7 +224,7 @@ export const createComparisonTableSchema = () => ({
 				name: "Open Source",
 				item: {
 					"@type": "PropertyValue",
-					name: "Cap",
+					name: "Orbit",
 					value: "Yes",
 				},
 			},
@@ -234,7 +234,7 @@ export const createComparisonTableSchema = () => ({
 				name: "Pricing",
 				item: {
 					"@type": "PropertyValue",
-					name: "Cap",
+					name: "Orbit",
 					value: "$8.16/month per user",
 				},
 			},
@@ -244,7 +244,7 @@ export const createComparisonTableSchema = () => ({
 				name: "4K Recording",
 				item: {
 					"@type": "PropertyValue",
-					name: "Cap",
+					name: "Orbit",
 					value: "Available in free & paid plans",
 				},
 			},
@@ -274,10 +274,10 @@ export const createHowToSchema = (params: {
 export const createLocalBusinessSchema = () => ({
 	"@context": "https://schema.org",
 	"@type": "LocalBusiness",
-	name: "Cap",
-	image: "https://cap.so/og.png",
-	"@id": "https://cap.so",
-	url: "https://cap.so",
+	name: "Orbit",
+	image: "https://orbit.so/og.png",
+	"@id": "https://orbit.so",
+	url: "https://orbit.so",
 	priceRange: "$0-$8.16",
 	address: {
 		"@type": "PostalAddress",

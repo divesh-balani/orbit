@@ -13,9 +13,9 @@ pub fn get_audio_segments(segments: &[SegmentMedia]) -> Vec<AudioSegment> {
                         a,
                         |c| c.mic_volume_db,
                         |c| match c.mic_stereo_mode {
-                            cap_project::StereoMode::Stereo => cap_audio::StereoMode::Stereo,
-                            cap_project::StereoMode::MonoL => cap_audio::StereoMode::MonoL,
-                            cap_project::StereoMode::MonoR => cap_audio::StereoMode::MonoR,
+                            orbit_project::StereoMode::Stereo => orbit_audio::StereoMode::Stereo,
+                            orbit_project::StereoMode::MonoL => orbit_audio::StereoMode::MonoL,
+                            orbit_project::StereoMode::MonoR => orbit_audio::StereoMode::MonoR,
                         },
                         |o| o.mic,
                     )
@@ -24,7 +24,7 @@ pub fn get_audio_segments(segments: &[SegmentMedia]) -> Vec<AudioSegment> {
                     AudioSegmentTrack::new(
                         a,
                         |c| c.system_volume_db,
-                        |_| cap_audio::StereoMode::Stereo,
+                        |_| orbit_audio::StereoMode::Stereo,
                         |o| o.system_audio,
                     )
                 }),

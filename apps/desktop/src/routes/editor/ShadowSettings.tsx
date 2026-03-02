@@ -42,7 +42,7 @@ const ShadowSettings = (props: Props) => {
 				class="flex gap-1 items-center w-full font-medium text-left transition duration-200 text-gray-12 hover:text-gray-10"
 			>
 				<span class="text-sm">Advanced shadow settings</span>
-				<IconCapChevronDown
+				<IconOrbitChevronDown
 					class={cx(
 						"size-5",
 						isOpen() ? "transition-transform rotate-180" : "",

@@ -1,9 +1,9 @@
-import { db } from "@cap/database";
-import { s3Buckets, videos } from "@cap/database/schema";
-import type { VideoMetadata } from "@cap/database/types";
-import { serverEnv } from "@cap/env";
-import { S3Buckets } from "@cap/web-backend";
-import type { S3Bucket, Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { s3Buckets, videos } from "@orbit/database/schema";
+import type { VideoMetadata } from "@orbit/database/types";
+import { serverEnv } from "@orbit/env";
+import { S3Buckets } from "@orbit/web-backend";
+import type { S3Bucket, Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Effect, Option } from "effect";
 import { FatalError } from "workflow";
@@ -197,7 +197,7 @@ async function saveResults(
 	);
 
 	if (
-		(video.name?.startsWith("Cap Recording -") || hasDatePattern) &&
+		(video.name?.startsWith("Orbit Recording -") || hasDatePattern) &&
 		result.title
 	) {
 		await db()
@@ -327,7 +327,7 @@ async function generateSingleChunk(
 	transcriptText: string,
 	groqClient: ReturnType<typeof getGroqClient>,
 ): Promise<AiResult> {
-	const prompt = `You are Cap AI, an expert at analyzing video content and creating comprehensive summaries.
+	const prompt = `You are Orbit AI, an expert at analyzing video content and creating comprehensive summaries.
 
 Analyze this transcript thoroughly and provide a detailed JSON response:
 {
@@ -367,7 +367,7 @@ async function generateMultipleChunks(
 		const chunk = chunks[i];
 		if (!chunk) continue;
 
-		const chunkPrompt = `You are Cap AI, an expert at analyzing video content. This is section ${i + 1} of ${chunks.length} from a longer video (timestamp ${Math.floor(chunk.startTime / 60)}:${String(chunk.startTime % 60).padStart(2, "0")} to ${Math.floor(chunk.endTime / 60)}:${String(chunk.endTime % 60).padStart(2, "0")}).
+		const chunkPrompt = `You are Orbit AI, an expert at analyzing video content. This is section ${i + 1} of ${chunks.length} from a longer video (timestamp ${Math.floor(chunk.startTime / 60)}:${String(chunk.startTime % 60).padStart(2, "0")} to ${Math.floor(chunk.endTime / 60)}:${String(chunk.endTime % 60).padStart(2, "0")}).
 
 Analyze this section thoroughly and provide JSON:
 {
@@ -416,7 +416,7 @@ ${chunk.text}`;
 		})
 		.join("\n\n");
 
-	const finalPrompt = `You are Cap AI, an expert at synthesizing information into comprehensive, well-organized summaries.
+	const finalPrompt = `You are Orbit AI, an expert at synthesizing information into comprehensive, well-organized summaries.
 
 Based on these detailed section analyses of a video, create a thorough final summary that captures EVERYTHING important.
 

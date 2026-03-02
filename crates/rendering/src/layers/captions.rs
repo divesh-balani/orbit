@@ -1,5 +1,5 @@
 use bytemuck::{Pod, Zeroable};
-use cap_project::XY;
+use orbit_project::XY;
 use glyphon::cosmic_text::LayoutRunIter;
 use glyphon::{
     Attrs, Buffer, Cache, Color, Family, FontSystem, Metrics, Resolution, Shaping, SwashCache,
@@ -868,7 +868,7 @@ pub struct CaptionAtTime {
 
 const CLOSE_TRANSITION_THRESHOLD: f32 = 0.4;
 
-fn convert_project_segment(segment: &cap_project::CaptionSegment) -> CaptionSegment {
+fn convert_project_segment(segment: &orbit_project::CaptionSegment) -> CaptionSegment {
     CaptionSegment {
         _id: segment.id.clone(),
         start: segment.start,
@@ -888,7 +888,7 @@ fn convert_project_segment(segment: &cap_project::CaptionSegment) -> CaptionSegm
 
 pub fn find_caption_at_time_project(
     time: f32,
-    segments: &[cap_project::CaptionSegment],
+    segments: &[orbit_project::CaptionSegment],
     linger_duration: f32,
     fade_duration: f32,
 ) -> Option<CaptionAtTime> {

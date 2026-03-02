@@ -1,6 +1,6 @@
 "use client";
 
-import type { Video } from "@cap/web-domain";
+import type { Video } from "@orbit/web-domain";
 import { Effect, Exit } from "effect";
 import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
@@ -31,7 +31,7 @@ export default function FolderVideosSection({
 
 	const rpc = useRpcClient();
 
-	const { mutate: deleteCaps, isPending: isDeletingCaps } = useEffectMutation({
+	const { mutate: deleteOrbits, isPending: isDeletingCaps } = useEffectMutation({
 		mutationFn: Effect.fn(function* (ids: Video.VideoId[]) {
 			if (ids.length === 0) return;
 
@@ -52,23 +52,23 @@ export default function FolderVideosSection({
 				} else {
 					return yield* Effect.fail(
 						new Error(
-							`Failed to delete ${errorCount} cap${errorCount === 1 ? "" : "s"}`,
+							`Failed to delete ${errorCount} orbit${errorCount === 1 ? "" : "s"}`,
 						),
 					);
 				}
 			}).pipe(Effect.fork);
 
 			toast.promise(Effect.runPromise(fiber.await.pipe(Effect.flatten)), {
-				loading: `Deleting ${ids.length} cap${ids.length === 1 ? "" : "s"}...`,
+				loading: `Deleting ${ids.length} orbit${ids.length === 1 ? "" : "s"}...`,
 				success: (data) => {
 					if (data.error) {
-						return `Successfully deleted ${data.success} cap${
+						return `Successfully deleted ${data.success} orbit${
 							data.success === 1 ? "" : "s"
-						}, but failed to delete ${data.error} cap${
+						}, but failed to delete ${data.error} orbit${
 							data.error === 1 ? "" : "s"
 						}`;
 					}
-					return `Successfully deleted ${data.success} cap${
+					return `Successfully deleted ${data.success} orbit${
 						data.success === 1 ? "" : "s"
 					}`;
 				},
@@ -84,14 +84,14 @@ export default function FolderVideosSection({
 		},
 	});
 
-	const { mutate: deleteCap, isPending: isDeletingCap } = useEffectMutation({
+	const { mutate: deleteOrbit, isPending: isDeletingCap } = useEffectMutation({
 		mutationFn: (id: Video.VideoId) => rpc.VideoDelete(id),
 		onSuccess: () => {
-			toast.success("Cap deleted successfully");
+			toast.success("Orbit deleted successfully");
 			router.refresh();
 		},
 		onError: () => {
-			toast.error("Failed to delete cap");
+			toast.error("Failed to delete orbit");
 		},
 	});
 
@@ -142,7 +142,7 @@ export default function FolderVideosSection({
 						{visibleVideos.map((video) => (
 							<CapCard
 								key={video.id}
-								cap={video}
+								orbit={video}
 								analytics={analytics[video.id] || 0}
 								userId={user?.id}
 								isLoadingAnalytics={analyticsQuery.isLoading}
@@ -152,9 +152,9 @@ export default function FolderVideosSection({
 								onSelectToggle={() => handleCapSelection(video.id)}
 								onDelete={() => {
 									if (selectedCaps.length > 0) {
-										deleteCaps(selectedCaps);
+										deleteOrbits(selectedCaps);
 									} else {
-										deleteCap(video.id);
+										deleteOrbit(video.id);
 									}
 								}}
 							/>
@@ -165,7 +165,7 @@ export default function FolderVideosSection({
 			<SelectedCapsBar
 				selectedCaps={selectedCaps}
 				setSelectedCaps={setSelectedCaps}
-				deleteSelectedCaps={() => deleteCaps(selectedCaps)}
+				deleteSelectedCaps={() => deleteOrbits(selectedCaps)}
 				isDeleting={isDeletingCaps || isDeletingCap}
 			/>
 		</>

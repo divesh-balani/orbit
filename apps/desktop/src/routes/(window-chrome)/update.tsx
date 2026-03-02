@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { useNavigate } from "@solidjs/router";
 import { getCurrentWindow, UserAttentionType } from "@tauri-apps/api/window";
 import { relaunch } from "@tauri-apps/plugin-process";
@@ -94,7 +94,7 @@ export default function () {
 						<div>
 							<Switch
 								fallback={
-									<IconCapLogo class="animate-spin size-4 text-[--text-primary]" />
+									<IconOrbitLogo class="animate-spin size-4 text-[--text-primary]" />
 								}
 							>
 								<Match when={updateStatus()?.type === "done"}>

@@ -1,16 +1,16 @@
 <p align="center">
   <p align="center">
-   <img width="150" height="150" src="https://github.com/CapSoftware/Cap/blob/main/apps/desktop/src-tauri/icons/Square310x310Logo.png" alt="Logo">
+   <img width="150" height="150" src="https://github.com/CapSoftware/Orbit/blob/main/apps/desktop/src-tauri/icons/Square310x310Logo.png" alt="Logo">
   </p>
-	<h1 align="center"><b>Cap</b></h1>
+	<h1 align="center"><b>Orbit</b></h1>
 	<p align="center">
 		The open source Loom alternative.
     <br />
-    <a href="https://cap.so"><strong>Cap.so »</strong></a>
+    <a href="https://orbit.so"><strong>Orbit.so »</strong></a>
     <br />
     <br />
     <b>Downloads for </b>
-		<a href="https://cap.so/download">macOS & Windows</a>
+		<a href="https://orbit.so/download">macOS & Windows</a>
     <br />
   </p>
 </p>
@@ -18,21 +18,21 @@
 
 [![Open Bounties](https://img.shields.io/endpoint?url=https%3A%2F%2Fconsole.algora.io%2Fapi%2Fshields%2FCapSoftware%2Fbounties%3Fstatus%3Dopen)](https://console.algora.io/org/CapSoftware/bounties?status=open)
 
-Cap is the open source alternative to Loom. It's a video messaging tool that allows you to record, edit and share videos in seconds.
+Orbit is the open source alternative to Loom. It's a video messaging tool that allows you to record, edit and share videos in seconds.
 
-<img src="https://raw.githubusercontent.com/CapSoftware/Cap/refs/heads/main/apps/web/public/landing-cover.png"/>
+<img src="https://raw.githubusercontent.com/CapSoftware/Orbit/refs/heads/main/apps/web/public/landing-cover.png"/>
 
 # Self Hosting
 
 ### Quick Start (One Command)
 
 ```bash
-git clone https://github.com/CapSoftware/Cap.git && cd Cap && docker compose up -d
+git clone https://github.com/CapSoftware/Orbit.git && cd Orbit && docker compose up -d
 ```
 
-Cap will be running at `http://localhost:3000`. That's it!
+Orbit will be running at `http://localhost:3000`. That's it!
 
-> **Note:** Login links appear in the logs (`docker compose logs cap-web`) since email isn't configured by default.
+> **Note:** Login links appear in the logs (`docker compose logs orbit-web`) since email isn't configured by default.
 
 ### Other Deployment Options
 
@@ -49,13 +49,13 @@ Cap will be running at `http://localhost:3000`. That's it!
 For production, create a `.env` file:
 
 ```bash
-CAP_URL=https://cap.yourdomain.com
+ORBIT_URL=https://orbit.yourdomain.com
 S3_PUBLIC_URL=https://s3.yourdomain.com
 ```
 
-See our [self-hosting docs](https://cap.so/docs/self-hosting) for full configuration options including email setup, AI features, and SSL.
+See our [self-hosting docs](https://orbit.so/docs/self-hosting) for full configuration options including email setup, AI features, and SSL.
 
-Cap Desktop can connect to your self-hosted instance via Settings → Cap Server URL.
+Orbit Desktop can connect to your self-hosted instance via Settings → Orbit Server URL.
 
 # Monorepo App Architecture
 
@@ -79,9 +79,9 @@ We use a combination of Rust, React (Next.js), TypeScript, Tauri, Drizzle (ORM),
 ### License:
 Portions of this software are licensed as follows:
 
-- All code residing in the `cap-camera*` and `scap-*` families of crates is licensed under the MIT License (see [licenses/LICENSE-MIT](https://github.com/CapSoftware/Cap/blob/main/licenses/LICENSE-MIT)).
+- All code residing in the `orbit-camera*` and `sorbit-*` families of crates is licensed under the MIT License (see [licenses/LICENSE-MIT](https://github.com/CapSoftware/Orbit/blob/main/licenses/LICENSE-MIT)).
 - All third party components are licensed under the original license provided by the owner of the applicable component
-- All other content not mentioned above is available under the AGPLv3 license as defined in [LICENSE](https://github.com/CapSoftware/Cap/blob/main/LICENSE)
+- All other content not mentioned above is available under the AGPLv3 license as defined in [LICENSE](https://github.com/CapSoftware/Orbit/blob/main/LICENSE)
   
 # Contributing
 
@@ -89,7 +89,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for more information. This guide is a wor
 
 ## Analytics (Tinybird)
 
-Cap uses [Tinybird](https://www.tinybird.co) to ingest viewer telemetry for dashboards. The Tinybird admin token (`TINYBIRD_ADMIN_TOKEN` or `TINYBIRD_TOKEN`) must be available in your environment. Once the token is present you can:
+Orbit uses [Tinybird](https://www.tinybird.co) to ingest viewer telemetry for dashboards. The Tinybird admin token (`TINYBIRD_ADMIN_TOKEN` or `TINYBIRD_TOKEN`) must be available in your environment. Once the token is present you can:
 
 - Provision the required data sources and materialized views via `pnpm analytics:setup`. This command installs the Tinybird CLI (if needed), runs `tb login` when a `.tinyb` credential file is missing, copies that credential into `scripts/analytics/tinybird`, and finally executes `tb deploy --allow-destructive-operations --wait` from that directory. **It synchronizes the Tinybird workspace to the resources defined in `scripts/analytics/tinybird`, removing any other datasources/pipes in that workspace.**
 - Validate that the schema and materialized views match what the app expects via `pnpm analytics:check`.

@@ -1,7 +1,7 @@
-import { getCurrentUser } from "@cap/database/auth/session";
-import { serverEnv } from "@cap/env";
-import { makeCurrentUserLayer } from "@cap/web-backend";
-import { Folder } from "@cap/web-domain";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { serverEnv } from "@orbit/env";
+import { makeCurrentUserLayer } from "@orbit/web-backend";
+import { Folder } from "@orbit/web-domain";
 import { Effect } from "effect";
 import { notFound } from "next/navigation";
 import {

@@ -1,8 +1,8 @@
 use crate::editor_window::{OptionalWindowEditorInstance, WindowEditorInstance};
 use crate::{FramesRendered, get_video_metadata};
-use cap_export::ExporterBase;
-use cap_project::{RecordingMeta, XY};
-use cap_rendering::{
+use orbit_export::ExporterBase;
+use orbit_project::{RecordingMeta, XY};
+use orbit_rendering::{
     FrameRenderer, ProjectRecordingsMeta, ProjectUniforms, RenderSegment, RenderVideoConstants,
     RendererLayers, ZoomFocusInterpolator, spring_mass_damper::SpringMassDamperSimulationConfig,
 };
@@ -30,8 +30,8 @@ impl Drop for ExportActiveGuard<'_> {
 #[derive(Deserialize, Clone, Copy, Debug, Type)]
 #[serde(tag = "format")]
 pub enum ExportSettings {
-    Mp4(cap_export::mp4::Mp4ExportSettings),
-    Gif(cap_export::gif::GifExportSettings),
+    Mp4(orbit_export::mp4::Mp4ExportSettings),
+    Gif(orbit_export::gif::GifExportSettings),
 }
 
 impl ExportSettings {
@@ -258,13 +258,13 @@ pub async fn generate_export_preview(
     settings: ExportPreviewSettings,
 ) -> Result<ExportPreviewResult, String> {
     use base64::{Engine, engine::general_purpose::STANDARD};
-    use cap_editor::create_segments;
+    use orbit_editor::create_segments;
     use std::time::Instant;
 
     let recording_meta = RecordingMeta::load_for_project(&project_path)
         .map_err(|e| format!("Failed to load recording meta: {e}"))?;
 
-    let cap_project::RecordingMetaInner::Studio(studio_meta) = &recording_meta.inner else {
+    let orbit_project::RecordingMetaInner::Studio(studio_meta) = &recording_meta.inner else {
         return Err("Cannot preview non-studio recordings".to_string());
     };
 

@@ -7,7 +7,7 @@ use crate::{
     },
 };
 use anyhow::{Context, anyhow};
-use cap_timestamp::Timestamp;
+use orbit_timestamp::Timestamp;
 use cidre::*;
 use futures::{FutureExt as _, channel::mpsc, future::BoxFuture};
 use std::{
@@ -56,7 +56,7 @@ impl FrameScaler {
 }
 
 fn get_pixel_buffer_pool_size() -> usize {
-    std::env::var("CAP_PIXEL_BUFFER_POOL_SIZE")
+    std::env::var("ORBIT_PIXEL_BUFFER_POOL_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(20)
@@ -125,14 +125,14 @@ impl PixelBufferCopier {
 }
 
 fn get_screen_buffer_size() -> usize {
-    std::env::var("CAP_SCREEN_BUFFER_SIZE")
+    std::env::var("ORBIT_SCREEN_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(15)
 }
 
 fn get_max_queue_depth() -> isize {
-    std::env::var("CAP_MAX_QUEUE_DEPTH")
+    std::env::var("ORBIT_MAX_QUEUE_DEPTH")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(8)
@@ -259,7 +259,7 @@ impl ScreenCaptureConfig<CMSampleBufferCapture> {
             "Screen capture queue depth"
         );
 
-        let mut settings = scap_screencapturekit::StreamCfgBuilder::default()
+        let mut settings = sorbit_screencapturekit::StreamCfgBuilder::default()
             .with_width(size.width() as usize)
             .with_height(size.height() as usize)
             .with_fps(self.config.fps as f32)
@@ -280,7 +280,7 @@ impl ScreenCaptureConfig<CMSampleBufferCapture> {
                 crop_bounds.size().height(),
             ));
         }
-        cap_fail::fail_err!(
+        orbit_fail::fail_err!(
             "macos::ScreenCaptureActor::new",
             ns::Error::with_domain(ns::ErrorDomain::os_status(), 69420, None)
         );
@@ -297,7 +297,7 @@ impl ScreenCaptureConfig<CMSampleBufferCapture> {
             PixelBufferCopier::new(expected_width, expected_height),
         ));
 
-        let builder = scap_screencapturekit::Capturer::builder(content_filter, settings)
+        let builder = sorbit_screencapturekit::Capturer::builder(content_filter, settings)
             .with_output_sample_buf_cb({
                 let video_frame_count = video_frame_counter.clone();
                 let drop_counter = drop_counter.clone();
@@ -313,11 +313,11 @@ impl ScreenCaptureConfig<CMSampleBufferCapture> {
                     let mach_timestamp =
                         cm::Clock::convert_host_time_to_sys_units(sample_buffer.pts());
                     let timestamp = Timestamp::MachAbsoluteTime(
-                        cap_timestamp::MachAbsoluteTimestamp::new(mach_timestamp),
+                        orbit_timestamp::MachAbsoluteTimestamp::new(mach_timestamp),
                     );
 
                     match &frame {
-                        scap_screencapturekit::Frame::Screen(frame) => {
+                        sorbit_screencapturekit::Frame::Screen(frame) => {
                             let Some(image_buf) = frame.image_buf() else {
                                 return;
                             };
@@ -406,7 +406,7 @@ impl ScreenCaptureConfig<CMSampleBufferCapture> {
                                     }
                                 };
 
-                            cap_fail::fail_ret!("screen_capture video frame skip");
+                            orbit_fail::fail_ret!("screen_capture video frame skip");
 
                             video_frame_count.fetch_add(1, atomic::Ordering::Relaxed);
 
@@ -420,10 +420,10 @@ impl ScreenCaptureConfig<CMSampleBufferCapture> {
                                 drop_counter.fetch_add(1, atomic::Ordering::Relaxed);
                             }
                         }
-                        scap_screencapturekit::Frame::Audio(_) => {
+                        sorbit_screencapturekit::Frame::Audio(_) => {
                             use ffmpeg::ChannelLayout;
 
-                            cap_fail::fail_ret!("screen_capture audio frame skip");
+                            orbit_fail::fail_ret!("screen_capture audio frame skip");
 
                             let Some(audio_tx) = &mut audio_tx else {
                                 return;
@@ -511,7 +511,7 @@ pub struct StartCapturing;
 
 // External
 
-pub struct NewFrame(pub scap_screencapturekit::Frame);
+pub struct NewFrame(pub sorbit_screencapturekit::Frame);
 
 // Internal
 
@@ -519,7 +519,7 @@ pub struct CaptureError(pub arc::R<ns::Error>);
 
 struct Capturer {
     started: Arc<AtomicBool>,
-    capturer: Arc<scap_screencapturekit::Capturer>,
+    capturer: Arc<sorbit_screencapturekit::Capturer>,
 }
 
 impl Clone for Capturer {
@@ -533,7 +533,7 @@ impl Clone for Capturer {
 }
 
 impl Capturer {
-    fn new(capturer: Arc<scap_screencapturekit::Capturer>) -> Self {
+    fn new(capturer: Arc<sorbit_screencapturekit::Capturer>) -> Self {
         Self {
             started: Arc::new(AtomicBool::new(false)),
             capturer,

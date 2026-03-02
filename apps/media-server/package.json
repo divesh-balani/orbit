@@ -1,5 +1,5 @@
 {
-	"name": "@cap/media-server",
+	"name": "@orbit/media-server",
 	"private": true,
 	"type": "module",
 	"scripts": {

@@ -5,7 +5,7 @@ import type { ToolPageContent } from "@/components/tools/types";
 import { createBreadcrumbSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "MKV to MP4 Converter | Free Online Video Converter | Cap",
+	title: "MKV to MP4 Converter | Free Online Video Converter | Orbit",
 	description:
 		"Convert MKV videos to widely supported MP4 format directly in your browser. Free online converter with no uploads needed for maximum privacy.",
 	openGraph: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 				url: "/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap MKV to MP4 Converter Tool",
+				alt: "Orbit MKV to MP4 Converter Tool",
 			},
 		],
 	},
@@ -29,17 +29,17 @@ export const metadata: Metadata = {
 		images: ["/og.png"],
 	},
 	alternates: {
-		canonical: "https://cap.so/tools/convert/mkv-to-mp4",
+		canonical: "https://orbit.so/tools/convert/mkv-to-mp4",
 	},
 };
 
 const breadcrumbSchema = createBreadcrumbSchema([
-	{ name: "Home", url: "https://cap.so" },
-	{ name: "Tools", url: "https://cap.so/tools" },
-	{ name: "Convert", url: "https://cap.so/tools/convert" },
+	{ name: "Home", url: "https://orbit.so" },
+	{ name: "Tools", url: "https://orbit.so/tools" },
+	{ name: "Convert", url: "https://orbit.so/tools/convert" },
 	{
 		name: "MKV to MP4 Converter",
-		url: "https://cap.so/tools/convert/mkv-to-mp4",
+		url: "https://orbit.so/tools/convert/mkv-to-mp4",
 	},
 ]);
 
@@ -85,10 +85,10 @@ export default function MKVToMP4Page() {
 			},
 		],
 		cta: {
-			title: "Cap is the open source Loom alternative",
+			title: "Orbit is the open source Loom alternative",
 			description:
-				"Record, edit, and share video messages with Cap. 100% open source and privacy focused.",
-			buttonText: "Download Cap Free",
+				"Record, edit, and share video messages with Orbit. 100% open source and privacy focused.",
+			buttonText: "Download Orbit Free",
 		},
 	};
 

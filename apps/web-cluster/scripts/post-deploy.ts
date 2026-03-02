@@ -7,9 +7,9 @@ Effect.gen(function* () {
 
 	const dotPnpm = "./node_modules/.pnpm";
 	const deps = yield* fs.readDirectory(dotPnpm);
-	const capDeps = deps.filter((dep) => dep.startsWith("@cap"));
+	const orbitDeps = deps.filter((dep) => dep.startsWith("@orbit"));
 
-	for (const key of capDeps) {
+	for (const key of orbitDeps) {
 		const pkgName = key.split("@file")[0].replace("+", "/");
 		const pkgJsonPath = `${dotPnpm}/${key}/node_modules/${pkgName}/package.json`;
 

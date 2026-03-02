@@ -9,19 +9,19 @@ import { createFAQSchema } from "@/utils/web-schema";
 export const metadata: Metadata = {
 	title: "Free Screen Recorder: High-Quality Recording at No Cost",
 	description:
-		"Cap offers a top-rated, free screen recorder with high-quality video capture, making it perfect for creating tutorials, educational content, and professional demos without any hidden fees.",
+		"Orbit offers a top-rated, free screen recorder with high-quality video capture, making it perfect for creating tutorials, educational content, and professional demos without any hidden fees.",
 	openGraph: {
 		title: "Free Screen Recorder: High-Quality Recording at No Cost",
 		description:
-			"Cap offers a top-rated, free screen recorder with high-quality video capture, making it perfect for creating tutorials, educational content, and professional demos without any hidden fees.",
-		url: "https://cap.so/free-screen-recorder",
-		siteName: "Cap",
+			"Orbit offers a top-rated, free screen recorder with high-quality video capture, making it perfect for creating tutorials, educational content, and professional demos without any hidden fees.",
+		url: "https://orbit.so/free-screen-recorder",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap: Free Screen Recorder",
+				alt: "Orbit: Free Screen Recorder",
 			},
 		],
 		locale: "en_US",
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "Free Screen Recorder: High-Quality Recording at No Cost",
 		description:
-			"Cap offers a top-rated, free screen recorder with high-quality video capture, making it perfect for creating tutorials, educational content, and professional demos without any hidden fees.",
-		images: ["https://cap.so/og.png"],
+			"Orbit offers a top-rated, free screen recorder with high-quality video capture, making it perfect for creating tutorials, educational content, and professional demos without any hidden fees.",
+		images: ["https://orbit.so/og.png"],
 	},
 	alternates: {
-		canonical: "https://cap.so/free-screen-recorder",
+		canonical: "https://orbit.so/free-screen-recorder",
 	},
 };
 

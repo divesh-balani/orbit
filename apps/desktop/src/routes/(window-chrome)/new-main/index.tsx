@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { useNavigate } from "@solidjs/router";
 import {
 	createMutation,
@@ -55,9 +55,9 @@ import {
 	type RecordingTargetMode,
 	type ScreenCaptureTarget,
 } from "~/utils/tauri";
-import IconCapLogoFull from "~icons/cap/logo-full";
-import IconCapLogoFullDark from "~icons/cap/logo-full-dark";
-import IconCapSettings from "~icons/cap/settings";
+import IconOrbitLogoFull from "~icons/orbit/logo-full";
+import IconOrbitLogoFullDark from "~icons/orbit/logo-full-dark";
+import IconOrbitSettings from "~icons/orbit/settings";
 import IconLucideAppWindowMac from "~icons/lucide/app-window-mac";
 import IconLucideArrowLeft from "~icons/lucide/arrow-left";
 import IconLucideBug from "~icons/lucide/bug";
@@ -235,7 +235,7 @@ function CameraListItem(props: {
 			)}
 		>
 			<div class="flex items-center gap-3 w-full">
-				<IconCapCamera class="size-4 shrink-0" />
+				<IconOrbitCamera class="size-4 shrink-0" />
 				<span class="truncate flex-1">{props.camera.display_name}</span>
 				<Show when={props.isSelected}>
 					<IconLucideCheck class="size-4 shrink-0" />
@@ -303,7 +303,7 @@ function MicrophoneListItem(props: {
 				/>
 			</Show>
 			<div class="relative flex items-center gap-3 w-full">
-				<IconCapMicrophone class="size-4 shrink-0" />
+				<IconOrbitMicrophone class="size-4 shrink-0" />
 				<span class="truncate flex-1">{props.mic.name}</span>
 				<Show when={props.isSelected}>
 					<IconLucideCheck class="size-4 shrink-0" />
@@ -1180,10 +1180,10 @@ function Page() {
 			document.activeElement.blur();
 		}
 
-		const { __CAP__ } = window as typeof window & {
-			__CAP__?: { initialTargetMode?: RecordingTargetMode | null };
+		const { __ORBIT__ } = window as typeof window & {
+			__ORBIT__?: { initialTargetMode?: RecordingTargetMode | null };
 		};
-		const targetMode = __CAP__?.initialTargetMode ?? null;
+		const targetMode = __ORBIT__?.initialTargetMode ?? null;
 		if (targetMode) {
 			await commands.openTargetSelectOverlays(null, null, targetMode);
 			setOptions({ targetMode });
@@ -1617,7 +1617,7 @@ function Page() {
 								}}
 								class="flex items-center justify-center size-5 -ml-[1.5px] focus:outline-none"
 							>
-								<IconCapSettings class="transition-colors text-gray-11 size-4 hover:text-gray-12" />
+								<IconOrbitSettings class="transition-colors text-gray-11 size-4 hover:text-gray-12" />
 							</button>
 						</Tooltip>
 						<Tooltip content={<span>Screenshots</span>}>
@@ -1680,8 +1680,8 @@ function Page() {
 				<div class="flex items-center justify-between mt-[16px] mb-[6px]">
 					<div class="flex items-center space-x-1">
 						<div class="*:w-[92px] *:h-auto text-[--text-primary]">
-							<IconCapLogoFullDark class="hidden dark:block" />
-							<IconCapLogoFull class="block dark:hidden" />
+							<IconOrbitLogoFullDark class="hidden dark:block" />
+							<IconOrbitLogoFull class="block dark:hidden" />
 						</div>
 					</div>
 					<Mode />

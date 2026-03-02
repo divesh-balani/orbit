@@ -262,13 +262,13 @@
 	animation-iteration-count: infinite;
 }
 
-.cap-selection-hint-monitor {
+.orbit-selection-hint-monitor {
 	position: relative;
 	width: 9.5rem;
 	height: 6.5rem;
 }
 
-.cap-selection-hint-screen-area {
+.orbit-selection-hint-screen-area {
 	position: absolute;
 	top: 4.4%;
 	left: 3%;
@@ -277,7 +277,7 @@
 	overflow: hidden;
 }
 
-.cap-selection-hint-selection {
+.orbit-selection-hint-selection {
 	position: absolute;
 	top: calc(50% - 26px);
 	left: calc(50% - 34px);
@@ -293,11 +293,11 @@
 	box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
 	opacity: 1;
 	transform-origin: top left;
-	animation: cap-selection-hint-selection 2.8s cubic-bezier(0.4, 0, 0.2, 1)
+	animation: orbit-selection-hint-selection 2.8s cubic-bezier(0.4, 0, 0.2, 1)
 		infinite;
 }
 
-.cap-selection-hint-cursor {
+.orbit-selection-hint-cursor {
 	position: absolute;
 	top: calc(50% - 26px);
 	left: calc(50% - 34px);
@@ -305,11 +305,11 @@
 	height: 26px;
 	filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
 	transform-origin: top left;
-	animation: cap-selection-hint-cursor 2.8s cubic-bezier(0.4, 0, 0.2, 1)
+	animation: orbit-selection-hint-cursor 2.8s cubic-bezier(0.4, 0, 0.2, 1)
 		infinite;
 }
 
-.cap-selection-hint-cursor::after {
+.orbit-selection-hint-cursor::after {
 	content: "";
 	position: absolute;
 	left: 50%;
@@ -320,10 +320,10 @@
 	border: 2px solid rgba(255, 255, 255, 0.85);
 	transform: translate(-50%, -50%) scale(0);
 	opacity: 0;
-	animation: cap-selection-hint-click 2.8s ease-out infinite;
+	animation: orbit-selection-hint-click 2.8s ease-out infinite;
 }
 
-@keyframes cap-selection-hint-selection {
+@keyframes orbit-selection-hint-selection {
 	0% {
 		width: 10px;
 		height: 8px;
@@ -338,7 +338,7 @@
 	}
 }
 
-@keyframes cap-selection-hint-cursor {
+@keyframes orbit-selection-hint-cursor {
 	0% {
 		opacity: 1;
 		transform: translate3d(0px, 0px, 0) rotate(-6deg);
@@ -352,7 +352,7 @@
 	}
 }
 
-@keyframes cap-selection-hint-click {
+@keyframes orbit-selection-hint-click {
 	0% {
 		opacity: 0;
 		transform: translate(-50%, -50%) scale(0);

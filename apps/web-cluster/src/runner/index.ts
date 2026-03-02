@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { Database, S3Buckets, Videos, Workflows } from "@cap/web-backend";
+import { Database, S3Buckets, Videos, Workflows } from "@orbit/web-backend";
 import { ClusterWorkflowEngine, RunnerAddress } from "@effect/cluster";
 import * as NodeSdk from "@effect/opentelemetry/NodeSdk";
 import {
@@ -103,7 +103,7 @@ const TracingLayer = Layer.unwrapEffect(
 		);
 
 		return NodeSdk.layer(() => ({
-			resource: { serviceName: "cap-workflow-runner" },
+			resource: { serviceName: "orbit-workflow-runner" },
 			spanProcessor: [new BatchSpanProcessor(exporter)],
 		}));
 	}),

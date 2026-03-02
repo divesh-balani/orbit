@@ -1,5 +1,5 @@
 #[cfg(target_os = "macos")]
-use scap_targets::{Window, WindowId};
+use sorbit_targets::{Window, WindowId};
 use serde::{Deserialize, Serialize};
 use specta::Type;
 

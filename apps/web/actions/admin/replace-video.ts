@@ -4,12 +4,12 @@ import {
 	CloudFrontClient,
 	CreateInvalidationCommand,
 } from "@aws-sdk/client-cloudfront";
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { videos } from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
-import { AwsCredentials, S3Buckets } from "@cap/web-backend";
-import { S3Bucket } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { videos } from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
+import { AwsCredentials, S3Buckets } from "@orbit/web-backend";
+import { S3Bucket } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Effect, Option } from "effect";
 
@@ -69,7 +69,7 @@ export async function invalidateVideoCache(videoId: string) {
 		return;
 	}
 
-	const distributionId = serverEnv().CAP_CLOUDFRONT_DISTRIBUTION_ID;
+	const distributionId = serverEnv().ORBIT_CLOUDFRONT_DISTRIBUTION_ID;
 	if (!distributionId) {
 		return;
 	}
@@ -77,7 +77,7 @@ export async function invalidateVideoCache(videoId: string) {
 	const fileKey = `${video.ownerId}/${video.id}/result.mp4`;
 
 	const cloudfront = new CloudFrontClient({
-		region: serverEnv().CAP_AWS_REGION || "us-east-1",
+		region: serverEnv().ORBIT_AWS_REGION || "us-east-1",
 		credentials: await runPromise(
 			Effect.map(AwsCredentials, (c) => c.credentials),
 		),

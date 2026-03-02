@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRive } from "@rive-app/react-canvas";
@@ -25,7 +25,7 @@ export const EmptySharedCapState: React.FC<EmptySharedCapStateProps> = ({
 	onAddVideos,
 }) => {
 	const { theme } = useTheme();
-	const { RiveComponent: EmptyCap } = useRive({
+	const { RiveComponent: EmptyOrbit } = useRive({
 		src: "/rive/main.riv",
 		artboard: theme === "light" ? "emptyshared" : "darkemptyshared",
 		autoplay: true,
@@ -39,8 +39,8 @@ export const EmptySharedCapState: React.FC<EmptySharedCapStateProps> = ({
 	return (
 		<div className="flex flex-col flex-1 justify-center items-center w-full h-full">
 			<div className="mx-auto mb-20 w-full max-w-md">
-				<EmptyCap
-					key={`${theme}empty-shared-cap`}
+				<EmptyOrbit
+					key={`${theme}empty-shared-orbit`}
 					className="max-w-[300px] w-full mx-auto md:max-w-[600px] h-[250px]"
 				/>
 			</div>

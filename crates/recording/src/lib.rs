@@ -22,9 +22,9 @@ pub use feeds::{camera::CameraFeed, microphone::MicrophoneFeed};
 pub use output_pipeline::*;
 pub use sources::screen_capture;
 
-use cap_media::MediaError;
+use orbit_media::MediaError;
 use feeds::microphone::MicrophoneFeedLock;
-use scap_targets::bounds::LogicalBounds;
+use sorbit_targets::bounds::LogicalBounds;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use thiserror::Error;
@@ -61,7 +61,7 @@ pub struct RecordingBaseInputs {
     #[cfg(target_os = "macos")]
     pub shareable_content: Option<SendableShareableContent>,
     #[cfg(target_os = "macos")]
-    pub excluded_windows: Vec<scap_targets::WindowId>,
+    pub excluded_windows: Vec<sorbit_targets::WindowId>,
 }
 
 #[cfg(target_os = "macos")]

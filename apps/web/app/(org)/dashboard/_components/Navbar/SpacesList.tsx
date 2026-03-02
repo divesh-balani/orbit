@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@cap/ui";
-import type { Space } from "@cap/web-domain";
+import { Button } from "@orbit/ui";
+import type { Space } from "@orbit/web-domain";
 import {
 	faLayerGroup,
 	faPlus,
@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { shareCap } from "@/actions/caps/share";
+import { shareOrbit } from "@/actions/caps/share";
 import { deleteSpace } from "@/actions/organization/delete-space";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import { Tooltip } from "@/components/Tooltip";
@@ -100,27 +100,27 @@ const SpacesList = ({ toggleMobileNav }: { toggleMobileNav?: () => void }) => {
 		setActiveDropTarget(null);
 
 		try {
-			const capData = e.dataTransfer.getData("application/cap");
+			const capData = e.dataTransfer.getData("application/orbit");
 			if (!capData) return;
 
-			const cap = JSON.parse(capData);
+			const orbit = JSON.parse(capData);
 
 			// Call the share action with just this space ID
-			const result = await shareCap({
-				capId: cap.id,
+			const result = await shareOrbit({
+				capId: orbit.id,
 				spaceIds: [spaceId],
 			});
 
 			if (result.success) {
 				const space = spacesData.find((s) => s.id === spaceId);
-				toast.success(`Shared "${cap.name}" to ${space?.name || "space"}`);
+				toast.success(`Shared "${orbit.name}" to ${space?.name || "space"}`);
 				router.refresh();
 			} else {
-				toast.error(result.error || "Failed to share cap");
+				toast.error(result.error || "Failed to share orbit");
 			}
 		} catch (error) {
-			console.error("Error sharing cap:", error);
-			toast.error("Failed to share cap");
+			console.error("Error sharing orbit:", error);
+			toast.error("Failed to share orbit");
 		}
 	};
 

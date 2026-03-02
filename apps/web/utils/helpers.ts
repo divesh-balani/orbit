@@ -1,4 +1,4 @@
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import { type ClassValue, clsx } from "clsx";
 import type { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
 import type { NextRequest } from "next/server";
@@ -11,8 +11,8 @@ export function classNames(...inputs: ClassValue[]) {
 // Base allowed origins
 export const allowedOrigins = [
 	buildEnv.NEXT_PUBLIC_WEB_URL,
-	"https://cap.link",
-	"cap.link",
+	"https://orbit.link",
+	"orbit.link",
 ];
 
 export function getHeaders(origin: string | null) {

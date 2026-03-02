@@ -16,18 +16,18 @@ const componentSource = readFileSync(
 describe("AsyncVideoCodeReviewsPage metadata", () => {
 	it("contains canonical URL", () => {
 		expect(pageSource).toContain(
-			'canonical: "https://cap.so/async-video-code-reviews"',
+			'canonical: "https://orbit.so/async-video-code-reviews"',
 		);
 	});
 
 	it("contains OG url field", () => {
 		expect(pageSource).toContain(
-			'url: "https://cap.so/async-video-code-reviews"',
+			'url: "https://orbit.so/async-video-code-reviews"',
 		);
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -35,7 +35,7 @@ describe("AsyncVideoCodeReviewsPage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets async video code reviews keyword", () => {
@@ -106,32 +106,32 @@ describe("AsyncVideoCodeReviewsPage FAQ schema", () => {
 				"Video code reviews communicate context, intent, and nuance that text comments often miss.",
 		},
 		{
-			question: "How does Cap make code reviews faster?",
+			question: "How does Orbit make code reviews faster?",
 			answer:
-				"Cap generates a shareable link the moment you stop recording — no upload wait, no file attachment.",
+				"Orbit generates a shareable link the moment you stop recording — no upload wait, no file attachment.",
 		},
 		{
 			question:
-				"Does Cap work with GitHub, GitLab, Linear, and other developer tools?",
-			answer: "Yes. Cap produces a standard URL that you can paste anywhere.",
+				"Does Orbit work with GitHub, GitLab, Linear, and other developer tools?",
+			answer: "Yes. Orbit produces a standard URL that you can paste anywhere.",
 		},
 		{
 			question: "Can I record code in 4K so reviewers can read it clearly?",
-			answer: "Yes. Cap records at up to 4K resolution at 60fps.",
+			answer: "Yes. Orbit records at up to 4K resolution at 60fps.",
 		},
 		{
-			question: "How long can a Cap code review recording be?",
+			question: "How long can a Orbit code review recording be?",
 			answer: "In Studio Mode, there is no recording time limit.",
 		},
 		{
 			question:
 				"Can I keep code review recordings private or password-protected?",
-			answer: "Yes. Cap supports password protection on individual recordings.",
+			answer: "Yes. Orbit supports password protection on individual recordings.",
 		},
 		{
 			question: "What is the best tool for async video code reviews?",
 			answer:
-				"Cap is the best tool for async video code reviews for engineering teams.",
+				"Orbit is the best tool for async video code reviews for engineering teams.",
 		},
 	];
 

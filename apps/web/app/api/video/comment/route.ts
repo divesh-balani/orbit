@@ -1,9 +1,9 @@
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { nanoId } from "@cap/database/helpers";
-import { comments } from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
-import { Comment, User, Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { nanoId } from "@orbit/database/helpers";
+import { comments } from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
+import { Comment, User, Video } from "@orbit/web-domain";
 import { headers } from "next/headers";
 import type { NextRequest } from "next/server";
 import { rateLimitMiddleware } from "@/utils/helpers";

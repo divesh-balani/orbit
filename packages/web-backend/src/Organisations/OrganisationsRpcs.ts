@@ -1,4 +1,4 @@
-import { InternalError, Organisation } from "@cap/web-domain";
+import { InternalError, Organisation } from "@orbit/web-domain";
 import { Effect } from "effect";
 import { Organisations } from ".";
 

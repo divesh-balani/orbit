@@ -1,4 +1,4 @@
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,8 +38,8 @@ export async function generateMetadata(
 			.join(" ");
 
 		return {
-			title: `${displayCategory} Documentation - Cap`,
-			description: `Documentation for ${displayCategory} in Cap`,
+			title: `${displayCategory} Documentation - Orbit`,
+			description: `Documentation for ${displayCategory} in Orbit`,
 		};
 	}
 

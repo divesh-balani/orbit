@@ -16,18 +16,18 @@ const componentSource = readFileSync(
 describe("SelfHostedScreenRecordingPage metadata", () => {
 	it("contains canonical URL", () => {
 		expect(pageSource).toContain(
-			'canonical: "https://cap.so/self-hosted-screen-recording"',
+			'canonical: "https://orbit.so/self-hosted-screen-recording"',
 		);
 	});
 
 	it("contains OG url field", () => {
 		expect(pageSource).toContain(
-			'url: "https://cap.so/self-hosted-screen-recording"',
+			'url: "https://orbit.so/self-hosted-screen-recording"',
 		);
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -35,7 +35,7 @@ describe("SelfHostedScreenRecordingPage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets self-hosted screen recording keyword", () => {
@@ -93,35 +93,35 @@ describe("SelfHostedScreenRecordingPage component content", () => {
 describe("SelfHostedScreenRecordingPage FAQ schema", () => {
 	const faqs = [
 		{
-			question: "Can Cap be self-hosted?",
+			question: "Can Orbit be self-hosted?",
 			answer:
-				"Yes. Cap supports two levels of self-hosting. First, you can configure Cap to use your own S3-compatible storage bucket.",
+				"Yes. Orbit supports two levels of self-hosting. First, you can configure Orbit to use your own S3-compatible storage bucket.",
 		},
 		{
-			question: "What storage providers does Cap support for self-hosting?",
+			question: "What storage providers does Orbit support for self-hosting?",
 			answer:
-				"Cap supports any S3-compatible object storage provider, including AWS S3, Cloudflare R2, Backblaze B2, Wasabi, and MinIO.",
+				"Orbit supports any S3-compatible object storage provider, including AWS S3, Cloudflare R2, Backblaze B2, Wasabi, and MinIO.",
 		},
 		{
 			question:
-				"Do recordings touch Cap's servers when using self-hosted storage?",
+				"Do recordings touch Orbit's servers when using self-hosted storage?",
 			answer:
-				"No. When self-hosted storage is configured, the Cap desktop app uploads recordings directly to your S3 bucket.",
+				"No. When self-hosted storage is configured, the Orbit desktop app uploads recordings directly to your S3 bucket.",
 		},
 		{
-			question: "How do I configure self-hosted storage in Cap?",
+			question: "How do I configure self-hosted storage in Orbit?",
 			answer:
-				"Open Cap's settings, navigate to the storage section, and enter your S3 bucket name, region, access key, secret key, and optional custom endpoint URL.",
+				"Open Orbit's settings, navigate to the storage section, and enter your S3 bucket name, region, access key, secret key, and optional custom endpoint URL.",
 		},
 		{
-			question: "Can I self-host the entire Cap platform, not just storage?",
+			question: "Can I self-host the entire Orbit platform, not just storage?",
 			answer:
-				"Yes. Cap is fully open source under the MIT license. You can deploy the complete Cap platform on your own infrastructure.",
+				"Yes. Orbit is fully open source under the MIT license. You can deploy the complete Orbit platform on your own infrastructure.",
 		},
 		{
-			question: "Is self-hosted Cap suitable for HIPAA compliance?",
+			question: "Is self-hosted Orbit suitable for HIPAA compliance?",
 			answer:
-				"Cap with self-hosted AWS S3 storage (covered under your AWS BAA) can support HIPAA-compliant recording workflows.",
+				"Orbit with self-hosted AWS S3 storage (covered under your AWS BAA) can support HIPAA-compliant recording workflows.",
 		},
 		{
 			question:
@@ -132,7 +132,7 @@ describe("SelfHostedScreenRecordingPage FAQ schema", () => {
 		{
 			question: "What is the best self-hosted screen recorder?",
 			answer:
-				"Cap is the best self-hosted screen recorder for teams that need both data control and a modern async video experience.",
+				"Orbit is the best self-hosted screen recorder for teams that need both data control and a modern async video experience.",
 		},
 	];
 
@@ -149,7 +149,7 @@ describe("SelfHostedScreenRecordingPage FAQ schema", () => {
 
 		expect(schema.mainEntity[0]).toEqual({
 			"@type": "Question",
-			name: "Can Cap be self-hosted?",
+			name: "Can Orbit be self-hosted?",
 			acceptedAnswer: {
 				"@type": "Answer",
 				text: faqs[0].answer,

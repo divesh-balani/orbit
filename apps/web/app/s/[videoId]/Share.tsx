@@ -1,7 +1,7 @@
 "use client";
 
-import type { comments as commentsSchema } from "@cap/database/schema";
-import type { ImageUpload, Video } from "@cap/web-domain";
+import type { comments as commentsSchema } from "@orbit/database/schema";
+import type { ImageUpload, Video } from "@orbit/web-domain";
 import { useQuery } from "@tanstack/react-query";
 import {
 	startTransition,
@@ -36,7 +36,7 @@ export type CommentType = typeof commentsSchema.$inferSelect & {
 	sending?: boolean;
 };
 
-const SESSION_STORAGE_KEY = "cap_tb_session_id";
+const SESSION_STORAGE_KEY = "orbit_tb_session_id";
 const SESSION_TTL_MS = 30 * 60 * 1000; // 30 minutes
 
 const ensureAnalyticsSessionId = () => {

@@ -25,12 +25,12 @@ use crate::output_pipeline::{
     WindowsFragmentedM4SCameraMuxerConfig,
 };
 use anyhow::{Context as _, anyhow, bail};
-use cap_media_info::VideoInfo;
-use cap_project::{
+use orbit_media_info::VideoInfo;
+use orbit_project::{
     CursorEvents, MultipleSegments, Platform, RecordingMeta, RecordingMetaInner,
     StudioRecordingMeta, StudioRecordingStatus,
 };
-use cap_timestamp::{Timestamp, Timestamps};
+use orbit_timestamp::{Timestamp, Timestamps};
 use futures::{FutureExt, StreamExt, future::OptionFuture, stream::FuturesUnordered};
 use kameo::{Actor as _, prelude::*};
 use relative_path::RelativePathBuf;
@@ -481,7 +481,7 @@ pub struct ActorBuilder {
     fragmented: bool,
     max_fps: u32,
     #[cfg(target_os = "macos")]
-    excluded_windows: Vec<scap_targets::WindowId>,
+    excluded_windows: Vec<sorbit_targets::WindowId>,
 }
 
 impl ActorBuilder {
@@ -531,7 +531,7 @@ impl ActorBuilder {
     }
 
     #[cfg(target_os = "macos")]
-    pub fn with_excluded_windows(mut self, excluded_windows: Vec<scap_targets::WindowId>) -> Self {
+    pub fn with_excluded_windows(mut self, excluded_windows: Vec<sorbit_targets::WindowId>) -> Self {
         self.excluded_windows = excluded_windows;
         self
     }
@@ -640,7 +640,7 @@ async fn spawn_studio_recording_actor(
 pub struct CompletedRecording {
     pub project_path: PathBuf,
     pub meta: StudioRecordingMeta,
-    pub cursor_data: cap_project::CursorImages,
+    pub cursor_data: orbit_project::CursorImages,
 }
 
 async fn stop_recording(
@@ -649,7 +649,7 @@ async fn stop_recording(
     cursors: Cursors,
     fragmented: bool,
 ) -> Result<CompletedRecording, RecordingError> {
-    use cap_project::*;
+    use orbit_project::*;
 
     const DEFAULT_FPS: u32 = 30;
 
@@ -813,7 +813,7 @@ async fn stop_recording(
     let meta = StudioRecordingMeta::MultipleSegments {
         inner: MultipleSegments {
             segments: segment_metas,
-            cursors: cap_project::Cursors::Correct(
+            cursors: orbit_project::Cursors::Correct(
                 cursors
                     .into_values()
                     .map(|cursor| {
@@ -833,7 +833,7 @@ async fn stop_recording(
         },
     };
 
-    let project_config = cap_project::ProjectConfiguration::default();
+    let project_config = orbit_project::ProjectConfiguration::default();
     project_config
         .write(&recording_dir)
         .map_err(RecordingError::from)?;
@@ -1291,7 +1291,7 @@ fn write_in_progress_meta(recording_dir: &Path) -> anyhow::Result<()> {
         inner: RecordingMetaInner::Studio(Box::new(StudioRecordingMeta::MultipleSegments {
             inner: MultipleSegments {
                 segments: Vec::new(),
-                cursors: cap_project::Cursors::default(),
+                cursors: orbit_project::Cursors::default(),
                 status: Some(StudioRecordingStatus::InProgress),
             },
         })),

@@ -6,15 +6,15 @@ use std::{
 };
 
 use base64::prelude::*;
-use cap_recording::screen_capture::ScreenCaptureTarget;
+use orbit_recording::screen_capture::ScreenCaptureTarget;
 
 use crate::{
     App, ArcLock, general_settings,
     recording_settings::RecordingTargetMode,
     window_exclusion::WindowExclusion,
-    windows::{CapWindowId, ShowCapWindow},
+    windows::{OrbitWindowId, ShowCapWindow},
 };
-use scap_targets::{
+use sorbit_targets::{
     Display, DisplayId, Window, WindowId,
     bounds::{LogicalBounds, LogicalSize, PhysicalSize},
 };
@@ -90,9 +90,9 @@ pub async fn open_target_select_overlays(
         .unwrap_or_else(|| Display::primary().id());
 
     for (id, window) in app.webview_windows() {
-        if let Ok(CapWindowId::TargetSelectOverlay {
+        if let Ok(OrbitWindowId::TargetSelectOverlay {
             display_id: existing_id,
-        }) = CapWindowId::from_str(&id)
+        }) = OrbitWindowId::from_str(&id)
             && !display_ids
                 .iter()
                 .any(|display_id| display_id == &existing_id)
@@ -105,7 +105,7 @@ pub async fn open_target_select_overlays(
     for display_id in &display_ids {
         let should_focus = display_id == &focus_display_id;
 
-        let existing_window = CapWindowId::TargetSelectOverlay {
+        let existing_window = OrbitWindowId::TargetSelectOverlay {
             display_id: display_id.clone(),
         }
         .get(&app);
@@ -151,7 +151,7 @@ pub async fn open_target_select_overlays(
         }
     }
 
-    let focus_window = CapWindowId::TargetSelectOverlay {
+    let focus_window = OrbitWindowId::TargetSelectOverlay {
         display_id: focus_display_id,
     }
     .get(&app);
@@ -176,11 +176,11 @@ pub async fn open_target_select_overlays(
                     let display = focused_target
                         .as_ref()
                         .map(|v| v.display())
-                        .unwrap_or_else(scap_targets::Display::get_containing_cursor);
+                        .unwrap_or_else(sorbit_targets::Display::get_containing_cursor);
                     let window = focused_target
                         .as_ref()
-                        .map(|v| v.window().and_then(|id| scap_targets::Window::from_id(&id)))
-                        .unwrap_or_else(scap_targets::Window::get_topmost_at_cursor);
+                        .map(|v| v.window().and_then(|id| sorbit_targets::Window::from_id(&id)))
+                        .unwrap_or_else(sorbit_targets::Window::get_topmost_at_cursor);
 
                     let _ = TargetUnderCursor {
                         display_id: display.map(|d| d.id()),
@@ -297,7 +297,7 @@ pub async fn close_target_select_overlays(
     let mut closed_display_ids = Vec::new();
 
     for (id, window) in app.webview_windows() {
-        if let Ok(CapWindowId::TargetSelectOverlay { display_id }) = CapWindowId::from_str(&id) {
+        if let Ok(OrbitWindowId::TargetSelectOverlay { display_id }) = OrbitWindowId::from_str(&id) {
             let _ = window.hide();
             closed_display_ids.push(display_id);
         }
@@ -418,11 +418,11 @@ impl WindowFocusManager {
                 let mut main_window_was_seen = false;
 
                 loop {
-                    let cap_main = CapWindowId::Main.get(app);
-                    let cap_settings = CapWindowId::Settings.get(app);
+                    let orbit_main = OrbitWindowId::Main.get(app);
+                    let orbit_settings = OrbitWindowId::Settings.get(app);
 
-                    let main_window_available = cap_main.is_some();
-                    let settings_window_available = cap_settings.is_some();
+                    let main_window_available = orbit_main.is_some();
+                    let settings_window_available = orbit_settings.is_some();
 
                     if main_window_available || settings_window_available {
                         main_window_was_seen = true;
@@ -435,8 +435,8 @@ impl WindowFocusManager {
                     }
 
                     #[cfg(windows)]
-                    if let Some(cap_main) = cap_main {
-                        let should_refocus = cap_main.is_focused().ok().unwrap_or_default()
+                    if let Some(orbit_main) = orbit_main {
+                        let should_refocus = orbit_main.is_focused().ok().unwrap_or_default()
                             || window.is_focused().unwrap_or_default();
 
                         if !should_refocus {

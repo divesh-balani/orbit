@@ -7,7 +7,7 @@ import {
 	FormField,
 	Input,
 	Label,
-} from "@cap/ui";
+} from "@orbit/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

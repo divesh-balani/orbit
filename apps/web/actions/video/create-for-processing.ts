@@ -1,18 +1,18 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { nanoId } from "@cap/database/helpers";
-import { s3Buckets, videos, videoUploads } from "@cap/database/schema";
-import { buildEnv, NODE_ENV, serverEnv } from "@cap/env";
-import { dub, userIsPro } from "@cap/utils";
-import { S3Buckets } from "@cap/web-backend";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { nanoId } from "@orbit/database/helpers";
+import { s3Buckets, videos, videoUploads } from "@orbit/database/schema";
+import { buildEnv, NODE_ENV, serverEnv } from "@orbit/env";
+import { dub, userIsPro } from "@orbit/utils";
+import { S3Buckets } from "@orbit/web-backend";
 import {
 	type Folder,
 	type Organisation,
 	S3Bucket,
 	Video,
-} from "@cap/web-domain";
+} from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Effect, Option } from "effect";
 import { revalidatePath } from "next/cache";
@@ -63,12 +63,12 @@ export async function createVideoForServerProcessing({
 		.insert(videos)
 		.values({
 			id: videoId,
-			name: `Cap Upload - ${formattedDate}`,
+			name: `Orbit Upload - ${formattedDate}`,
 			ownerId: user.id,
 			orgId,
 			source: { type: "webMP4" as const },
 			bucket: customBucket?.id,
-			public: serverEnv().CAP_VIDEOS_DEFAULT_PUBLIC,
+			public: serverEnv().ORBIT_VIDEOS_DEFAULT_PUBLIC,
 			...(folderId ? { folderId } : {}),
 		});
 
@@ -98,11 +98,11 @@ export async function createVideoForServerProcessing({
 		});
 	}).pipe(runPromise);
 
-	if (buildEnv.NEXT_PUBLIC_IS_CAP && NODE_ENV === "production") {
+	if (buildEnv.NEXT_PUBLIC_IS_ORBIT && NODE_ENV === "production") {
 		await dub()
 			.links.create({
 				url: `${serverEnv().WEB_URL}/s/${videoId}`,
-				domain: "cap.link",
+				domain: "orbit.link",
 				key: videoId,
 			})
 			.catch((err) => {

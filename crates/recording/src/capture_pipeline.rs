@@ -12,8 +12,8 @@ use crate::output_pipeline::{MacOSFragmentedM4SMuxer, MacOSFragmentedM4SMuxerCon
 use crate::output_pipeline::{WindowsFragmentedM4SMuxer, WindowsFragmentedM4SMuxerConfig};
 use anyhow::anyhow;
 #[cfg(windows)]
-use cap_enc_ffmpeg::h264::H264Preset;
-use cap_timestamp::Timestamps;
+use orbit_enc_ffmpeg::h264::H264Preset;
+use orbit_timestamp::Timestamps;
 use std::{path::PathBuf, sync::Arc};
 
 #[cfg(windows)]
@@ -242,8 +242,8 @@ pub type ScreenCaptureMethod = screen_capture::Direct3DCapture;
 
 pub fn target_to_display_and_crop(
     target: &ScreenCaptureTarget,
-) -> anyhow::Result<(scap_targets::Display, Option<CropBounds>)> {
-    use scap_targets::{bounds::*, *};
+) -> anyhow::Result<(sorbit_targets::Display, Option<CropBounds>)> {
+    use sorbit_targets::{bounds::*, *};
 
     let display = target
         .display()

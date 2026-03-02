@@ -1,8 +1,8 @@
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { users } from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
-import { stripe } from "@cap/utils";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { users } from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
+import { stripe } from "@orbit/utils";
 import { eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 import type Stripe from "stripe";

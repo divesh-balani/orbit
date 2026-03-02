@@ -1,15 +1,15 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
 import {
 	folders,
 	spaceMembers,
 	spaces,
 	spaceVideos,
-} from "@cap/database/schema";
-import { S3Buckets } from "@cap/web-backend";
-import type { Space } from "@cap/web-domain";
+} from "@orbit/database/schema";
+import { S3Buckets } from "@orbit/web-backend";
+import type { Space } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Effect, Option } from "effect";
 import { revalidatePath } from "next/cache";

@@ -1,5 +1,5 @@
-import { Videos } from "@cap/web-backend";
-import { HttpAuthMiddleware, Video } from "@cap/web-domain";
+import { Videos } from "@orbit/web-backend";
+import { HttpAuthMiddleware, Video } from "@orbit/web-domain";
 import {
 	HttpApi,
 	HttpApiBuilder,

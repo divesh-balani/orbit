@@ -15,15 +15,15 @@ const componentSource = readFileSync(
 
 describe("ObsAlternativePage metadata", () => {
 	it("contains canonical URL", () => {
-		expect(pageSource).toContain('canonical: "https://cap.so/obs-alternative"');
+		expect(pageSource).toContain('canonical: "https://orbit.so/obs-alternative"');
 	});
 
 	it("contains OG url field", () => {
-		expect(pageSource).toContain('url: "https://cap.so/obs-alternative"');
+		expect(pageSource).toContain('url: "https://orbit.so/obs-alternative"');
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -31,7 +31,7 @@ describe("ObsAlternativePage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets obs-alternative keyword", () => {
@@ -97,43 +97,43 @@ describe("ObsAlternativePage component content", () => {
 describe("ObsAlternativePage FAQ schema", () => {
 	const faqs = [
 		{
-			question: "Why would I use Cap instead of OBS Studio?",
+			question: "Why would I use Orbit instead of OBS Studio?",
 			answer:
-				"OBS Studio is the best tool for live streaming, but it's complex and saves files locally. Cap is designed for async screen sharing.",
+				"OBS Studio is the best tool for live streaming, but it's complex and saves files locally. Orbit is designed for async screen sharing.",
 		},
 		{
-			question: "Is Cap free like OBS?",
+			question: "Is Orbit free like OBS?",
 			answer:
-				"Yes. Cap's Studio Mode is completely free for personal use with no time limits and no watermarks.",
+				"Yes. Orbit's Studio Mode is completely free for personal use with no time limits and no watermarks.",
 		},
 		{
-			question: "Is Cap open source like OBS?",
-			answer: "Yes. Cap is fully open source and MIT-licensed on GitHub.",
+			question: "Is Orbit open source like OBS?",
+			answer: "Yes. Orbit is fully open source and MIT-licensed on GitHub.",
 		},
 		{
-			question: "Can Cap do live streaming like OBS?",
+			question: "Can Orbit do live streaming like OBS?",
 			answer:
-				"No. Cap is built for async screen recording and sharing, not live streaming.",
+				"No. Orbit is built for async screen recording and sharing, not live streaming.",
 		},
 		{
-			question: "Does Cap support the same recording quality as OBS?",
+			question: "Does Orbit support the same recording quality as OBS?",
 			answer:
-				"Yes. Cap records at up to 4K resolution and 60 frames per second with system audio and microphone.",
+				"Yes. Orbit records at up to 4K resolution and 60 frames per second with system audio and microphone.",
 		},
 		{
-			question: "What happens to my recordings after I stop recording in Cap?",
+			question: "What happens to my recordings after I stop recording in Orbit?",
 			answer:
-				"Cap automatically uploads your recording and generates a shareable link in seconds.",
+				"Orbit automatically uploads your recording and generates a shareable link in seconds.",
 		},
 		{
-			question: "Does Cap work on Mac and Windows like OBS?",
+			question: "Does Orbit work on Mac and Windows like OBS?",
 			answer:
-				"Yes. Cap is available as a native desktop app for macOS and Windows, just like OBS.",
+				"Yes. Orbit is available as a native desktop app for macOS and Windows, just like OBS.",
 		},
 		{
-			question: "Can I self-host Cap like I can self-host OBS outputs?",
+			question: "Can I self-host Orbit like I can self-host OBS outputs?",
 			answer:
-				"Yes. Cap supports any S3-compatible storage provider, including AWS S3, Cloudflare R2, and self-hosted MinIO.",
+				"Yes. Orbit supports any S3-compatible storage provider, including AWS S3, Cloudflare R2, and self-hosted MinIO.",
 		},
 	];
 
@@ -150,7 +150,7 @@ describe("ObsAlternativePage FAQ schema", () => {
 
 		expect(schema.mainEntity[0]).toEqual({
 			"@type": "Question",
-			name: "Why would I use Cap instead of OBS Studio?",
+			name: "Why would I use Orbit instead of OBS Studio?",
 			acceptedAnswer: {
 				"@type": "Answer",
 				text: faqs[0].answer,

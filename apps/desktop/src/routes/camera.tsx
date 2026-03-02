@@ -43,7 +43,7 @@ const CAMERA_PRESET_SMALL = 230;
 const CAMERA_PRESET_LARGE = 400;
 
 const getCameraOnlyMode = () => {
-	return window.__CAP__?.cameraOnlyMode === true;
+	return window.__ORBIT__?.cameraOnlyMode === true;
 };
 
 const getCameraOnlyInitialState = (): CameraWindowState => ({
@@ -335,7 +335,7 @@ function NativeCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 						style={{ transform: `scale(${scale()})` }}
 					>
 						<ControlButton onClick={() => getCurrentWindow().close()}>
-							<IconCapCircleX class="size-5.5" />
+							<IconOrbitCircleX class="size-5.5" />
 						</ControlButton>
 						<ControlButton
 							pressed={state.size >= CAMERA_PRESET_LARGE}
@@ -348,7 +348,7 @@ function NativeCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 								);
 							}}
 						>
-							<IconCapEnlarge class="size-5.5" />
+							<IconOrbitEnlarge class="size-5.5" />
 						</ControlButton>
 						<ControlButton
 							pressed={state.shape !== "round"}
@@ -358,8 +358,8 @@ function NativeCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 								)
 							}
 						>
-							{state.shape === "round" && <IconCapCircle class="size-5.5" />}
-							{state.shape === "square" && <IconCapSquare class="size-5.5" />}
+							{state.shape === "round" && <IconOrbitCircle class="size-5.5" />}
+							{state.shape === "square" && <IconOrbitSquare class="size-5.5" />}
 							{state.shape === "full" && (
 								<IconLucideRectangleHorizontal class="size-5.5" />
 							)}
@@ -368,7 +368,7 @@ function NativeCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 							pressed={state.mirrored}
 							onClick={() => setState("mirrored", (m) => !m)}
 						>
-							<IconCapArrows class="size-5.5" />
+							<IconOrbitArrows class="size-5.5" />
 						</ControlButton>
 					</div>
 				</div>
@@ -549,7 +549,7 @@ function LegacyCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 		ctx?.putImageData(imageData.data, 0, 0);
 	}
 
-	const { cameraWsPort } = window.__CAP__;
+	const { cameraWsPort } = window.__ORBIT__;
 	const [isWindowVisible, setIsWindowVisible] = createSignal(!document.hidden);
 	const [_isConnected, setIsConnected] = createSignal(false);
 	let ws: WebSocket | undefined;
@@ -880,7 +880,7 @@ function LegacyCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 						style={{ transform: `scale(${scale()})` }}
 					>
 						<ControlButton onClick={() => getCurrentWindow().close()}>
-							<IconCapCircleX class="size-5.5" />
+							<IconOrbitCircleX class="size-5.5" />
 						</ControlButton>
 						<ControlButton
 							pressed={state.size >= CAMERA_PRESET_LARGE}
@@ -893,7 +893,7 @@ function LegacyCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 								);
 							}}
 						>
-							<IconCapEnlarge class="size-5.5" />
+							<IconOrbitEnlarge class="size-5.5" />
 						</ControlButton>
 						<ControlButton
 							pressed={state.shape !== "round"}
@@ -903,8 +903,8 @@ function LegacyCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 								)
 							}
 						>
-							{state.shape === "round" && <IconCapCircle class="size-5.5" />}
-							{state.shape === "square" && <IconCapSquare class="size-5.5" />}
+							{state.shape === "round" && <IconOrbitCircle class="size-5.5" />}
+							{state.shape === "square" && <IconOrbitSquare class="size-5.5" />}
 							{state.shape === "full" && (
 								<IconLucideRectangleHorizontal class="size-5.5" />
 							)}
@@ -913,7 +913,7 @@ function LegacyCameraPreviewPage(props: { disconnected: Accessor<boolean> }) {
 							pressed={state.mirrored}
 							onClick={() => setState("mirrored", (m) => !m)}
 						>
-							<IconCapArrows class="size-5.5" />
+							<IconOrbitArrows class="size-5.5" />
 						</ControlButton>
 					</div>
 				</div>

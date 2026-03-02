@@ -1,7 +1,7 @@
 use crate::output_pipeline::win::{CameraBuffers, NativeCameraFrame, upload_mf_buffer_to_texture};
 use crate::{AudioFrame, AudioMuxer, Muxer, TaskPool, VideoMuxer, fragmentation};
 use anyhow::{Context, anyhow};
-use cap_media_info::{AudioInfo, VideoInfo};
+use orbit_media_info::{AudioInfo, VideoInfo};
 use serde::Serialize;
 use std::{
     path::PathBuf,
@@ -395,7 +395,7 @@ impl WindowsSegmentedCameraMuxer {
         let encoder_handle = std::thread::Builder::new()
             .name(format!("camera-segment-encoder-{}", self.current_index))
             .spawn(move || {
-                cap_mediafoundation_utils::thread_init();
+                orbit_mediafoundation_utils::thread_init();
 
                 let d3d_device = match crate::capture_pipeline::create_d3d_device() {
                     Ok(device) => device,
@@ -426,7 +426,7 @@ impl WindowsSegmentedCameraMuxer {
                             }
                         };
 
-                        cap_enc_ffmpeg::h264::H264Encoder::builder(video_config)
+                        orbit_enc_ffmpeg::h264::H264Encoder::builder(video_config)
                             .with_output_size(output_width, output_height)
                             .and_then(|builder| builder.build(&mut output_guard))
                             .map(either::Right)
@@ -437,7 +437,7 @@ impl WindowsSegmentedCameraMuxer {
                         return fallback(None);
                     }
 
-                    match cap_enc_mediafoundation::H264Encoder::new_with_scaled_output(
+                    match orbit_enc_mediafoundation::H264Encoder::new_with_scaled_output(
                         &d3d_device,
                         input_format,
                         input_size,
@@ -462,9 +462,9 @@ impl WindowsSegmentedCameraMuxer {
                                     }
                                 };
 
-                                cap_mediafoundation_ffmpeg::H264StreamMuxer::new(
+                                orbit_mediafoundation_ffmpeg::H264StreamMuxer::new(
                                     &mut output_guard,
-                                    cap_mediafoundation_ffmpeg::MuxerConfig {
+                                    orbit_mediafoundation_ffmpeg::MuxerConfig {
                                         width: output_width,
                                         height: output_height,
                                         fps: frame_rate,

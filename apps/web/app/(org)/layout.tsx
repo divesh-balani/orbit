@@ -1,4 +1,4 @@
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import type { PropsWithChildren } from "react";
 import { MessengerWidget } from "../Layout/MessengerWidget";
 
@@ -6,7 +6,7 @@ export default function Layout(props: PropsWithChildren) {
 	return (
 		<>
 			{props.children}
-			{buildEnv.NEXT_PUBLIC_IS_CAP === "true" && <MessengerWidget />}
+			{buildEnv.NEXT_PUBLIC_IS_ORBIT === "true" && <MessengerWidget />}
 		</>
 	);
 }

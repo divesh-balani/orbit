@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo } from "@cap/ui";
+import { Logo } from "@orbit/ui";
 import Link from "next/link";
 
 type FooterLink = {
@@ -17,7 +17,7 @@ const footerLinks = {
 		{ label: "Download", href: "/download" },
 		{
 			label: "Open Source",
-			href: "https://github.com/CapSoftware/Cap",
+			href: "https://github.com/CapSoftware/Orbit",
 			isExternal: true,
 		},
 		{
@@ -35,9 +35,9 @@ const footerLinks = {
 		{ label: "Testimonials", href: "/testimonials" },
 		{ label: "FAQs", href: "/faq" },
 		{ label: "Self-hosting", href: "/self-hosting" },
-		{ label: "Email Support", href: "mailto:hello@cap.so" },
-		{ label: "Help Center", href: "https://help.cap.so" },
-		{ label: "Trust Portal", href: "https://trust.cap.so" },
+		{ label: "Email Support", href: "mailto:hello@orbit.so" },
+		{ label: "Help Center", href: "https://help.orbit.so" },
+		{ label: "Trust Portal", href: "https://trust.orbit.so" },
 		{
 			label: "Chat Support",
 			href: "https://discord.gg/y8gdQ3WRN3",
@@ -45,12 +45,12 @@ const footerLinks = {
 		},
 		{
 			label: "System Status",
-			href: "https://cap.openstatus.dev/",
+			href: "https://orbit.openstatus.dev/",
 			isExternal: true,
 		},
 	] as FooterLink[],
 	socials: [
-		{ label: "X (@Cap)", href: "https://x.com/cap", isExternal: true },
+		{ label: "X (@Orbit)", href: "https://x.com/orbit", isExternal: true },
 		{
 			label: "Discord",
 			href: "https://discord.gg/y8gdQ3WRN3",
@@ -102,7 +102,7 @@ const footerLinks = {
 		{ label: "Screen Recorder for Mac", href: "/screen-recorder-mac" },
 		{ label: "Screen Recorder for Windows", href: "/screen-recorder-windows" },
 		{ label: "Screen Recording Software", href: "/screen-recording-software" },
-		{ label: "Cap vs Loom", href: "/loom-alternative" },
+		{ label: "Orbit vs Loom", href: "/loom-alternative" },
 		{ label: "Student Discount", href: "/student-discount" },
 	] as FooterLink[],
 };
@@ -120,13 +120,13 @@ export const Footer = () => {
 						<Logo className="w-[104px] h-auto mx-auto" />
 						<div className="w-full">
 							<p className="max-w-sm text-gray-12">
-								Cap is the open source alternative to Loom. Lightweight,
+								Orbit is the open source alternative to Loom. Lightweight,
 								powerful, and cross-platform. Record and share in seconds.
 								Import your existing Loom videos seamlessly.
 							</p>
 						</div>
 						<p className="pt-4 text-sm text-gray-9">
-							© Cap Software, Inc. {new Date().getFullYear()}.
+							© Orbit Software, Inc. {new Date().getFullYear()}.
 						</p>
 						<div className="flex justify-center pt-6 space-x-10">
 							<a className="text-sm text-gray-8" href="/terms">
@@ -179,7 +179,7 @@ export const Footer = () => {
 
 						{/* Help Column */}
 						<div className="space-y-2">
-							<h3 className="text-lg font-semibold text-gray-12">Cap</h3>
+							<h3 className="text-lg font-semibold text-gray-12">Orbit</h3>
 							<ul className="grid grid-cols-1 gap-2 pt-2">
 								{footerLinks.help.map((link, index) => (
 									<li key={index.toString()}>

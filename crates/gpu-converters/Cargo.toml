@@ -1,5 +1,5 @@
 [package]
-name = "cap-gpu-converters"
+name = "orbit-gpu-converters"
 version = "0.1.0"
 edition = "2024"
 

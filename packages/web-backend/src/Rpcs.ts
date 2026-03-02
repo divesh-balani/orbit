@@ -2,7 +2,7 @@ import {
 	InternalError,
 	RpcAuthMiddleware,
 	UnauthenticatedError,
-} from "@cap/web-domain";
+} from "@orbit/web-domain";
 import { Effect, Layer, Option } from "effect";
 
 import { getCurrentUser, makeCurrentUser } from "./Auth.ts";

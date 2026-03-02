@@ -1,4 +1,4 @@
-use cap_media_info::{AudioInfo, VideoInfo, ensure_even};
+use orbit_media_info::{AudioInfo, VideoInfo, ensure_even};
 use cidre::{cm::SampleTimingInfo, objc::Obj, *};
 use ffmpeg::{frame, software::resampling};
 use std::{path::PathBuf, time::Duration};
@@ -920,7 +920,7 @@ fn get_instant_mode_bitrate(width: f32, height: f32, fps: f32) -> f32 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use cap_media_info::RawVideoFormat;
+    use orbit_media_info::RawVideoFormat;
 
     fn valid_video_config() -> VideoInfo {
         VideoInfo::from_raw(RawVideoFormat::Bgra, 1920, 1080, 30)
@@ -1049,7 +1049,7 @@ mod tests {
     #[test]
     fn creates_parent_directory() {
         let dir = std::env::temp_dir()
-            .join("cap_test_encoder_parent")
+            .join("orbit_test_encoder_parent")
             .join("nested")
             .join("dir");
 
@@ -1063,12 +1063,12 @@ mod tests {
 
         assert!(dir.exists(), "Parent directory should have been created");
 
-        let _ = std::fs::remove_dir_all(std::env::temp_dir().join("cap_test_encoder_parent"));
+        let _ = std::fs::remove_dir_all(std::env::temp_dir().join("orbit_test_encoder_parent"));
     }
 
     #[test]
     fn removes_existing_output_file() {
-        let output = std::env::temp_dir().join("cap_test_existing_output.mp4");
+        let output = std::env::temp_dir().join("orbit_test_existing_output.mp4");
         std::fs::write(&output, b"stale data").unwrap();
         assert!(output.exists());
 
@@ -1085,7 +1085,7 @@ mod tests {
 
     #[test]
     fn succeeds_with_valid_config() {
-        let output = std::env::temp_dir().join("cap_test_valid_encoder.mp4");
+        let output = std::env::temp_dir().join("orbit_test_valid_encoder.mp4");
         let _ = std::fs::remove_file(&output);
 
         let config = valid_video_config();
@@ -1102,7 +1102,7 @@ mod tests {
 
     #[test]
     fn instant_mode_succeeds_with_valid_config() {
-        let output = std::env::temp_dir().join("cap_test_instant_encoder.mp4");
+        let output = std::env::temp_dir().join("orbit_test_instant_encoder.mp4");
         let _ = std::fs::remove_file(&output);
 
         let config = valid_video_config();
@@ -1134,7 +1134,7 @@ mod tests {
     }
 
     fn test_output_path(name: &str) -> PathBuf {
-        let path = std::env::temp_dir().join(format!("cap_test_{name}.mp4"));
+        let path = std::env::temp_dir().join(format!("orbit_test_{name}.mp4"));
         let _ = std::fs::remove_file(&path);
         path
     }
@@ -1202,8 +1202,8 @@ mod tests {
         frame
     }
 
-    fn wireless_audio_config() -> cap_media_info::AudioInfo {
-        cap_media_info::AudioInfo {
+    fn wireless_audio_config() -> orbit_media_info::AudioInfo {
+        orbit_media_info::AudioInfo {
             sample_rate: 48000,
             channels: 1,
             sample_format: ffmpeg::format::Sample::F32(ffmpeg::format::sample::Type::Packed),
@@ -1242,7 +1242,7 @@ mod tests {
         fn new(
             output: PathBuf,
             video_config: VideoInfo,
-            audio_config: Option<cap_media_info::AudioInfo>,
+            audio_config: Option<orbit_media_info::AudioInfo>,
             output_height: Option<u32>,
         ) -> Self {
             let encoder =
@@ -1811,8 +1811,8 @@ mod tests {
         use cidre::{av, cf};
 
         let video_config = valid_video_config();
-        let output_height = cap_media_info::ensure_even(video_config.height);
-        let output_width = cap_media_info::ensure_even(video_config.width);
+        let output_height = orbit_media_info::ensure_even(video_config.height);
+        let output_width = orbit_media_info::ensure_even(video_config.width);
         let fps = 30.0f32;
 
         let _ = std::fs::remove_file(output);
@@ -2120,8 +2120,8 @@ mod tests {
 
         let _ = std::fs::remove_file(output);
 
-        let output_width = cap_media_info::ensure_even(width);
-        let output_height = cap_media_info::ensure_even(height);
+        let output_width = orbit_media_info::ensure_even(width);
+        let output_height = orbit_media_info::ensure_even(height);
 
         let mut asset_writer = av::AssetWriter::with_url_and_file_type(
             cf::Url::with_path(output, false).unwrap().as_ns(),

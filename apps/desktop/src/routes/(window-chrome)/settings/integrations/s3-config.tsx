@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { createWritableMemo } from "@solid-primitives/memo";
 import { useMutation } from "@tanstack/solid-query";
 import { createResource, Suspense } from "solid-js";
@@ -149,7 +149,7 @@ export default function S3ConfigPage() {
 					<Suspense
 						fallback={
 							<div class="flex justify-center items-center w-full h-screen">
-								<IconCapLogo class="animate-spin size-16" />
+								<IconOrbitLogo class="animate-spin size-16" />
 							</div>
 						}
 					>

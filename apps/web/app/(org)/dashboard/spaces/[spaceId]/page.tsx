@@ -1,5 +1,5 @@
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
 import {
 	comments,
 	folders,
@@ -11,20 +11,20 @@ import {
 	users,
 	videos,
 	videoUploads,
-} from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
+} from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
 import {
 	Database,
 	ImageUploads,
 	makeCurrentUserLayer,
 	Spaces,
-} from "@cap/web-backend";
+} from "@orbit/web-backend";
 import {
 	type ImageUpload,
 	type Organisation,
 	Space,
 	Video,
-} from "@cap/web-domain";
+} from "@orbit/web-domain";
 import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
 import { Effect } from "effect";
 import type { Metadata } from "next";
@@ -33,7 +33,7 @@ import { runPromise } from "@/lib/server";
 import { SharedCaps } from "./SharedCaps";
 
 export const metadata: Metadata = {
-	title: "Shared Caps — Cap",
+	title: "Shared Caps — Orbit",
 };
 
 export type SpaceMemberData = {

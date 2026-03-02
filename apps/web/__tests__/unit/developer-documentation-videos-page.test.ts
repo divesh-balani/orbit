@@ -22,18 +22,18 @@ const componentSource = readFileSync(
 describe("DeveloperDocumentationVideosPage metadata", () => {
 	it("contains canonical URL", () => {
 		expect(pageSource).toContain(
-			'canonical: "https://cap.so/developer-documentation-videos"',
+			'canonical: "https://orbit.so/developer-documentation-videos"',
 		);
 	});
 
 	it("contains OG url field", () => {
 		expect(pageSource).toContain(
-			'url: "https://cap.so/developer-documentation-videos"',
+			'url: "https://orbit.so/developer-documentation-videos"',
 		);
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -41,7 +41,7 @@ describe("DeveloperDocumentationVideosPage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets developer documentation videos keyword", () => {
@@ -109,38 +109,38 @@ describe("DeveloperDocumentationVideosPage FAQ schema", () => {
 				"A developer documentation video is a screen recording that demonstrates how to use an API, SDK, CLI tool, or technical workflow.",
 		},
 		{
-			question: "How do I embed a Cap video in my documentation?",
+			question: "How do I embed a Orbit video in my documentation?",
 			answer:
-				"Cap generates a shareable link the moment you stop recording. You can paste this URL directly into Notion, Confluence, Docusaurus, GitBook.",
+				"Orbit generates a shareable link the moment you stop recording. You can paste this URL directly into Notion, Confluence, Docusaurus, GitBook.",
 		},
 		{
 			question: "Can I record my terminal and IDE output in 4K?",
-			answer: "Yes. Cap records at up to 4K resolution at 60fps.",
+			answer: "Yes. Orbit records at up to 4K resolution at 60fps.",
 		},
 		{
-			question: "Does Cap auto-generate transcripts for documentation?",
+			question: "Does Orbit auto-generate transcripts for documentation?",
 			answer:
-				"Yes. Cap auto-generates captions and transcripts for every recording using AI transcription.",
+				"Yes. Orbit auto-generates captions and transcripts for every recording using AI transcription.",
 		},
 		{
 			question: "How do I share a documentation video with my team or users?",
 			answer:
-				"Cap generates a shareable link immediately when you stop recording — no upload wait, no file attachment.",
+				"Orbit generates a shareable link immediately when you stop recording — no upload wait, no file attachment.",
 		},
 		{
 			question: "Can I record videos for private internal documentation?",
 			answer:
-				"Yes. Cap supports password protection on individual recordings and expiry dates on share links.",
+				"Yes. Orbit supports password protection on individual recordings and expiry dates on share links.",
 		},
 		{
 			question: "What is the best screen recorder for developer documentation?",
 			answer:
-				"Cap is the best screen recorder for developer documentation because it combines 4K recording quality, instant shareable links, AI-generated transcripts, and self-hosted storage.",
+				"Orbit is the best screen recorder for developer documentation because it combines 4K recording quality, instant shareable links, AI-generated transcripts, and self-hosted storage.",
 		},
 		{
-			question: "Does Cap work for recording API demos and SDK walkthroughs?",
+			question: "Does Orbit work for recording API demos and SDK walkthroughs?",
 			answer:
-				"Yes. Cap is designed exactly for this use case. Record your terminal, IDE, browser, API client.",
+				"Yes. Orbit is designed exactly for this use case. Record your terminal, IDE, browser, API client.",
 		},
 	];
 

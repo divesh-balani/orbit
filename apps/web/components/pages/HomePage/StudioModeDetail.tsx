@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import {
 	Camera,
@@ -382,7 +382,7 @@ const MockEditor = () => {
 						/>
 					</div>
 					<span className="text-[9px] md:text-[10px] text-gray-10 ml-1 md:ml-2">
-						My Recording.cap
+						My Recording.orbit
 					</span>
 				</div>
 				<div className="flex items-center gap-1.5 md:gap-2">

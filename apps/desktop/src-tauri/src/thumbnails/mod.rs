@@ -1,4 +1,4 @@
-use cap_recording::sources::screen_capture::{list_displays, list_windows};
+use orbit_recording::sources::screen_capture::{list_displays, list_windows};
 use serde::{Deserialize, Serialize};
 use specta::Type;
 use tracing::*;
@@ -18,7 +18,7 @@ const THUMBNAIL_HEIGHT: u32 = 180;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Type)]
 pub struct CaptureDisplayWithThumbnail {
-    pub id: scap_targets::DisplayId,
+    pub id: sorbit_targets::DisplayId,
     pub name: String,
     pub refresh_rate: u32,
     pub thumbnail: Option<String>,
@@ -26,10 +26,10 @@ pub struct CaptureDisplayWithThumbnail {
 
 #[derive(Debug, Clone, Serialize, Deserialize, Type)]
 pub struct CaptureWindowWithThumbnail {
-    pub id: scap_targets::WindowId,
+    pub id: sorbit_targets::WindowId,
     pub owner_name: String,
     pub name: String,
-    pub bounds: scap_targets::bounds::LogicalBounds,
+    pub bounds: sorbit_targets::bounds::LogicalBounds,
     pub refresh_rate: u32,
     pub thumbnail: Option<String>,
     pub app_icon: Option<String>,

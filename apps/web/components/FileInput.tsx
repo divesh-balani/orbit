@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Input, LoadingSpinner } from "@cap/ui";
-import { ImageUpload } from "@cap/web-domain";
+import { Button, Input, LoadingSpinner } from "@orbit/ui";
+import { ImageUpload } from "@orbit/web-domain";
 import {
 	faCloudUpload,
 	faSpinner,

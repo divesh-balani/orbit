@@ -1,4 +1,4 @@
-use cap_media_info::VideoInfo;
+use orbit_media_info::VideoInfo;
 use ffmpeg::{format, frame};
 use serde::Serialize;
 use std::{

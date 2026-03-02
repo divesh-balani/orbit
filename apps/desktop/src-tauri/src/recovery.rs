@@ -1,5 +1,5 @@
-use cap_project::StudioRecordingMeta;
-use cap_recording::recovery::RecoveryManager;
+use orbit_project::StudioRecordingMeta;
+use orbit_recording::recovery::RecoveryManager;
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use specta::Type;
@@ -14,7 +14,7 @@ const RECOVERY_CUTOFF_DATE: (i32, u32, u32) = (2025, 12, 31);
 fn parse_recording_date(pretty_name: &str) -> Option<NaiveDate> {
     let date_part = pretty_name
         .strip_prefix("Orbit ")
-        .or_else(|| pretty_name.strip_prefix("Cap "))?;
+        .or_else(|| pretty_name.strip_prefix("Orbit "))?;
     let date_str = date_part.split(" at ").next()?;
     NaiveDate::parse_from_str(date_str, "%Y-%m-%d").ok()
 }

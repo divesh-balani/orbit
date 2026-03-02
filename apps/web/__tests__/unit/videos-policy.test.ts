@@ -1,10 +1,10 @@
-import { buildCanView, type VideosPolicyDeps } from "@cap/web-backend";
+import { buildCanView, type VideosPolicyDeps } from "@orbit/web-backend";
 import {
 	CurrentUser,
 	type Organisation,
 	type User,
 	Video,
-} from "@cap/web-domain";
+} from "@orbit/web-domain";
 import { Context, Effect, Option } from "effect";
 import { describe, expect, it } from "vitest";
 

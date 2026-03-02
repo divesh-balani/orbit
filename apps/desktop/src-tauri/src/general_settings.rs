@@ -1,5 +1,5 @@
 use crate::window_exclusion::WindowExclusion;
-use scap_targets::DisplayId;
+use sorbit_targets::DisplayId;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use specta::Type;

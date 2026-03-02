@@ -11,6 +11,6 @@ export const metadata: Metadata = {
 		type: "website",
 	},
 	alternates: {
-		canonical: "https://cap.so/tools/trim",
+		canonical: "https://orbit.so/tools/trim",
 	},
 };

@@ -1,8 +1,8 @@
-use cap_project::{
+use orbit_project::{
     Cursors, MultipleSegment, MultipleSegments, RecordingMeta, RecordingMetaInner,
     StudioRecordingMeta, StudioRecordingStatus, VideoMeta,
 };
-use cap_recording::recovery::{RecoveryError, RecoveryManager};
+use orbit_recording::recovery::{RecoveryError, RecoveryManager};
 use relative_path::RelativePathBuf;
 use std::path::{Path, PathBuf};
 use tempfile::TempDir;

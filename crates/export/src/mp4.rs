@@ -1,9 +1,9 @@
 use crate::ExporterBase;
-use cap_editor::{AudioRenderer, get_audio_segments};
-use cap_enc_ffmpeg::{AudioEncoder, aac::AACEncoder, h264::H264Encoder, mp4::*};
-use cap_media_info::{RawVideoFormat, VideoInfo};
-use cap_project::XY;
-use cap_rendering::{Nv12RenderedFrame, ProjectUniforms, RenderSegment};
+use orbit_editor::{AudioRenderer, get_audio_segments};
+use orbit_enc_ffmpeg::{AudioEncoder, aac::AACEncoder, h264::H264Encoder, mp4::*};
+use orbit_media_info::{RawVideoFormat, VideoInfo};
+use orbit_project::XY;
+use orbit_rendering::{Nv12RenderedFrame, ProjectUniforms, RenderSegment};
 use futures::FutureExt;
 use image::ImageBuffer;
 use serde::Deserialize;
@@ -313,7 +313,7 @@ impl Mp4ExportSettings {
                 .and_then(|v| v.map_err(|e| e.to_string()))
         });
 
-        let render_video_task = cap_rendering::render_video_to_channel_nv12(
+        let render_video_task = orbit_rendering::render_video_to_channel_nv12(
             &base.render_constants,
             &base.project_config,
             tx_image_data,
@@ -355,7 +355,7 @@ struct Nv12ExportFrame {
 }
 
 fn ensure_nv12_data(frame: Nv12RenderedFrame) -> Arc<Vec<u8>> {
-    use cap_rendering::GpuOutputFormat;
+    use orbit_rendering::GpuOutputFormat;
 
     if frame.format != GpuOutputFormat::Rgba {
         return frame.data;
@@ -499,7 +499,7 @@ fn save_screenshot_from_nv12(
     };
 
     let mut rgba = vec![0u8; (width * height * 4) as usize];
-    cap_rendering::cpu_yuv::nv12_to_rgba_simd(
+    orbit_rendering::cpu_yuv::nv12_to_rgba_simd(
         y_data, uv_data, width, height, y_stride, width, &mut rgba,
     );
 
@@ -599,7 +599,7 @@ mod tests {
 
     #[test]
     fn ensure_nv12_data_passthrough_for_nv12_format() {
-        use cap_rendering::{GpuOutputFormat, Nv12RenderedFrame};
+        use orbit_rendering::{GpuOutputFormat, Nv12RenderedFrame};
 
         let data = vec![1u8, 2, 3, 4, 5, 6];
         let frame = Nv12RenderedFrame {

@@ -11,7 +11,7 @@ export const layerTracer = Layer.unwrapEffect(
 		const otelTracer = Layer.effect(
 			Tracer.OtelTracer,
 			Effect.flatMap(Tracer.OtelTracerProvider, (provider) =>
-				Effect.sync(() => provider.getTracer("cap-web-backend")),
+				Effect.sync(() => provider.getTracer("orbit-web-backend")),
 			),
 		);
 
@@ -19,7 +19,7 @@ export const layerTracer = Layer.unwrapEffect(
 			Effect.provide(
 				Layer.mergeAll(
 					otelTracer.pipe(Layer.provideMerge(provider)),
-					Resource.layer({ serviceName: "cap-web-backend" }),
+					Resource.layer({ serviceName: "orbit-web-backend" }),
 				),
 			),
 		);

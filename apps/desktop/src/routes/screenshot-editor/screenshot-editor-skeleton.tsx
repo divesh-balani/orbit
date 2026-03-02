@@ -1,6 +1,6 @@
 import { type as ostype } from "@tauri-apps/plugin-os";
 import { cx } from "cva";
-import IconCapLogo from "~icons/cap/logo";
+import IconOrbitLogo from "~icons/orbit/logo";
 
 function SkeletonPulse(props: { class?: string }) {
 	return (
@@ -72,7 +72,7 @@ function PreviewSkeleton() {
 
 				<div class="flex items-center justify-center">
 					<div class="animate-spin">
-						<IconCapLogo class="size-12 text-gray-400 opacity-50" />
+						<IconOrbitLogo class="size-12 text-gray-400 opacity-50" />
 					</div>
 				</div>
 			</div>

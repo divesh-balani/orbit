@@ -1,7 +1,7 @@
-import * as Db from "@cap/database/schema";
-import { buildEnv, NODE_ENV, serverEnv } from "@cap/env";
-import { dub } from "@cap/utils";
-import { CurrentUser, type Folder, Policy, Video } from "@cap/web-domain";
+import * as Db from "@orbit/database/schema";
+import { buildEnv, NODE_ENV, serverEnv } from "@orbit/env";
+import { dub } from "@orbit/utils";
+import { CurrentUser, type Folder, Policy, Video } from "@orbit/web-domain";
 import * as Dz from "drizzle-orm";
 import { Array, Effect, Exit, Option } from "effect";
 import type { Schema } from "effect/Schema";
@@ -403,8 +403,8 @@ export class Videos extends Effect.Service<Videos>()("Videos", {
 					const createData: RepoCreateVideoInput = {
 						ownerId: user.id,
 						orgId: input.orgId,
-						name: `Cap Recording - ${formattedDate}`,
-						public: serverEnv().CAP_VIDEOS_DEFAULT_PUBLIC,
+						name: `Orbit Recording - ${formattedDate}`,
+						public: serverEnv().ORBIT_VIDEOS_DEFAULT_PUBLIC,
 						source: { type: "webMP4" },
 						bucketId,
 						folderId,
@@ -442,11 +442,11 @@ export class Videos extends Effect.Service<Videos>()("Videos", {
 
 					const shareUrl = `${serverEnv().WEB_URL}/s/${videoId}`;
 
-					if (buildEnv.NEXT_PUBLIC_IS_CAP && NODE_ENV === "production")
+					if (buildEnv.NEXT_PUBLIC_IS_ORBIT && NODE_ENV === "production")
 						yield* Effect.tryPromise(() =>
 							dub().links.create({
 								url: shareUrl,
-								domain: "cap.link",
+								domain: "orbit.link",
 								key: videoId,
 							}),
 						).pipe(

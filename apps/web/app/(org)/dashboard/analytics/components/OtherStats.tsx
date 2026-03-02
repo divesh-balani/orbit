@@ -191,7 +191,7 @@ export default function OtherStats({ data, isLoading }: OtherStatsProps) {
 							title="Caps"
 							columns={["Name", "Views", "Percentage"]}
 							rows={data.topCaps.map(toCapRow)}
-							type="cap"
+							type="orbit"
 							isLoading={isLoading}
 						/>
 					</div>

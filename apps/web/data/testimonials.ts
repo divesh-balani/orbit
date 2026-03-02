@@ -4,22 +4,22 @@ export const testimonials = [
 		handle: "Dub.co",
 		image: "/testimonials/steven_tey.jpg",
 		content:
-			"Cap is one of my favorite pieces of software I've used in the recent years – best part is you get to own your data since they're fully open-source + via their S3 integration. Incredibly excited for this launch!",
-		url: "https://www.producthunt.com/products/cap-3?comment=4174427#cap-4",
+			"Orbit is one of my favorite pieces of software I've used in the recent years – best part is you get to own your data since they're fully open-source + via their S3 integration. Incredibly excited for this launch!",
+		url: "https://www.producthunt.com/products/orbit-3?comment=4174427#orbit-4",
 	},
 	{
 		name: "Guillermo Rauch",
 		handle: "Vercel",
 		image: "/testimonials/guillermo_rauch.jpg",
 		content: "Congrats on shipping!",
-		url: "https://www.producthunt.com/products/cap-3?comment=4174563#cap-4",
+		url: "https://www.producthunt.com/products/orbit-3?comment=4174563#orbit-4",
 	},
 	{
 		name: "Olivia",
 		handle: "@olivialawson.co",
 		image: "/testimonials/olivialawson.jpg",
 		content:
-			"I've been testing Cap.so for no other reason than some old habits die hard for this former software analyst. Whew that UI is so polished and crispy. Between the open source code, self hosted vids, editing features and price point -- gone give Loom some competition 🤞🏽",
+			"I've been testing Orbit.so for no other reason than some old habits die hard for this former software analyst. Whew that UI is so polished and crispy. Between the open source code, self hosted vids, editing features and price point -- gone give Loom some competition 🤞🏽",
 		url: "https://www.threads.com/@olivialawson.co/post/DIj1kOfpPgX",
 	},
 	{
@@ -34,7 +34,7 @@ export const testimonials = [
 		handle: "@_rogermattos",
 		image: "/testimonials/_rogermattos.jpg",
 		content:
-			"Tip for people that need to make screen recordings: Cap is the open source alternative to Loom. Lightweight, powerful, and stunning. Record and share in seconds.",
+			"Tip for people that need to make screen recordings: Orbit is the open source alternative to Loom. Lightweight, powerful, and stunning. Record and share in seconds.",
 		url: "https://x.com/_rogermattos/status/1844398522650722596",
 	},
 	{
@@ -48,7 +48,7 @@ export const testimonials = [
 		name: "Azzam",
 		handle: "@azrrow_s",
 		image: "/testimonials/azrrow_s.jpg",
-		content: "you can try Cap.so, it's just better!",
+		content: "you can try Orbit.so, it's just better!",
 		url: "https://x.com/azrrow_s/status/1863202543725121586",
 	},
 	{
@@ -63,7 +63,7 @@ export const testimonials = [
 		handle: "@gillarohith",
 		image: "/testimonials/gillarohith.jpg",
 		content:
-			"Used @cap. Holy smokes this product delivers and it delivers hard The whole experience from recording to the editor part is pretty sweet",
+			"Used @orbit. Holy smokes this product delivers and it delivers hard The whole experience from recording to the editor part is pretty sweet",
 		url: "https://x.com/gillarohith/status/1843895676142530789",
 	},
 	{
@@ -71,7 +71,7 @@ export const testimonials = [
 		handle: "@BilalBudhani",
 		image: "/testimonials/BilalBudhani.jpg",
 		content:
-			"Tried @Cap v 0.3.beta and found an issue while exporting video.\n\nWrote to @richiemcilroy about the problem and ~40 mins later the issue is fixed.\n\nI'm sold. Checkout Cap.so",
+			"Tried @Orbit v 0.3.beta and found an issue while exporting video.\n\nWrote to @richiemcilroy about the problem and ~40 mins later the issue is fixed.\n\nI'm sold. Checkout Orbit.so",
 		url: "https://x.com/BilalBudhani/status/1842198507756675104",
 	},
 	{
@@ -79,7 +79,7 @@ export const testimonials = [
 		handle: "@BorhadeHrushi",
 		image: "/testimonials/BorhadeHrushi.jpg",
 		content:
-			"hey @richiemcilroy , cap is hands down one of the best oss i've used, so much so i've uninstalled loom and screen studio  :)  can you please bring up the video cut and  playback speed adjust feature soon , can't wait to try it on, you guys are doing great cheers!",
+			"hey @richiemcilroy , orbit is hands down one of the best oss i've used, so much so i've uninstalled loom and screen studio  :)  can you please bring up the video cut and  playback speed adjust feature soon , can't wait to try it on, you guys are doing great cheers!",
 		url: "https://x.com/BorhadeHrushi/status/1915477348549615816",
 	},
 	{
@@ -94,7 +94,7 @@ export const testimonials = [
 		handle: "@eveningkid",
 		image: "/testimonials/eveningkid.jpg",
 		content:
-			"I've been looking for *ages* for a screen recording app that does the job + allows to zoom in/out easily and @Cap is AWESOME!\n\nFree, cross-platform, fully-featured, open-source. I mean...unless you love spending +$200 for recording your screen, use Cap!",
+			"I've been looking for *ages* for a screen recording app that does the job + allows to zoom in/out easily and @Orbit is AWESOME!\n\nFree, cross-platform, fully-featured, open-source. I mean...unless you love spending +$200 for recording your screen, use Orbit!",
 		url: "https://x.com/eveningkid/status/1916136666898813076",
 	},
 	{
@@ -102,7 +102,7 @@ export const testimonials = [
 		handle: "@prayagtushar",
 		image: "/testimonials/prayagtushar.jpg",
 		content:
-			"I think I just found my go to screen recording app which is free @Cap",
+			"I think I just found my go to screen recording app which is free @Orbit",
 		url: "https://x.com/prayagtushar/status/1910037657482113272",
 	},
 	{
@@ -111,22 +111,22 @@ export const testimonials = [
 		image: "/testimonials/omar_mcadam.jpg",
 		content:
 			"Been following since the first announcement tweet Proud to say i've been a user since pre-beta, and can see the epic trajectory of this product",
-		url: "https://www.producthunt.com/products/cap-3?comment=4174563#cap-4",
+		url: "https://www.producthunt.com/products/orbit-3?comment=4174563#orbit-4",
 	},
 	{
 		name: "Emeka Onu",
 		handle: "Postly",
 		image: "/testimonials/emekaonu.jpg",
 		content:
-			"Congratulations on the launch! I tried Cap some time ago, and it's such a great product.",
-		url: "https://www.producthunt.com/products/cap-3?comment=4174570#cap-4",
+			"Congratulations on the launch! I tried Orbit some time ago, and it's such a great product.",
+		url: "https://www.producthunt.com/products/orbit-3?comment=4174570#orbit-4",
 	},
 	{
 		name: "Jay Ghiya",
 		handle: "@BeLikeBumblebee",
 		image: "/testimonials/BeLikeBumblebee.jpg",
 		content:
-			"Just purchased Cap commercial lifetime. If you need to capture product videos for your startup cap is the easiest one to get started along with solid feature roadmap.",
+			"Just purchased Orbit commercial lifetime. If you need to capture product videos for your startup orbit is the easiest one to get started along with solid feature roadmap.",
 		url: "https://x.com/BeLikeBumblebee/status/1916330489528431058",
 	},
 	{
@@ -134,14 +134,14 @@ export const testimonials = [
 		handle: "muku.ai",
 		image: "/testimonials/tony_tong.jpg",
 		content: "Wow this is a beautiful product! Congratulations on the launch!",
-		url: "https://www.producthunt.com/products/cap-3?comment=4179706#cap-4",
+		url: "https://www.producthunt.com/products/orbit-3?comment=4179706#orbit-4",
 	},
 	{
 		name: "Geet Khosla",
 		handle: "proem.ai",
 		image: "/testimonials/geet_khosla.jpg",
-		content: "I tried Cap sometime ago, great product - well executed.",
-		url: "https://www.producthunt.com/products/cap-3?comment=4172443#cap-4",
+		content: "I tried Orbit sometime ago, great product - well executed.",
+		url: "https://www.producthunt.com/products/orbit-3?comment=4172443#orbit-4",
 	},
 	{
 		name: "diana",
@@ -161,7 +161,7 @@ export const testimonials = [
 		name: "JoséPablo*",
 		handle: "@jdomito_",
 		image: "/testimonials/jdomito_.jpg",
-		content: "@Cap is actually way better than loom",
+		content: "@Orbit is actually way better than loom",
 		url: "https://x.com/jdomito_/status/1900395567550742956",
 	},
 	{
@@ -169,7 +169,7 @@ export const testimonials = [
 		handle: "@Greg__LD",
 		image: "/testimonials/Greg__LD.jpg",
 		content:
-			"No brainer instant purchase this morning: was looking for a solid screen recorder, for my new MacBook Pro,  gave @cap a try, got myself a license within 10 mins — flawless UX sometimes speaks louder than lengthy marketer's words !",
+			"No brainer instant purchase this morning: was looking for a solid screen recorder, for my new MacBook Pro,  gave @orbit a try, got myself a license within 10 mins — flawless UX sometimes speaks louder than lengthy marketer's words !",
 		url: "https://x.com/Greg__LD/status/1913515902139523366",
 	},
 	{
@@ -183,7 +183,7 @@ export const testimonials = [
 		name: "Dozie",
 		handle: "@dozibe",
 		image: "/testimonials/dozibe.jpg",
-		content: "Came at the right time. Cap.so was well needed.",
+		content: "Came at the right time. Orbit.so was well needed.",
 		url: "https://x.com/dozibe/status/1842653324635455914",
 	},
 	{
@@ -191,7 +191,7 @@ export const testimonials = [
 		handle: "@NerdyProgramme2",
 		image: "/testimonials/NerdyProgramme2.jpg",
 		content:
-			"thanks for creating this @richiemcilroy. Cap is so good especially the zoom effects still playing around and figuring things out tho... you guys need to try it out @cap - an opensource alternative to loom",
+			"thanks for creating this @richiemcilroy. Orbit is so good especially the zoom effects still playing around and figuring things out tho... you guys need to try it out @orbit - an opensource alternative to loom",
 		url: "https://x.com/NerdyProgramme2/status/1913593977124671956",
 	},
 	{
@@ -199,14 +199,14 @@ export const testimonials = [
 		handle: "Holoholo App",
 		image: "/testimonials/christophersybico.jpg",
 		content: "Sold on owning your own data 👍",
-		url: "https://www.producthunt.com/products/cap-3?comment=4175688#cap-4",
+		url: "https://www.producthunt.com/products/orbit-3?comment=4175688#orbit-4",
 	},
 	{
 		name: "Cam Pak",
 		handle: "",
 		image: "/testimonials/campak.jpg",
-		content: "Thank you for Cap!",
-		url: "https://www.producthunt.com/products/cap-3?comment=4174238#cap-4",
+		content: "Thank you for Orbit!",
+		url: "https://www.producthunt.com/products/orbit-3?comment=4174238#orbit-4",
 	},
 ] as const;
 

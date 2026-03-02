@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 		follow: false,
 	},
 	alternates: {
-		canonical: "https://cap.so/",
+		canonical: "https://orbit.so/",
 	},
 };
 

@@ -7,24 +7,24 @@ import {
 import { createFAQSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Cap",
+	title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
 	description:
-		"Record your Mac screen with system audio and microphone using Cap. No BlackHole, no plugins required. Free, open-source, and available for macOS. Download Cap today.",
+		"Record your Mac screen with system audio and microphone using Orbit. No BlackHole, no plugins required. Free, open-source, and available for macOS. Download Orbit today.",
 	alternates: {
-		canonical: "https://cap.so/mac-screen-recording-with-audio",
+		canonical: "https://orbit.so/mac-screen-recording-with-audio",
 	},
 	openGraph: {
-		title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Cap",
+		title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
 		description:
-			"Record your Mac screen with system audio and microphone using Cap. No BlackHole, no plugins required. Free and open-source for macOS.",
-		url: "https://cap.so/mac-screen-recording-with-audio",
-		siteName: "Cap",
+			"Record your Mac screen with system audio and microphone using Orbit. No BlackHole, no plugins required. Free and open-source for macOS.",
+		url: "https://orbit.so/mac-screen-recording-with-audio",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap: Mac Screen Recording with Audio",
+				alt: "Orbit: Mac Screen Recording with Audio",
 			},
 		],
 		locale: "en_US",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Cap",
+		title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
 		description:
-			"Record your Mac screen with system audio and microphone using Cap. No BlackHole, no plugins required. Free and open-source for macOS.",
-		images: ["https://cap.so/og.png"],
+			"Record your Mac screen with system audio and microphone using Orbit. No BlackHole, no plugins required. Free and open-source for macOS.",
+		images: ["https://orbit.so/og.png"],
 	},
 };
 

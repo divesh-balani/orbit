@@ -1,5 +1,5 @@
-import { db } from "@cap/database";
-import type { userSelectProps } from "@cap/database/auth/session";
+import { db } from "@orbit/database";
+import type { userSelectProps } from "@orbit/database/auth/session";
 import {
 	notifications,
 	organizationInvites,
@@ -9,9 +9,9 @@ import {
 	spaces,
 	users,
 	videos,
-} from "@cap/database/schema";
-import { Database, ImageUploads } from "@cap/web-backend";
-import type { ImageUpload } from "@cap/web-domain";
+} from "@orbit/database/schema";
+import { Database, ImageUploads } from "@orbit/web-backend";
+import type { ImageUpload } from "@orbit/web-domain";
 import { and, count, eq, inArray, isNull, or, sql } from "drizzle-orm";
 import { Effect } from "effect";
 import { runPromise } from "@/lib/server";

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 	description:
 		"Free online file conversion tools. Convert between various file formats directly in your browser with no uploads needed.",
 	alternates: {
-		canonical: "https://cap.so/tools/convert",
+		canonical: "https://orbit.so/tools/convert",
 	},
 };
 
@@ -65,9 +65,9 @@ const conversionTools: ConversionTool[] = [
 ];
 
 const breadcrumbSchema = createBreadcrumbSchema([
-	{ name: "Home", url: "https://cap.so" },
-	{ name: "Tools", url: "https://cap.so/tools" },
-	{ name: "Convert", url: "https://cap.so/tools/convert" },
+	{ name: "Home", url: "https://orbit.so" },
+	{ name: "Tools", url: "https://orbit.so/tools" },
+	{ name: "Convert", url: "https://orbit.so/tools/convert" },
 ]);
 
 export default function ConvertToolsPage() {

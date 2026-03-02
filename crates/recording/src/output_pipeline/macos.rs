@@ -3,9 +3,9 @@ use crate::{
     sources::screen_capture,
 };
 use anyhow::anyhow;
-use cap_enc_avfoundation::QueueFrameError;
-use cap_media_info::{AudioInfo, VideoInfo};
-use cap_timestamp::Timestamp;
+use orbit_enc_avfoundation::QueueFrameError;
+use orbit_media_info::{AudioInfo, VideoInfo};
+use orbit_timestamp::Timestamp;
 use cidre::arc;
 use std::{
     path::PathBuf,
@@ -38,7 +38,7 @@ fn get_available_disk_space_mb(path: &std::path::Path) -> Option<u64> {
 }
 
 fn get_mp4_muxer_buffer_size(instant_mode: bool) -> usize {
-    std::env::var("CAP_MP4_MUXER_BUFFER_SIZE")
+    std::env::var("ORBIT_MP4_MUXER_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(if instant_mode {
@@ -216,7 +216,7 @@ enum AudioFrameMessage {
 struct Mp4EncoderState {
     video_tx: SyncSender<Option<VideoFrameMessage>>,
     audio_tx: Option<SyncSender<Option<AudioFrameMessage>>>,
-    encoder: Arc<Mutex<cap_enc_avfoundation::MP4Encoder>>,
+    encoder: Arc<Mutex<orbit_enc_avfoundation::MP4Encoder>>,
     encoder_handle: Option<JoinHandle<anyhow::Result<()>>>,
     audio_handle: Option<JoinHandle<anyhow::Result<()>>>,
     video_frame_count: Arc<AtomicU64>,
@@ -276,14 +276,14 @@ impl Muxer for AVFoundationMp4Muxer {
         let (ready_tx, ready_rx) = sync_channel::<anyhow::Result<()>>(1);
 
         let encoder = if config.instant_mode {
-            cap_enc_avfoundation::MP4Encoder::init_instant_mode(
+            orbit_enc_avfoundation::MP4Encoder::init_instant_mode(
                 output_path.clone(),
                 video_config,
                 audio_config,
                 config.output_height,
             )
         } else {
-            cap_enc_avfoundation::MP4Encoder::init(
+            orbit_enc_avfoundation::MP4Encoder::init(
                 output_path.clone(),
                 video_config,
                 audio_config,
@@ -770,7 +770,7 @@ enum CameraFrameMessage {
 
 struct CameraEncoderState {
     video_tx: SyncSender<Option<CameraFrameMessage>>,
-    encoder: Arc<Mutex<cap_enc_avfoundation::MP4Encoder>>,
+    encoder: Arc<Mutex<orbit_enc_avfoundation::MP4Encoder>>,
     encoder_handle: Option<JoinHandle<anyhow::Result<()>>>,
 }
 
@@ -807,7 +807,7 @@ impl Muxer for AVFoundationCameraMuxer {
         let (video_tx, video_rx) = sync_channel::<Option<CameraFrameMessage>>(buffer_size);
         let (ready_tx, ready_rx) = sync_channel::<anyhow::Result<()>>(1);
 
-        let encoder = cap_enc_avfoundation::MP4Encoder::init(
+        let encoder = orbit_enc_avfoundation::MP4Encoder::init(
             output_path.clone(),
             video_config,
             None,
@@ -1097,12 +1097,12 @@ mod tests {
         #[test]
         fn env_override_takes_precedence() {
             unsafe {
-                std::env::set_var("CAP_MP4_MUXER_BUFFER_SIZE", "500");
+                std::env::set_var("ORBIT_MP4_MUXER_BUFFER_SIZE", "500");
             }
             let normal = get_mp4_muxer_buffer_size(false);
             let instant = get_mp4_muxer_buffer_size(true);
             unsafe {
-                std::env::remove_var("CAP_MP4_MUXER_BUFFER_SIZE");
+                std::env::remove_var("ORBIT_MP4_MUXER_BUFFER_SIZE");
             }
             assert_eq!(normal, 500);
             assert_eq!(instant, 500);
@@ -1111,12 +1111,12 @@ mod tests {
         #[test]
         fn invalid_env_falls_back_to_defaults() {
             unsafe {
-                std::env::set_var("CAP_MP4_MUXER_BUFFER_SIZE", "not_a_number");
+                std::env::set_var("ORBIT_MP4_MUXER_BUFFER_SIZE", "not_a_number");
             }
             let normal = get_mp4_muxer_buffer_size(false);
             let instant = get_mp4_muxer_buffer_size(true);
             unsafe {
-                std::env::remove_var("CAP_MP4_MUXER_BUFFER_SIZE");
+                std::env::remove_var("ORBIT_MP4_MUXER_BUFFER_SIZE");
             }
             assert_eq!(normal, DEFAULT_MP4_MUXER_BUFFER_SIZE);
             assert_eq!(instant, DEFAULT_MP4_MUXER_BUFFER_SIZE_INSTANT);

@@ -1,8 +1,8 @@
 use super::*;
 
-pub async fn capture_display_thumbnail(display: &scap_targets::Display) -> Option<String> {
+pub async fn capture_display_thumbnail(display: &sorbit_targets::Display) -> Option<String> {
     use image::{ColorType, ImageEncoder, codecs::png::PngEncoder};
-    use scap_direct3d::{Capturer, Settings};
+    use sorbit_direct3d::{Capturer, Settings};
     use std::io::Cursor;
 
     let item = display.raw_handle().try_as_capture_item().ok()?;
@@ -11,7 +11,7 @@ pub async fn capture_display_thumbnail(display: &scap_targets::Display) -> Optio
 
     let settings = Settings {
         is_cursor_capture_enabled: Some(false),
-        pixel_format: scap_direct3d::PixelFormat::R8G8B8A8Unorm,
+        pixel_format: sorbit_direct3d::PixelFormat::R8G8B8A8Unorm,
         ..Default::default()
     };
 
@@ -139,9 +139,9 @@ pub async fn capture_display_thumbnail(display: &scap_targets::Display) -> Optio
     ))
 }
 
-pub async fn capture_window_thumbnail(window: &scap_targets::Window) -> Option<String> {
+pub async fn capture_window_thumbnail(window: &sorbit_targets::Window) -> Option<String> {
     use image::{ColorType, ImageEncoder, codecs::png::PngEncoder};
-    use scap_direct3d::{Capturer, Settings};
+    use sorbit_direct3d::{Capturer, Settings};
     use std::io::Cursor;
 
     let item = window.raw_handle().try_as_capture_item().ok()?;
@@ -150,7 +150,7 @@ pub async fn capture_window_thumbnail(window: &scap_targets::Window) -> Option<S
 
     let settings = Settings {
         is_cursor_capture_enabled: Some(false),
-        pixel_format: scap_direct3d::PixelFormat::R8G8B8A8Unorm,
+        pixel_format: sorbit_direct3d::PixelFormat::R8G8B8A8Unorm,
         ..Default::default()
     };
 

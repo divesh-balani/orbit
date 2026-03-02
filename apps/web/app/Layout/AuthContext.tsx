@@ -1,6 +1,6 @@
 "use client";
 
-import type { ImageUpload, Organisation, User } from "@cap/web-domain";
+import type { ImageUpload, Organisation, User } from "@orbit/web-domain";
 import { createContext, use } from "react";
 
 export type CurrentUser = {

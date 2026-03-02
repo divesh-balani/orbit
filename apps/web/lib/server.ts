@@ -1,7 +1,7 @@
 import "server-only";
 
-import { decrypt } from "@cap/database/crypto";
-import { serverEnv } from "@cap/env";
+import { decrypt } from "@orbit/database/crypto";
+import { serverEnv } from "@orbit/env";
 import {
 	AwsCredentials,
 	Database,
@@ -19,8 +19,8 @@ import {
 	VideosPolicy,
 	VideosRepo,
 	Workflows,
-} from "@cap/web-backend";
-import { type HttpAuthMiddleware, Video } from "@cap/web-domain";
+} from "@orbit/web-backend";
+import { type HttpAuthMiddleware, Video } from "@orbit/web-domain";
 import {
 	FetchHttpClient,
 	Headers,
@@ -49,7 +49,7 @@ const CookiePasswordAttachmentLive = Layer.effect(
 	Effect.gen(function* () {
 		const password = Option.fromNullable(
 			yield* Effect.promise(async () => {
-				const pw = (await cookies()).get("x-cap-password")?.value;
+				const pw = (await cookies()).get("x-orbit-password")?.value;
 				if (pw) return decrypt(pw);
 			}),
 		);

@@ -1,9 +1,9 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { organizations } from "@cap/database/schema";
-import type { Organisation } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { organizations } from "@orbit/database/schema";
+import type { Organisation } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { checkDomainStatus } from "./domain-utils";
 

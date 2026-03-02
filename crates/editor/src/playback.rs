@@ -1,10 +1,10 @@
-use cap_audio::FromSampleBytes;
+use orbit_audio::FromSampleBytes;
 #[cfg(not(target_os = "windows"))]
-use cap_audio::{LatencyCorrectionConfig, LatencyCorrector, default_output_latency_hint};
-use cap_media::MediaError;
-use cap_media_info::AudioInfo;
-use cap_project::{ProjectConfiguration, XY};
-use cap_rendering::{
+use orbit_audio::{LatencyCorrectionConfig, LatencyCorrector, default_output_latency_hint};
+use orbit_media::MediaError;
+use orbit_media_info::AudioInfo;
+use orbit_project::{ProjectConfiguration, XY};
+use orbit_rendering::{
     DecodedSegmentFrames, ProjectUniforms, RenderVideoConstants, ZoomFocusInterpolator,
     spring_mass_damper::SpringMassDamperSimulationConfig,
 };
@@ -768,7 +768,7 @@ impl Playback {
         };
 
         std::thread::Builder::new()
-            .name("cap-playback".into())
+            .name("orbit-playback".into())
             .spawn(playback_body)
             .expect("failed to spawn playback thread");
 
@@ -1056,7 +1056,7 @@ impl AudioPlayback {
                 && hint.latency_secs > 0.0
             {
                 match hint.transport {
-                    cap_audio::OutputTransportKind::Airplay => info!(
+                    orbit_audio::OutputTransportKind::Airplay => info!(
                         "Applying AirPlay output latency hint: {:.1} ms",
                         hint.latency_secs * 1_000.0
                     ),

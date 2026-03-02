@@ -1,5 +1,5 @@
-import { Button } from "@cap/ui";
-import { Organisation } from "@cap/web-domain";
+import { Button } from "@orbit/ui";
+import { Organisation } from "@orbit/web-domain";
 import {
 	faCheckCircle,
 	faExclamationCircle,

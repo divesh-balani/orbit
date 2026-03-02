@@ -27,12 +27,12 @@ export default function Settings(props: RouteSectionProps) {
 							{
 								href: "general",
 								name: "General",
-								icon: IconCapSettings,
+								icon: IconOrbitSettings,
 							},
 							{
 								href: "hotkeys",
 								name: "Shortcuts",
-								icon: IconCapHotkeys,
+								icon: IconOrbitHotkeys,
 							},
 							{
 								href: "recordings",
@@ -47,7 +47,7 @@ export default function Settings(props: RouteSectionProps) {
 							{
 								href: "experimental",
 								name: "Experimental",
-								icon: IconCapSettings,
+								icon: IconOrbitSettings,
 							},
 						].filter(Boolean)}
 					>

@@ -2,8 +2,8 @@ import { Popover } from "@kobalte/core/popover";
 import { Select as KSelect } from "@kobalte/core/select";
 import { cx } from "cva";
 import { batch, Show, type ValidComponent } from "solid-js";
-import IconCapChevronDown from "~icons/cap/chevron-down";
-import IconCapCorners from "~icons/cap/corners";
+import IconOrbitChevronDown from "~icons/orbit/chevron-down";
+import IconOrbitCorners from "~icons/orbit/corners";
 import { useScreenshotEditorContext } from "../context";
 import {
 	EditorButton,
@@ -77,7 +77,7 @@ export function RoundingPopover() {
 				onClick={() =>
 					setActivePopover(activePopover() === "rounding" ? null : "rounding")
 				}
-				leftIcon={<IconCapCorners class="size-4" />}
+				leftIcon={<IconOrbitCorners class="size-4" />}
 				tooltipText="Corner Rounding"
 			/>
 			<Popover.Portal>
@@ -149,7 +149,7 @@ function CornerStyleSelect(props: {
 					</KSelect.Value>
 					<KSelect.Icon<ValidComponent>
 						as={(iconProps) => (
-							<IconCapChevronDown
+							<IconOrbitChevronDown
 								{...iconProps}
 								class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180 text-[--gray-500]"
 							/>

@@ -597,7 +597,7 @@ function InProgressRecordingInner() {
 									title="Stop recording"
 									aria-label="Stop recording"
 								>
-									<IconCapStopCircle />
+									<IconOrbitStopCircle />
 									<span class="text-[0.875rem] font-[500] tabular-nums">
 										<Show when={!isInitializing()} fallback="Starting">
 											<Show
@@ -670,7 +670,7 @@ function InProgressRecordingInner() {
 												<IconLucideMicOff class="size-5 text-amber-11" />
 											) : (
 												<>
-													<IconCapMicrophone class="size-5 text-gray-12" />
+													<IconOrbitMicrophone class="size-5 text-gray-12" />
 													<div class="absolute bottom-1 left-1 right-1 h-0.5 overflow-hidden rounded-full bg-gray-10">
 														<div
 															class="absolute inset-0 bg-blue-9 transition-transform duration-100"
@@ -740,9 +740,9 @@ function InProgressRecordingInner() {
 											}
 										>
 											{state().variant === "paused" ? (
-												<IconCapPlayCircle />
+												<IconOrbitPlayCircle />
 											) : (
-												<IconCapPauseCircle />
+												<IconOrbitPauseCircle />
 											)}
 										</ActionButton>
 									)}
@@ -753,7 +753,7 @@ function InProgressRecordingInner() {
 										title="Restart recording"
 										aria-label="Restart recording"
 									>
-										<IconCapRestart />
+										<IconOrbitRestart />
 									</ActionButton>
 									<ActionButton
 										disabled={deleteRecording.isPending || isCountdown()}
@@ -761,7 +761,7 @@ function InProgressRecordingInner() {
 										title="Delete recording"
 										aria-label="Delete recording"
 									>
-										<IconCapTrash />
+										<IconOrbitTrash />
 									</ActionButton>
 									<ActionButton
 										ref={(el) => {
@@ -773,7 +773,7 @@ function InProgressRecordingInner() {
 										title="Recording settings"
 										aria-label="Recording settings"
 									>
-										<IconCapSettings class="size-5" />
+										<IconOrbitSettings class="size-5" />
 									</ActionButton>
 								</div>
 							</div>
@@ -782,7 +782,7 @@ function InProgressRecordingInner() {
 							class="non-styled-move flex cursor-move items-center justify-center border-l border-gray-5 p-[0.25rem] hover:cursor-move transition-colors duration-100 hover:bg-gray-12/[0.04] dark:hover:bg-white/[0.06]"
 							data-tauri-drag-region
 						>
-							<IconCapMoreVertical class="pointer-events-none text-gray-10" />
+							<IconOrbitMoreVertical class="pointer-events-none text-gray-10" />
 						</div>
 					</div>
 				</div>

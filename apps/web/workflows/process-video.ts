@@ -1,8 +1,8 @@
-import { db } from "@cap/database";
-import { s3Buckets, videos, videoUploads } from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
-import { S3Buckets } from "@cap/web-backend";
-import type { S3Bucket, Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { s3Buckets, videos, videoUploads } from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
+import { S3Buckets } from "@orbit/web-backend";
+import type { S3Bucket, Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Option } from "effect";
 import { FatalError } from "workflow";

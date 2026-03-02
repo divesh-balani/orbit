@@ -1,4 +1,4 @@
-import { CurrentUser, Http, Policy } from "@cap/web-domain";
+import { CurrentUser, Http, Policy } from "@orbit/web-domain";
 import { HttpApiBuilder, HttpApiError } from "@effect/platform";
 import { Effect } from "effect";
 
@@ -21,12 +21,12 @@ export const LoomHttpLive = HttpApiBuilder.group(
 					);
 
 					const user = yield* CurrentUser;
-					if (!user.email.endsWith("@cap.so"))
+					if (!user.email.endsWith("@orbit.so"))
 						return yield* Effect.die("Internal access only");
 
 					const result = yield* workflows
 						.LoomImportVideo({
-							cap: { userId: user.id, orgId: user.activeOrganizationId },
+							orbit: { userId: user.id, orgId: user.activeOrganizationId },
 							loom: payload.loom,
 						})
 						.pipe(
@@ -38,7 +38,7 @@ export const LoomHttpLive = HttpApiBuilder.group(
 
 					return { videoId: result.videoId };
 				}).pipe(
-					Policy.withPolicy(orgPolicy.isMember(payload.cap.orgId)),
+					Policy.withPolicy(orgPolicy.isMember(payload.orbit.orgId)),
 					handleDomainError,
 				),
 			);

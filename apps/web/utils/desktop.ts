@@ -4,7 +4,7 @@ export function isFromDesktopSemver(
 	request: HonoRequest,
 	semver: readonly [number, number, number],
 ) {
-	const xCapVersion = request.header("X-Cap-Desktop-Version");
+	const xCapVersion = request.header("X-Orbit-Desktop-Version");
 
 	return xCapVersion ? isAtLeastSemver(xCapVersion, ...semver) : false;
 }

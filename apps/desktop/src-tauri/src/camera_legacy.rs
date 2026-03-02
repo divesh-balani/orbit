@@ -1,6 +1,6 @@
 use std::time::Instant;
 
-use cap_recording::FFmpegVideoFrame;
+use orbit_recording::FFmpegVideoFrame;
 use flume::Sender;
 use tokio_util::sync::CancellationToken;
 

@@ -1,4 +1,4 @@
-import { Policy, type Space } from "@cap/web-domain";
+import { Policy, type Space } from "@orbit/web-domain";
 import { Effect, Option } from "effect";
 
 import { Database } from "../Database.ts";

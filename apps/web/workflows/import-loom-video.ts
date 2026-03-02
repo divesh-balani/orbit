@@ -1,9 +1,9 @@
 import { randomUUID } from "node:crypto";
-import { db } from "@cap/database";
-import { videos, videoUploads } from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
-import { S3Buckets } from "@cap/web-backend";
-import { S3Bucket, type Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { videos, videoUploads } from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
+import { S3Buckets } from "@orbit/web-backend";
+import { S3Bucket, type Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Effect, Option } from "effect";
 import { FatalError } from "workflow";

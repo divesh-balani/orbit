@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input } from "@cap/ui";
+import { Button, Input } from "@orbit/ui";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Effect } from "effect";

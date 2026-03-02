@@ -1,5 +1,5 @@
-import { provideOptionalAuth, Tinybird } from "@cap/web-backend";
-import { CurrentUser } from "@cap/web-domain";
+import { provideOptionalAuth, Tinybird } from "@orbit/web-backend";
+import { CurrentUser } from "@orbit/web-domain";
 import { Effect, Option } from "effect";
 import type { NextRequest } from "next/server";
 import UAParser from "ua-parser-js";

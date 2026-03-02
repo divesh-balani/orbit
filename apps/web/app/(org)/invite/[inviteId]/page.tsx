@@ -1,13 +1,13 @@
-import { db } from "@cap/database";
+import { db } from "@orbit/database";
 import {
 	getCurrentUser,
 	type userSelectProps,
-} from "@cap/database/auth/session";
+} from "@orbit/database/auth/session";
 import {
 	organizationInvites,
 	organizations,
 	users,
-} from "@cap/database/schema";
+} from "@orbit/database/schema";
 import { eq } from "drizzle-orm";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -27,8 +27,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 	}
 
 	return {
-		title: `Join ${invite.organizationName} on Cap`,
-		description: `You've been invited to join ${invite.organizationName} on Cap.`,
+		title: `Join ${invite.organizationName} on Orbit`,
+		description: `You've been invited to join ${invite.organizationName} on Orbit.`,
 	};
 }
 

@@ -2,7 +2,7 @@ import { ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "OSS Friends — Cap",
+	title: "OSS Friends — Orbit",
 	description:
 		"Discover amazing open source projects and tools built by our friends in the community.",
 };
@@ -30,7 +30,7 @@ async function fetchOSSFriends(): Promise<OSSFriendsResponse> {
 
 	const filteredData = {
 		...data,
-		data: data.data.filter((friend: any) => friend.name !== "Cap"),
+		data: data.data.filter((friend: any) => friend.name !== "Orbit"),
 	};
 
 	return filteredData;

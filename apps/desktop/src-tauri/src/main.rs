@@ -3,7 +3,7 @@
 
 use std::sync::Arc;
 
-use cap_desktop_lib::DynLoggingLayer;
+use orbit_desktop_lib::DynLoggingLayer;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 fn main() {
@@ -13,7 +13,7 @@ fn main() {
     }
 
     // We have to hold onto the ClientInitGuard until the very end
-    let _sentry_guard = std::option_env!("CAP_DESKTOP_SENTRY_URL").map(|url| {
+    let _sentry_guard = std::option_env!("ORBIT_DESKTOP_SENTRY_URL").map(|url| {
         let sentry_client = sentry::init((
             url,
             sentry::ClientOptions {
@@ -111,7 +111,7 @@ fn main() {
 
     tracing_subscriber::registry()
         .with(tracing_subscriber::filter::filter_fn(
-            (|v| v.target().starts_with("cap_")) as fn(&tracing::Metadata) -> bool,
+            (|v| v.target().starts_with("orbit_")) as fn(&tracing::Metadata) -> bool,
         ))
         .with(reload_layer)
         .with(level_filter)
@@ -141,5 +141,5 @@ fn main() {
         .enable_all()
         .build()
         .expect("Failed to build multi threaded tokio runtime")
-        .block_on(cap_desktop_lib::run(handle, logs_dir));
+        .block_on(orbit_desktop_lib::run(handle, logs_dir));
 }

@@ -1,19 +1,19 @@
 use anyhow::anyhow;
-use cap_fail::fail;
-use cap_project::CursorMoveEvent;
-use cap_project::cursor::SHORT_CURSOR_SHAPE_DEBOUNCE_MS;
-use cap_project::{
+use orbit_fail::fail;
+use orbit_project::CursorMoveEvent;
+use orbit_project::cursor::SHORT_CURSOR_SHAPE_DEBOUNCE_MS;
+use orbit_project::{
     CameraShape, CursorClickEvent, GlideDirection, MultipleSegments, Platform,
     ProjectConfiguration, RecordingMeta, RecordingMetaInner, SharingMeta, StudioRecordingMeta,
     StudioRecordingStatus, TimelineConfiguration, TimelineSegment, ZoomMode, ZoomSegment,
     cursor::CursorEvents,
 };
 #[cfg(target_os = "macos")]
-use cap_recording::SendableShareableContent;
-use cap_recording::feeds::camera::CameraFeedLock;
+use orbit_recording::SendableShareableContent;
+use orbit_recording::feeds::camera::CameraFeedLock;
 #[cfg(target_os = "macos")]
-use cap_recording::sources::screen_capture::SourceError;
-use cap_recording::{
+use orbit_recording::sources::screen_capture::SourceError;
+use orbit_recording::{
     RecordingMode,
     feeds::{camera, microphone},
     recovery::RecoveryManager,
@@ -24,8 +24,8 @@ use cap_recording::{
     },
     studio_recording,
 };
-use cap_rendering::ProjectRecordingsMeta;
-use cap_utils::{ensure_dir, moment_format_to_chrono, spawn_actor};
+use orbit_rendering::ProjectRecordingsMeta;
+use orbit_utils::{ensure_dir, moment_format_to_chrono, spawn_actor};
 use futures::FutureExt;
 use lazy_static::lazy_static;
 use regex::Regex;
@@ -60,7 +60,7 @@ use crate::{
     general_settings::{GeneralSettingsStore, PostDeletionBehaviour, PostStudioRecordingBehaviour},
     presets::PresetsStore,
     thumbnails::*,
-    windows::{CapWindowId, ShowCapWindow},
+    windows::{OrbitWindowId, ShowCapWindow, hide_recording_windows},
 };
 
 #[derive(Clone)]
@@ -179,13 +179,13 @@ impl InProgressRecording {
         })
     }
 
-    pub fn done_fut(&self) -> cap_recording::DoneFut {
+    pub fn done_fut(&self) -> orbit_recording::DoneFut {
         match self {
             Self::Studio { handle, .. } => handle.done_fut(),
         }
     }
 
-    pub fn take_health_rx(&mut self) -> Option<cap_recording::HealthReceiver> {
+    pub fn take_health_rx(&mut self) -> Option<orbit_recording::HealthReceiver> {
         match self {
             Self::Studio { .. } => None,
         }
@@ -245,11 +245,11 @@ pub async fn list_capture_windows() -> Vec<CaptureWindow> {
 
 #[tauri::command(async)]
 #[specta::specta]
-pub fn list_cameras() -> Vec<cap_camera::CameraInfo> {
+pub fn list_cameras() -> Vec<orbit_camera::CameraInfo> {
     if !permissions::do_permissions_check(false).camera.permitted() {
         return vec![];
     }
-    cap_camera::list_cameras().collect()
+    orbit_camera::list_cameras().collect()
 }
 
 #[derive(Debug, Clone, serde::Serialize, specta::Type)]
@@ -296,7 +296,7 @@ pub fn get_camera_formats(device_id: String) -> Option<CameraWithFormats> {
         return None;
     }
 
-    cap_camera::list_cameras()
+    orbit_camera::list_cameras()
         .find(|c| c.device_id() == device_id)
         .map(|camera| {
             let formats: Vec<CameraFormatInfo> = camera
@@ -569,11 +569,11 @@ pub async fn start_recording(
     );
 
     let filename = project_name.replace(":", ".");
-    let filename = format!("{}.cap", sanitize_filename::sanitize(&filename));
+    let filename = format!("{}.orbit", sanitize_filename::sanitize(&filename));
 
     let recordings_base_dir = app.path().app_data_dir().unwrap().join("recordings");
 
-    let project_file_path = recordings_base_dir.join(&cap_utils::ensure_unique_filename(
+    let project_file_path = recordings_base_dir.join(&orbit_utils::ensure_unique_filename(
         &filename,
         &recordings_base_dir,
     )?);
@@ -586,7 +586,7 @@ pub async fn start_recording(
         .add_recording_logging_handle(&project_file_path.join("recording-logs.log"))
         .await?;
 
-    if let Some(window) = CapWindowId::Camera.get(&app) {
+    if let Some(window) = OrbitWindowId::Camera.get(&app) {
         let _ = window.set_content_protected(matches!(inputs.mode, RecordingMode::Studio));
     }
 
@@ -646,9 +646,9 @@ pub async fn start_recording(
     for (id, win) in app
         .webview_windows()
         .iter()
-        .filter_map(|(label, win)| CapWindowId::from_str(label).ok().map(|id| (id, win)))
+        .filter_map(|(label, win)| OrbitWindowId::from_str(label).ok().map(|id| (id, win)))
     {
-        if matches!(id, CapWindowId::TargetSelectOverlay { .. }) {
+        if matches!(id, OrbitWindowId::TargetSelectOverlay { .. }) {
             win.hide().ok();
         }
     }
@@ -656,7 +656,7 @@ pub async fn start_recording(
         .show(&app)
         .await;
 
-    if let Some(window) = CapWindowId::Main.get(&app) {
+    if let Some(window) = OrbitWindowId::Main.get(&app) {
         let _ = general_settings
             .map(|v| v.main_window_recording_start_behaviour)
             .unwrap_or_default()
@@ -923,7 +923,7 @@ pub async fn start_recording(
                     )
                     .kind(tauri_plugin_dialog::MessageDialogKind::Error);
 
-                    if let Some(window) = CapWindowId::RecordingControls.get(&app) {
+                    if let Some(window) = OrbitWindowId::RecordingControls.get(&app) {
                         dialog = dialog.parent(&window);
                     }
 
@@ -944,16 +944,16 @@ pub async fn start_recording(
                 let mut is_degraded = false;
                 while let Some(event) = health_rx.recv().await {
                     let reason = match &event {
-                        cap_recording::PipelineHealthEvent::FrameDropRateHigh { rate_pct } => {
+                        orbit_recording::PipelineHealthEvent::FrameDropRateHigh { rate_pct } => {
                             Some(format!("High frame drop rate: {rate_pct:.0}%"))
                         }
-                        cap_recording::PipelineHealthEvent::AudioGapDetected { gap_ms } => {
+                        orbit_recording::PipelineHealthEvent::AudioGapDetected { gap_ms } => {
                             Some(format!("Audio gap detected: {gap_ms}ms"))
                         }
-                        cap_recording::PipelineHealthEvent::SourceRestarting => {
+                        orbit_recording::PipelineHealthEvent::SourceRestarting => {
                             Some("Capture source restarting".to_string())
                         }
-                        cap_recording::PipelineHealthEvent::SourceRestarted => None,
+                        orbit_recording::PipelineHealthEvent::SourceRestarted => None,
                     };
 
                     if let Some(reason) = reason {
@@ -961,7 +961,7 @@ pub async fn start_recording(
                             is_degraded = true;
                             RecordingEvent::Degraded { reason }.emit(&app).ok();
                         }
-                    } else if matches!(event, cap_recording::PipelineHealthEvent::SourceRestarted)
+                    } else if matches!(event, orbit_recording::PipelineHealthEvent::SourceRestarted)
                         && is_degraded
                     {
                         is_degraded = false;
@@ -1045,7 +1045,7 @@ async fn handle_spawn_failure(
     )
     .kind(tauri_plugin_dialog::MessageDialogKind::Error);
 
-    if let Some(window) = CapWindowId::RecordingControls.get(app) {
+    if let Some(window) = OrbitWindowId::RecordingControls.get(app) {
         dialog = dialog.parent(&window);
     }
 
@@ -1087,15 +1087,20 @@ fn mic_actor_not_running(err: &anyhow::Error) -> bool {
 #[specta::specta]
 #[instrument(skip(app, state))]
 pub async fn stop_recording(app: AppHandle, state: MutableState<'_, App>) -> Result<(), String> {
-    let mut state = state.write().await;
-    let Some(current_recording) = state.clear_current_recording() else {
+    let current_recording = {
+        let mut app_state = state.write().await;
+        app_state.clear_current_recording()
+    };
+
+    let Some(current_recording) = current_recording else {
         return Err("Recording not in progress".to_string())?;
     };
 
     let completed_recording = current_recording.stop().await.map_err(|e| e.to_string())?;
     let recording_dir = completed_recording.project_path().clone();
 
-    handle_recording_end(app, Ok(completed_recording), &mut state, recording_dir).await?;
+    let mut app_state = state.write().await;
+    handle_recording_end(app, Ok(completed_recording), &mut app_state, recording_dir).await?;
 
     Ok(())
 }
@@ -1107,7 +1112,12 @@ pub async fn restart_recording(
     app: AppHandle,
     state: MutableState<'_, App>,
 ) -> Result<RecordingAction, String> {
-    let Some(recording) = state.write().await.clear_current_recording() else {
+    let recording = {
+        let mut app_state = state.write().await;
+        app_state.clear_current_recording()
+    };
+
+    let Some(recording) = recording else {
         return Err("No recording in progress".to_string());
     };
 
@@ -1117,7 +1127,7 @@ pub async fn restart_recording(
 
     let _ = recording.cancel().await;
 
-    tokio::time::sleep(Duration::from_millis(1000)).await;
+    tokio::time::sleep(Duration::from_millis(100)).await;
 
     start_recording(app.clone(), state, inputs).await
 }
@@ -1133,24 +1143,34 @@ pub async fn delete_recording(app: AppHandle, state: MutableState<'_, App>) -> R
 
     if let Some(recording) = recording_data {
         let recording_dir = recording.recording_dir().clone();
+
+        if let Some(window) = OrbitWindowId::RecordingControls.get(&app) {
+            let _ = window.close();
+        }
+
         CurrentRecordingChanged.emit(&app).ok();
         RecordingStopped {}.emit(&app).ok();
 
-        let _ = recording.cancel().await;
-
-        std::fs::remove_dir_all(&recording_dir).ok();
+        tokio::spawn(async move {
+            let _ = recording.cancel().await;
+            let _ = tokio::fs::remove_dir_all(&recording_dir).await;
+        });
 
         let settings = GeneralSettingsStore::get(&app)
             .ok()
             .flatten()
             .unwrap_or_default();
 
-        if let Some(window) = CapWindowId::RecordingControls.get(&app) {
-            let _ = window.hide();
-        }
-
         match settings.post_deletion_behaviour {
-            PostDeletionBehaviour::DoNothing => {}
+            PostDeletionBehaviour::DoNothing => {
+                // Even if DoNothing, if we close the controls we should probably show the main window
+                // so the user isn't stuck.
+                let _ = ShowCapWindow::Main {
+                    init_target_mode: None,
+                }
+                .show(&app)
+                .await;
+            }
             PostDeletionBehaviour::ReopenRecordingWindow => {
                 let _ = ShowCapWindow::Main {
                     init_target_mode: None,
@@ -1174,7 +1194,7 @@ pub async fn take_screenshot(
     use crate::NewScreenshotAdded;
     use crate::notifications;
     use crate::{PendingScreenshot, PendingScreenshots};
-    use cap_recording::screenshot::capture_screenshot;
+    use orbit_recording::screenshot::capture_screenshot;
     use image::ImageEncoder;
     use std::time::Instant;
 
@@ -1211,11 +1231,11 @@ pub async fn take_screenshot(
     let image_data = image.into_bytes();
 
     let filename = project_name.replace(":", ".");
-    let filename = format!("{}.cap", sanitize_filename::sanitize(&filename));
+    let filename = format!("{}.orbit", sanitize_filename::sanitize(&filename));
 
     let screenshots_base_dir = app.path().app_data_dir().unwrap().join("screenshots");
 
-    let project_file_path = screenshots_base_dir.join(&cap_utils::ensure_unique_filename(
+    let project_file_path = screenshots_base_dir.join(&orbit_utils::ensure_unique_filename(
         &filename,
         &screenshots_base_dir,
     )?);
@@ -1225,11 +1245,11 @@ pub async fn take_screenshot(
 
     let image_filename = "original.png";
     let image_path = project_file_path.join(image_filename);
-    let cap_dir_key = project_file_path.to_string_lossy().to_string();
+    let orbit_dir_key = project_file_path.to_string_lossy().to_string();
 
     let pending_screenshots = app.state::<PendingScreenshots>();
     pending_screenshots.insert(
-        cap_dir_key.clone(),
+        orbit_dir_key.clone(),
         PendingScreenshot {
             data: image_data.clone(),
             width: image_width,
@@ -1241,27 +1261,27 @@ pub async fn take_screenshot(
 
     let relative_path = relative_path::RelativePathBuf::from(image_filename);
 
-    let video_meta = cap_project::VideoMeta {
+    let video_meta = orbit_project::VideoMeta {
         path: relative_path,
         fps: 0,
         start_time: Some(0.0),
         device_id: None,
     };
 
-    let segment = cap_project::SingleSegment {
+    let segment = orbit_project::SingleSegment {
         display: video_meta,
         camera: None,
         audio: None,
         cursor: None,
     };
 
-    let meta = cap_project::RecordingMeta {
+    let meta = orbit_project::RecordingMeta {
         platform: Some(Platform::default()),
         project_path: project_file_path.clone(),
         pretty_name: project_name,
         sharing: None,
-        inner: cap_project::RecordingMetaInner::Studio(Box::new(
-            cap_project::StudioRecordingMeta::SingleSegment { segment },
+        inner: orbit_project::RecordingMetaInner::Studio(Box::new(
+            orbit_project::StudioRecordingMeta::SingleSegment { segment },
         )),
         upload: None,
     };
@@ -1269,7 +1289,7 @@ pub async fn take_screenshot(
     meta.save_for_project()
         .map_err(|e| format!("Failed to save recording meta: {e}"))?;
 
-    cap_project::ProjectConfiguration::default()
+    orbit_project::ProjectConfiguration::default()
         .write(&project_file_path)
         .map_err(|e| format!("Failed to save project config: {e}"))?;
 
@@ -1305,7 +1325,7 @@ pub async fn take_screenshot(
         })
         .await;
 
-        pending_state.remove(&cap_dir_key);
+        pending_state.remove(&orbit_dir_key);
 
         match encode_result {
             Ok(Ok(())) => {
@@ -1393,21 +1413,9 @@ async fn handle_recording_end(
 
     let _ = app.recording_logging_handle.reload(None);
 
-    for (label, window) in handle.webview_windows() {
-        if let Ok(id) = CapWindowId::from_str(&label) {
-            if matches!(
-                id,
-                CapWindowId::RecordingControls
-                    | CapWindowId::Camera
-                    | CapWindowId::TargetSelectOverlay { .. }
-                    | CapWindowId::WindowCaptureOccluder { .. }
-            ) {
-                let _ = window.hide();
-            }
-        }
-    }
+    hide_recording_windows(&handle);
 
-    if CapWindowId::Main.get(&handle).is_none() {
+    if OrbitWindowId::Main.get(&handle).is_none() {
         let _ = app.mic_feed.ask(microphone::RemoveInput).await;
         let _ = app.camera_feed.ask(camera::RemoveInput).await;
         app.selected_mic_label = None;
@@ -1536,7 +1544,7 @@ async fn handle_recording_finish(
 
             let config = project_config_from_recording(
                 app,
-                &cap_recording::studio_recording::CompletedRecording {
+                &orbit_recording::studio_recording::CompletedRecording {
                     project_path: recording.project_path,
                     meta: updated_studio_meta.clone(),
                     cursor_data: recording.cursor_data,
@@ -1594,7 +1602,7 @@ async fn finalize_studio_recording(
     app: &AppHandle,
     recording_dir: PathBuf,
     screenshots_dir: PathBuf,
-    recording: cap_recording::studio_recording::CompletedRecording,
+    recording: orbit_recording::studio_recording::CompletedRecording,
     default_preset: Option<ProjectConfiguration>,
 ) -> Result<(), String> {
     info!("Starting background finalization for recording");
@@ -1638,7 +1646,7 @@ async fn finalize_studio_recording(
 
     let config = project_config_from_recording(
         app,
-        &cap_recording::studio_recording::CompletedRecording {
+        &orbit_recording::studio_recording::CompletedRecording {
             project_path: recording.project_path,
             meta: updated_studio_meta,
             cursor_data: recording.cursor_data,

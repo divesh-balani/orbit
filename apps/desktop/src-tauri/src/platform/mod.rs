@@ -64,7 +64,7 @@ pub fn perform_haptic_feedback(
 pub fn is_system_audio_capture_supported() -> bool {
     #[cfg(target_os = "macos")]
     {
-        scap_screencapturekit::is_system_audio_supported()
+        sorbit_screencapturekit::is_system_audio_supported()
     }
 
     #[cfg(not(target_os = "macos"))]

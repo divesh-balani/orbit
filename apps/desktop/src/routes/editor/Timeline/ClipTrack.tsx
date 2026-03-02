@@ -946,7 +946,7 @@ function CutOffsetButton(props: {
 		>
 			<Show
 				when={props.value !== 0}
-				fallback={<IconCapScissors class="size-3.5" />}
+				fallback={<IconOrbitScissors class="size-3.5" />}
 			>
 				{formatTime(props.value)}
 			</Show>

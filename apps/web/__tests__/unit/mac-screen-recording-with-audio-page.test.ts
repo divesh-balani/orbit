@@ -22,18 +22,18 @@ const componentSource = readFileSync(
 describe("MacScreenRecordingWithAudioPage metadata", () => {
 	it("contains canonical URL", () => {
 		expect(pageSource).toContain(
-			'canonical: "https://cap.so/mac-screen-recording-with-audio"',
+			'canonical: "https://orbit.so/mac-screen-recording-with-audio"',
 		);
 	});
 
 	it("contains OG url field", () => {
 		expect(pageSource).toContain(
-			'url: "https://cap.so/mac-screen-recording-with-audio"',
+			'url: "https://orbit.so/mac-screen-recording-with-audio"',
 		);
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -41,7 +41,7 @@ describe("MacScreenRecordingWithAudioPage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets mac-screen-recording-with-audio keyword", () => {
@@ -125,38 +125,38 @@ describe("MacScreenRecordingWithAudioPage FAQ schema", () => {
 		{
 			question: "How do I record my Mac screen with internal audio?",
 			answer:
-				"The easiest way to record your Mac screen with internal audio is to use Cap.",
+				"The easiest way to record your Mac screen with internal audio is to use Orbit.",
 		},
 		{
 			question:
 				"Can I record Mac screen with both microphone and system audio?",
 			answer:
-				"Yes — with Cap you can record both microphone and system audio simultaneously on Mac.",
+				"Yes — with Orbit you can record both microphone and system audio simultaneously on Mac.",
 		},
 		{
-			question: "Does Cap require BlackHole or Loopback for audio on Mac?",
+			question: "Does Orbit require BlackHole or Loopback for audio on Mac?",
 			answer:
-				"No. Cap handles Mac system audio capture natively without requiring BlackHole, Loopback, or any virtual audio driver.",
+				"No. Orbit handles Mac system audio capture natively without requiring BlackHole, Loopback, or any virtual audio driver.",
 		},
 		{
 			question: "Is there a free way to record Mac screen with audio?",
 			answer:
-				"Yes. Cap is completely free for Mac screen recording with audio. Studio Mode has no time limits, no watermarks, and no fees.",
+				"Yes. Orbit is completely free for Mac screen recording with audio. Studio Mode has no time limits, no watermarks, and no fees.",
 		},
 		{
-			question: "Does Cap record Mac screen with audio in 4K?",
+			question: "Does Orbit record Mac screen with audio in 4K?",
 			answer:
-				"Yes. Cap records your Mac screen at up to 4K resolution at 60fps while simultaneously capturing system audio and microphone input.",
+				"Yes. Orbit records your Mac screen at up to 4K resolution at 60fps while simultaneously capturing system audio and microphone input.",
 		},
 		{
 			question: "How do I share a Mac screen recording with audio?",
 			answer:
-				"With Cap, sharing is automatic. When you stop recording, Cap generates a shareable link in seconds.",
+				"With Orbit, sharing is automatic. When you stop recording, Orbit generates a shareable link in seconds.",
 		},
 		{
 			question: "Can I record a specific app window with audio on Mac?",
 			answer:
-				"Yes. Cap lets you record a specific application window on Mac while capturing that app's system audio along with your microphone.",
+				"Yes. Orbit lets you record a specific application window on Mac while capturing that app's system audio along with your microphone.",
 		},
 	];
 

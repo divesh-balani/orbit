@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import {
 	faCheck,
 	faExclamation,
@@ -95,7 +95,7 @@ export const SeoPageTemplate = ({
 			{showLogosInHeader && (
 				<>
 					<MotionImage
-						alt="Cap Logo"
+						alt="Orbit Logo"
 						initial={{ opacity: 0, left: "-40vw" }}
 						animate={{ opacity: 0.5, left: "-17vw" }}
 						transition={{ duration: 1 }}
@@ -210,9 +210,9 @@ export const SeoPageTemplate = ({
 				<ComparisonSlider
 					leftImage="/app/capdashboard.webp"
 					rightImage="/app/loomdashboard.webp"
-					leftAlt="Cap Dashboard"
+					leftAlt="Orbit Dashboard"
 					rightAlt="Loom Dashboard"
-					leftLabel="Cap"
+					leftLabel="Orbit"
 					rightLabel="Loom"
 				/>
 			)}
@@ -253,10 +253,10 @@ export const SeoPageTemplate = ({
 					<div>
 						<div className="text-center max-w-[800px] mx-auto mb-10">
 							<h2 className="inline-block relative mb-2 text-3xl font-medium text-gray-800 md:text-4xl">
-								{content.video.title ?? "See Cap in Action"}
+								{content.video.title ?? "See Orbit in Action"}
 							</h2>
 							<p className="text-xl leading-relaxed text-gray-10">
-								Watch how Cap makes screen recording simple, powerful, and
+								Watch how Orbit makes screen recording simple, powerful, and
 								accessible.
 							</p>
 						</div>
@@ -272,7 +272,7 @@ export const SeoPageTemplate = ({
 								>
 									<iframe
 										src={content.video.iframe.src}
-										title={content.video.iframe.title || "Cap Demo"}
+										title={content.video.iframe.title || "Orbit Demo"}
 										frameBorder="0"
 										allowFullScreen
 										style={{
@@ -290,7 +290,7 @@ export const SeoPageTemplate = ({
 									<MuxPlayer
 										playbackId="A6oZoUWVZjOIVZB6XnBMLagYnXE6xhDhp8Hcyky018hk"
 										playerInitTime={0}
-										metadataVideoTitle="Cap Demo"
+										metadataVideoTitle="Orbit Demo"
 										accentColor="#5C9FFF"
 										style={{
 											aspectRatio: "16/9",

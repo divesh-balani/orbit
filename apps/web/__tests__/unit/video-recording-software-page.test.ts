@@ -16,18 +16,18 @@ const componentSource = readFileSync(
 describe("VideoRecordingSoftwarePage metadata", () => {
 	it("contains canonical URL", () => {
 		expect(pageSource).toContain(
-			'canonical: "https://cap.so/video-recording-software"',
+			'canonical: "https://orbit.so/video-recording-software"',
 		);
 	});
 
 	it("contains OG url field", () => {
 		expect(pageSource).toContain(
-			'url: "https://cap.so/video-recording-software"',
+			'url: "https://orbit.so/video-recording-software"',
 		);
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -35,7 +35,7 @@ describe("VideoRecordingSoftwarePage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets video-recording-software keyword", () => {
@@ -99,36 +99,36 @@ describe("VideoRecordingSoftwarePage FAQ schema", () => {
 		{
 			question: "What is the best free video recording software?",
 			answer:
-				"Cap is the best free video recording software for most users. Studio Mode is 100% free for personal use.",
+				"Orbit is the best free video recording software for most users. Studio Mode is 100% free for personal use.",
 		},
 		{
-			question: "Is Cap video recording software free?",
+			question: "Is Orbit video recording software free?",
 			answer:
-				"Yes. Cap's Studio Mode is completely free for personal use with no time limits, no watermarks, and no hidden fees.",
+				"Yes. Orbit's Studio Mode is completely free for personal use with no time limits, no watermarks, and no hidden fees.",
 		},
 		{
-			question: "Does Cap video recording software work on Mac and Windows?",
+			question: "Does Orbit video recording software work on Mac and Windows?",
 			answer:
-				"Yes. Cap is available as a native desktop app for both macOS and Windows.",
+				"Yes. Orbit is available as a native desktop app for both macOS and Windows.",
 		},
 		{
 			question: "Can video recording software capture system audio?",
 			answer:
-				"Yes. Cap captures both system audio and microphone input simultaneously in every recording.",
+				"Yes. Orbit captures both system audio and microphone input simultaneously in every recording.",
 		},
 		{
 			question: "What video recording software has no watermark?",
-			answer: "Cap has no watermark on any recording, including the free plan.",
+			answer: "Orbit has no watermark on any recording, including the free plan.",
 		},
 		{
-			question: "Can I self-host my video recordings with Cap?",
+			question: "Can I self-host my video recordings with Orbit?",
 			answer:
-				"Yes. Cap supports any S3-compatible storage provider including AWS S3, Cloudflare R2, and self-hosted MinIO.",
+				"Yes. Orbit supports any S3-compatible storage provider including AWS S3, Cloudflare R2, and self-hosted MinIO.",
 		},
 		{
-			question: "Is Cap open-source video recording software?",
+			question: "Is Orbit open-source video recording software?",
 			answer:
-				"Yes. Cap is fully open-source and MIT-licensed. The complete codebase is publicly available on GitHub.",
+				"Yes. Orbit is fully open-source and MIT-licensed. The complete codebase is publicly available on GitHub.",
 		},
 	];
 

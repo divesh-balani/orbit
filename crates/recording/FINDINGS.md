@@ -1,4 +1,4 @@
-# Cap Recording Performance Findings
+# Orbit Recording Performance Findings
 
 > **SELF-HEALING DOCUMENT**: This file is designed to maintain complete context for recording performance work. After any work session, UPDATE this file with your findings before ending.
 
@@ -12,7 +12,7 @@
 2. Read `BENCHMARKS.md` for latest raw test data
 3. Run a quick benchmark to verify current state:
    ```bash
-   cargo run -p cap-recording --example real-device-test-runner -- baseline --mp4-only --keep-outputs
+   cargo run -p orbit-recording --example real-device-test-runner -- baseline --mp4-only --keep-outputs
    ```
 4. Continue work from "Next Steps" section below
 
@@ -62,12 +62,12 @@
 *(Update this section as you work)*
 
 - [ ] **System audio latency investigation** (optional)
-  - Location: `crates/scap-screencapturekit/` for macOS system audio
+  - Location: `crates/sorbit-screencapturekit/` for macOS system audio
   - May need latency compensation in audio pipeline
   
 - [ ] **Buffer tuning for dropped frames** (optional)
-  - Try increasing `CAP_MP4_MUXER_BUFFER_SIZE` env var (default: 60)
-  - Try increasing `CAP_VIDEO_SOURCE_BUFFER_SIZE` env var (default: 300)
+  - Try increasing `ORBIT_MP4_MUXER_BUFFER_SIZE` env var (default: 60)
+  - Try increasing `ORBIT_VIDEO_SOURCE_BUFFER_SIZE` env var (default: 300)
 
 ### Completed
 - [x] Fix #1: Non-blocking MP4 muxer (2026-01-28)
@@ -80,19 +80,19 @@
 
 ```bash
 # Quick isolated test (RECOMMENDED for development)
-cargo run -p cap-recording --example real-device-test-runner -- baseline --mp4-only --keep-outputs
+cargo run -p orbit-recording --example real-device-test-runner -- baseline --mp4-only --keep-outputs
 
 # Quick fragmented test
-cargo run -p cap-recording --example real-device-test-runner -- baseline --fragmented-only --keep-outputs
+cargo run -p orbit-recording --example real-device-test-runner -- baseline --fragmented-only --keep-outputs
 
 # Test pause/resume
-cargo run -p cap-recording --example real-device-test-runner -- single-pause --mp4-only --keep-outputs
+cargo run -p orbit-recording --example real-device-test-runner -- single-pause --mp4-only --keep-outputs
 
 # Full suite (takes ~1 min, may have thermal issues)
-cargo run -p cap-recording --example real-device-test-runner -- full --keep-outputs --benchmark-output
+cargo run -p orbit-recording --example real-device-test-runner -- full --keep-outputs --benchmark-output
 
 # Full suite without camera (faster)
-cargo run -p cap-recording --example real-device-test-runner -- full --no-camera --keep-outputs
+cargo run -p orbit-recording --example real-device-test-runner -- full --no-camera --keep-outputs
 ```
 
 **Note**: Running isolated tests gives more reliable results. The full suite can cause thermal throttling.

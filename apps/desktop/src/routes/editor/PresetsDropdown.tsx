@@ -19,8 +19,8 @@ export function PresetsDropdown() {
 		<KDropdownMenu gutter={8} placement="bottom">
 			<EditorButton<typeof KDropdownMenu.Trigger>
 				as={KDropdownMenu.Trigger}
-				leftIcon={<IconCapPresets />}
-				rightIcon={<IconCapChevronDown />}
+				leftIcon={<IconOrbitPresets />}
+				rightIcon={<IconOrbitChevronDown />}
 			>
 				Presets
 			</EditorButton>
@@ -83,7 +83,7 @@ export function PresetsDropdown() {
 														e.preventDefault();
 													}}
 												>
-													<IconCapSettings />
+													<IconOrbitSettings />
 												</button>
 											</MenuItem>
 											<KDropdownMenu.Portal>
@@ -145,7 +145,7 @@ export function PresetsDropdown() {
 								onSelect={() => setDialog({ type: "createPreset", open: true })}
 							>
 								<span>Create new preset</span>
-								<IconCapCirclePlus class="ml-auto" />
+								<IconOrbitCirclePlus class="ml-auto" />
 							</DropdownItem>
 						</MenuItemList>
 					</PopperContent>

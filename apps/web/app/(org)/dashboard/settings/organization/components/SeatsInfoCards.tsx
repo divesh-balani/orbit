@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@cap/ui";
+import { Card } from "@orbit/ui";
 import { faChair, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { calculateSeats } from "@/utils/organization";

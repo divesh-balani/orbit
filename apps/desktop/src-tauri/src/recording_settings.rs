@@ -1,4 +1,4 @@
-use cap_recording::{
+use orbit_recording::{
     RecordingMode, feeds::camera::DeviceOrModelID, sources::screen_capture::ScreenCaptureTarget,
 };
 use tauri::{AppHandle, Wry};

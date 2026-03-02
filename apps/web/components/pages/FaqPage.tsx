@@ -13,39 +13,39 @@ interface FaqItem {
 
 const faqContent: FaqItem[] = [
 	{
-		title: "Who is Cap for?",
+		title: "Who is Orbit for?",
 		answer:
-			"Cap is for anyone who wants to record, edit, and share videos. It's a lightweight, powerful tool for creators, educators, marketers, developers, and remote teams who want to communicate more effectively through screen recordings.",
+			"Orbit is for anyone who wants to record, edit, and share videos. It's a lightweight, powerful tool for creators, educators, marketers, developers, and remote teams who want to communicate more effectively through screen recordings.",
 	},
 	{
 		title: "How much does it cost?",
 		answer:
-			"Cap offers a free version for personal use. You can upgrade to Cap Pro for just $8.16/month (when billed annually) to unlock unlimited cloud storage, unlimited recording length, custom domain support, advanced team features, password-protected videos, analytics, and priority support. We also offer commercial licenses and self-hosted options for businesses.",
+			"Orbit offers a free version for personal use. You can upgrade to Orbit Pro for just $8.16/month (when billed annually) to unlock unlimited cloud storage, unlimited recording length, custom domain support, advanced team features, password-protected videos, analytics, and priority support. We also offer commercial licenses and self-hosted options for businesses.",
 	},
 	{
-		title: "Which platforms does Cap support?",
+		title: "Which platforms does Orbit support?",
 		answer:
-			"Cap is cross-platform and works on macOS (both Apple Silicon and Intel) and Windows. For macOS, we recommend version 13.1 or newer. For Windows, we recommend Windows 10 or newer.",
+			"Orbit is cross-platform and works on macOS (both Apple Silicon and Intel) and Windows. For macOS, we recommend version 13.1 or newer. For Windows, we recommend Windows 10 or newer.",
 	},
 	{
-		title: "What makes Cap different from Loom?",
+		title: "What makes Orbit different from Loom?",
 		answer:
-			"Cap is open source, privacy-focused, and lets you own your data. You can connect custom S3 storage buckets, self-host the entire platform, and get a lightweight, faster experience. We focus strongly on design, user experience, and building with our community at the center of everything we do. Plus, our built-in Loom video importer makes switching effortless.",
+			"Orbit is open source, privacy-focused, and lets you own your data. You can connect custom S3 storage buckets, self-host the entire platform, and get a lightweight, faster experience. We focus strongly on design, user experience, and building with our community at the center of everything we do. Plus, our built-in Loom video importer makes switching effortless.",
 	},
 	{
-		title: "Can I import my Loom videos to Cap?",
+		title: "Can I import my Loom videos to Orbit?",
 		answer:
-			"Yes! Cap Pro includes a built-in Loom video importer that lets you seamlessly transfer your existing Loom recordings into Cap. Just paste your Loom video links and Cap handles the rest — keeping all your content organized in one place.",
+			"Yes! Orbit Pro includes a built-in Loom video importer that lets you seamlessly transfer your existing Loom recordings into Orbit. Just paste your Loom video links and Orbit handles the rest — keeping all your content organized in one place.",
 	},
 	{
-		title: "Can I self-host Cap?",
+		title: "Can I self-host Orbit?",
 		answer:
-			"Yes! Cap can be self-hosted on your own infrastructure, giving you full control over your data.",
+			"Yes! Orbit can be self-hosted on your own infrastructure, giving you full control over your data.",
 	},
 	{
 		title: "Is there a commercial license available?",
 		answer:
-			"Yes, we offer commercial licenses for businesses that want to use the Cap desktop app. The commercial license includes the Cap Recorder + Editor with local-only features. Our Pro plan also includes a commercial license for the desktop app.",
+			"Yes, we offer commercial licenses for businesses that want to use the Orbit desktop app. The commercial license includes the Orbit Recorder + Editor with local-only features. Our Pro plan also includes a commercial license for the desktop app.",
 		link: {
 			text: "Deactivate your license",
 			href: "/deactivate-license",

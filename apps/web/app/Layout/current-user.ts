@@ -1,6 +1,6 @@
-import { getCurrentUser } from "@cap/database/auth/session";
-import { userIsPro } from "@cap/utils";
-import { ImageUploads } from "@cap/web-backend";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { userIsPro } from "@orbit/utils";
+import { ImageUploads } from "@orbit/web-backend";
 import { Effect } from "effect";
 
 export const resolveCurrentUser = Effect.gen(function* () {

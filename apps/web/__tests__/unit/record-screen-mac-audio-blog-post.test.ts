@@ -45,16 +45,16 @@ describe("how-to-record-screen-on-mac-with-audio blog post frontmatter", () => {
 });
 
 describe("how-to-record-screen-on-mac-with-audio blog post content", () => {
-	it("mentions Cap as the recommended tool", () => {
-		expect(postSource).toContain("Cap");
+	it("mentions Orbit as the recommended tool", () => {
+		expect(postSource).toContain("Orbit");
 	});
 
 	it("explains system audio limitation on macOS", () => {
 		expect(postSource.toLowerCase()).toContain("system audio");
 	});
 
-	it("covers the Cap method", () => {
-		expect(postSource).toContain("cap.so");
+	it("covers the Orbit method", () => {
+		expect(postSource).toContain("orbit.so");
 	});
 
 	it("covers the QuickTime + BlackHole method", () => {
@@ -75,7 +75,7 @@ describe("how-to-record-screen-on-mac-with-audio blog post content", () => {
 	});
 
 	it("links to the download page", () => {
-		expect(postSource).toContain("cap.so/download");
+		expect(postSource).toContain("orbit.so/download");
 	});
 
 	it("mentions macOS versions and Apple Silicon", () => {

@@ -1,4 +1,4 @@
-# `@cap/web`
+# `@orbit/web`
 
-Cap's NextJS web app for video sharing.
-Used for both self hosting and on [cap.so](https://cap.so).
+Orbit's NextJS web app for video sharing.
+Used for both self hosting and on [orbit.so](https://orbit.so).

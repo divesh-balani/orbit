@@ -13,9 +13,9 @@ import {
 	Show,
 } from "solid-js";
 import type { BackgroundSource } from "~/utils/tauri";
-import IconCapBgBlur from "~icons/cap/bg-blur";
-import IconCapCircleX from "~icons/cap/circle-x";
-import IconCapImage from "~icons/cap/image";
+import IconOrbitBgBlur from "~icons/orbit/bg-blur";
+import IconOrbitCircleX from "~icons/orbit/circle-x";
+import IconOrbitImage from "~icons/orbit/image";
 import {
 	DEFAULT_GRADIENT_FROM,
 	DEFAULT_GRADIENT_TO,
@@ -211,7 +211,7 @@ export function BackgroundSettingsPopover() {
 						activePopover() === "background" ? null : "background",
 					)
 				}
-				leftIcon={<IconCapImage class="size-4" />}
+				leftIcon={<IconOrbitImage class="size-4" />}
 				tooltipText="Background"
 				kbd={["B"]}
 			/>
@@ -222,7 +222,7 @@ export function BackgroundSettingsPopover() {
 						class="max-h-[600px] overflow-y-auto p-4 flex flex-col gap-6"
 					>
 						<Field
-							icon={<IconCapImage class="size-4" />}
+							icon={<IconOrbitImage class="size-4" />}
 							name="Background Image"
 						>
 							<KTabs
@@ -362,7 +362,7 @@ export function BackgroundSettingsPopover() {
 												onClick={() => fileInput.click()}
 												class="p-6 bg-gray-2 text-[13px] w-full rounded-[0.5rem] border border-gray-5 border-dashed flex flex-col items-center justify-center gap-[0.5rem] hover:bg-gray-3 transition-colors duration-100"
 											>
-												<IconCapImage class="text-gray-11 size-6" />
+												<IconOrbitImage class="text-gray-11 size-6" />
 												<span class="text-gray-12">
 													Click to select or drag and drop image
 												</span>
@@ -387,7 +387,7 @@ export function BackgroundSettingsPopover() {
 														}
 														class="p-2 text-white rounded-full transition-colors bg-black/50 hover:bg-black/70"
 													>
-														<IconCapCircleX class="w-4 h-4" />
+														<IconOrbitCircleX class="w-4 h-4" />
 													</button>
 												</div>
 											</div>
@@ -529,7 +529,7 @@ export function BackgroundSettingsPopover() {
 							</KTabs>
 						</Field>
 
-						<Field name="Background Blur" icon={<IconCapBgBlur />}>
+						<Field name="Background Blur" icon={<IconOrbitBgBlur />}>
 							<Slider
 								value={[project.background.blur]}
 								onChange={(v) => setProject("background", "blur", v[0])}

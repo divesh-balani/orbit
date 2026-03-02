@@ -1,6 +1,6 @@
-import { nanoId } from "@cap/database/helpers";
-import * as Db from "@cap/database/schema";
-import { Folder, type Organisation, type User } from "@cap/web-domain";
+import { nanoId } from "@orbit/database/helpers";
+import * as Db from "@orbit/database/schema";
+import { Folder, type Organisation, type User } from "@orbit/web-domain";
 import * as Dz from "drizzle-orm";
 import { Array, Effect, Option } from "effect";
 import type { Schema } from "effect/Schema";

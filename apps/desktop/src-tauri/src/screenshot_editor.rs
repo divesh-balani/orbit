@@ -1,12 +1,12 @@
 use crate::PendingScreenshots;
 use crate::frame_ws::{WSFrame, create_watch_frame_ws};
 use crate::gpu_context;
-use crate::windows::{CapWindowId, ScreenshotEditorWindowIds};
-use cap_project::{
+use crate::windows::{OrbitWindowId, ScreenshotEditorWindowIds};
+use orbit_project::{
     ProjectConfiguration, RecordingMeta, RecordingMetaInner, SingleSegment, StudioRecordingMeta,
     VideoMeta,
 };
-use cap_rendering::{
+use orbit_rendering::{
     DecodedFrame, DecodedSegmentFrames, FrameRenderer, ProjectUniforms, RenderVideoConstants,
     RendererLayers, ZoomFocusInterpolator,
 };
@@ -194,10 +194,10 @@ impl ScreenshotEditorInstances {
                     }
                 };
 
-                let cap_dir = if path.extension().and_then(|s| s.to_str()) == Some("cap") {
+                let orbit_dir = if path.extension().and_then(|s| s.to_str()) == Some("orbit") {
                     Some(path.clone())
                 } else if let Some(parent) = path.parent() {
-                    if parent.extension().and_then(|s| s.to_str()) == Some("cap") {
+                    if parent.extension().and_then(|s| s.to_str()) == Some("orbit") {
                         Some(parent.to_path_buf())
                     } else {
                         None
@@ -206,9 +206,9 @@ impl ScreenshotEditorInstances {
                     None
                 };
 
-                let (recording_meta, loaded_config) = if let Some(cap_dir) = &cap_dir {
-                    let meta = RecordingMeta::load_for_project(cap_dir).ok();
-                    let config = ProjectConfiguration::load(cap_dir).ok();
+                let (recording_meta, loaded_config) = if let Some(orbit_dir) = &orbit_dir {
+                    let meta = RecordingMeta::load_for_project(orbit_dir).ok();
+                    let config = ProjectConfiguration::load(orbit_dir).ok();
                     (meta, config)
                 } else {
                     (None, None)
@@ -271,7 +271,7 @@ impl ScreenshotEditorInstances {
 
                         let (device, queue) = adapter
                             .request_device(&wgpu::DeviceDescriptor {
-                                label: Some("cap-rendering-device"),
+                                label: Some("orbit-rendering-device"),
                                 required_features: wgpu::Features::empty(),
                                 ..Default::default()
                             })
@@ -280,8 +280,8 @@ impl ScreenshotEditorInstances {
                         (instance, adapter, Arc::new(device), Arc::new(queue), false)
                     };
 
-                let options = cap_rendering::RenderOptions {
-                    screen_size: cap_project::XY::new(width, height),
+                let options = orbit_rendering::RenderOptions {
+                    screen_size: orbit_project::XY::new(width, height),
                     camera_size: None,
                 };
 
@@ -350,7 +350,7 @@ impl ScreenshotEditorInstances {
                         let (base_w, base_h) =
                             ProjectUniforms::get_base_size(&constants.options, &current_config);
 
-                        let cursor_events = cap_project::CursorEvents::default();
+                        let cursor_events = orbit_project::CursorEvents::default();
                         let zoom_focus_interpolator = ZoomFocusInterpolator::new(
                             &cursor_events,
                             None,
@@ -363,7 +363,7 @@ impl ScreenshotEditorInstances {
                             &current_config,
                             0,
                             30,
-                            cap_project::XY::new(base_w, base_h),
+                            orbit_project::XY::new(base_w, base_h),
                             &cursor_events,
                             &segment_frames,
                             0.0,
@@ -374,7 +374,7 @@ impl ScreenshotEditorInstances {
                             .render_immediate(
                                 segment_frames,
                                 uniforms,
-                                &cap_project::CursorEvents::default(),
+                                &orbit_project::CursorEvents::default(),
                                 &mut layers,
                             )
                             .await;
@@ -454,8 +454,8 @@ pub struct SerializedScreenshotEditorInstance {
 pub async fn create_screenshot_editor_instance(
     window: Window,
 ) -> Result<SerializedScreenshotEditorInstance, String> {
-    let CapWindowId::ScreenshotEditor { id } =
-        CapWindowId::from_str(window.label()).map_err(|e| e.to_string())?
+    let OrbitWindowId::ScreenshotEditor { id } =
+        OrbitWindowId::from_str(window.label()).map_err(|e| e.to_string())?
     else {
         return Err("Invalid window".to_string());
     };
@@ -501,7 +501,7 @@ pub async fn update_screenshot_config(
         return Ok(());
     };
 
-    if parent.extension().and_then(|s| s.to_str()) == Some("cap") {
+    if parent.extension().and_then(|s| s.to_str()) == Some("orbit") {
         let path = parent.to_path_buf();
         if let Err(e) = config.write(&path) {
             eprintln!("Failed to save screenshot config: {e}");
@@ -509,7 +509,7 @@ pub async fn update_screenshot_config(
             println!("Saved screenshot config to {path:?}");
         }
     } else {
-        println!("Not saving config: parent {parent:?} is not a .cap directory");
+        println!("Not saving config: parent {parent:?} is not a .orbit directory");
     }
     Ok(())
 }

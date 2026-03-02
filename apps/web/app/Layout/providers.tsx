@@ -1,6 +1,6 @@
 "use client";
 
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import {
 	QueryClient,
@@ -155,7 +155,7 @@ export function Devtools() {
 			}}
 			plugins={[
 				{
-					name: "Cap",
+					name: "Orbit",
 					render: <CapDevtools />,
 				},
 				{
@@ -173,7 +173,7 @@ function CapDevtools() {
 
 	return (
 		<div className="flex flex-col p-4 space-y-4">
-			<h1 className="text-2xl font-semibold">Cap Devtools</h1>
+			<h1 className="text-2xl font-semibold">Orbit Devtools</h1>
 			{/*<div className="space-y-2">
 				<h1 className="text-lg font-semibold">Features</h1>
 				<label className="flex items-center space-x-2">
@@ -191,7 +191,7 @@ function CapDevtools() {
 				</label>
 			</div>*/}
 			<div className="space-y-2">
-				<h1 className="text-lg font-semibold">Cap Pro</h1>
+				<h1 className="text-lg font-semibold">Orbit Pro</h1>
 				<p className="text-xs text-muted-foreground">
 					Toggle the current user's Pro status (dev only)
 				</p>

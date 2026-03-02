@@ -1,7 +1,7 @@
 "use client";
 
-import { buildEnv } from "@cap/env";
-import { Button, Dialog, DialogContent, Switch } from "@cap/ui";
+import { buildEnv } from "@orbit/env";
+import { Button, Dialog, DialogContent, Switch } from "@orbit/ui";
 import NumberFlow from "@number-flow/react";
 import { Fit, Layout, useRive } from "@rive-app/react-canvas";
 import { useMutation } from "@tanstack/react-query";
@@ -76,7 +76,7 @@ const UpgradeModalImpl = ({
 
 	useRive({
 		src: "/rive/main.riv",
-		artboard: "cap-pro-modal",
+		artboard: "orbit-pro-modal",
 		animations: ["animation"],
 		layout: new Layout({
 			fit: Fit.Cover,
@@ -89,7 +89,7 @@ const UpgradeModalImpl = ({
 		{
 			icon: <Globe className={iconStyling} />,
 			title: "Custom domain",
-			description: "Connect your own domain to Cap",
+			description: "Connect your own domain to Orbit",
 		},
 		{
 			icon: <Share2 className={iconStyling} />,
@@ -98,7 +98,7 @@ const UpgradeModalImpl = ({
 		},
 		{
 			icon: <Sparkles className={iconStyling} />,
-			title: "Cap AI",
+			title: "Orbit AI",
 			description: "Automatic video chapters, summaries & more",
 		},
 		{
@@ -119,7 +119,7 @@ const UpgradeModalImpl = ({
 		{
 			icon: <Video className={iconStyling} />,
 			title: "Upload videos",
-			description: "Upload custom videos directly to Cap",
+			description: "Upload custom videos directly to Orbit",
 		},
 		{
 			icon: <Infinity className={iconStyling} />,
@@ -163,12 +163,12 @@ const UpgradeModalImpl = ({
 			}
 
 			if (data.subscription === true) {
-				toast.success("You are already on the Cap Pro plan");
+				toast.success("You are already on the Orbit Pro plan");
 				onOpenChange(false);
 			}
 
 			if (data.subscription === true) {
-				toast.success("You are already on the Cap Pro plan");
+				toast.success("You are already on the Orbit Pro plan");
 				onOpenChange(false);
 			}
 
@@ -202,7 +202,7 @@ const UpgradeModalImpl = ({
 								<div className="flex relative flex-col flex-1 justify-center items-center py-6 w-full">
 									<div className="flex flex-col items-center">
 										<h1 className="text-3xl font-medium text-gray-12">
-											Upgrade to Cap Pro
+											Upgrade to Orbit Pro
 										</h1>
 									</div>
 									<p className="mt-1 text-lg text-center text-gray-11">
@@ -285,7 +285,7 @@ const UpgradeModalImpl = ({
 									>
 										{proCheckoutMutation.isPending
 											? "Loading..."
-											: "Upgrade to Cap Pro"}
+											: "Upgrade to Orbit Pro"}
 									</Button>
 									<button
 										type="button"
@@ -326,12 +326,12 @@ const UpgradeModalImpl = ({
 };
 
 export const UpgradeModal =
-	buildEnv.NEXT_PUBLIC_IS_CAP !== "true" ? () => null : UpgradeModalImpl;
+	buildEnv.NEXT_PUBLIC_IS_ORBIT !== "true" ? () => null : UpgradeModalImpl;
 
 const ProRiveArt = memo(() => {
 	const { RiveComponent: ProModal } = useRive({
 		src: "/rive/main.riv",
-		artboard: "cap-pro-modal",
+		artboard: "orbit-pro-modal",
 		animations: ["animation"],
 		layout: new Layout({
 			fit: Fit.Cover,

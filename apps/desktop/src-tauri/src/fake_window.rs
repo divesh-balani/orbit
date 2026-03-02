@@ -1,4 +1,4 @@
-use scap_targets::{Display, DisplayId, bounds::LogicalBounds};
+use sorbit_targets::{Display, DisplayId, bounds::LogicalBounds};
 use std::{collections::HashMap, sync::Arc, time::Duration};
 use tauri::{AppHandle, Manager, WebviewWindow};
 use tokio::{sync::RwLock, time::sleep};

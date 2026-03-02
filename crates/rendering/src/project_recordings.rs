@@ -3,7 +3,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use cap_project::{AudioMeta, StudioRecordingMeta, VideoMeta};
+use orbit_project::{AudioMeta, StudioRecordingMeta, VideoMeta};
 use serde::Serialize;
 use specta::Type;
 

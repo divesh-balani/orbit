@@ -3,7 +3,7 @@ import { mkdir, readdir, rm, stat, unlink } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-const TEMP_DIR = join(tmpdir(), "cap-media-server");
+const TEMP_DIR = join(tmpdir(), "orbit-media-server");
 const STALE_FILE_AGE_MS = 60 * 60 * 1000;
 
 export interface TempFileHandle {

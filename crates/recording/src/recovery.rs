@@ -3,11 +3,11 @@ use std::{
     time::Duration,
 };
 
-use cap_enc_ffmpeg::remux::{
+use orbit_enc_ffmpeg::remux::{
     concatenate_audio_to_ogg, concatenate_m4s_segments_with_init, concatenate_video_fragments,
     get_media_duration, get_video_fps, probe_media_valid, probe_video_can_decode,
 };
-use cap_project::{
+use orbit_project::{
     AudioMeta, Cursors, MultipleSegment, MultipleSegments, ProjectConfiguration, RecordingMeta,
     RecordingMetaInner, StudioRecordingMeta, StudioRecordingStatus, TimelineConfiguration,
     TimelineSegment, VideoMeta,
@@ -52,9 +52,9 @@ pub enum RecoveryError {
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
     #[error("Failed to concatenate video fragments: {0}")]
-    VideoConcat(cap_enc_ffmpeg::remux::RemuxError),
+    VideoConcat(orbit_enc_ffmpeg::remux::RemuxError),
     #[error("Failed to concatenate audio fragments: {0}")]
-    AudioConcat(cap_enc_ffmpeg::remux::RemuxError),
+    AudioConcat(orbit_enc_ffmpeg::remux::RemuxError),
     #[error("Failed to serialize meta: {0}")]
     Serialize(#[from] serde_json::Error),
     #[error("No recoverable segments found")]
@@ -997,9 +997,9 @@ impl RecoveryManager {
 
                 cursors.insert(
                     id_str.to_string(),
-                    cap_project::CursorMeta {
+                    orbit_project::CursorMeta {
                         image_path: relative_path,
-                        hotspot: cap_project::XY::new(0.0, 0.0),
+                        hotspot: orbit_project::XY::new(0.0, 0.0),
                         shape: None,
                     },
                 );

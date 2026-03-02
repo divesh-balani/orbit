@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { serverEnv } from "@cap/env";
+import { serverEnv } from "@orbit/env";
 import { eq } from "drizzle-orm";
 import type { NextAuthOptions } from "next-auth";
 import { getServerSession as _getServerSession } from "next-auth";
@@ -96,7 +96,7 @@ export const authOptions = (): NextAuthOptions => {
 							console.log({ email });
 							await sendEmail({
 								email: identifier,
-								subject: `Your Cap Verification Code`,
+								subject: `Your Orbit Verification Code`,
 								react: email,
 							});
 						}
@@ -119,7 +119,7 @@ export const authOptions = (): NextAuthOptions => {
 		},
 		callbacks: {
 			async signIn({ user, email, credentials }) {
-				const allowedDomains = serverEnv().CAP_ALLOWED_SIGNUP_DOMAINS;
+				const allowedDomains = serverEnv().ORBIT_ALLOWED_SIGNUP_DOMAINS;
 				if (!allowedDomains) return true;
 
 				const rawEmail =

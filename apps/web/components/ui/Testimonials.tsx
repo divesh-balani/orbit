@@ -13,8 +13,8 @@ interface TestimonialsProps {
 
 export const Testimonials = ({
 	amount,
-	title = "What our users say about Cap after hitting record",
-	subtitle = "Don't just take our word for it. Here's what our users are saying about their experience with Cap.",
+	title = "What our users say about Orbit after hitting record",
+	subtitle = "Don't just take our word for it. Here's what our users are saying about their experience with Orbit.",
 	showHeader = true,
 }: TestimonialsProps) => {
 	const displayedTestimonials = amount

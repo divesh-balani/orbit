@@ -3,7 +3,7 @@ use tauri::{AppHandle, Manager, Runtime, Window, ipc::CommandArg};
 use tokio::sync::{RwLock, watch};
 use tokio_util::sync::CancellationToken;
 
-use cap_rendering::GpuOutputFormat;
+use orbit_rendering::GpuOutputFormat;
 
 use crate::{
     create_editor_instance_impl,
@@ -11,7 +11,7 @@ use crate::{
 };
 
 pub struct EditorInstance {
-    inner: Arc<cap_editor::EditorInstance>,
+    inner: Arc<orbit_editor::EditorInstance>,
     pub ws_port: u16,
     pub ws_shutdown_token: CancellationToken,
 }
@@ -31,7 +31,7 @@ async fn do_prewarm(app: AppHandle, path: PathBuf) -> PendingResult {
         path,
         Box::new(move |output| {
             let ws_frame = match output {
-                cap_editor::EditorFrameOutput::Nv12(frame) => {
+                orbit_editor::EditorFrameOutput::Nv12(frame) => {
                     let ws_format = match frame.format {
                         GpuOutputFormat::Nv12 => WSFrameFormat::Nv12,
                         GpuOutputFormat::Rgba => WSFrameFormat::Rgba,
@@ -47,7 +47,7 @@ async fn do_prewarm(app: AppHandle, path: PathBuf) -> PendingResult {
                         created_at: Instant::now(),
                     }
                 }
-                cap_editor::EditorFrameOutput::Rgba(frame) => WSFrame {
+                orbit_editor::EditorFrameOutput::Rgba(frame) => WSFrame {
                     data: frame.data,
                     width: frame.width,
                     height: frame.height,
@@ -121,7 +121,7 @@ impl EditorInstance {
 }
 
 impl Deref for EditorInstance {
-    type Target = Arc<cap_editor::EditorInstance>;
+    type Target = Arc<orbit_editor::EditorInstance>;
 
     fn deref(&self) -> &Self::Target {
         &self.inner
@@ -242,7 +242,7 @@ impl EditorInstances {
                     path,
                     Box::new(move |output| {
                         let ws_frame = match output {
-                            cap_editor::EditorFrameOutput::Nv12(frame) => {
+                            orbit_editor::EditorFrameOutput::Nv12(frame) => {
                                 let ws_format = match frame.format {
                                     GpuOutputFormat::Nv12 => WSFrameFormat::Nv12,
                                     GpuOutputFormat::Rgba => WSFrameFormat::Rgba,
@@ -258,7 +258,7 @@ impl EditorInstances {
                                     created_at: Instant::now(),
                                 }
                             }
-                            cap_editor::EditorFrameOutput::Rgba(frame) => WSFrame {
+                            orbit_editor::EditorFrameOutput::Rgba(frame) => WSFrame {
                                 data: frame.data,
                                 width: frame.width,
                                 height: frame.height,

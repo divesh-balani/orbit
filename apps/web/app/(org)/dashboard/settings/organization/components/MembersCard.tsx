@@ -1,6 +1,6 @@
 "use client";
 
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import {
 	Button,
 	Card,
@@ -13,7 +13,7 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@cap/ui";
+} from "@orbit/ui";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format } from "date-fns";
@@ -153,7 +153,7 @@ export const MembersCard = ({
 						<CardDescription>Manage your organization members.</CardDescription>
 					</CardHeader>
 					<div className="flex flex-wrap gap-3">
-						{buildEnv.NEXT_PUBLIC_IS_CAP && (
+						{buildEnv.NEXT_PUBLIC_IS_ORBIT && (
 							<Tooltip
 								position="top"
 								content="Once inside the Stripe dashboard, click 'Manage Plan', then increase quantity of subscriptions to purchase more seats"

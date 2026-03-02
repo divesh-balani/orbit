@@ -6,8 +6,8 @@ import { createBreadcrumbSchema } from "@/utils/web-schema";
 describe("createBreadcrumbSchema", () => {
 	it("produces valid BreadcrumbList schema structure", () => {
 		const schema = createBreadcrumbSchema([
-			{ name: "Home", url: "https://cap.so" },
-			{ name: "Tools", url: "https://cap.so/tools" },
+			{ name: "Home", url: "https://orbit.so" },
+			{ name: "Tools", url: "https://orbit.so/tools" },
 		]);
 
 		expect(schema["@context"]).toBe("https://schema.org");
@@ -18,22 +18,22 @@ describe("createBreadcrumbSchema", () => {
 
 	it("maps each item to a ListItem with correct position and name", () => {
 		const schema = createBreadcrumbSchema([
-			{ name: "Home", url: "https://cap.so" },
-			{ name: "Tools", url: "https://cap.so/tools" },
-			{ name: "Convert", url: "https://cap.so/tools/convert" },
+			{ name: "Home", url: "https://orbit.so" },
+			{ name: "Tools", url: "https://orbit.so/tools" },
+			{ name: "Convert", url: "https://orbit.so/tools/convert" },
 		]);
 
 		expect(schema.itemListElement[0]).toEqual({
 			"@type": "ListItem",
 			position: 1,
 			name: "Home",
-			item: "https://cap.so",
+			item: "https://orbit.so",
 		});
 		expect(schema.itemListElement[1]).toEqual({
 			"@type": "ListItem",
 			position: 2,
 			name: "Tools",
-			item: "https://cap.so/tools",
+			item: "https://orbit.so/tools",
 		});
 		expect(schema.itemListElement[2].position).toBe(3);
 		expect(schema.itemListElement[2].name).toBe("Convert");
@@ -41,17 +41,17 @@ describe("createBreadcrumbSchema", () => {
 
 	it("omits item field when no url is provided", () => {
 		const schema = createBreadcrumbSchema([
-			{ name: "Home", url: "https://cap.so" },
+			{ name: "Home", url: "https://orbit.so" },
 			{ name: "Current Page" },
 		]);
 
-		expect(schema.itemListElement[0].item).toBe("https://cap.so");
+		expect(schema.itemListElement[0].item).toBe("https://orbit.so");
 		expect("item" in schema.itemListElement[1]).toBe(false);
 	});
 
 	it("handles single item breadcrumb", () => {
 		const schema = createBreadcrumbSchema([
-			{ name: "Home", url: "https://cap.so" },
+			{ name: "Home", url: "https://orbit.so" },
 		]);
 
 		expect(schema.itemListElement).toHaveLength(1);
@@ -67,11 +67,11 @@ describe("createBreadcrumbSchema", () => {
 
 	it("produces JSON-serializable output", () => {
 		const schema = createBreadcrumbSchema([
-			{ name: "Home", url: "https://cap.so" },
-			{ name: "Tools", url: "https://cap.so/tools" },
+			{ name: "Home", url: "https://orbit.so" },
+			{ name: "Tools", url: "https://orbit.so/tools" },
 			{
 				name: "Video Speed Controller",
-				url: "https://cap.so/tools/video-speed-controller",
+				url: "https://orbit.so/tools/video-speed-controller",
 			},
 		]);
 
@@ -93,51 +93,51 @@ function readPage(routePath: string): string {
 const toolPages: Array<{ file: string; breadcrumbItems: string[] }> = [
 	{
 		file: "(site)/tools/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools"],
+		breadcrumbItems: ["https://orbit.so/tools"],
 	},
 	{
 		file: "(site)/tools/convert/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools", "https://cap.so/tools/convert"],
+		breadcrumbItems: ["https://orbit.so/tools", "https://orbit.so/tools/convert"],
 	},
 	{
 		file: "(site)/tools/convert/mov-to-mp4/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/convert/mov-to-mp4"],
+		breadcrumbItems: ["https://orbit.so/tools/convert/mov-to-mp4"],
 	},
 	{
 		file: "(site)/tools/convert/mp4-to-gif/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/convert/mp4-to-gif"],
+		breadcrumbItems: ["https://orbit.so/tools/convert/mp4-to-gif"],
 	},
 	{
 		file: "(site)/tools/convert/webm-to-mp4/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/convert/webm-to-mp4"],
+		breadcrumbItems: ["https://orbit.so/tools/convert/webm-to-mp4"],
 	},
 	{
 		file: "(site)/tools/convert/avi-to-mp4/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/convert/avi-to-mp4"],
+		breadcrumbItems: ["https://orbit.so/tools/convert/avi-to-mp4"],
 	},
 	{
 		file: "(site)/tools/convert/mkv-to-mp4/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/convert/mkv-to-mp4"],
+		breadcrumbItems: ["https://orbit.so/tools/convert/mkv-to-mp4"],
 	},
 	{
 		file: "(site)/tools/convert/mp4-to-mp3/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/convert/mp4-to-mp3"],
+		breadcrumbItems: ["https://orbit.so/tools/convert/mp4-to-mp3"],
 	},
 	{
 		file: "(site)/tools/convert/mp4-to-webm/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/convert/mp4-to-webm"],
+		breadcrumbItems: ["https://orbit.so/tools/convert/mp4-to-webm"],
 	},
 	{
 		file: "(site)/tools/video-speed-controller/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/video-speed-controller"],
+		breadcrumbItems: ["https://orbit.so/tools/video-speed-controller"],
 	},
 	{
 		file: "(site)/tools/loom-downloader/page.tsx",
-		breadcrumbItems: ["https://cap.so/tools/loom-downloader"],
+		breadcrumbItems: ["https://orbit.so/tools/loom-downloader"],
 	},
 	{
 		file: "(site)/tools/trim/layout.tsx",
-		breadcrumbItems: ["https://cap.so/tools/trim"],
+		breadcrumbItems: ["https://orbit.so/tools/trim"],
 	},
 ];
 
@@ -150,7 +150,7 @@ describe("Breadcrumb structured data in tools pages", () => {
 
 		it(`${file} contains Home breadcrumb`, () => {
 			const content = readPage(file);
-			expect(content).toContain("https://cap.so");
+			expect(content).toContain("https://orbit.so");
 		});
 
 		for (const url of breadcrumbItems) {
@@ -165,7 +165,7 @@ describe("Breadcrumb structured data in tools pages", () => {
 		const content = readPage("(site)/tools/convert/[conversionPath]/page.tsx");
 		expect(content).toContain("createBreadcrumbSchema");
 		expect(content).toContain(
-			"`https://cap.so/tools/convert/${conversionPath}`",
+			"`https://orbit.so/tools/convert/${conversionPath}`",
 		);
 	});
 });

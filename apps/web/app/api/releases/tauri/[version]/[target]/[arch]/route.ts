@@ -14,10 +14,10 @@ export async function GET(
 
 		const { data: release } = await octokit.repos.getLatestRelease({
 			owner: "capsoftware",
-			repo: "cap",
+			repo: "orbit",
 		});
 
-		const version = release.tag_name.replace("cap-v", "");
+		const version = release.tag_name.replace("orbit-v", "");
 		const notes = release.body;
 		const pub_date = release.published_at
 			? new Date(release.published_at).toISOString()

@@ -4,7 +4,7 @@ use std::{
     sync::Arc,
 };
 
-use cap_project::RecordingMeta;
+use orbit_project::RecordingMeta;
 use futures::StreamExt;
 use tauri::AppHandle;
 use tauri_plugin_store::StoreExt;
@@ -170,7 +170,7 @@ async fn collect_uuid_projects(recordings_dir: &Path) -> Result<Vec<PathBuf>, St
             continue;
         };
 
-        if filename.ends_with(".cap") && fast_is_project_filename_uuid(filename) {
+        if filename.ends_with(".orbit") && fast_is_project_filename_uuid(filename) {
             uuid_projects.push(path);
         }
     }
@@ -257,17 +257,17 @@ async fn migrate_project_filename_async(
 ) -> Result<PathBuf, String> {
     let sanitized = sanitize_filename::sanitize(meta.pretty_name.replace(":", "."));
 
-    let filename = if sanitized.ends_with(".cap") {
+    let filename = if sanitized.ends_with(".orbit") {
         sanitized
     } else {
-        format!("{sanitized}.cap")
+        format!("{sanitized}.orbit")
     };
 
     let parent_dir = project_path
         .parent()
         .ok_or("Project path has no parent directory")?;
 
-    let unique_filename = cap_utils::ensure_unique_filename(&filename, parent_dir)
+    let unique_filename = orbit_utils::ensure_unique_filename(&filename, parent_dir)
         .map_err(|e| format!("Failed to ensure unique filename: {e}"))?;
 
     let final_path = parent_dir.join(&unique_filename);
@@ -280,7 +280,7 @@ async fn migrate_project_filename_async(
 }
 
 pub fn fast_is_project_filename_uuid(filename: &str) -> bool {
-    if filename.len() != 40 || !filename.ends_with(".cap") {
+    if filename.len() != 40 || !filename.ends_with(".orbit") {
         return false;
     }
 
@@ -305,14 +305,14 @@ mod tests {
     fn test_is_project_filename_uuid() {
         // Valid UUID
         assert!(fast_is_project_filename_uuid(
-            "a1b2c3d4-e5f6-7890-abcd-ef1234567890.cap"
+            "a1b2c3d4-e5f6-7890-abcd-ef1234567890.orbit"
         ));
         assert!(fast_is_project_filename_uuid(
-            "00000000-0000-0000-0000-000000000000.cap"
+            "00000000-0000-0000-0000-000000000000.orbit"
         ));
 
         // Invalid cases
-        assert!(!fast_is_project_filename_uuid("my-project-name.cap"));
+        assert!(!fast_is_project_filename_uuid("my-project-name.orbit"));
         assert!(!fast_is_project_filename_uuid(
             "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
         ));
@@ -320,7 +320,7 @@ mod tests {
             "a1b2c3d4-e5f6-7890-abcd-ef1234567890.txt"
         ));
         assert!(!fast_is_project_filename_uuid(
-            "g1b2c3d4-e5f6-7890-abcd-ef1234567890.cap"
+            "g1b2c3d4-e5f6-7890-abcd-ef1234567890.orbit"
         ));
     }
 }

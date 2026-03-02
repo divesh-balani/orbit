@@ -20,7 +20,7 @@ export default function (props: RouteSectionProps) {
 	onMount(async () => {
 		console.log("window chrome mounted");
 		unlistenResize = await initializeTitlebar();
-		const capContext = (window as any).__CAP__;
+		const capContext = (window as any).__ORBIT__;
 		const hasInitialTargetMode = capContext?.initialTargetMode != null;
 		if (location.pathname === "/" && !hasInitialTargetMode)
 			getCurrentWindow().show();

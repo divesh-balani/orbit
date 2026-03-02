@@ -10,10 +10,10 @@ import {
 	users,
 	videos,
 	videoUploads,
-} from "@cap/database/schema";
-import { Database, ImageUploads } from "@cap/web-backend";
-import type { ImageUpload, Organisation, Space, Video } from "@cap/web-domain";
-import { CurrentUser, Folder } from "@cap/web-domain";
+} from "@orbit/database/schema";
+import { Database, ImageUploads } from "@orbit/web-backend";
+import type { ImageUpload, Organisation, Space, Video } from "@orbit/web-domain";
+import { CurrentUser, Folder } from "@orbit/web-domain";
 import { and, desc, eq, isNull } from "drizzle-orm";
 import { sql } from "drizzle-orm/sql";
 import { Effect } from "effect";

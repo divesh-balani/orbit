@@ -1,5 +1,5 @@
 "use client";
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import {
 	Button,
 	Command,
@@ -16,8 +16,8 @@ import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-} from "@cap/ui";
-import { classNames } from "@cap/utils";
+} from "@orbit/ui";
+import { classNames } from "@orbit/utils";
 import {
 	faBuilding,
 	faCircleInfo,
@@ -71,7 +71,7 @@ const AdminNavItems = ({ toggleMobileNav }: Props) => {
 			subNav: [],
 		},
 		{
-			name: "Record a Cap",
+			name: "Record a Orbit",
 			href: `/dashboard/caps/record`,
 			icon: <RecordIcon />,
 			subNav: [],
@@ -339,7 +339,7 @@ const AdminNavItems = ({ toggleMobileNav }: Props) => {
 						toggleMobileNav={() => toggleMobileNav?.()}
 						subscribed={user.isPro}
 					/>
-					{buildEnv.NEXT_PUBLIC_IS_CAP && (
+					{buildEnv.NEXT_PUBLIC_IS_ORBIT && (
 						<div className="flex justify-center items-center mt-2">
 							<Link
 								href="/dashboard/refer"
@@ -350,7 +350,7 @@ const AdminNavItems = ({ toggleMobileNav }: Props) => {
 						</div>
 					)}
 					<p className="mt-2 text-xs text-center truncate text-gray-10">
-						Cap Software, Inc. {new Date().getFullYear()}.
+						Orbit Software, Inc. {new Date().getFullYear()}.
 					</p>
 				</div>
 			</nav>

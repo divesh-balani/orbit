@@ -14,8 +14,8 @@ export const metadata = {
 		title: "Video Speed Controller - Speed Up or Slow Down Videos Online",
 		description:
 			"Free browser-based tool to adjust video playback speed. Speed up or slow down videos without losing quality, all processed locally for privacy.",
-		url: "https://cap.so/tools/video-speed-controller",
-		siteName: "Cap",
+		url: "https://orbit.so/tools/video-speed-controller",
+		siteName: "Orbit",
 		images: [
 			{
 				url: "/og.png",

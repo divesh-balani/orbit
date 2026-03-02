@@ -1,6 +1,6 @@
 use std::{thread, time::Duration};
 
-use cap_media_info::{Pixel, VideoInfo, ensure_even};
+use orbit_media_info::{Pixel, VideoInfo, ensure_even};
 use ffmpeg::{
     Dictionary,
     codec::{codec::Codec, context, encoder},
@@ -515,14 +515,14 @@ impl H264Encoder {
     }
 }
 
-const VIDEOTOOLBOX_4K_MAX_FPS: f64 = 55.0;
-const VIDEOTOOLBOX_1080P_MAX_FPS: f64 = 190.0;
+const VIDEOTOOLBOX_4K_MAX_FPS: f64 = 120.0;
+const VIDEOTOOLBOX_1080P_MAX_FPS: f64 = 240.0;
 const NVENC_4K_MAX_FPS: f64 = 120.0;
-const NVENC_1080P_MAX_FPS: f64 = 500.0;
-const QSV_4K_MAX_FPS: f64 = 90.0;
-const QSV_1080P_MAX_FPS: f64 = 300.0;
-const AMF_4K_MAX_FPS: f64 = 100.0;
-const AMF_1080P_MAX_FPS: f64 = 350.0;
+const NVENC_1080P_MAX_FPS: f64 = 600.0;
+const QSV_4K_MAX_FPS: f64 = 120.0;
+const QSV_1080P_MAX_FPS: f64 = 400.0;
+const AMF_4K_MAX_FPS: f64 = 120.0;
+const AMF_1080P_MAX_FPS: f64 = 400.0;
 
 const PIXELS_4K: f64 = 3840.0 * 2160.0;
 const PIXELS_1080P: f64 = 1920.0 * 1080.0;
@@ -574,7 +574,7 @@ fn requires_software_encoder(config: &VideoInfo, preset: H264Preset) -> bool {
 
     #[cfg(target_os = "windows")]
     {
-        use cap_frame_converter::{GpuVendor, detect_primary_gpu};
+        use orbit_frame_converter::{GpuVendor, detect_primary_gpu};
 
         let encoder_name = match detect_primary_gpu().map(|info| info.vendor) {
             Some(GpuVendor::Nvidia) => "h264_nvenc",
@@ -616,7 +616,7 @@ fn get_default_encoder_priority(_config: &VideoInfo) -> &'static [&'static str] 
 
     #[cfg(target_os = "windows")]
     {
-        use cap_frame_converter::{GpuVendor, detect_primary_gpu};
+        use orbit_frame_converter::{GpuVendor, detect_primary_gpu};
 
         static ENCODER_PRIORITY_NVIDIA: &[&str] =
             &["h264_nvenc", "h264_mf", "h264_qsv", "h264_amf", "libx264"];
@@ -663,7 +663,7 @@ fn export_encoder_priority_override(
 
     #[cfg(target_os = "windows")]
     {
-        use cap_frame_converter::{GpuVendor, detect_primary_gpu};
+        use orbit_frame_converter::{GpuVendor, detect_primary_gpu};
 
         static ENCODER_PRIORITY_AMD_EXPORT: &[&str] =
             &["h264_mf", "h264_amf", "h264_nvenc", "h264_qsv", "libx264"];

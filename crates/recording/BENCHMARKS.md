@@ -1,6 +1,6 @@
-# Cap Recording Benchmark Results
+# Orbit Recording Benchmark Results
 
-This document tracks performance benchmarks for Cap's recording system over time. Each benchmark run is timestamped, enabling comparison across different versions, configurations, and hardware.
+This document tracks performance benchmarks for Orbit's recording system over time. Each benchmark run is timestamped, enabling comparison across different versions, configurations, and hardware.
 
 ## Quick Reference
 
@@ -23,8 +23,8 @@ This document tracks performance benchmarks for Cap's recording system over time
 ### Running Benchmarks
 
 ```bash
-cargo run -p cap-recording --example real-device-test-runner -- baseline --keep-outputs --benchmark-output
-cargo run -p cap-recording --example real-device-test-runner -- full --keep-outputs --benchmark-output
+cargo run -p orbit-recording --example real-device-test-runner -- baseline --keep-outputs --benchmark-output
+cargo run -p orbit-recording --example real-device-test-runner -- full --keep-outputs --benchmark-output
 ```
 
 ---
@@ -41,7 +41,7 @@ cargo run -p cap-recording --example real-device-test-runner -- full --keep-outp
 
 **Notes:** Fix #2: Display-Camera A/V sync - Sync display start time to camera/mic
 
-**Command:** `cargo run -p cap-recording --example real-device-test-runner -- full --keep-outputs`
+**Command:** `cargo run -p orbit-recording --example real-device-test-runner -- full --keep-outputs`
 
 <details>
 <summary>System Information</summary>

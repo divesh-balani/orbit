@@ -1,7 +1,7 @@
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { authApiKeys } from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { authApiKeys } from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { getCookie } from "hono/cookie";
@@ -69,7 +69,7 @@ app.get(
 		const returnUrl = new URL(
 			platform === "web"
 				? `http://127.0.0.1:${port}?${params}`
-				: `cap-desktop://signin?${params}`,
+				: `orbit-desktop://signin?${params}`,
 		);
 
 		return Response.redirect(returnUrl.href);

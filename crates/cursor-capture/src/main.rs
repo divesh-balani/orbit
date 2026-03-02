@@ -1,5 +1,5 @@
-use cap_cursor_capture::RawCursorPosition;
-use scap_targets::Display;
+use orbit_cursor_capture::RawCursorPosition;
+use sorbit_targets::Display;
 
 fn main() {
     loop {

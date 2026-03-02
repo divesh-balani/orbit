@@ -8,15 +8,15 @@ use ::windows::Win32::Graphics::Direct3D11::{
 };
 use ::windows::Win32::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC;
 use anyhow::anyhow;
-use cap_media_info::{AudioInfo, VideoInfo};
-use cap_timestamp::{PerformanceCounterTimestamp, Timestamp};
+use orbit_media_info::{AudioInfo, VideoInfo};
+use orbit_timestamp::{PerformanceCounterTimestamp, Timestamp};
 use cpal::traits::{DeviceTrait, HostTrait};
 use futures::{
     FutureExt, StreamExt,
     channel::{mpsc, oneshot},
 };
-use scap_ffmpeg::*;
-use scap_targets::{Display, DisplayId};
+use sorbit_ffmpeg::*;
+use sorbit_targets::{Display, DisplayId};
 use std::{
     sync::{
         Arc, Mutex,
@@ -34,14 +34,14 @@ use tracing::*;
 pub struct Direct3DCapture;
 
 impl Direct3DCapture {
-    pub const PIXEL_FORMAT: scap_direct3d::PixelFormat = scap_direct3d::PixelFormat::R8G8B8A8Unorm;
+    pub const PIXEL_FORMAT: sorbit_direct3d::PixelFormat = sorbit_direct3d::PixelFormat::R8G8B8A8Unorm;
 }
 
 impl ScreenCaptureFormat for Direct3DCapture {
-    type VideoFormat = scap_direct3d::Frame;
+    type VideoFormat = sorbit_direct3d::Frame;
 
     fn pixel_format() -> ffmpeg::format::Pixel {
-        scap_direct3d::PixelFormat::R8G8B8A8Unorm.as_ffmpeg()
+        sorbit_direct3d::PixelFormat::R8G8B8A8Unorm.as_ffmpeg()
     }
 
     fn audio_info() -> AudioInfo {
@@ -94,7 +94,7 @@ impl ScreenCaptureFormat for Direct3DCapture {
 }
 
 pub enum ScreenFrame {
-    Captured(scap_direct3d::Frame),
+    Captured(sorbit_direct3d::Frame),
     Scaled(ScaledScreenFrame),
 }
 
@@ -103,7 +103,7 @@ pub struct ScaledScreenFrame {
     pixel_data: Vec<u8>,
     width: u32,
     height: u32,
-    pixel_format: scap_direct3d::PixelFormat,
+    pixel_format: sorbit_direct3d::PixelFormat,
 }
 
 unsafe impl Send for ScaledScreenFrame {}
@@ -133,13 +133,13 @@ impl ScreenFrame {
     pub fn as_ffmpeg(&self) -> Result<ffmpeg::frame::Video, ::windows::core::Error> {
         match self {
             ScreenFrame::Captured(frame) => {
-                use scap_ffmpeg::AsFFmpeg;
+                use sorbit_ffmpeg::AsFFmpeg;
                 frame.as_ffmpeg()
             }
             ScreenFrame::Scaled(scaled) => {
                 let ffmpeg_pixel = match scaled.pixel_format {
-                    scap_direct3d::PixelFormat::R8G8B8A8Unorm => ffmpeg::format::Pixel::RGBA,
-                    scap_direct3d::PixelFormat::B8G8R8A8Unorm => ffmpeg::format::Pixel::BGRA,
+                    sorbit_direct3d::PixelFormat::R8G8B8A8Unorm => ffmpeg::format::Pixel::RGBA,
+                    sorbit_direct3d::PixelFormat::B8G8R8A8Unorm => ffmpeg::format::Pixel::BGRA,
                 };
                 let mut ff_frame =
                     ffmpeg::frame::Video::new(ffmpeg_pixel, scaled.width, scaled.height);
@@ -180,7 +180,7 @@ unsafe impl Send for FrameScalerState {}
 struct WindowsFrameScaler {
     target_width: u32,
     target_height: u32,
-    pixel_format: scap_direct3d::PixelFormat,
+    pixel_format: sorbit_direct3d::PixelFormat,
     d3d_device: ID3D11Device,
     state: Option<FrameScalerState>,
 }
@@ -189,7 +189,7 @@ impl WindowsFrameScaler {
     fn new(
         target_width: u32,
         target_height: u32,
-        pixel_format: scap_direct3d::PixelFormat,
+        pixel_format: sorbit_direct3d::PixelFormat,
         d3d_device: ID3D11Device,
     ) -> Self {
         Self {
@@ -201,7 +201,7 @@ impl WindowsFrameScaler {
         }
     }
 
-    fn scale_frame(&mut self, frame: &scap_direct3d::Frame) -> Option<ScreenFrame> {
+    fn scale_frame(&mut self, frame: &sorbit_direct3d::Frame) -> Option<ScreenFrame> {
         let src_width = frame.width();
         let src_height = frame.height();
 
@@ -212,8 +212,8 @@ impl WindowsFrameScaler {
 
         if needs_reinit {
             let src_pixel = match self.pixel_format {
-                scap_direct3d::PixelFormat::R8G8B8A8Unorm => ffmpeg::format::Pixel::RGBA,
-                scap_direct3d::PixelFormat::B8G8R8A8Unorm => ffmpeg::format::Pixel::BGRA,
+                sorbit_direct3d::PixelFormat::R8G8B8A8Unorm => ffmpeg::format::Pixel::RGBA,
+                sorbit_direct3d::PixelFormat::B8G8R8A8Unorm => ffmpeg::format::Pixel::BGRA,
             };
 
             let context = ffmpeg::software::scaling::Context::get(
@@ -240,8 +240,8 @@ impl WindowsFrameScaler {
         let row_length = (src_width * 4) as usize;
 
         let src_pixel = match self.pixel_format {
-            scap_direct3d::PixelFormat::R8G8B8A8Unorm => ffmpeg::format::Pixel::RGBA,
-            scap_direct3d::PixelFormat::B8G8R8A8Unorm => ffmpeg::format::Pixel::BGRA,
+            sorbit_direct3d::PixelFormat::R8G8B8A8Unorm => ffmpeg::format::Pixel::RGBA,
+            sorbit_direct3d::PixelFormat::B8G8R8A8Unorm => ffmpeg::format::Pixel::BGRA,
         };
 
         let mut src_frame = ffmpeg::frame::Video::new(src_pixel, src_width, src_height);
@@ -292,10 +292,10 @@ impl WindowsFrameScaler {
         }
 
         let dxgi_format = match self.pixel_format {
-            scap_direct3d::PixelFormat::R8G8B8A8Unorm => {
+            sorbit_direct3d::PixelFormat::R8G8B8A8Unorm => {
                 ::windows::Win32::Graphics::Dxgi::Common::DXGI_FORMAT_R8G8B8A8_UNORM
             }
-            scap_direct3d::PixelFormat::B8G8R8A8Unorm => {
+            sorbit_direct3d::PixelFormat::B8G8R8A8Unorm => {
                 ::windows::Win32::Graphics::Dxgi::Common::DXGI_FORMAT_B8G8R8A8_UNORM
             }
         };
@@ -355,7 +355,7 @@ impl ScreenCaptureConfig<Direct3DCapture> {
     pub async fn to_sources(
         &self,
     ) -> anyhow::Result<(VideoSourceConfig, Option<SystemAudioSourceConfig>)> {
-        let mut settings = scap_direct3d::Settings {
+        let mut settings = sorbit_direct3d::Settings {
             pixel_format: Direct3DCapture::PIXEL_FORMAT,
             crop: self.config.crop_bounds.map(|b| {
                 let position = b.position();
@@ -378,15 +378,15 @@ impl ScreenCaptureConfig<Direct3DCapture> {
             ..Default::default()
         };
 
-        if let Ok(true) = scap_direct3d::Settings::can_is_border_required() {
+        if let Ok(true) = sorbit_direct3d::Settings::can_is_border_required() {
             settings.is_border_required = Some(false);
         }
 
-        if let Ok(true) = scap_direct3d::Settings::can_is_cursor_capture_enabled() {
+        if let Ok(true) = sorbit_direct3d::Settings::can_is_cursor_capture_enabled() {
             settings.is_cursor_capture_enabled = Some(self.config.show_cursor);
         }
 
-        if let Ok(true) = scap_direct3d::Settings::can_min_update_interval() {
+        if let Ok(true) = sorbit_direct3d::Settings::can_min_update_interval() {
             settings.min_update_interval =
                 Some(Duration::from_secs_f64(1.0 / self.config.fps as f64));
         }
@@ -416,7 +416,7 @@ pub enum VideoSourceError {
 pub struct VideoSourceConfig {
     video_info: VideoInfo,
     display_id: DisplayId,
-    settings: scap_direct3d::Settings,
+    settings: sorbit_direct3d::Settings,
     pub d3d_device: ID3D11Device,
 }
 pub struct VideoSource {
@@ -435,7 +435,7 @@ const RESTART_DELAY: Duration = Duration::from_secs(1);
 
 struct CreateCapturerParams<'a> {
     display_id: &'a DisplayId,
-    settings: &'a scap_direct3d::Settings,
+    settings: &'a sorbit_direct3d::Settings,
     d3d_device: &'a ID3D11Device,
     video_tx: &'a mpsc::Sender<VideoFrame>,
     video_frame_counter: &'a Arc<AtomicU32>,
@@ -450,14 +450,14 @@ struct CreateCapturerParams<'a> {
 fn create_d3d_capturer(
     params: &CreateCapturerParams,
     error_tx: &mpsc::Sender<anyhow::Error>,
-) -> anyhow::Result<scap_direct3d::Capturer> {
+) -> anyhow::Result<sorbit_direct3d::Capturer> {
     let capture_item = Display::from_id(params.display_id)
         .ok_or_else(|| anyhow!("Display not found for ID: {:?}", params.display_id))?
         .raw_handle()
         .try_as_capture_item()
         .map_err(|e| anyhow!("Failed to create GraphicsCaptureItem: {}", e))?;
 
-    scap_direct3d::Capturer::new(
+    sorbit_direct3d::Capturer::new(
         capture_item,
         params.settings.clone(),
         {
@@ -593,7 +593,7 @@ impl output_pipeline::VideoSource for VideoSource {
             let scaled_frame_count = scaled_frame_count.clone();
             let stats_health_tx = stats_health_tx.clone();
             move || {
-                cap_mediafoundation_utils::thread_init();
+                orbit_mediafoundation_utils::thread_init();
 
                 let video_frame_counter: Arc<AtomicU32> = Arc::new(AtomicU32::new(0));
                 let video_drop_counter: Arc<AtomicU32> = Arc::new(AtomicU32::new(0));
@@ -694,8 +694,8 @@ impl output_pipeline::VideoSource for VideoSource {
                 loop {
                     match ctrl_rx.recv() {
                         Ok(VideoControl::Stop(reply)) => {
-                            if let Some(mut cap) = capturer.take() {
-                                let _ = reply.send(cap.stop().map_err(Into::into));
+                            if let Some(mut orbit) = capturer.take() {
+                                let _ = reply.send(orbit.stop().map_err(Into::into));
                             } else {
                                 let _ = reply.send(Ok(()));
                             }
@@ -818,7 +818,7 @@ pub enum StartCapturingError {
     #[error("AlreadyCapturing")]
     AlreadyCapturing,
     #[error("CreateCapturer/{0}")]
-    CreateCapturer(scap_direct3d::NewCapturerError),
+    CreateCapturer(sorbit_direct3d::NewCapturerError),
     #[error("StartCapturer/{0}")]
     StartCapturer(::windows::core::Error),
 }
@@ -830,7 +830,7 @@ const SILENCE_CHUNKS_ON_SWITCH: usize = 5;
 pub struct SystemAudioSourceConfig;
 
 struct CapturerState {
-    capturer: Option<scap_cpal::Capturer>,
+    capturer: Option<sorbit_cpal::Capturer>,
     is_started: bool,
     device_name: String,
 }
@@ -898,7 +898,7 @@ fn create_system_audio_capturer(
     error_flag: Arc<AtomicBool>,
     last_timestamp: Arc<std::sync::Mutex<Option<Timestamp>>>,
     original_info: AudioInfo,
-) -> Result<scap_cpal::Capturer, scap_cpal::CapturerError> {
+) -> Result<sorbit_cpal::Capturer, sorbit_cpal::CapturerError> {
     let new_info = Direct3DCapture::audio_info();
     let needs_resample = new_info.sample_rate != original_info.sample_rate
         || new_info.channels != original_info.channels
@@ -917,13 +917,13 @@ fn create_system_audio_capturer(
         None
     };
 
-    scap_cpal::create_capturer(
+    sorbit_cpal::create_capturer(
         {
             let frame_counter = frame_counter.clone();
             let drop_counter = drop_counter.clone();
             let last_timestamp = last_timestamp.clone();
             move |data, info, config| {
-                use scap_ffmpeg::*;
+                use sorbit_ffmpeg::*;
 
                 let timestamp = Timestamp::from_cpal(info.timestamp().capture);
                 let raw_frame = data.as_ffmpeg(config);
@@ -1201,7 +1201,7 @@ impl output_pipeline::AudioSource for SystemAudioSource {
         }
     }
 
-    fn audio_info(&self) -> cap_media_info::AudioInfo {
+    fn audio_info(&self) -> orbit_media_info::AudioInfo {
         self.audio_info
     }
 

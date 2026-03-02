@@ -1,9 +1,9 @@
-import { db } from "@cap/database";
-import { nanoId } from "@cap/database/helpers";
-import { users } from "@cap/database/schema";
-import { buildEnv, serverEnv } from "@cap/env";
-import { stripe } from "@cap/utils";
-import { Organisation, User } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { nanoId } from "@orbit/database/helpers";
+import { users } from "@orbit/database/schema";
+import { buildEnv, serverEnv } from "@orbit/env";
+import { stripe } from "@orbit/utils";
+import { Organisation, User } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { PostHog } from "posthog-node";

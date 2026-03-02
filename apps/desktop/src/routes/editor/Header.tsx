@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import { ask } from "@tauri-apps/plugin-dialog";
 import { revealItemInDir } from "@tauri-apps/plugin-opener";
@@ -83,7 +83,7 @@ export function Header() {
 						await commands.editorDeleteProject();
 					}}
 					tooltipText="Delete recording"
-					leftIcon={<IconCapTrash class="w-5" />}
+					leftIcon={<IconOrbitTrash class="w-5" />}
 				/>
 				<EditorButton
 					onClick={() => {
@@ -98,7 +98,7 @@ export function Header() {
 
 				<div class="flex flex-row items-center">
 					<NameEditor name={meta().prettyName} />
-					<span class="text-sm text-gray-11">.cap</span>
+					<span class="text-sm text-gray-11">.orbit</span>
 				</div>
 				<div data-tauri-drag-region class="flex-1 h-full" />
 				<EditorButton
@@ -106,7 +106,7 @@ export function Header() {
 						if (clearTimelineSelection()) return;
 					}}
 					tooltipText="Captions"
-					leftIcon={<IconCapCaptions class="w-5" />}
+					leftIcon={<IconOrbitCaptions class="w-5" />}
 					comingSoon={true}
 				/>
 				<EditorButton
@@ -114,7 +114,7 @@ export function Header() {
 						if (clearTimelineSelection()) return;
 					}}
 					tooltipText="Performance"
-					leftIcon={<IconCapGauge class="w-[18px]" />}
+					leftIcon={<IconOrbitGauge class="w-[18px]" />}
 					comingSoon={true}
 				/>
 			</div>
@@ -143,7 +143,7 @@ export function Header() {
 						!projectHistory.canUndo() && !editorState.timeline.selection
 					}
 					tooltipText="Undo"
-					leftIcon={<IconCapUndo class="w-5" />}
+					leftIcon={<IconOrbitUndo class="w-5" />}
 				/>
 				<EditorButton
 					onClick={() => {
@@ -155,7 +155,7 @@ export function Header() {
 						!projectHistory.canRedo() && !editorState.timeline.selection
 					}
 					tooltipText="Redo"
-					leftIcon={<IconCapRedo class="w-5" />}
+					leftIcon={<IconOrbitRedo class="w-5" />}
 				/>
 				<div data-tauri-drag-region class="flex-1 h-full" />
 				<Button

@@ -1,5 +1,5 @@
 use anyhow::Result;
-use cap_audio::AudioData;
+use orbit_audio::AudioData;
 use ffmpeg::{
     ChannelLayout, codec as avcodec,
     format::{self as avformat},
@@ -20,7 +20,7 @@ use tokio::sync::Mutex;
 use tracing::instrument;
 use whisper_rs::{FullParams, SamplingStrategy, WhisperContext, WhisperContextParameters};
 
-pub use cap_project::{CaptionSegment, CaptionSettings, CaptionWord};
+pub use orbit_project::{CaptionSegment, CaptionSettings, CaptionWord};
 
 use crate::http_client;
 
@@ -64,8 +64,8 @@ async fn extract_audio_from_video(video_path: &str, output_path: &PathBuf) -> Re
     log::info!("Attempting to extract audio from: {video_path}");
     log::info!("Output path: {output_path:?}");
 
-    if video_path.ends_with(".cap") {
-        log::info!("Detected .cap project directory");
+    if video_path.ends_with(".orbit") {
+        log::info!("Detected .orbit project directory");
 
         let meta_path = std::path::Path::new(video_path).join("recording-meta.json");
         let meta_content = std::fs::read_to_string(&meta_path)
@@ -321,7 +321,7 @@ async fn extract_audio_from_video(video_path: &str, output_path: &PathBuf) -> Re
             .write_trailer()
             .map_err(|e| format!("Failed to write trailer: {e}"))?;
 
-        log::info!("=== EXTRACT AUDIO END (from .cap) ===");
+        log::info!("=== EXTRACT AUDIO END (from .orbit) ===");
         Ok(())
     } else {
         let mut input =
@@ -779,7 +779,7 @@ fn process_with_whisper(
 
     Ok(CaptionData {
         segments,
-        settings: Some(cap_project::CaptionSettings::default()),
+        settings: Some(orbit_project::CaptionSettings::default()),
     })
 }
 
@@ -1075,7 +1075,7 @@ pub async fn save_captions(
     Ok(())
 }
 
-pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, String> {
+pub fn parse_captions_json(json: &str) -> Result<orbit_project::CaptionsData, String> {
     match serde_json::from_str::<serde_json::Value>(json) {
         Ok(json_value) => {
             if let Some(segments_array) = json_value.get("segments").and_then(|v| v.as_array()) {
@@ -1096,7 +1096,7 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                                     word.get("start").and_then(|v| v.as_f64()),
                                     word.get("end").and_then(|v| v.as_f64()),
                                 ) {
-                                    words.push(cap_project::CaptionWord {
+                                    words.push(orbit_project::CaptionWord {
                                         text: w_text.to_string(),
                                         start: w_start as f32,
                                         end: w_end as f32,
@@ -1104,7 +1104,7 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                                 }
                             }
                         }
-                        segments.push(cap_project::CaptionSegment {
+                        segments.push(orbit_project::CaptionSegment {
                             id: id.to_string(),
                             start: start as f32,
                             end: end as f32,
@@ -1210,7 +1210,7 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         .and_then(|v| v.as_bool())
                         .unwrap_or(false);
 
-                    cap_project::CaptionSettings {
+                    orbit_project::CaptionSettings {
                         enabled,
                         font,
                         size,
@@ -1230,10 +1230,10 @@ pub fn parse_captions_json(json: &str) -> Result<cap_project::CaptionsData, Stri
                         active_word_highlight,
                     }
                 } else {
-                    cap_project::CaptionSettings::default()
+                    orbit_project::CaptionSettings::default()
                 };
 
-                Ok(cap_project::CaptionsData { segments, settings })
+                Ok(orbit_project::CaptionsData { segments, settings })
             } else {
                 Err("Missing or invalid segments array in captions file".to_string())
             }
@@ -1316,7 +1316,7 @@ fn app_captions_dir(app: &AppHandle, video_id: &str) -> Result<PathBuf, String> 
         .app_data_dir()
         .map_err(|_| "Failed to get app data directory".to_string())?;
 
-    let clean_video_id = video_id.trim_end_matches(".cap");
+    let clean_video_id = video_id.trim_end_matches(".orbit");
     let captions_dir = app_dir.join("captions").join(clean_video_id);
 
     tracing::info!("Captions directory path: {:?}", captions_dir);

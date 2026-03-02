@@ -1,15 +1,15 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
 import {
 	folders,
 	organizationMembers,
 	organizations,
 	sharedVideos,
 	videos,
-} from "@cap/database/schema";
-import type { Organisation, Video } from "@cap/web-domain";
+} from "@orbit/database/schema";
+import type { Organisation, Video } from "@orbit/web-domain";
 import { and, eq, inArray } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 

@@ -1,6 +1,6 @@
-import { serverEnv } from "@cap/env";
-import { provideOptionalAuth, S3Buckets, Videos } from "@cap/web-backend";
-import { Video } from "@cap/web-domain";
+import { serverEnv } from "@orbit/env";
+import { provideOptionalAuth, S3Buckets, Videos } from "@orbit/web-backend";
+import { Video } from "@orbit/web-domain";
 import {
 	HttpApi,
 	HttpApiBuilder,

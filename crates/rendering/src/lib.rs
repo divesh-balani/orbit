@@ -1,5 +1,5 @@
 use anyhow::Result;
-use cap_project::{
+use orbit_project::{
     AspectRatio, CameraShape, CameraXPosition, CameraYPosition, ClipOffsets, CornerStyle, Crop,
     CursorEvents, MaskKind, ProjectConfiguration, RecordingMeta, StudioRecordingMeta, XY,
 };
@@ -911,7 +911,7 @@ async fn decode_segment_frames_with_retry(
     decoders: &RecordingSegmentDecoders,
     segment_time: f64,
     needs_camera: bool,
-    offsets: cap_project::ClipOffsets,
+    offsets: orbit_project::ClipOffsets,
     current_frame_number: u32,
     is_initial_frame: bool,
 ) -> Option<DecodedSegmentFrames> {
@@ -1114,7 +1114,7 @@ impl RenderVideoConstants {
         }
 
         let device_descriptor = wgpu::DeviceDescriptor {
-            label: Some("cap-rendering-device"),
+            label: Some("orbit-rendering-device"),
             required_features,
             ..Default::default()
         };
@@ -2961,7 +2961,7 @@ fn srgb_to_linear(c: u16) -> f32 {
 #[cfg(test)]
 mod project_uniforms_tests {
     use super::*;
-    use cap_project::CursorMoveEvent;
+    use orbit_project::CursorMoveEvent;
 
     fn cursor_move(time_ms: f64, x: f64, y: f64) -> CursorMoveEvent {
         CursorMoveEvent {

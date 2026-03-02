@@ -1,5 +1,5 @@
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
 import {
 	comments,
 	organizationMembers,
@@ -10,24 +10,24 @@ import {
 	users,
 	videos,
 	videoUploads,
-} from "@cap/database/schema";
-import type { VideoMetadata } from "@cap/database/types";
-import { buildEnv } from "@cap/env";
-import { Logo } from "@cap/ui";
-import { userIsPro } from "@cap/utils";
+} from "@orbit/database/schema";
+import type { VideoMetadata } from "@orbit/database/types";
+import { buildEnv } from "@orbit/env";
+import { Logo } from "@orbit/ui";
+import { userIsPro } from "@orbit/utils";
 import {
 	Database,
 	ImageUploads,
 	provideOptionalAuth,
 	Videos,
-} from "@cap/web-backend";
-import { VideosPolicy } from "@cap/web-backend/src/Videos/VideosPolicy";
+} from "@orbit/web-backend";
+import { VideosPolicy } from "@orbit/web-backend/src/Videos/VideosPolicy";
 import {
 	Comment,
 	type Organisation,
 	Policy,
 	type Video,
-} from "@cap/web-domain";
+} from "@orbit/web-domain";
 import { and, eq, type InferSelectModel, isNull, sql } from "drizzle-orm";
 import { Effect, Option } from "effect";
 import type { Metadata } from "next";
@@ -176,8 +176,8 @@ export async function generateMetadata(
 			Option.match({
 				onNone: () => notFound(),
 				onSome: ([video]) => ({
-					title: `${video.name} | Cap Recording`,
-					description: "Watch this video on Cap",
+					title: `${video.name} | Orbit Recording`,
+					description: "Watch this video on Orbit",
 					openGraph: {
 						images: [
 							{
@@ -203,8 +203,8 @@ export async function generateMetadata(
 					},
 					twitter: {
 						card: "player",
-						title: `${video.name} | Cap Recording`,
-						description: "Watch this video on Cap",
+						title: `${video.name} | Orbit Recording`,
+						description: "Watch this video on Orbit",
 						images: [
 							new URL(
 								`/api/video/og?videoId=${videoId}`,
@@ -231,7 +231,7 @@ export async function generateMetadata(
 		Effect.catchTags({
 			PolicyDenied: () =>
 				Effect.succeed({
-					title: "Cap: This video is restricted",
+					title: "Orbit: This video is restricted",
 					description: "This video has restricted access.",
 					openGraph: {
 						images: [
@@ -260,7 +260,7 @@ export async function generateMetadata(
 				}),
 			VerifyVideoPasswordError: () =>
 				Effect.succeed({
-					title: "Cap: Password Protected Video",
+					title: "Orbit: Password Protected Video",
 					description: "This video is password protected.",
 					openGraph: {
 						images: [
@@ -276,7 +276,7 @@ export async function generateMetadata(
 					},
 					twitter: {
 						card: "summary_large_image",
-						title: "Cap: Password Protected Video",
+						title: "Orbit: Password Protected Video",
 						description: "This video is password protected.",
 						images: [
 							new URL(

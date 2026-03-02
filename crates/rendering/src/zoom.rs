@@ -1,4 +1,4 @@
-use cap_project::{XY, ZoomSegment};
+use orbit_project::{XY, ZoomSegment};
 
 use crate::{Coord, RawDisplayUVSpace};
 
@@ -61,11 +61,11 @@ impl SegmentBounds {
         zoom_focus: Coord<RawDisplayUVSpace>,
         actual_cursor: Option<Coord<RawDisplayUVSpace>>,
     ) -> Self {
-        let is_auto_mode = matches!(segment.mode, cap_project::ZoomMode::Auto);
+        let is_auto_mode = matches!(segment.mode, orbit_project::ZoomMode::Auto);
 
         let focus_pos = match segment.mode {
-            cap_project::ZoomMode::Auto => (zoom_focus.x, zoom_focus.y),
-            cap_project::ZoomMode::Manual { x, y } => (x as f64, y as f64),
+            orbit_project::ZoomMode::Auto => (zoom_focus.x, zoom_focus.y),
+            orbit_project::ZoomMode::Manual { x, y } => (x as f64, y as f64),
         };
 
         let (effective_zoom, viewport_center) = if is_auto_mode {
@@ -314,7 +314,7 @@ impl InterpolatedZoom {
         let is_auto_mode = cursor
             .segment
             .or(cursor.prev_segment)
-            .map(|s| matches!(s.mode, cap_project::ZoomMode::Auto))
+            .map(|s| matches!(s.mode, orbit_project::ZoomMode::Auto))
             .unwrap_or(false);
 
         let result = match (cursor.prev_segment, cursor.segment) {
@@ -558,7 +558,7 @@ fn t_clamp(v: f64) -> f64 {
 
 #[cfg(test)]
 mod test {
-    use cap_project::{GlideDirection, ZoomMode, ZoomSegment};
+    use orbit_project::{GlideDirection, ZoomMode, ZoomSegment};
 
     use super::*;
 

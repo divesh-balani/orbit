@@ -7,8 +7,8 @@ import {
 	CardTitle,
 	Input,
 	Select,
-} from "@cap/ui";
-import { type ImageUpload, Organisation } from "@cap/web-domain";
+} from "@orbit/ui";
+import { type ImageUpload, Organisation } from "@orbit/web-domain";
 import { useMutation } from "@tanstack/react-query";
 import { Effect, Option } from "effect";
 import { useRouter } from "next/navigation";
@@ -182,7 +182,7 @@ export const Settings = () => {
 						<CardTitle>Your name</CardTitle>
 						<CardDescription>
 							Changing your name below will update how your name appears when
-							sharing a Cap, and in your profile.
+							sharing a Orbit, and in your profile.
 						</CardDescription>
 					</div>
 					<div className="flex flex-col flex-wrap gap-3 w-full">
@@ -212,7 +212,7 @@ export const Settings = () => {
 					<div className="space-y-1">
 						<CardTitle>Contact email address</CardTitle>
 						<CardDescription>
-							This is the email address you used to sign up to Cap with.
+							This is the email address you used to sign up to Orbit with.
 						</CardDescription>
 					</div>
 					<Input

@@ -1,10 +1,10 @@
 import { Collapsible } from "@kobalte/core/collapsible";
 import { Popover } from "@kobalte/core/popover";
 import { Toggle } from "~/components/Toggle";
-import IconCapEnlarge from "~icons/cap/enlarge";
-import IconCapImage from "~icons/cap/image";
-import IconCapShadow from "~icons/cap/shadow";
-import IconCapSquare from "~icons/cap/square";
+import IconOrbitEnlarge from "~icons/orbit/enlarge";
+import IconOrbitImage from "~icons/orbit/image";
+import IconOrbitShadow from "~icons/orbit/shadow";
+import IconOrbitSquare from "~icons/orbit/square";
 import { RgbInput } from "../ColorPicker";
 import { useScreenshotEditorContext } from "../context";
 import { EditorButton, Field, Slider } from "../ui";
@@ -26,7 +26,7 @@ export function BorderPopover() {
 				onClick={() =>
 					setActivePopover(activePopover() === "border" ? null : "border")
 				}
-				leftIcon={<IconCapSquare class="size-4" />}
+				leftIcon={<IconOrbitSquare class="size-4" />}
 				tooltipText="Border"
 				kbd={["E"]}
 			/>
@@ -55,7 +55,7 @@ export function BorderPopover() {
 						<Collapsible open={project.background.border?.enabled ?? false}>
 							<Collapsible.Content class="overflow-hidden opacity-0 transition-opacity animate-collapsible-up ui-expanded:animate-collapsible-down ui-expanded:opacity-100">
 								<div class="flex flex-col gap-4">
-									<Field name="Width" icon={<IconCapEnlarge class="size-4" />}>
+									<Field name="Width" icon={<IconOrbitEnlarge class="size-4" />}>
 										<Slider
 											value={[project.background.border?.width ?? 5.0]}
 											onChange={(v) =>
@@ -75,7 +75,7 @@ export function BorderPopover() {
 											formatTooltip="px"
 										/>
 									</Field>
-									<Field name="Color" icon={<IconCapImage class="size-4" />}>
+									<Field name="Color" icon={<IconOrbitImage class="size-4" />}>
 										<RgbInput
 											value={project.background.border?.color ?? [0, 0, 0]}
 											onChange={(color) =>
@@ -91,7 +91,7 @@ export function BorderPopover() {
 											}
 										/>
 									</Field>
-									<Field name="Opacity" icon={<IconCapShadow class="size-4" />}>
+									<Field name="Opacity" icon={<IconOrbitShadow class="size-4" />}>
 										<Slider
 											value={[project.background.border?.opacity ?? 50.0]}
 											onChange={(v) =>

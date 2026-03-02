@@ -58,39 +58,39 @@ export async function GET(
 		{ url: string; fallback: FallbackPlatform }
 	> = {
 		"apple-intel": {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/dmg-x86_64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/dmg-x86_64",
 			fallback: "macos-x64",
 		},
 		intel: {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/dmg-x86_64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/dmg-x86_64",
 			fallback: "macos-x64",
 		},
 		mac: {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/dmg-aarch64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/dmg-aarch64",
 			fallback: "macos-arm64",
 		},
 		macos: {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/dmg-aarch64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/dmg-aarch64",
 			fallback: "macos-arm64",
 		},
 		"apple-silicon": {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/dmg-aarch64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/dmg-aarch64",
 			fallback: "macos-arm64",
 		},
 		aarch64: {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/dmg-aarch64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/dmg-aarch64",
 			fallback: "macos-arm64",
 		},
 		x86_64: {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/dmg-x86_64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/dmg-x86_64",
 			fallback: "macos-x64",
 		},
 		windows: {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/nsis-x86_64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/nsis-x86_64",
 			fallback: "windows",
 		},
 		win: {
-			url: "https://cdn.crabnebula.app/download/cap/cap/latest/platform/nsis-x86_64",
+			url: "https://cdn.crabnebula.app/download/orbit/orbit/latest/platform/nsis-x86_64",
 			fallback: "windows",
 		},
 	};

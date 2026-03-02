@@ -1,4 +1,4 @@
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 
 /**
  * Calculate organization seats information
@@ -12,7 +12,7 @@ export function calculateSeats(organization: {
 	const memberCount = organization?.members?.length ?? 0;
 	const pendingInvitesCount = organization?.invites?.length ?? 0;
 	const totalUsedSeats = memberCount + pendingInvitesCount;
-	const remainingSeats = buildEnv.NEXT_PUBLIC_IS_CAP
+	const remainingSeats = buildEnv.NEXT_PUBLIC_IS_ORBIT
 		? Math.max(0, inviteQuota - totalUsedSeats)
 		: Number.MAX_SAFE_INTEGER;
 

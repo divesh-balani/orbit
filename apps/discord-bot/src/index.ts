@@ -12,7 +12,7 @@ const PUBLIC_KEY =
 	"fea8bb4c1432223609db5a37e074c5a5474b89bf4bea12515bc4e09d564e4f61";
 
 const GITHUB_ORG = "CapSoftware";
-const GITHUB_REPO = "Cap";
+const GITHUB_REPO = "Orbit";
 const GITHUB_APP_ID = 1196731;
 const GITHUB_APP_INSTALLATION = 63538726;
 const WORKFLOW_FILE = "publish.yml";
@@ -102,7 +102,7 @@ const ghActionsOidc = createMiddleware<{
 		const publicKey = await jose.importJWK(signingKey);
 		const { payload } = await jose.jwtVerify(token, publicKey, {
 			issuer: "https://token.actions.githubusercontent.com",
-			audience: "cap-discord-bot",
+			audience: "orbit-discord-bot",
 		});
 
 		if (!payload.sub) return new Response("Missing sub claim", { status: 401 });
@@ -331,7 +331,7 @@ function releaseDraftedMessageComponents(props: {
 		{
 			type: 2,
 			label: "CN Cloud Release",
-			url: `https://web.crabnebula.cloud/org/cap/cap/releases/${props.cnReleaseId}`,
+			url: `https://web.crabnebula.cloud/org/orbit/orbit/releases/${props.cnReleaseId}`,
 			style: 5,
 		},
 		{

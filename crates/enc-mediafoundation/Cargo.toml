@@ -1,10 +1,10 @@
 [package]
-name = "cap-enc-mediafoundation"
+name = "orbit-enc-mediafoundation"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-cap-media-info = { path = "../media-info" }
+orbit-media-info = { path = "../media-info" }
 futures.workspace = true
 thiserror.workspace = true
 tracing.workspace = true
@@ -46,10 +46,10 @@ windows = { workspace = true, features = [
 ] }
 windows-core.workspace = true
 windows-numerics = "0.2.0"
-scap-direct3d = { path = "../scap-direct3d" }
+sorbit-direct3d = { path = "../sorbit-direct3d" }
 
 [dev-dependencies]
-scap-targets = { path = "../scap-targets" }
+sorbit-targets = { path = "../sorbit-targets" }
 clap = { version = "4.5.46", features = ["derive"] }
 
 [lints]

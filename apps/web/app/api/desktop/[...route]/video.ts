@@ -1,7 +1,7 @@
-import { db } from "@cap/database";
-import { sendEmail } from "@cap/database/emails/config";
-import { FirstShareableLink } from "@cap/database/emails/first-shareable-link";
-import { nanoId } from "@cap/database/helpers";
+import { db } from "@orbit/database";
+import { sendEmail } from "@orbit/database/emails/config";
+import { FirstShareableLink } from "@orbit/database/emails/first-shareable-link";
+import { nanoId } from "@orbit/database/helpers";
 import {
 	organizationMembers,
 	organizations,
@@ -9,11 +9,11 @@ import {
 	users,
 	videos,
 	videoUploads,
-} from "@cap/database/schema";
-import { buildEnv, NODE_ENV, serverEnv } from "@cap/env";
-import { dub, userIsPro } from "@cap/utils";
-import { S3Buckets } from "@cap/web-backend";
-import { Organisation, Video } from "@cap/web-domain";
+} from "@orbit/database/schema";
+import { buildEnv, NODE_ENV, serverEnv } from "@orbit/env";
+import { dub, userIsPro } from "@orbit/utils";
+import { S3Buckets } from "@orbit/web-backend";
+import { Organisation, Video } from "@orbit/web-domain";
 import { zValidator } from "@hono/zod-validator";
 import { and, count, eq, lte, or } from "drizzle-orm";
 import { Effect, Option } from "effect";
@@ -163,7 +163,7 @@ app.get(
 
 			const videoName =
 				name ??
-				`Cap ${isScreenshot ? "Screenshot" : "Recording"} - ${formattedDate}`;
+				`Orbit ${isScreenshot ? "Screenshot" : "Recording"} - ${formattedDate}`;
 
 			await db()
 				.insert(videos)
@@ -180,7 +180,7 @@ app.get(
 								: undefined,
 					isScreenshot,
 					bucket: customBucket?.id,
-					public: serverEnv().CAP_VIDEOS_DEFAULT_PUBLIC,
+					public: serverEnv().ORBIT_VIDEOS_DEFAULT_PUBLIC,
 					duration: durationInSecs,
 					width,
 					height,
@@ -198,10 +198,10 @@ app.get(
 					mode: "singlepart",
 				});
 
-			if (buildEnv.NEXT_PUBLIC_IS_CAP && NODE_ENV === "production")
+			if (buildEnv.NEXT_PUBLIC_IS_ORBIT && NODE_ENV === "production")
 				await dub().links.create({
 					url: `${serverEnv().WEB_URL}/s/${idToUse}`,
-					domain: "cap.link",
+					domain: "orbit.link",
 					key: idToUse,
 				});
 
@@ -216,13 +216,13 @@ app.get(
 						"[SendFirstShareableLinkEmail] Sending first shareable link email with 5-minute delay",
 					);
 
-					const videoUrl = buildEnv.NEXT_PUBLIC_IS_CAP
-						? `https://cap.link/${idToUse}`
+					const videoUrl = buildEnv.NEXT_PUBLIC_IS_ORBIT
+						? `https://orbit.link/${idToUse}`
 						: `${serverEnv().WEB_URL}/s/${idToUse}`;
 
 					await sendEmail({
 						email: user.email,
-						subject: "You created your first Cap! 🥳",
+						subject: "You created your first Orbit! 🥳",
 						react: FirstShareableLink({
 							email: user.email,
 							url: videoUrl,

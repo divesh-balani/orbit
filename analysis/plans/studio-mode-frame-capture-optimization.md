@@ -64,7 +64,7 @@ Studio mode recording flows through:
 
 ```rust
 fn get_muxer_buffer_size() -> usize {
-    std::env::var("CAP_MUXER_BUFFER_SIZE")
+    std::env::var("ORBIT_MUXER_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(3)  // <-- ONLY 3 FRAMES!
@@ -102,7 +102,7 @@ match state.video_tx.try_send(Some((frame.sample_buf, adjusted_timestamp))) {
 
 ```rust
 fn get_screen_buffer_size() -> usize {
-    std::env::var("CAP_SCREEN_BUFFER_SIZE")
+    std::env::var("ORBIT_SCREEN_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(4)  // Only 4 frames
@@ -175,7 +175,7 @@ if was_cancelled {
 
 ```rust
 fn get_pixel_buffer_pool_size() -> usize {
-    std::env::var("CAP_PIXEL_BUFFER_POOL_SIZE")
+    std::env::var("ORBIT_PIXEL_BUFFER_POOL_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(20)  // 20 buffers
@@ -210,7 +210,7 @@ Align macOS muxer buffer size with Windows to provide adequate buffering for enc
 **Implementation:**
 ```rust
 fn get_muxer_buffer_size() -> usize {
-    std::env::var("CAP_MUXER_BUFFER_SIZE")
+    std::env::var("ORBIT_MUXER_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(60)  // 1 second at 60fps, up from 3
@@ -238,7 +238,7 @@ Increase screen capture channel buffer to provide more tolerance for processing 
 **Implementation:**
 ```rust
 fn get_screen_buffer_size() -> usize {
-    std::env::var("CAP_SCREEN_BUFFER_SIZE")
+    std::env::var("ORBIT_SCREEN_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(15)  // 500ms at 30fps, up from 4
@@ -426,7 +426,7 @@ Improve hardware vs software encoder selection and configuration.
 ## Implementation Notes
 
 ### Testing Strategy
-1. Run test suite after each phase: `cargo run -p cap-test -- suite recording`
+1. Run test suite after each phase: `cargo run -p orbit-test -- suite recording`
 2. Compare frame drop percentages against baseline
 3. Test under both low and high system load conditions
 4. Verify no regressions in audio sync
@@ -434,16 +434,16 @@ Improve hardware vs software encoder selection and configuration.
 ### Environment Variables for Tuning
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `CAP_MUXER_BUFFER_SIZE` | 3 (macOS), 240 (Windows) | Muxer channel buffer |
-| `CAP_SCREEN_BUFFER_SIZE` | 4 | Screen capture channel buffer |
-| `CAP_VIDEO_SOURCE_BUFFER_SIZE` | 300 | Video source channel capacity |
-| `CAP_PIXEL_BUFFER_POOL_SIZE` | 20 | Pixel buffer pool count |
-| `CAP_MAX_QUEUE_DEPTH` | 8 | ScreenCaptureKit queue depth |
+| `ORBIT_MUXER_BUFFER_SIZE` | 3 (macOS), 240 (Windows) | Muxer channel buffer |
+| `ORBIT_SCREEN_BUFFER_SIZE` | 4 | Screen capture channel buffer |
+| `ORBIT_VIDEO_SOURCE_BUFFER_SIZE` | 300 | Video source channel capacity |
+| `ORBIT_PIXEL_BUFFER_POOL_SIZE` | 20 | Pixel buffer pool count |
+| `ORBIT_MAX_QUEUE_DEPTH` | 8 | ScreenCaptureKit queue depth |
 
 ### Rollback Plan
 All changes use environment variables with fallback to current defaults. To rollback:
-1. Set `CAP_MUXER_BUFFER_SIZE=3` to restore original macOS buffer
-2. Set `CAP_SCREEN_BUFFER_SIZE=4` to restore original screen buffer
+1. Set `ORBIT_MUXER_BUFFER_SIZE=3` to restore original macOS buffer
+2. Set `ORBIT_SCREEN_BUFFER_SIZE=4` to restore original screen buffer
 3. Changes are additive and backward compatible
 
 ### Dependencies

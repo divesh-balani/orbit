@@ -1012,615 +1012,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "cap"
-version = "0.1.0"
-dependencies = [
- "cap-camera",
- "cap-editor",
- "cap-export",
- "cap-flags",
- "cap-media",
- "cap-project",
- "cap-recording",
- "cap-rendering",
- "cap-utils",
- "cidre",
- "clap",
- "ffmpeg-next",
- "flume",
- "scap-targets",
- "serde",
- "serde_json",
- "tokio",
- "tracing",
- "tracing-subscriber",
- "uuid",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-api"
-version = "0.0.0"
-dependencies = [
- "reqwest 0.12.24",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-audio"
-version = "0.1.0"
-dependencies = [
- "cidre",
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "ffmpeg-next",
- "serde",
- "serde_json",
- "tempfile",
- "tokio",
- "tracing",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-camera"
-version = "0.1.0"
-dependencies = [
- "cap-camera-avfoundation",
- "cap-camera-windows",
- "cidre",
- "inquire",
- "objc2-av-foundation",
- "serde",
- "specta",
- "thiserror 1.0.69",
- "windows 0.60.0",
- "windows-core 0.60.1",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-camera-avfoundation"
-version = "0.1.0"
-dependencies = [
- "cidre",
- "clap",
- "inquire",
- "tracing",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-camera-directshow"
-version = "0.1.0"
-dependencies = [
- "inquire",
- "thiserror 1.0.69",
- "tracing",
- "tracing-subscriber",
- "windows 0.60.0",
- "windows-core 0.60.1",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-camera-ffmpeg"
-version = "0.1.0"
-dependencies = [
- "cap-camera",
- "cap-camera-avfoundation",
- "cap-camera-windows",
- "cidre",
- "ffmpeg-next",
- "inquire",
- "thiserror 1.0.69",
- "tracing",
- "windows 0.60.0",
- "windows-core 0.60.1",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-camera-mediafoundation"
-version = "0.1.0"
-dependencies = [
- "cap-mediafoundation-utils",
- "inquire",
- "parking_lot",
- "thiserror 1.0.69",
- "tracing",
- "windows 0.60.0",
- "windows-core 0.60.1",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-camera-windows"
-version = "0.1.0"
-dependencies = [
- "cap-camera-directshow",
- "cap-camera-mediafoundation",
- "cap-mediafoundation-utils",
- "inquire",
- "thiserror 1.0.69",
- "windows 0.60.0",
- "windows-core 0.60.1",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-cpal-ffmpeg"
-version = "0.1.0"
-dependencies = [
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "ffmpeg-next",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-cursor-capture"
-version = "0.1.0"
-dependencies = [
- "core-graphics 0.24.0",
- "device_query",
- "scap-targets",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-cursor-info"
-version = "0.0.0"
-dependencies = [
- "hex",
- "objc2 0.6.2",
- "objc2-app-kit",
- "serde",
- "sha2",
- "specta",
- "strum 0.27.2",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-editor"
-version = "0.1.0"
-dependencies = [
- "axum",
- "cap-audio",
- "cap-media",
- "cap-media-info",
- "cap-project",
- "cap-rendering",
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "ffmpeg-next",
- "flume",
- "futures",
- "lru",
- "ringbuf",
- "sentry",
- "serde",
- "specta",
- "tokio",
- "tokio-util",
- "tracing",
- "tracing-subscriber",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-enc-avfoundation"
-version = "0.1.0"
-dependencies = [
- "cap-media-info",
- "cidre",
- "ffmpeg-next",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
- "tracing",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-enc-ffmpeg"
-version = "0.1.0"
-dependencies = [
- "cap-frame-converter",
- "cap-media-info",
- "ffmpeg-next",
- "serde",
- "serde_json",
- "sysinfo 0.32.1",
- "thiserror 1.0.69",
- "tracing",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-enc-gif"
-version = "0.1.0"
-dependencies = [
- "gifski",
- "imgref",
- "rgb",
- "thiserror 1.0.69",
- "tracing",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-enc-mediafoundation"
-version = "0.1.0"
-dependencies = [
- "cap-media-info",
- "clap",
- "futures",
- "scap-direct3d",
- "scap-targets",
- "thiserror 1.0.69",
- "tracing",
- "windows 0.60.0",
- "windows-core 0.60.1",
- "windows-numerics 0.2.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-export"
-version = "0.1.0"
-dependencies = [
- "cap-editor",
- "cap-enc-ffmpeg",
- "cap-enc-gif",
- "cap-flags",
- "cap-media",
- "cap-media-info",
- "cap-project",
- "cap-rendering",
- "cap-utils",
- "chrono",
- "clap",
- "directories 6.0.0",
- "ffmpeg-next",
- "futures",
- "gifski",
- "image 0.25.8",
- "imgref",
- "inquire",
- "mp4",
- "rgb",
- "serde",
- "serde_json",
- "specta",
- "tempfile",
- "thiserror 1.0.69",
- "tokio",
- "tracing",
- "tracing-subscriber",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-fail"
-version = "0.1.0"
-dependencies = [
- "inventory",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-flags"
-version = "0.1.0"
-dependencies = [
- "serde",
- "specta",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-frame-converter"
-version = "0.1.0"
-dependencies = [
- "cap-media-info",
- "crossbeam-channel",
- "ffmpeg-next",
- "flume",
- "parking_lot",
- "thiserror 1.0.69",
- "thread_local",
- "tracing",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-gpu-converters"
-version = "0.1.0"
-dependencies = [
- "thiserror 1.0.69",
- "wgpu",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-media"
-version = "0.1.0"
-dependencies = [
- "cap-media-info",
- "ffmpeg-next",
- "inquire",
- "thiserror 1.0.69",
- "tokio",
- "tracing-subscriber",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-media-info"
-version = "0.1.0"
-dependencies = [
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "ffmpeg-next",
- "thiserror 1.0.69",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-mediafoundation-ffmpeg"
-version = "0.1.0"
-dependencies = [
- "cap-media-info",
- "cap-mediafoundation-utils",
- "ffmpeg-next",
- "flume",
- "thiserror 1.0.69",
- "tracing",
- "windows 0.60.0",
- "windows-numerics 0.2.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-mediafoundation-utils"
-version = "0.1.0"
-dependencies = [
- "windows 0.60.0",
- "windows-core 0.60.1",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-project"
-version = "0.1.0"
-dependencies = [
- "cap-cursor-info",
- "either",
- "log",
- "relative-path",
- "serde",
- "serde_json",
- "specta",
- "tempfile",
- "tracing",
- "uuid",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-recording"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "cap-audio",
- "cap-camera",
- "cap-camera-ffmpeg",
- "cap-camera-windows",
- "cap-cursor-capture",
- "cap-cursor-info",
- "cap-enc-avfoundation",
- "cap-enc-ffmpeg",
- "cap-enc-mediafoundation",
- "cap-fail",
- "cap-flags",
- "cap-frame-converter",
- "cap-media",
- "cap-media-info",
- "cap-mediafoundation-ffmpeg",
- "cap-mediafoundation-utils",
- "cap-project",
- "cap-rendering",
- "cap-timestamp",
- "cap-utils",
- "chrono",
- "cidre",
- "clap",
- "cocoa",
- "core-foundation 0.10.1",
- "core-graphics 0.24.0",
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "device_query",
- "either",
- "ffmpeg-next",
- "flume",
- "foreign-types-shared 0.3.1",
- "futures",
- "hex",
- "image 0.25.8",
- "indexmap 2.11.4",
- "inquire",
- "kameo",
- "libc",
- "libproc",
- "objc",
- "objc2 0.6.2",
- "objc2-app-kit",
- "relative-path",
- "replace_with",
- "retry",
- "ringbuf",
- "scap-cpal",
- "scap-direct3d",
- "scap-ffmpeg",
- "scap-screencapturekit",
- "scap-targets",
- "screencapturekit",
- "serde",
- "serde_json",
- "sha2",
- "specta",
- "sysinfo 0.35.2",
- "tempfile",
- "thiserror 1.0.69",
- "tokio",
- "tokio-util",
- "tracing",
- "tracing-subscriber",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-rendering"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bezier_easing",
- "build-time",
- "bytemuck",
- "cap-cursor-info",
- "cap-flags",
- "cap-project",
- "cap-video-decode",
- "cidre",
- "clap",
- "dirs 5.0.1",
- "ffmpeg-hw-device",
- "ffmpeg-next",
- "foreign-types 0.5.0",
- "futures",
- "futures-intrusive",
- "glyphon",
- "image 0.25.8",
- "log",
- "metal 0.31.0",
- "objc2 0.6.2",
- "pretty_assertions",
- "rayon",
- "reactive_graph",
- "resvg",
- "serde",
- "serde_json",
- "specta",
- "thiserror 1.0.69",
- "tiny-skia",
- "tokio",
- "tracing",
- "wgpu",
- "wgpu-core",
- "wgpu-hal",
- "windows 0.58.0",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-rendering-skia"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "cap-project",
- "foreign-types-shared 0.3.1",
- "futures",
- "metal 0.27.0",
- "skia-safe",
- "thiserror 1.0.69",
- "tracing",
- "tracing-subscriber",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-test"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "cap-camera",
- "cap-media-info",
- "cap-project",
- "cap-recording",
- "chrono",
- "cidre",
- "clap",
- "colored",
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "ffmpeg-next",
- "flume",
- "indicatif",
- "kameo",
- "parking_lot",
- "scap-targets",
- "serde",
- "serde_json",
- "sysinfo 0.35.2",
- "tempfile",
- "thiserror 1.0.69",
- "tokio",
- "toml 0.8.2",
- "tracing",
- "tracing-subscriber",
- "uuid",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-timestamp"
-version = "0.1.0"
-dependencies = [
- "cidre",
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-utils"
-version = "0.1.0"
-dependencies = [
- "aho-corasick",
- "directories 5.0.1",
- "flume",
- "futures",
- "nix 0.29.0",
- "serde",
- "serde_json",
- "tempfile",
- "tokio",
- "tracing",
- "uuid",
- "windows 0.58.0",
- "windows-sys 0.52.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "cap-video-decode"
-version = "0.1.0"
-dependencies = [
- "cidre",
- "ffmpeg-hw-device",
- "ffmpeg-next",
- "num_cpus",
- "tempfile",
- "tokio",
- "tracing",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
 name = "cargo-platform"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6224,6 +5615,177 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8c04f5d74368e4d0dfe06c45c8627c81bd7c317d52762d118fb9b3076f6420fd"
 
 [[package]]
+name = "orbit"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "clap",
+ "ffmpeg-next",
+ "flume",
+ "orbit-camera",
+ "orbit-editor",
+ "orbit-export",
+ "orbit-flags",
+ "orbit-media",
+ "orbit-project",
+ "orbit-recording",
+ "orbit-rendering",
+ "orbit-utils",
+ "serde",
+ "serde_json",
+ "sorbit-targets",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "uuid",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-api"
+version = "0.0.0"
+dependencies = [
+ "reqwest 0.12.24",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-audio"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "ffmpeg-next",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "tokio",
+ "tracing",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-camera"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "inquire",
+ "objc2-av-foundation",
+ "orbit-camera-avfoundation",
+ "orbit-camera-windows",
+ "serde",
+ "specta",
+ "thiserror 1.0.69",
+ "windows 0.60.0",
+ "windows-core 0.60.1",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-camera-avfoundation"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "clap",
+ "inquire",
+ "tracing",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-camera-directshow"
+version = "0.1.0"
+dependencies = [
+ "inquire",
+ "thiserror 1.0.69",
+ "tracing",
+ "tracing-subscriber",
+ "windows 0.60.0",
+ "windows-core 0.60.1",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-camera-ffmpeg"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "ffmpeg-next",
+ "inquire",
+ "orbit-camera",
+ "orbit-camera-avfoundation",
+ "orbit-camera-windows",
+ "thiserror 1.0.69",
+ "tracing",
+ "windows 0.60.0",
+ "windows-core 0.60.1",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-camera-mediafoundation"
+version = "0.1.0"
+dependencies = [
+ "inquire",
+ "orbit-mediafoundation-utils",
+ "parking_lot",
+ "thiserror 1.0.69",
+ "tracing",
+ "windows 0.60.0",
+ "windows-core 0.60.1",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-camera-windows"
+version = "0.1.0"
+dependencies = [
+ "inquire",
+ "orbit-camera-directshow",
+ "orbit-camera-mediafoundation",
+ "orbit-mediafoundation-utils",
+ "thiserror 1.0.69",
+ "windows 0.60.0",
+ "windows-core 0.60.1",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-cpal-ffmpeg"
+version = "0.1.0"
+dependencies = [
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "ffmpeg-next",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-cursor-capture"
+version = "0.1.0"
+dependencies = [
+ "core-graphics 0.24.0",
+ "device_query",
+ "sorbit-targets",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-cursor-info"
+version = "0.0.0"
+dependencies = [
+ "hex",
+ "objc2 0.6.2",
+ "objc2-app-kit",
+ "serde",
+ "sha2",
+ "specta",
+ "strum 0.27.2",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
 name = "orbit-desktop"
 version = "0.4.8"
 dependencies = [
@@ -6234,19 +5796,6 @@ dependencies = [
  "base64 0.22.1",
  "bytemuck",
  "bytes",
- "cap-audio",
- "cap-camera",
- "cap-editor",
- "cap-enc-ffmpeg",
- "cap-export",
- "cap-fail",
- "cap-flags",
- "cap-media",
- "cap-media-info",
- "cap-project",
- "cap-recording",
- "cap-rendering",
- "cap-utils",
  "chrono",
  "cidre",
  "clipboard-rs",
@@ -6275,6 +5824,19 @@ dependencies = [
  "opentelemetry",
  "opentelemetry-otlp",
  "opentelemetry_sdk",
+ "orbit-audio",
+ "orbit-camera",
+ "orbit-editor",
+ "orbit-enc-ffmpeg",
+ "orbit-export",
+ "orbit-fail",
+ "orbit-flags",
+ "orbit-media",
+ "orbit-media-info",
+ "orbit-project",
+ "orbit-recording",
+ "orbit-rendering",
+ "orbit-utils",
  "png 0.17.16",
  "posthog-rs",
  "rand 0.8.5",
@@ -6283,12 +5845,12 @@ dependencies = [
  "reqwest 0.12.24",
  "rodio",
  "sanitize-filename",
- "scap-direct3d",
- "scap-screencapturekit",
- "scap-targets",
  "sentry",
  "serde",
  "serde_json",
+ "sorbit-direct3d",
+ "sorbit-screencapturekit",
+ "sorbit-targets",
  "specta",
  "specta-typescript",
  "swift-rs",
@@ -6331,6 +5893,444 @@ dependencies = [
  "windows 0.60.0",
  "windows-sys 0.59.0",
  "winreg 0.55.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-editor"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "ffmpeg-next",
+ "flume",
+ "futures",
+ "lru",
+ "orbit-audio",
+ "orbit-media",
+ "orbit-media-info",
+ "orbit-project",
+ "orbit-rendering",
+ "ringbuf",
+ "sentry",
+ "serde",
+ "specta",
+ "tokio",
+ "tokio-util",
+ "tracing",
+ "tracing-subscriber",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-enc-avfoundation"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "ffmpeg-next",
+ "orbit-media-info",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+ "tracing",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-enc-ffmpeg"
+version = "0.1.0"
+dependencies = [
+ "ffmpeg-next",
+ "orbit-frame-converter",
+ "orbit-media-info",
+ "serde",
+ "serde_json",
+ "sysinfo 0.32.1",
+ "thiserror 1.0.69",
+ "tracing",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-enc-gif"
+version = "0.1.0"
+dependencies = [
+ "gifski",
+ "imgref",
+ "rgb",
+ "thiserror 1.0.69",
+ "tracing",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-enc-mediafoundation"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "futures",
+ "orbit-media-info",
+ "sorbit-direct3d",
+ "sorbit-targets",
+ "thiserror 1.0.69",
+ "tracing",
+ "windows 0.60.0",
+ "windows-core 0.60.1",
+ "windows-numerics 0.2.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-export"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "clap",
+ "directories 6.0.0",
+ "ffmpeg-next",
+ "futures",
+ "gifski",
+ "image 0.25.8",
+ "imgref",
+ "inquire",
+ "mp4",
+ "orbit-editor",
+ "orbit-enc-ffmpeg",
+ "orbit-enc-gif",
+ "orbit-flags",
+ "orbit-media",
+ "orbit-media-info",
+ "orbit-project",
+ "orbit-rendering",
+ "orbit-utils",
+ "rgb",
+ "serde",
+ "serde_json",
+ "specta",
+ "tempfile",
+ "thiserror 1.0.69",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-fail"
+version = "0.1.0"
+dependencies = [
+ "inventory",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-flags"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "specta",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-frame-converter"
+version = "0.1.0"
+dependencies = [
+ "crossbeam-channel",
+ "ffmpeg-next",
+ "flume",
+ "orbit-media-info",
+ "parking_lot",
+ "thiserror 1.0.69",
+ "thread_local",
+ "tracing",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-gpu-converters"
+version = "0.1.0"
+dependencies = [
+ "thiserror 1.0.69",
+ "wgpu",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-media"
+version = "0.1.0"
+dependencies = [
+ "ffmpeg-next",
+ "inquire",
+ "orbit-media-info",
+ "thiserror 1.0.69",
+ "tokio",
+ "tracing-subscriber",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-media-info"
+version = "0.1.0"
+dependencies = [
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "ffmpeg-next",
+ "thiserror 1.0.69",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-mediafoundation-ffmpeg"
+version = "0.1.0"
+dependencies = [
+ "ffmpeg-next",
+ "flume",
+ "orbit-media-info",
+ "orbit-mediafoundation-utils",
+ "thiserror 1.0.69",
+ "tracing",
+ "windows 0.60.0",
+ "windows-numerics 0.2.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-mediafoundation-utils"
+version = "0.1.0"
+dependencies = [
+ "windows 0.60.0",
+ "windows-core 0.60.1",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-project"
+version = "0.1.0"
+dependencies = [
+ "either",
+ "log",
+ "orbit-cursor-info",
+ "relative-path",
+ "serde",
+ "serde_json",
+ "specta",
+ "tempfile",
+ "tracing",
+ "uuid",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-recording"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "cidre",
+ "clap",
+ "cocoa",
+ "core-foundation 0.10.1",
+ "core-graphics 0.24.0",
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "device_query",
+ "either",
+ "ffmpeg-next",
+ "flume",
+ "foreign-types-shared 0.3.1",
+ "futures",
+ "hex",
+ "image 0.25.8",
+ "indexmap 2.11.4",
+ "inquire",
+ "kameo",
+ "libc",
+ "libproc",
+ "objc",
+ "objc2 0.6.2",
+ "objc2-app-kit",
+ "orbit-audio",
+ "orbit-camera",
+ "orbit-camera-ffmpeg",
+ "orbit-camera-windows",
+ "orbit-cursor-capture",
+ "orbit-cursor-info",
+ "orbit-enc-avfoundation",
+ "orbit-enc-ffmpeg",
+ "orbit-enc-mediafoundation",
+ "orbit-fail",
+ "orbit-flags",
+ "orbit-frame-converter",
+ "orbit-media",
+ "orbit-media-info",
+ "orbit-mediafoundation-ffmpeg",
+ "orbit-mediafoundation-utils",
+ "orbit-project",
+ "orbit-rendering",
+ "orbit-timestamp",
+ "orbit-utils",
+ "relative-path",
+ "replace_with",
+ "retry",
+ "ringbuf",
+ "screencapturekit",
+ "serde",
+ "serde_json",
+ "sha2",
+ "sorbit-cpal",
+ "sorbit-direct3d",
+ "sorbit-ffmpeg",
+ "sorbit-screencapturekit",
+ "sorbit-targets",
+ "specta",
+ "sysinfo 0.35.2",
+ "tempfile",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-util",
+ "tracing",
+ "tracing-subscriber",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-rendering"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bezier_easing",
+ "build-time",
+ "bytemuck",
+ "cidre",
+ "clap",
+ "dirs 5.0.1",
+ "ffmpeg-hw-device",
+ "ffmpeg-next",
+ "foreign-types 0.5.0",
+ "futures",
+ "futures-intrusive",
+ "glyphon",
+ "image 0.25.8",
+ "log",
+ "metal 0.31.0",
+ "objc2 0.6.2",
+ "orbit-cursor-info",
+ "orbit-flags",
+ "orbit-project",
+ "orbit-video-decode",
+ "pretty_assertions",
+ "rayon",
+ "reactive_graph",
+ "resvg",
+ "serde",
+ "serde_json",
+ "specta",
+ "thiserror 1.0.69",
+ "tiny-skia",
+ "tokio",
+ "tracing",
+ "wgpu",
+ "wgpu-core",
+ "wgpu-hal",
+ "windows 0.58.0",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-rendering-skia"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "foreign-types-shared 0.3.1",
+ "futures",
+ "metal 0.27.0",
+ "orbit-project",
+ "skia-safe",
+ "thiserror 1.0.69",
+ "tracing",
+ "tracing-subscriber",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-test"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "cidre",
+ "clap",
+ "colored",
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "ffmpeg-next",
+ "flume",
+ "indicatif",
+ "kameo",
+ "orbit-camera",
+ "orbit-media-info",
+ "orbit-project",
+ "orbit-recording",
+ "parking_lot",
+ "serde",
+ "serde_json",
+ "sorbit-targets",
+ "sysinfo 0.35.2",
+ "tempfile",
+ "thiserror 1.0.69",
+ "tokio",
+ "toml 0.8.2",
+ "tracing",
+ "tracing-subscriber",
+ "uuid",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-timestamp"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-utils"
+version = "0.1.0"
+dependencies = [
+ "aho-corasick",
+ "directories 5.0.1",
+ "flume",
+ "futures",
+ "nix 0.29.0",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "tokio",
+ "tracing",
+ "uuid",
+ "windows 0.58.0",
+ "windows-sys 0.52.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "orbit-video-decode"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "ffmpeg-hw-device",
+ "ffmpeg-next",
+ "num_cpus",
+ "tempfile",
+ "tokio",
+ "tracing",
+ "windows 0.60.0",
  "workspace-hack",
 ]
 
@@ -7856,80 +7856,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "scap-cpal"
-version = "0.1.0"
-dependencies = [
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "thiserror 1.0.69",
- "workspace-hack",
-]
-
-[[package]]
-name = "scap-direct3d"
-version = "0.1.0"
-dependencies = [
- "scap-ffmpeg",
- "scap-targets",
- "thiserror 1.0.69",
- "tracing",
- "windows 0.60.0",
- "windows-numerics 0.2.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "scap-ffmpeg"
-version = "0.1.0"
-dependencies = [
- "cidre",
- "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
- "ffmpeg-next",
- "futures",
- "scap-cpal",
- "scap-direct3d",
- "scap-screencapturekit",
- "scap-targets",
- "tokio",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
-name = "scap-screencapturekit"
-version = "0.1.0"
-dependencies = [
- "cidre",
- "clap",
- "futures",
- "inquire",
- "objc2 0.6.2",
- "objc2-app-kit",
- "objc2-foundation 0.3.1",
- "scap-targets",
- "tokio",
- "tracing",
- "workspace-hack",
-]
-
-[[package]]
-name = "scap-targets"
-version = "0.1.0"
-dependencies = [
- "cidre",
- "cocoa",
- "core-foundation 0.10.1",
- "core-graphics 0.24.0",
- "image 0.24.9",
- "objc",
- "serde",
- "specta",
- "tokio",
- "tracing",
- "windows 0.60.0",
- "workspace-hack",
-]
-
-[[package]]
 name = "schannel"
 version = "0.1.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -8680,6 +8606,80 @@ dependencies = [
  "wasm-bindgen",
  "web-sys",
  "windows-sys 0.59.0",
+]
+
+[[package]]
+name = "sorbit-cpal"
+version = "0.1.0"
+dependencies = [
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "thiserror 1.0.69",
+ "workspace-hack",
+]
+
+[[package]]
+name = "sorbit-direct3d"
+version = "0.1.0"
+dependencies = [
+ "sorbit-ffmpeg",
+ "sorbit-targets",
+ "thiserror 1.0.69",
+ "tracing",
+ "windows 0.60.0",
+ "windows-numerics 0.2.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "sorbit-ffmpeg"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "cpal 0.15.3 (git+https://github.com/CapSoftware/cpal?rev=3cc779a7b4ca)",
+ "ffmpeg-next",
+ "futures",
+ "sorbit-cpal",
+ "sorbit-direct3d",
+ "sorbit-screencapturekit",
+ "sorbit-targets",
+ "tokio",
+ "windows 0.60.0",
+ "workspace-hack",
+]
+
+[[package]]
+name = "sorbit-screencapturekit"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "clap",
+ "futures",
+ "inquire",
+ "objc2 0.6.2",
+ "objc2-app-kit",
+ "objc2-foundation 0.3.1",
+ "sorbit-targets",
+ "tokio",
+ "tracing",
+ "workspace-hack",
+]
+
+[[package]]
+name = "sorbit-targets"
+version = "0.1.0"
+dependencies = [
+ "cidre",
+ "cocoa",
+ "core-foundation 0.10.1",
+ "core-graphics 0.24.0",
+ "image 0.24.9",
+ "objc",
+ "serde",
+ "specta",
+ "tokio",
+ "tracing",
+ "windows 0.60.0",
+ "workspace-hack",
 ]
 
 [[package]]

@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import Link from "next/link";
 import type { User } from "next-auth";
 
@@ -25,7 +25,7 @@ const internalLinks: NavLink[] = [
 
 const externalLinks: NavLink[] = [
 	{
-		href: "https://github.com/CapSoftware/Cap",
+		href: "https://github.com/CapSoftware/Orbit",
 		text: "Open Source",
 		external: true,
 		icon: (

@@ -64,10 +64,10 @@ export function ClientCapCard(props: ClientCapCardProps) {
 	const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
 		// Set the data transfer
 		e.dataTransfer.setData(
-			"application/cap",
+			"application/orbit",
 			JSON.stringify({
 				id: videoId,
-				name: props.cap.name,
+				name: props.orbit.name,
 			}),
 		);
 
@@ -76,7 +76,7 @@ export function ClientCapCard(props: ClientCapCardProps) {
 
 		// Set the drag image
 		try {
-			const dragPreview = createDragPreview(props.cap.name);
+			const dragPreview = createDragPreview(props.orbit.name);
 			document.body.appendChild(dragPreview);
 
 			// Adjust offset based on whether we have a thumbnail

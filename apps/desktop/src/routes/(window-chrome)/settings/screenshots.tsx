@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import Tooltip from "@corvu/tooltip";
 import {
 	createQuery,
@@ -22,7 +22,7 @@ import { createTauriEventListener } from "~/utils/createEventListener";
 import { commands, events, type RecordingMeta } from "~/utils/tauri";
 
 // Icons
-import IconCapTrash from "~icons/cap/trash";
+import IconOrbitTrash from "~icons/orbit/trash";
 import IconLucideCopy from "~icons/lucide/copy";
 import IconLucideEdit from "~icons/lucide/edit";
 import IconLucideFolder from "~icons/lucide/folder";
@@ -255,14 +255,14 @@ function ScreenshotItem(props: {
 							!(await ask("Are you sure you want to delete this screenshot?"))
 						)
 							return;
-						// screenshot.path is the png file. Parent is the .cap folder.
+						// screenshot.path is the png file. Parent is the .orbit folder.
 						const parent = props.screenshot.path.replace(/[/\\][^/\\]+$/, "");
 						await remove(parent, { recursive: true });
 
 						queryClient.invalidateQueries({ queryKey: ["screenshots"] });
 					}}
 				>
-					<IconCapTrash class="size-4" />
+					<IconOrbitTrash class="size-4" />
 				</TooltipIconButton>
 			</div>
 		</li>

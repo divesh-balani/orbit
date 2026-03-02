@@ -5,21 +5,21 @@ import type { ToolPageContent } from "@/components/tools/types";
 import { createBreadcrumbSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "MP4 to GIF Converter — Free Online Animated GIF Maker | Cap",
+	title: "MP4 to GIF Converter — Free Online Animated GIF Maker | Orbit",
 	description:
 		"Convert MP4 videos to animated GIF images directly in your browser. Free, private, no upload needed. Adjust FPS, quality, and dimensions for the perfect GIF.",
 	openGraph: {
-		title: "MP4 to GIF Converter — Free Online Animated GIF Maker | Cap",
+		title: "MP4 to GIF Converter — Free Online Animated GIF Maker | Orbit",
 		description:
 			"Convert MP4 to animated GIF directly in your browser. No uploads, no installs, 100% private. Customize FPS, quality, and size.",
-		url: "https://cap.so/tools/convert/mp4-to-gif",
-		siteName: "Cap",
+		url: "https://orbit.so/tools/convert/mp4-to-gif",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap MP4 to GIF Converter — Free Online Animated GIF Maker",
+				alt: "Orbit MP4 to GIF Converter — Free Online Animated GIF Maker",
 			},
 		],
 		locale: "en_US",
@@ -27,13 +27,13 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "MP4 to GIF Converter — Free Online Animated GIF Maker | Cap",
+		title: "MP4 to GIF Converter — Free Online Animated GIF Maker | Orbit",
 		description:
 			"Convert MP4 to animated GIF directly in your browser. No uploads, no installs, 100% private.",
-		images: ["https://cap.so/og.png"],
+		images: ["https://orbit.so/og.png"],
 	},
 	alternates: {
-		canonical: "https://cap.so/tools/convert/mp4-to-gif",
+		canonical: "https://orbit.so/tools/convert/mp4-to-gif",
 	},
 };
 
@@ -41,7 +41,7 @@ const faqs = [
 	{
 		question: "How do I convert MP4 to GIF?",
 		answer:
-			"Open the Cap MP4 to GIF converter, drag and drop your MP4 file (or click to browse), adjust your settings if needed, then click Convert. The entire process runs in your browser — your file never leaves your device. Once complete, download the GIF instantly.",
+			"Open the Orbit MP4 to GIF converter, drag and drop your MP4 file (or click to browse), adjust your settings if needed, then click Convert. The entire process runs in your browser — your file never leaves your device. Once complete, download the GIF instantly.",
 	},
 	{
 		question: "Is the MP4 to GIF converter free?",
@@ -83,7 +83,7 @@ const faqs = [
 const howToSteps = [
 	{
 		name: "Upload your MP4 file",
-		text: "Open the Cap MP4 to GIF converter and drag and drop your MP4 file into the upload area, or click to browse your files.",
+		text: "Open the Orbit MP4 to GIF converter and drag and drop your MP4 file into the upload area, or click to browse your files.",
 	},
 	{
 		name: "Adjust conversion settings",
@@ -113,7 +113,7 @@ const howToStructuredData = {
 	"@type": "HowTo",
 	name: "How to Convert MP4 to GIF Online",
 	description:
-		"Convert MP4 video files to animated GIF format for free using Cap's browser-based converter. No upload required.",
+		"Convert MP4 video files to animated GIF format for free using Orbit's browser-based converter. No upload required.",
 	step: howToSteps.map((step, index) => ({
 		"@type": "HowToStep",
 		position: index + 1,
@@ -127,12 +127,12 @@ const howToStructuredData = {
 };
 
 const breadcrumbSchema = createBreadcrumbSchema([
-	{ name: "Home", url: "https://cap.so" },
-	{ name: "Tools", url: "https://cap.so/tools" },
-	{ name: "Convert", url: "https://cap.so/tools/convert" },
+	{ name: "Home", url: "https://orbit.so" },
+	{ name: "Tools", url: "https://orbit.so/tools" },
+	{ name: "Convert", url: "https://orbit.so/tools/convert" },
 	{
 		name: "MP4 to GIF Converter",
-		url: "https://cap.so/tools/convert/mp4-to-gif",
+		url: "https://orbit.so/tools/convert/mp4-to-gif",
 	},
 ]);
 
@@ -178,10 +178,10 @@ export default function MP4ToGIFPage() {
 		],
 		faqs,
 		cta: {
-			title: "Cap is the open source Loom alternative",
+			title: "Orbit is the open source Loom alternative",
 			description:
-				"Record, edit, and share video messages with Cap. 100% open source and privacy focused. Export directly to MP4 — no conversion needed.",
-			buttonText: "Download Cap Free",
+				"Record, edit, and share video messages with Orbit. 100% open source and privacy focused. Export directly to MP4 — no conversion needed.",
+			buttonText: "Download Orbit Free",
 		},
 	};
 

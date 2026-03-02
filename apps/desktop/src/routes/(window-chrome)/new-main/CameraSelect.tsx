@@ -97,7 +97,7 @@ export default function CameraSelect(props: {
 				}}
 				class="flex flex-row gap-2 items-center px-2 w-full h-[42px] rounded-lg border border-gray-5 transition-colors cursor-default disabled:opacity-70 bg-gray-3 disabled:text-gray-11 KSelect"
 			>
-				<IconCapCamera class="text-gray-10 size-4" />
+				<IconOrbitCamera class="text-gray-10 size-4" />
 				<p class="flex-1 text-sm text-left truncate">
 					{props.value?.display_name ?? NO_CAMERA}
 				</p>
@@ -245,7 +245,7 @@ export function CameraSelectBase(props: {
 				}}
 				class={props.class}
 			>
-				<IconCapCamera class={props.iconClass} />
+				<IconOrbitCamera class={props.iconClass} />
 				<p class="flex-1 text-sm text-left truncate">
 					{props.value?.display_name ?? NO_CAMERA}
 				</p>

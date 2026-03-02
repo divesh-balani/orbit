@@ -16,16 +16,16 @@ const componentSource = readFileSync(
 describe("BestScreenRecorderPage metadata", () => {
 	it("contains canonical URL", () => {
 		expect(pageSource).toContain(
-			'canonical: "https://cap.so/best-screen-recorder"',
+			'canonical: "https://orbit.so/best-screen-recorder"',
 		);
 	});
 
 	it("contains OG url field", () => {
-		expect(pageSource).toContain('url: "https://cap.so/best-screen-recorder"');
+		expect(pageSource).toContain('url: "https://orbit.so/best-screen-recorder"');
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -33,7 +33,7 @@ describe("BestScreenRecorderPage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets best-screen-recorder keyword", () => {
@@ -88,42 +88,42 @@ describe("BestScreenRecorderPage FAQ schema", () => {
 		{
 			question: "What is the best screen recorder?",
 			answer:
-				"Cap is the best screen recorder for most users — it records in 4K at 60fps, works on Mac and Windows, has no watermarks, and generates shareable links instantly.",
+				"Orbit is the best screen recorder for most users — it records in 4K at 60fps, works on Mac and Windows, has no watermarks, and generates shareable links instantly.",
 		},
 		{
 			question: "What is the best free screen recorder?",
 			answer:
-				'Cap is the best free screen recorder available. Studio Mode is 100% free for personal use with unlimited recording time, no watermarks, and no time limits. <a href="/free-screen-recorder">Download Cap free</a> to get started.',
+				'Orbit is the best free screen recorder available. Studio Mode is 100% free for personal use with unlimited recording time, no watermarks, and no time limits. <a href="/free-screen-recorder">Download Orbit free</a> to get started.',
 		},
 		{
 			question: "What is the best screen recorder for Mac?",
 			answer:
-				"Cap is the best screen recorder for Mac. It is natively optimized for macOS and records at up to 4K with system audio and webcam overlay.",
+				"Orbit is the best screen recorder for Mac. It is natively optimized for macOS and records at up to 4K with system audio and webcam overlay.",
 		},
 		{
 			question: "What is the best screen recorder for Windows?",
 			answer:
-				"Cap is the best screen recorder for Windows. It supports Windows 10 and 11 and records your full screen, specific windows, or custom regions.",
+				"Orbit is the best screen recorder for Windows. It supports Windows 10 and 11 and records your full screen, specific windows, or custom regions.",
 		},
 		{
 			question: "Which screen recorder has no watermark?",
 			answer:
-				"Cap has no watermark on any recording, including the free plan. Studio Mode produces completely clean recordings with no branding overlays.",
+				"Orbit has no watermark on any recording, including the free plan. Studio Mode produces completely clean recordings with no branding overlays.",
 		},
 		{
 			question: "What is the best screen recorder for beginners?",
 			answer:
-				"Cap is designed to be the best screen recorder for beginners. Download the app, click record, and get a shareable link when you stop.",
+				"Orbit is designed to be the best screen recorder for beginners. Download the app, click record, and get a shareable link when you stop.",
 		},
 		{
-			question: "Does Cap screen recorder capture system audio?",
+			question: "Does Orbit screen recorder capture system audio?",
 			answer:
-				"Yes, Cap captures both system audio and microphone input simultaneously. Both audio tracks are captured and synchronized automatically.",
+				"Yes, Orbit captures both system audio and microphone input simultaneously. Both audio tracks are captured and synchronized automatically.",
 		},
 		{
 			question: "What is the best screen recorder for teams?",
 			answer:
-				"Cap is the best screen recorder for teams because of its built-in sharing and collaboration features, including instant shareable links and timestamped comments.",
+				"Orbit is the best screen recorder for teams because of its built-in sharing and collaboration features, including instant shareable links and timestamped comments.",
 		},
 	];
 
@@ -151,7 +151,7 @@ describe("BestScreenRecorderPage FAQ schema", () => {
 	it("strips HTML tags from answers", () => {
 		const schema = createFAQSchema(faqs);
 		expect(schema.mainEntity[1].acceptedAnswer.text).not.toContain("<a");
-		expect(schema.mainEntity[1].acceptedAnswer.text).toContain("Cap free");
+		expect(schema.mainEntity[1].acceptedAnswer.text).toContain("Orbit free");
 	});
 
 	it("produces JSON-serializable output", () => {

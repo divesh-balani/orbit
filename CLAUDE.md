@@ -33,7 +33,7 @@ Orbit is a personal local-only desktop screen recorder, editor, and exporter —
 - `crates/recording/` — Core recording functionality
 - `crates/rendering/` — Video rendering and effects
 - `crates/camera*/` — Cross-platform camera handling
-- `crates/scap-*/` — Screen capture implementations
+- `crates/sorbit-*/` — Screen capture implementations
 
 ### Important File Patterns
 - `**/tauri.ts` — Auto-generated IPC bindings (DO NOT EDIT)
@@ -124,8 +124,8 @@ pnpm tauri:build                 # Build desktop app (release)
 ### Code Organization Principles
 1. **Follow Local Patterns**: Study neighboring files and shared packages first
 2. **Database Changes**: Always `pnpm db:generate` → `pnpm db:push` → test
-3. **Strict Typing**: Use existing types; validate config via `@cap/env`
-4. **Component Consistency**: Use `@cap/ui` (React) or `@cap/ui-solid` (Solid)
+3. **Strict Typing**: Use existing types; validate config via `@orbit/env`
+4. **Component Consistency**: Use `@orbit/ui` (React) or `@orbit/ui-solid` (Solid)
 5. **No Manual Edits**: Never touch auto-generated bindings or schemas
 
 ### Key Implementation Patterns
@@ -185,7 +185,7 @@ No cloud environment variables are needed. The desktop app runs fully locally.
 - IPC: Call generated `commands` and `events` from `tauri_specta`. Listen directly to generated events and prefer the typed interfaces.
 - Windowing/permissions are handled in Rust; keep UI logic in Solid and avoid mixing IPC with rendering logic.
 - Recording flow: TargetSelectOverlay (screen chooser) → RecordingControls (timer/stop/pause) → Editor (on stop, all recording windows auto-hide)
-- Window management: `CapWindowId` enum in `windows.rs`; `hide_recording_windows()` hides all recording-related windows when transitioning to editor.
+- Window management: `OrbitWindowId` enum in `windows.rs`; `hide_recording_windows()` hides all recording-related windows when transitioning to editor.
 
 ## Conventions
 - **CRITICAL: NO CODE COMMENTS**: Never add any form of comments to code. This includes:
@@ -265,7 +265,7 @@ value.clamp(min, max)
 - **Video Storage**: Local filesystem only (no cloud uploads)
 - **No Authentication**: Auth modules are gutted no-ops
 - **No Analytics**: PostHog is a no-op
-- **No Network Requests**: The app makes no outbound requests to cap.so or any external service
+- **No Network Requests**: The app makes no outbound requests to orbit.so or any external service
 
 ### Privacy Controls
 - **Recording Permissions**: Platform-specific (macOS Screen Recording, Windows)

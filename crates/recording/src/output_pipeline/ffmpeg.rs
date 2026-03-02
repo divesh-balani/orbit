@@ -3,7 +3,7 @@ use crate::{
     output_pipeline::{AudioFrame, AudioMuxer, Muxer, VideoFrame, VideoMuxer},
 };
 use anyhow::{Context, anyhow};
-use cap_enc_ffmpeg::{
+use orbit_enc_ffmpeg::{
     aac::AACEncoder,
     fragmented_audio::{FinishError as FragmentedAudioFinishError, FragmentedAudioFile},
     h264::*,
@@ -12,8 +12,8 @@ use cap_enc_ffmpeg::{
     segmented_audio::SegmentedAudioEncoder,
     segmented_stream::{SegmentedVideoEncoder, SegmentedVideoEncoderConfig},
 };
-use cap_media_info::{AudioInfo, VideoInfo};
-use cap_timestamp::Timestamp;
+use orbit_media_info::{AudioInfo, VideoInfo};
+use orbit_timestamp::Timestamp;
 use std::{
     path::PathBuf,
     sync::{
@@ -50,8 +50,8 @@ impl Muxer for Mp4Muxer {
     async fn setup(
         _: Self::Config,
         output_path: std::path::PathBuf,
-        video_config: Option<cap_media_info::VideoInfo>,
-        audio_config: Option<cap_media_info::AudioInfo>,
+        video_config: Option<orbit_media_info::VideoInfo>,
+        audio_config: Option<orbit_media_info::AudioInfo>,
         _: Arc<AtomicBool>,
         _: &mut TaskPool,
     ) -> anyhow::Result<Self>
@@ -300,7 +300,7 @@ impl AudioMuxer for SegmentedAudioMuxer {
 }
 
 fn get_muxer_buffer_size() -> usize {
-    std::env::var("CAP_MUXER_BUFFER_SIZE")
+    std::env::var("ORBIT_MUXER_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(30)

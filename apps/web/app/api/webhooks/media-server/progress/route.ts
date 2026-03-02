@@ -1,7 +1,7 @@
-import { db } from "@cap/database";
-import { videos, videoUploads } from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
-import type { Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { videos, videoUploads } from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
+import type { Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 

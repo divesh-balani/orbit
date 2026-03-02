@@ -6,9 +6,9 @@ import { AgenciesPage } from "@/components/pages/seo/AgenciesPage";
 const createFaqStructuredData = () => {
 	const faqs = [
 		{
-			question: "Does Cap work on both macOS and Windows?",
+			question: "Does Orbit work on both macOS and Windows?",
 			answer:
-				"Yes. Cap supports both macOS and Windows with desktop apps, so your entire team can use the same workflow regardless of their platform preference.",
+				"Yes. Orbit supports both macOS and Windows with desktop apps, so your entire team can use the same workflow regardless of their platform preference.",
 		},
 		{
 			question: "Can clients view videos without installing anything?",
@@ -23,22 +23,22 @@ const createFaqStructuredData = () => {
 		{
 			question: "How long can we record on the free version?",
 			answer:
-				"The free version supports recordings up to 5 minutes. For longer client presentations and unlimited recording time, upgrade to Cap Pro at $8.16/month (billed annually).",
+				"The free version supports recordings up to 5 minutes. For longer client presentations and unlimited recording time, upgrade to Orbit Pro at $8.16/month (billed annually).",
 		},
 		{
-			question: "Is Cap secure enough for confidential client work?",
+			question: "Is Orbit secure enough for confidential client work?",
 			answer:
-				"Yes. Cap is open-source and privacy-first. You can connect your own S3 storage, use a custom domain for share links, and password-protect sensitive videos. This gives you complete control over client data.",
+				"Yes. Orbit is open-source and privacy-first. You can connect your own S3 storage, use a custom domain for share links, and password-protect sensitive videos. This gives you complete control over client data.",
 		},
 		{
-			question: "Can we use our own branding with Cap?",
+			question: "Can we use our own branding with Orbit?",
 			answer:
-				"Yes. Cap Pro includes custom domain support (cap.yourdomain.com) so share links reflect your agency's brand. You can also use your own S3 storage for complete data ownership.",
+				"Yes. Orbit Pro includes custom domain support (orbit.yourdomain.com) so share links reflect your agency's brand. You can also use your own S3 storage for complete data ownership.",
 		},
 		{
-			question: "How does Cap pricing work for agency teams?",
+			question: "How does Orbit pricing work for agency teams?",
 			answer:
-				"Cap Pro is $8.16/month per user (billed annually) and includes unlimited cloud storage, custom domains, team workspaces, and all collaboration features. Volume discounts are available for teams over 10 users.",
+				"Orbit Pro is $8.16/month per user (billed annually) and includes unlimited cloud storage, custom domains, team workspaces, and all collaboration features. Volume discounts are available for teams over 10 users.",
 		},
 	];
 
@@ -63,14 +63,14 @@ const createSoftwareStructuredData = () => {
 	const softwareStructuredData = {
 		"@context": "https://schema.org",
 		"@type": "SoftwareApplication",
-		name: "Cap — Screen Recorder",
+		name: "Orbit — Screen Recorder",
 		operatingSystem: ["macOS", "Windows"],
 		applicationCategory: "BusinessApplication",
 		description:
 			"Open-source, privacy-first screen recorder for agencies. Instant share links and studio-quality local recording with editing.",
 		publisher: {
 			"@type": "Organization",
-			name: "Cap",
+			name: "Orbit",
 		},
 		offers: {
 			"@type": "Offer",
@@ -84,21 +84,21 @@ const createSoftwareStructuredData = () => {
 };
 
 export const metadata: Metadata = {
-	title: "Cap for Agencies — Faster Client Updates with Instant Video Links",
+	title: "Orbit for Agencies — Faster Client Updates with Instant Video Links",
 	description:
-		"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Cap for Agencies on macOS & Windows.",
+		"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Orbit for Agencies on macOS & Windows.",
 	openGraph: {
-		title: "Cap for Agencies — Faster Client Updates with Instant Video Links",
+		title: "Orbit for Agencies — Faster Client Updates with Instant Video Links",
 		description:
-			"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Cap for Agencies on macOS & Windows.",
-		url: "https://cap.so/solutions/agencies",
-		siteName: "Cap",
+			"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Orbit for Agencies on macOS & Windows.",
+		url: "https://orbit.so/solutions/agencies",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap for Agencies",
+				alt: "Orbit for Agencies",
 			},
 		],
 		locale: "en_US",
@@ -106,13 +106,13 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Cap for Agencies — Faster Client Updates with Instant Video Links",
+		title: "Orbit for Agencies — Faster Client Updates with Instant Video Links",
 		description:
-			"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Cap for Agencies on macOS & Windows.",
-		images: ["https://cap.so/og.png"],
+			"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Orbit for Agencies on macOS & Windows.",
+		images: ["https://orbit.so/og.png"],
 	},
 	alternates: {
-		canonical: "https://cap.so/solutions/agencies",
+		canonical: "https://orbit.so/solutions/agencies",
 	},
 };
 

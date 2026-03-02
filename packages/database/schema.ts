@@ -7,7 +7,7 @@ import type {
 	Space,
 	User,
 	Video,
-} from "@cap/web-domain";
+} from "@orbit/web-domain";
 import { sql } from "drizzle-orm";
 import {
 	bigint,
@@ -36,7 +36,7 @@ const nanoId = customType<{ data: string; notNull: true }>({
 		return `varchar(${nanoIdLength})`;
 	},
 });
-// TODO: This will replace `nanoId` in: https://github.com/CapSoftware/Cap/pull/1105
+// TODO: This will replace `nanoId` in: https://github.com/CapSoftware/Orbit/pull/1105
 const nanoIdRequired = (name: string) =>
 	varchar(name, { length: nanoIdLength }).notNull();
 

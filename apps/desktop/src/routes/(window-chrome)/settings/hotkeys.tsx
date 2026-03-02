@@ -148,7 +148,7 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 																);
 															}}
 														>
-															<IconCapCircleCheck class="transition-colors text-gray-12 hover:text-gray-10 size-5" />
+															<IconOrbitCircleCheck class="transition-colors text-gray-12 hover:text-gray-10 size-5" />
 														</button>
 													</Show>
 													<button
@@ -163,7 +163,7 @@ function Inner(props: { initialStore: HotkeysStore | null }) {
 															});
 														}}
 													>
-														<IconCapCircleX class="text-red-500 transition-colors hover:text-red-700 size-5" />
+														<IconOrbitCircleX class="text-red-500 transition-colors hover:text-red-700 size-5" />
 													</button>
 												</div>
 											</div>

@@ -1,4 +1,4 @@
-use cap_media_info::RawVideoFormat;
+use orbit_media_info::RawVideoFormat;
 use ffmpeg::{format, frame};
 use std::{path::PathBuf, time::Duration};
 use tracing::*;

@@ -12,7 +12,7 @@ Orbit is a personal local-only desktop screen recorder, editor, and exporter —
   - `scripts/*` for tooling.
 
 ## Build, Test, Develop
-- Install: `pnpm install`; setup: `pnpm env-setup` then `pnpm cap-setup`.
+- Install: `pnpm install`; setup: `pnpm env-setup` then `pnpm orbit-setup`.
 - Dev: `pnpm dev` (web+desktop). Desktop only: `pnpm dev:desktop`. Web only: `pnpm dev:web` or `cd apps/web && pnpm dev`.
 - Build: `pnpm build` (Turbo). Desktop release: `pnpm tauri:build`.
 - DB: `pnpm db:generate` → `pnpm db:push` → `pnpm db:studio`.

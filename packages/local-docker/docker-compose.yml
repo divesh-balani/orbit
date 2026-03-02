@@ -1,5 +1,5 @@
 # This is meant for local development only. Do not use this in production.
-name: cap-so-dev
+name: orbit-so-dev
 
 services:
   ps-mysql:
@@ -20,8 +20,8 @@ services:
     volumes:
       - ps-mysql:/var/lib/mysql
 
-  cap-media-server:
-    container_name: cap-media-server-dev
+  orbit-media-server:
+    container_name: orbit-media-server-dev
     build:
       context: ../..
       dockerfile: apps/media-server/Dockerfile

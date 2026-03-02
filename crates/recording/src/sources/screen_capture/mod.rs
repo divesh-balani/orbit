@@ -1,10 +1,10 @@
 #[cfg(target_os = "macos")]
 use crate::SendableShareableContent;
-use cap_cursor_capture::CursorCropBounds;
+use orbit_cursor_capture::CursorCropBounds;
 #[cfg(target_os = "macos")]
-use cap_media_info::ensure_even;
-use cap_media_info::{AudioInfo, VideoInfo};
-use scap_targets::{Display, DisplayId, Window, WindowId, bounds::*};
+use orbit_media_info::ensure_even;
+use orbit_media_info::{AudioInfo, VideoInfo};
+use sorbit_targets::{Display, DisplayId, Window, WindowId, bounds::*};
 use serde::{Deserialize, Serialize};
 use specta::Type;
 use std::time::SystemTime;
@@ -300,7 +300,7 @@ pub enum ScreenCaptureInitError {
 impl<TCaptureFormat: ScreenCaptureFormat> ScreenCaptureConfig<TCaptureFormat> {
     #[allow(clippy::too_many_arguments)]
     pub async fn init(
-        display: scap_targets::Display,
+        display: sorbit_targets::Display,
         crop_bounds: Option<CropBounds>,
         show_cursor: bool,
         max_fps: u32,
@@ -310,7 +310,7 @@ impl<TCaptureFormat: ScreenCaptureFormat> ScreenCaptureConfig<TCaptureFormat> {
         #[cfg(target_os = "macos")] shareable_content: SendableShareableContent,
         #[cfg(target_os = "macos")] excluded_windows: Vec<WindowId>,
     ) -> Result<Self, ScreenCaptureInitError> {
-        cap_fail::fail!("ScreenCaptureSource::init");
+        orbit_fail::fail!("ScreenCaptureSource::init");
 
         let target_refresh = validated_refresh_rate(display.refresh_rate());
         let fps = std::cmp::max(1, std::cmp::min(max_fps, target_refresh));
@@ -405,7 +405,7 @@ where
 }
 
 pub fn list_displays() -> Vec<(CaptureDisplay, Display)> {
-    scap_targets::Display::list()
+    sorbit_targets::Display::list()
         .into_iter()
         .filter_map(|display| {
             let refresh_rate = validated_refresh_rate(display.raw_handle().refresh_rate());
@@ -423,7 +423,7 @@ pub fn list_displays() -> Vec<(CaptureDisplay, Display)> {
 }
 
 pub fn list_windows() -> Vec<(CaptureWindow, Window)> {
-    scap_targets::Window::list()
+    sorbit_targets::Window::list()
         .into_iter()
         .flat_map(|v| {
             let name = v.name()?;

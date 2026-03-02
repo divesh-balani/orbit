@@ -1,4 +1,4 @@
-import { ProgressCircle } from "@cap/ui-solid";
+import { ProgressCircle } from "@orbit/ui-solid";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { ask, save } from "@tauri-apps/plugin-dialog";
 import { remove } from "@tauri-apps/plugin-fs";
@@ -15,8 +15,8 @@ import {
 	type RecordingMeta,
 	type RecordingMetaWithMetadata,
 } from "~/utils/tauri";
-import IconCapLink from "~icons/cap/link";
-import IconCapTrash from "~icons/cap/trash";
+import IconOrbitLink from "~icons/orbit/link";
+import IconOrbitTrash from "~icons/orbit/trash";
 import IconLucideAppWindowMac from "~icons/lucide/app-window-mac";
 import IconLucideCopy from "~icons/lucide/copy";
 import IconLucideEdit from "~icons/lucide/edit";
@@ -481,7 +481,7 @@ export default function TargetCard(props: TargetCardProps) {
 											onClick={handleOpenRecordingLink}
 											class="flex-1 flex items-center justify-center p-1 rounded hover:bg-gray-5 text-gray-11 hover:text-gray-12 transition-colors"
 										>
-											<IconCapLink class="size-3.5" />
+											<IconOrbitLink class="size-3.5" />
 										</div>
 									</Tooltip>
 								</Show>
@@ -502,7 +502,7 @@ export default function TargetCard(props: TargetCardProps) {
 										onClick={handleDeleteRecording}
 										class="flex-1 flex items-center justify-center p-1 rounded hover:bg-gray-5 text-gray-11 hover:text-gray-12 transition-colors"
 									>
-										<IconCapTrash class="size-3.5" />
+										<IconOrbitTrash class="size-3.5" />
 									</div>
 								</Tooltip>
 							</div>

@@ -1,9 +1,9 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { videos, videoUploads } from "@cap/database/schema";
-import type { Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { videos, videoUploads } from "@orbit/database/schema";
+import type { Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { start } from "workflow/api";
 import { processVideoWorkflow } from "@/workflows/process-video";

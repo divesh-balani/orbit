@@ -16,18 +16,18 @@ const componentSource = readFileSync(
 describe("OpenSourceScreenRecorderPage metadata", () => {
 	it("contains canonical URL", () => {
 		expect(pageSource).toContain(
-			'canonical: "https://cap.so/open-source-screen-recorder"',
+			'canonical: "https://orbit.so/open-source-screen-recorder"',
 		);
 	});
 
 	it("contains OG url field", () => {
 		expect(pageSource).toContain(
-			'url: "https://cap.so/open-source-screen-recorder"',
+			'url: "https://orbit.so/open-source-screen-recorder"',
 		);
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -35,7 +35,7 @@ describe("OpenSourceScreenRecorderPage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets open-source-screen-recorder keyword", () => {
@@ -91,45 +91,45 @@ describe("OpenSourceScreenRecorderPage component content", () => {
 describe("OpenSourceScreenRecorderPage FAQ schema", () => {
 	const faqs = [
 		{
-			question: "Is Cap really open source?",
+			question: "Is Orbit really open source?",
 			answer:
-				"Yes. Cap is fully open source and MIT-licensed. The complete codebase is publicly available on GitHub.",
+				"Yes. Orbit is fully open source and MIT-licensed. The complete codebase is publicly available on GitHub.",
 		},
 		{
-			question: "Can I self-host Cap's screen recordings?",
+			question: "Can I self-host Orbit's screen recordings?",
 			answer:
-				"Yes. Cap supports any S3-compatible storage provider, including AWS S3, Cloudflare R2, and self-hosted MinIO.",
+				"Yes. Orbit supports any S3-compatible storage provider, including AWS S3, Cloudflare R2, and self-hosted MinIO.",
 		},
 		{
 			question: "What is the best open source screen recorder?",
 			answer:
-				"Cap is the best open source screen recorder for most users because it combines full transparency with practical features.",
+				"Orbit is the best open source screen recorder for most users because it combines full transparency with practical features.",
 		},
 		{
-			question: "Is Cap's open source version free?",
+			question: "Is Orbit's open source version free?",
 			answer:
-				"Yes. Cap's Studio Mode is completely free for personal use with no time limits and no watermarks.",
+				"Yes. Orbit's Studio Mode is completely free for personal use with no time limits and no watermarks.",
 		},
 		{
 			question:
-				"How does Cap compare to OBS Studio as an open source recorder?",
+				"How does Orbit compare to OBS Studio as an open source recorder?",
 			answer:
-				"Both Cap and OBS Studio are open source, but OBS is built for live streaming while Cap is designed for async screen sharing.",
+				"Both Orbit and OBS Studio are open source, but OBS is built for live streaming while Orbit is designed for async screen sharing.",
 		},
 		{
-			question: "Can I contribute to Cap's development?",
+			question: "Can I contribute to Orbit's development?",
 			answer:
-				"Absolutely. Cap welcomes contributions of all kinds — bug reports, feature requests, and code contributions.",
+				"Absolutely. Orbit welcomes contributions of all kinds — bug reports, feature requests, and code contributions.",
 		},
 		{
-			question: "Does Cap work on Mac and Windows?",
+			question: "Does Orbit work on Mac and Windows?",
 			answer:
-				"Yes. Cap is available as a native desktop app for macOS and Windows.",
+				"Yes. Orbit is available as a native desktop app for macOS and Windows.",
 		},
 		{
-			question: "What license does Cap use?",
+			question: "What license does Orbit use?",
 			answer:
-				"Cap is released under the MIT License. You are free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies.",
+				"Orbit is released under the MIT License. You are free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies.",
 		},
 	];
 
@@ -146,7 +146,7 @@ describe("OpenSourceScreenRecorderPage FAQ schema", () => {
 
 		expect(schema.mainEntity[0]).toEqual({
 			"@type": "Question",
-			name: "Is Cap really open source?",
+			name: "Is Orbit really open source?",
 			acceptedAnswer: {
 				"@type": "Answer",
 				text: faqs[0].answer,

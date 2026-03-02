@@ -323,7 +323,7 @@ pub fn setup<R: Runtime>(window: Window<R>, controls_inset: LogicalPosition<f64>
 
         // We need to ensure we have a unique delegate name, otherwise we will panic while trying to create a duplicate
         // delegate with the same name.
-        let delegate_name = format!("windowDelegate_cap_{window_label}_{random_str}");
+        let delegate_name = format!("windowDelegate_orbit_{window_label}_{random_str}");
 
         ns_win_id.setDelegate_(cocoa::delegate!(&delegate_name, {
             window: id = ns_win_id,

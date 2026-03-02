@@ -1,6 +1,6 @@
-# cap-rendering-skia
+# orbit-rendering-skia
 
-A new rendering backend for Cap using Skia, designed to replace the current wgpu-based renderer.
+A new rendering backend for Orbit using Skia, designed to replace the current wgpu-based renderer.
 
 ## Status
 
@@ -17,13 +17,13 @@ This crate implements the basic infrastructure for Skia-based rendering with GPU
 
 ```bash
 # Build the crate
-cargo build -p cap-rendering-skia
+cargo build -p orbit-rendering-skia
 
 # Run the test binary
-cargo run -p cap-rendering-skia --bin test-skia
+cargo run -p orbit-rendering-skia --bin test-skia
 
 # Run tests
-cargo test -p cap-rendering-skia
+cargo test -p orbit-rendering-skia
 ```
 
 The test binary will:

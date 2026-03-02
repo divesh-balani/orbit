@@ -1,11 +1,11 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { nanoId } from "@cap/database/helpers";
-import { comments } from "@cap/database/schema";
-import type { ImageUpload } from "@cap/web-domain";
-import { Comment, type Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { nanoId } from "@orbit/database/helpers";
+import { comments } from "@orbit/database/schema";
+import type { ImageUpload } from "@orbit/web-domain";
+import { Comment, type Video } from "@orbit/web-domain";
 import { revalidatePath } from "next/cache";
 import { createNotification } from "@/lib/Notification";
 

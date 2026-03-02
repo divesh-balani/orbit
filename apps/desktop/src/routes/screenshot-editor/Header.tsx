@@ -7,8 +7,8 @@ import { type as ostype } from "@tauri-apps/plugin-os";
 import { cx } from "cva";
 import { createEffect, onCleanup, Suspense } from "solid-js";
 import CaptionControlsWindows11 from "~/components/titlebar/controls/CaptionControlsWindows11";
-import IconCapCrop from "~icons/cap/crop";
-import IconCapTrash from "~icons/cap/trash";
+import IconOrbitCrop from "~icons/orbit/crop";
+import IconOrbitTrash from "~icons/orbit/trash";
 import IconLucideCopy from "~icons/lucide/copy";
 import IconLucideFolder from "~icons/lucide/folder";
 import IconLucideMoreHorizontal from "~icons/lucide/more-horizontal";
@@ -93,7 +93,7 @@ export function Header() {
 					tooltipText="Crop Image"
 					onClick={cropDialogHandler}
 					disabled={isCropDisabled()}
-					leftIcon={<IconCapCrop class="size-4" />}
+					leftIcon={<IconOrbitCrop class="size-4" />}
 				/>
 				<div class="w-px h-6 bg-gray-4 mx-1" />
 				<AnnotationTools />
@@ -165,7 +165,7 @@ export function Header() {
 											}
 										}}
 									>
-										<IconCapTrash class="size-4 text-gray-11" />
+										<IconOrbitTrash class="size-4 text-gray-11" />
 										<span>Delete</span>
 									</DropdownItem>
 								</MenuItemList>

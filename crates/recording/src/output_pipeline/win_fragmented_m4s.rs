@@ -4,11 +4,11 @@ use crate::{
     screen_capture,
 };
 use anyhow::{Context, anyhow};
-use cap_enc_ffmpeg::h264::{H264EncoderBuilder, H264Preset};
-use cap_enc_ffmpeg::segmented_stream::{
+use orbit_enc_ffmpeg::h264::{H264EncoderBuilder, H264Preset};
+use orbit_enc_ffmpeg::segmented_stream::{
     DiskSpaceCallback, SegmentedVideoEncoder, SegmentedVideoEncoderConfig,
 };
-use cap_media_info::{AudioInfo, Pixel, VideoInfo};
+use orbit_media_info::{AudioInfo, Pixel, VideoInfo};
 use std::{
     path::PathBuf,
     sync::{
@@ -24,7 +24,7 @@ use tracing::*;
 const DEFAULT_MUXER_BUFFER_SIZE: usize = 240;
 
 fn get_muxer_buffer_size() -> usize {
-    std::env::var("CAP_MUXER_BUFFER_SIZE")
+    std::env::var("ORBIT_MUXER_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
         .unwrap_or(DEFAULT_MUXER_BUFFER_SIZE)
@@ -267,7 +267,7 @@ impl WindowsFragmentedM4SMuxer {
         let encoder_handle = std::thread::Builder::new()
             .name("win-m4s-segment-encoder".to_string())
             .spawn(move || {
-                cap_mediafoundation_utils::thread_init();
+                orbit_mediafoundation_utils::thread_init();
 
                 if ready_tx.send(Ok(())).is_err() {
                     return Err(anyhow!("Failed to send ready signal - receiver dropped"));
@@ -675,7 +675,7 @@ impl WindowsFragmentedM4SCameraMuxer {
         let mut updated = false;
 
         let desired_pixel_format = match frame.pixel_format {
-            cap_camera_windows::PixelFormat::UYVY422 => Pixel::YUYV422,
+            orbit_camera_windows::PixelFormat::UYVY422 => Pixel::YUYV422,
             _ => self.video_config.pixel_format,
         };
 
@@ -743,7 +743,7 @@ impl WindowsFragmentedM4SCameraMuxer {
         let encoder_handle = std::thread::Builder::new()
             .name("win-m4s-camera-segment-encoder".to_string())
             .spawn(move || {
-                cap_mediafoundation_utils::thread_init();
+                orbit_mediafoundation_utils::thread_init();
 
                 if ready_tx.send(Ok(())).is_err() {
                     return Err(anyhow!(

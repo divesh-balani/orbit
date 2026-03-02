@@ -1,6 +1,6 @@
 use anyhow::{Context, bail};
-use cap_project::{Platform, RecordingMeta, RecordingMetaInner, StudioRecordingMeta};
-use cap_recording::{
+use orbit_project::{Platform, RecordingMeta, RecordingMetaInner, StudioRecordingMeta};
+use orbit_recording::{
     CameraFeed, MicrophoneFeed,
     feeds::{camera, microphone},
     screen_capture::ScreenCaptureTarget,
@@ -9,7 +9,7 @@ use cap_recording::{
 use chrono::{Local, Utc};
 use clap::{Parser, Subcommand};
 use kameo::Actor as _;
-use scap_targets::Display;
+use sorbit_targets::Display;
 use std::{
     fs,
     io::Write,
@@ -21,12 +21,12 @@ use tracing_subscriber::{EnvFilter, fmt, prelude::*};
 
 #[cfg(windows)]
 fn default_output_dir() -> PathBuf {
-    std::env::temp_dir().join("cap-real-device-tests")
+    std::env::temp_dir().join("orbit-real-device-tests")
 }
 
 #[cfg(not(windows))]
 fn default_output_dir() -> PathBuf {
-    PathBuf::from("/tmp/cap-real-device-tests")
+    PathBuf::from("/tmp/orbit-real-device-tests")
 }
 
 #[derive(Parser)]
@@ -84,7 +84,7 @@ enum Commands {
 struct AvailableDevices {
     primary_display: Display,
     default_microphone: Option<String>,
-    cameras: Vec<cap_camera::CameraInfo>,
+    cameras: Vec<orbit_camera::CameraInfo>,
 }
 
 impl AvailableDevices {
@@ -93,7 +93,7 @@ impl AvailableDevices {
 
         let default_microphone = MicrophoneFeed::default_device().map(|(label, _, _)| label);
 
-        let cameras: Vec<_> = cap_camera::list_cameras().collect();
+        let cameras: Vec<_> = orbit_camera::list_cameras().collect();
 
         Ok(Self {
             primary_display,
@@ -1391,7 +1391,7 @@ async fn execute_recording(
     };
 
     #[cfg(target_os = "macos")]
-    let shareable_content = cap_recording::SendableShareableContent::from(
+    let shareable_content = orbit_recording::SendableShareableContent::from(
         cidre::sc::ShareableContent::current().await?,
     );
 
@@ -1437,7 +1437,7 @@ async fn execute_recording(
 
     let completed = handle.stop().await?;
 
-    let pretty_name = Local::now().format("Cap %Y-%m-%d at %H.%M.%S").to_string();
+    let pretty_name = Local::now().format("Orbit %Y-%m-%d at %H.%M.%S").to_string();
     let meta = RecordingMeta {
         platform: Some(Platform::default()),
         project_path: recording_dir.clone(),
@@ -1564,7 +1564,7 @@ async fn check_permissions() -> anyhow::Result<()> {
         println!("  Microphone: NO DEVICE FOUND");
     }
 
-    if cap_camera::list_cameras().next().is_some() {
+    if orbit_camera::list_cameras().next().is_some() {
         println!("  Camera: AVAILABLE (permission will be requested on first use)");
     } else {
         println!("  Camera: NO DEVICE FOUND");
@@ -1586,7 +1586,7 @@ async fn check_permissions() -> anyhow::Result<()> {
         println!("  Microphone: NO DEVICE FOUND");
     }
 
-    if cap_camera::list_cameras().next().is_some() {
+    if orbit_camera::list_cameras().next().is_some() {
         println!("  Camera: AVAILABLE");
     } else {
         println!("  Camera: NO DEVICE FOUND");
@@ -1598,7 +1598,7 @@ async fn check_permissions() -> anyhow::Result<()> {
 
 fn print_summary(reports: &[TestReport]) {
     println!("\n{}", "=".repeat(70));
-    println!("CAP REAL-DEVICE RECORDING TEST RESULTS");
+    println!("ORBIT REAL-DEVICE RECORDING TEST RESULTS");
     println!("{}", "=".repeat(70));
 
     for report in reports {
@@ -2281,7 +2281,7 @@ async fn main() -> anyhow::Result<()> {
 
     if cli.benchmark_output {
         let command = format!(
-            "cargo run -p cap-recording --example real-device-test-runner -- {} {}{}{}{}--fps {}",
+            "cargo run -p orbit-recording --example real-device-test-runner -- {} {}{}{}{}--fps {}",
             match cli.command {
                 Some(Commands::Baseline) => "baseline",
                 Some(Commands::SinglePause) => "single-pause",

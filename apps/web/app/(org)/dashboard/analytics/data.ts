@@ -1,6 +1,6 @@
-import { db } from "@cap/database";
-import { comments, spaceVideos, videos } from "@cap/database/schema";
-import { Tinybird } from "@cap/web-backend";
+import { db } from "@orbit/database";
+import { comments, spaceVideos, videos } from "@orbit/database/schema";
+import { Tinybird } from "@orbit/web-backend";
 import { and, between, eq, inArray } from "drizzle-orm";
 import { sql } from "drizzle-orm/sql";
 import { Effect } from "effect";
@@ -333,7 +333,7 @@ export const getOrgAnalyticsData = async (
 
 	const videoNames = await loadVideoNames(
 		tinybirdData.topCapsRaw
-			.map((cap: TopCapRow) => cap.videoId)
+			.map((orbit: TopCapRow) => orbit.videoId)
 			.filter(Boolean),
 	);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { buildEnv } from "@cap/env";
+import { buildEnv } from "@orbit/env";
 import {
 	Command,
 	CommandGroup,
@@ -8,7 +8,7 @@ import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-} from "@cap/ui";
+} from "@orbit/ui";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -60,14 +60,14 @@ const Top = () => {
 		"/dashboard/caps": "Caps",
 		"/dashboard/folder": "Caps",
 		"/dashboard/shared-caps": "Shared Caps",
-		"/dashboard/caps/record": "Record a Cap",
+		"/dashboard/caps/record": "Record a Orbit",
 		"/dashboard/settings/organization": "Organization Settings",
 		"/dashboard/settings/account": "Account Settings",
 		"/dashboard/spaces": "Spaces",
 		"/dashboard/spaces/browse": "Browse Spaces",
 		"/dashboard/analytics": "Analytics",
 		[`/dashboard/folder/${params.id}`]: "Caps",
-		[`/dashboard/analytics/s/${params.id}`]: "Analytics: Cap video title",
+		[`/dashboard/analytics/s/${params.id}`]: "Analytics: Orbit video title",
 	};
 
 	const title = activeSpace ? activeSpace.name : titles[pathname] || "";
@@ -116,7 +116,7 @@ const Top = () => {
 				</div>
 			</div>
 			<div className="flex gap-4 items-center">
-				{buildEnv.NEXT_PUBLIC_IS_CAP && <ReferButton />}
+				{buildEnv.NEXT_PUBLIC_IS_ORBIT && <ReferButton />}
 				<div
 					data-state={toggleNotifications ? "open" : "closed"}
 					ref={bellRef}
@@ -203,7 +203,7 @@ const User = () => {
 					setUpgradeModalOpen(true);
 				},
 				iconClassName: "text-amber-400 group-hover:text-amber-500",
-				showCondition: buildEnv.NEXT_PUBLIC_IS_CAP && !user.isPro,
+				showCondition: buildEnv.NEXT_PUBLIC_IS_ORBIT && !user.isPro,
 			},
 			{
 				name: "Earn 40% Referral",
@@ -211,7 +211,7 @@ const User = () => {
 				href: "/dashboard/refer",
 				onClick: () => setMenuOpen(false),
 				iconClassName: "text-gray-11 group-hover:text-gray-12",
-				showCondition: buildEnv.NEXT_PUBLIC_IS_CAP,
+				showCondition: buildEnv.NEXT_PUBLIC_IS_ORBIT,
 			},
 			{
 				name: "Settings",
@@ -224,14 +224,14 @@ const User = () => {
 			{
 				name: "Chat Support",
 				icon: <MessageCircleMoreIcon />,
-				onClick: () => window.open("https://cap.link/discord", "_blank"),
+				onClick: () => window.open("https://orbit.link/discord", "_blank"),
 				iconClassName: "text-gray-11 group-hover:text-gray-12",
 				showCondition: true,
 			},
 			{
 				name: "Download App",
 				icon: <DownloadIcon />,
-				onClick: () => window.open("https://cap.so/download", "_blank"),
+				onClick: () => window.open("https://orbit.so/download", "_blank"),
 				iconClassName: "text-gray-11 group-hover:text-gray-12",
 				showCondition: true,
 			},

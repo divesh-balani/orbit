@@ -1,5 +1,5 @@
 [package]
-name = "cap-rendering"
+name = "orbit-rendering"
 version = "0.1.0"
 edition = "2024"
 
@@ -9,10 +9,10 @@ workspace = true
 [dependencies]
 anyhow.workspace = true
 bytemuck = { version = "1.7", features = ["derive"] }
-cap-flags = { path = "../flags" }
-cap-project = { path = "../project" }
-cap-video-decode = { path = "../video-decode" }
-cap-cursor-info = { path = "../cursor-info" }
+orbit-flags = { path = "../flags" }
+orbit-project = { path = "../project" }
+orbit-video-decode = { path = "../video-decode" }
+orbit-cursor-info = { path = "../cursor-info" }
 ffmpeg-hw-device = { path = "../ffmpeg-hw-device" }
 tokio.workspace = true
 ffmpeg.workspace = true

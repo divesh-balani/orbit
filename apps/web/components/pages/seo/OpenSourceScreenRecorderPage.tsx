@@ -7,47 +7,47 @@ import type { SeoPageContent } from "../../seo/types";
 export const openSourceScreenRecorderContent: SeoPageContent = {
 	title: "Open Source Screen Recorder — Free, Private, and Community-Built",
 	description:
-		"Cap is the leading open-source screen recorder for Mac and Windows. Audit the code, self-host your recordings, and stay in full control of your data. Free forever with no vendor lock-in.",
+		"Orbit is the leading open-source screen recorder for Mac and Windows. Audit the code, self-host your recordings, and stay in full control of your data. Free forever with no vendor lock-in.",
 
 	featuresTitle: "Why Choose an Open Source Screen Recorder",
 	featuresDescription:
-		"Open source means full transparency, real privacy, and the freedom to use Cap exactly how you want — without compromise",
+		"Open source means full transparency, real privacy, and the freedom to use Orbit exactly how you want — without compromise",
 
 	features: [
 		{
 			title: "Fully Open Source on GitHub",
 			description:
-				"Cap's entire codebase is publicly available and MIT-licensed on GitHub. Inspect every line of code, understand exactly what happens to your recordings, and contribute features or fixes back to the community.",
+				"Orbit's entire codebase is publicly available and MIT-licensed on GitHub. Inspect every line of code, understand exactly what happens to your recordings, and contribute features or fixes back to the community.",
 		},
 		{
 			title: "Self-Host Your Recordings",
 			description:
-				"Connect Cap to any S3-compatible storage — AWS S3, Cloudflare R2, Backblaze, or your own MinIO instance. Your recordings never touch Cap's servers unless you want them to. True data ownership.",
+				"Connect Orbit to any S3-compatible storage — AWS S3, Cloudflare R2, Backblaze, or your own MinIO instance. Your recordings never touch Orbit's servers unless you want them to. True data ownership.",
 		},
 		{
 			title: "No Vendor Lock-In",
 			description:
-				"With a closed-source tool, you're dependent on a company's pricing, policies, and survival. Cap is open source — fork it, modify it, or self-host the entire platform. Your workflow is never held hostage.",
+				"With a closed-source tool, you're dependent on a company's pricing, policies, and survival. Orbit is open source — fork it, modify it, or self-host the entire platform. Your workflow is never held hostage.",
 		},
 		{
 			title: "Community-Driven Development",
 			description:
-				"Cap is built in the open with contributions from developers around the world. Features are shaped by real user needs, not quarterly revenue targets. File an issue, submit a PR, or join the discussion on GitHub.",
+				"Orbit is built in the open with contributions from developers around the world. Features are shaped by real user needs, not quarterly revenue targets. File an issue, submit a PR, or join the discussion on GitHub.",
 		},
 		{
 			title: "Privacy-First Architecture",
 			description:
-				"Because Cap is open source, privacy isn't a marketing claim — it's verifiable. Review the data handling code yourself, run the app locally, and configure storage to keep recordings entirely within your infrastructure.",
+				"Because Orbit is open source, privacy isn't a marketing claim — it's verifiable. Review the data handling code yourself, run the app locally, and configure storage to keep recordings entirely within your infrastructure.",
 		},
 		{
 			title: "4K Recording at 60fps",
 			description:
-				"Open source doesn't mean underpowered. Cap captures your screen at up to 4K resolution and 60 frames per second with system audio and webcam overlay. Professional-grade output at zero cost.",
+				"Open source doesn't mean underpowered. Orbit captures your screen at up to 4K resolution and 60 frames per second with system audio and webcam overlay. Professional-grade output at zero cost.",
 		},
 		{
 			title: "Instant Shareable Links",
 			description:
-				"Stop recording and Cap generates a shareable link immediately. No manual uploading, no processing queue. Paste the link in Slack, email, or any tool and viewers get instant access.",
+				"Stop recording and Orbit generates a shareable link immediately. No manual uploading, no processing queue. Paste the link in Slack, email, or any tool and viewers get instant access.",
 		},
 		{
 			title: "AI Captions Without Compromise",
@@ -59,7 +59,7 @@ export const openSourceScreenRecorderContent: SeoPageContent = {
 	recordingModes: {
 		title: "Two Open Source Recording Modes",
 		description:
-			"Cap gives you two distinct modes so you can choose the right workflow for every recording",
+			"Orbit gives you two distinct modes so you can choose the right workflow for every recording",
 		modes: [
 			{
 				icon: <Zap fill="yellow" className="mb-4 size-8" strokeWidth={1.5} />,
@@ -84,7 +84,7 @@ export const openSourceScreenRecorderContent: SeoPageContent = {
 
 	comparisonTable: {
 		title: "Open Source vs Closed Source Screen Recorders",
-		headers: ["Feature", "Cap (Open Source)", "Loom", "Vidyard", "Camtasia"],
+		headers: ["Feature", "Orbit (Open Source)", "Loom", "Vidyard", "Camtasia"],
 		rows: [
 			[
 				"Open source",
@@ -145,124 +145,124 @@ export const openSourceScreenRecorderContent: SeoPageContent = {
 		],
 	},
 
-	comparisonTitle: "How Cap Stands Apart as an Open Source Screen Recorder",
+	comparisonTitle: "How Orbit Stands Apart as an Open Source Screen Recorder",
 	comparisonDescription:
 		"The open-source difference goes beyond price — it's about trust, control, and long-term sustainability",
 
 	comparison: [
 		{
-			title: "Cap vs Loom",
+			title: "Orbit vs Loom",
 			description:
-				"Loom is a closed-source SaaS that owns your recording data and can change pricing at any time. Cap is open source with custom storage support, starting at $9.99/month versus Loom's $18/month — and Cap's Studio Mode is completely free. <a href='/loom-alternative'>See the full Cap vs Loom comparison</a>.",
+				"Loom is a closed-source SaaS that owns your recording data and can change pricing at any time. Orbit is open source with custom storage support, starting at $9.99/month versus Loom's $18/month — and Orbit's Studio Mode is completely free. <a href='/loom-alternative'>See the full Orbit vs Loom comparison</a>.",
 		},
 		{
-			title: "Cap vs OBS Studio",
+			title: "Orbit vs OBS Studio",
 			description:
-				"OBS is also open source but built for live streaming, not async screen sharing. Cap brings the open-source ethos to everyday recording with instant shareable links, cloud storage, and built-in commenting — features OBS doesn't offer.",
+				"OBS is also open source but built for live streaming, not async screen sharing. Orbit brings the open-source ethos to everyday recording with instant shareable links, cloud storage, and built-in commenting — features OBS doesn't offer.",
 		},
 		{
-			title: "Cap vs Vidyard",
+			title: "Orbit vs Vidyard",
 			description:
-				"Vidyard is a closed-source enterprise video platform with pricing to match. Cap gives teams the same async video capabilities with full transparency, no vendor lock-in, and a free tier that covers most use cases.",
+				"Vidyard is a closed-source enterprise video platform with pricing to match. Orbit gives teams the same async video capabilities with full transparency, no vendor lock-in, and a free tier that covers most use cases.",
 		},
 		{
-			title: "Cap vs Camtasia",
+			title: "Orbit vs Camtasia",
 			description:
-				"Camtasia is a powerful but closed-source editor costing $299.99. Cap is open source and covers the full recording-to-sharing workflow for free. If you need advanced editing, combine Cap's free recording with your editor of choice.",
+				"Camtasia is a powerful but closed-source editor costing $299.99. Orbit is open source and covers the full recording-to-sharing workflow for free. If you need advanced editing, combine Orbit's free recording with your editor of choice.",
 		},
 	],
 
-	useCasesTitle: "Who Uses Cap as Their Open Source Screen Recorder",
+	useCasesTitle: "Who Uses Orbit as Their Open Source Screen Recorder",
 	useCasesDescription:
-		"From privacy-conscious developers to enterprises with compliance requirements — Cap fits every team that values transparency",
+		"From privacy-conscious developers to enterprises with compliance requirements — Orbit fits every team that values transparency",
 
 	useCases: [
 		{
 			title: "Privacy-Conscious Developers",
 			description:
-				"Developers who want to verify what software does with their data choose Cap because the code is public. Self-host recordings on your own S3 bucket for complete data sovereignty with zero third-party access.",
+				"Developers who want to verify what software does with their data choose Orbit because the code is public. Self-host recordings on your own S3 bucket for complete data sovereignty with zero third-party access.",
 		},
 		{
 			title: "Open Source Projects and Communities",
 			description:
-				"Open source teams use Cap to record demos, walkthroughs, and contributor onboarding videos. The shared ethos of transparency and community ownership makes Cap a natural fit for open source workflows.",
+				"Open source teams use Orbit to record demos, walkthroughs, and contributor onboarding videos. The shared ethos of transparency and community ownership makes Orbit a natural fit for open source workflows.",
 		},
 		{
 			title: "Enterprise Compliance Teams",
 			description:
-				"Organizations with strict data residency or compliance requirements deploy Cap with self-hosted storage. Keep every recording within your own infrastructure and satisfy GDPR, HIPAA, or internal security policies.",
+				"Organizations with strict data residency or compliance requirements deploy Orbit with self-hosted storage. Keep every recording within your own infrastructure and satisfy GDPR, HIPAA, or internal security policies.",
 		},
 		{
 			title: "Remote Development Teams",
 			description:
-				"Engineering teams use Cap to record bug reports, code reviews, and architecture walkthroughs. Instant shareable links drop into GitHub issues, Jira tickets, and Slack without any file transfer overhead.",
+				"Engineering teams use Orbit to record bug reports, code reviews, and architecture walkthroughs. Instant shareable links drop into GitHub issues, Jira tickets, and Slack without any file transfer overhead.",
 		},
 		{
 			title: "Educational Institutions",
 			description:
-				"Schools and universities choose Cap because open-source software is auditable, trustworthy, and free from unexpected pricing changes. <a href='/solutions/online-classroom-tools'>Learn how Cap supports online teaching</a>.",
+				"Schools and universities choose Orbit because open-source software is auditable, trustworthy, and free from unexpected pricing changes. <a href='/solutions/online-classroom-tools'>Learn how Orbit supports online teaching</a>.",
 		},
 		{
 			title: "Startups and Indie Developers",
 			description:
-				"Small teams get enterprise-quality async video without SaaS pricing. Cap's free Studio Mode and open-source codebase mean you can grow without worrying about per-seat costs or licensing terms.",
+				"Small teams get enterprise-quality async video without SaaS pricing. Orbit's free Studio Mode and open-source codebase mean you can grow without worrying about per-seat costs or licensing terms.",
 		},
 	],
 
 	faqsTitle: "Frequently Asked Questions About Open Source Screen Recording",
 	faqs: [
 		{
-			question: "Is Cap really open source?",
+			question: "Is Orbit really open source?",
 			answer:
-				"Yes. Cap is fully open source and MIT-licensed. The complete codebase — desktop app, web app, Rust media processing pipeline, and all backend services — is publicly available on GitHub. You can inspect every line, fork the project, and contribute back to the community.",
+				"Yes. Orbit is fully open source and MIT-licensed. The complete codebase — desktop app, web app, Rust media processing pipeline, and all backend services — is publicly available on GitHub. You can inspect every line, fork the project, and contribute back to the community.",
 		},
 		{
-			question: "Can I self-host Cap's screen recordings?",
+			question: "Can I self-host Orbit's screen recordings?",
 			answer:
-				"Yes. Cap supports any S3-compatible storage provider, including AWS S3, Cloudflare R2, Backblaze B2, and self-hosted MinIO. Configure your own bucket in Cap's settings and your recordings are stored entirely within your infrastructure — Cap's servers never see your content.",
+				"Yes. Orbit supports any S3-compatible storage provider, including AWS S3, Cloudflare R2, Backblaze B2, and self-hosted MinIO. Configure your own bucket in Orbit's settings and your recordings are stored entirely within your infrastructure — Orbit's servers never see your content.",
 		},
 		{
 			question: "What is the best open source screen recorder?",
 			answer:
-				"Cap is the best open source screen recorder for most users because it combines full transparency with practical features: 4K recording, instant shareable links, webcam overlay, AI captions, and built-in thread commenting. OBS Studio is also open source but designed for streaming rather than async screen sharing and instant link generation.",
+				"Orbit is the best open source screen recorder for most users because it combines full transparency with practical features: 4K recording, instant shareable links, webcam overlay, AI captions, and built-in thread commenting. OBS Studio is also open source but designed for streaming rather than async screen sharing and instant link generation.",
 		},
 		{
-			question: "Is Cap's open source version free?",
+			question: "Is Orbit's open source version free?",
 			answer:
-				"Yes. Cap's Studio Mode is completely free for personal use with no time limits and no watermarks. Instant Mode on the free plan supports recordings up to 5 minutes. Cap Pro ($9.99/month) removes Instant Mode time limits and adds team features. The core software will always be open source and free to use.",
+				"Yes. Orbit's Studio Mode is completely free for personal use with no time limits and no watermarks. Instant Mode on the free plan supports recordings up to 5 minutes. Orbit Pro ($9.99/month) removes Instant Mode time limits and adds team features. The core software will always be open source and free to use.",
 		},
 		{
 			question:
-				"How does Cap compare to OBS Studio as an open source recorder?",
+				"How does Orbit compare to OBS Studio as an open source recorder?",
 			answer:
-				"Both Cap and OBS Studio are open source, but they serve different workflows. OBS requires significant setup and is built for live streaming. Cap is designed for async screen sharing — you record, get a shareable link in seconds, and viewers can leave timestamped comments. Cap is the better open source screen recorder for teams and everyday recording.",
+				"Both Orbit and OBS Studio are open source, but they serve different workflows. OBS requires significant setup and is built for live streaming. Orbit is designed for async screen sharing — you record, get a shareable link in seconds, and viewers can leave timestamped comments. Orbit is the better open source screen recorder for teams and everyday recording.",
 		},
 		{
-			question: "Can I contribute to Cap's development?",
+			question: "Can I contribute to Orbit's development?",
 			answer:
-				"Absolutely. Cap welcomes contributions of all kinds — bug reports, feature requests, code contributions, and documentation improvements. Visit Cap's GitHub repository to file issues, browse open tasks, or submit a pull request. The roadmap is public and shaped by community feedback.",
+				"Absolutely. Orbit welcomes contributions of all kinds — bug reports, feature requests, code contributions, and documentation improvements. Visit Orbit's GitHub repository to file issues, browse open tasks, or submit a pull request. The roadmap is public and shaped by community feedback.",
 		},
 		{
-			question: "Does Cap work on Mac and Windows?",
+			question: "Does Orbit work on Mac and Windows?",
 			answer:
-				"Yes. Cap is available as a native desktop app for macOS and Windows. Both versions are included in the same open-source repository. <a href='/screen-recorder-mac'>Learn more about screen recording on Mac</a> or <a href='/screen-recorder-windows'>learn more about screen recording on Windows</a>.",
+				"Yes. Orbit is available as a native desktop app for macOS and Windows. Both versions are included in the same open-source repository. <a href='/screen-recorder-mac'>Learn more about screen recording on Mac</a> or <a href='/screen-recorder-windows'>learn more about screen recording on Windows</a>.",
 		},
 		{
-			question: "What license does Cap use?",
+			question: "What license does Orbit use?",
 			answer:
-				"Cap is released under the MIT License, one of the most permissive open-source licenses available. You are free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the software. Commercial use is permitted. Attribution is required.",
+				"Orbit is released under the MIT License, one of the most permissive open-source licenses available. You are free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the software. Commercial use is permitted. Attribution is required.",
 		},
 	],
 
 	video: {
-		url: "/videos/cap-demo.mp4",
-		thumbnail: "/videos/cap-demo-thumbnail.png",
-		alt: "Cap open source screen recorder demo showing recording, sharing, and self-hosting",
+		url: "/videos/orbit-demo.mp4",
+		thumbnail: "/videos/orbit-demo-thumbnail.png",
+		alt: "Orbit open source screen recorder demo showing recording, sharing, and self-hosting",
 	},
 
 	cta: {
 		title: "Start Recording with the Best Open Source Screen Recorder",
-		buttonText: "Download Cap Free",
+		buttonText: "Download Orbit Free",
 		secondaryButtonText: "View on GitHub",
 	},
 };

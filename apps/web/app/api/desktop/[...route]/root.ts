@@ -1,13 +1,13 @@
-import { db } from "@cap/database";
-import { sendEmail } from "@cap/database/emails/config";
-import { Feedback } from "@cap/database/emails/feedback";
+import { db } from "@orbit/database";
+import { sendEmail } from "@orbit/database/emails/config";
+import { Feedback } from "@orbit/database/emails/feedback";
 import {
 	organizationMembers,
 	organizations,
 	users,
-} from "@cap/database/schema";
-import { buildEnv, serverEnv } from "@cap/env";
-import { stripe, userIsPro } from "@cap/utils";
+} from "@orbit/database/schema";
+import { buildEnv, serverEnv } from "@orbit/env";
+import { stripe, userIsPro } from "@orbit/utils";
 import { zValidator } from "@hono/zod-validator";
 import { and, eq, inArray, isNull, or } from "drizzle-orm";
 import { Hono } from "hono";
@@ -193,7 +193,7 @@ app.post(
 
 			const formData = new FormData();
 			const logBlob = new Blob([log], { type: "text/plain" });
-			const fileName = `cap-desktop-${os || "unknown"}-${version || "unknown"}-${Date.now()}.log`;
+			const fileName = `orbit-desktop-${os || "unknown"}-${version || "unknown"}-${Date.now()}.log`;
 			formData.append("file", logBlob, fileName);
 
 			let diagnosticsContent = "";
@@ -260,7 +260,7 @@ app.post(
 
 		try {
 			await sendEmail({
-				email: "hello@cap.so",
+				email: "hello@orbit.so",
 				subject: `New Feedback from ${userEmail}`,
 				react: Feedback({
 					userEmail,
@@ -270,7 +270,7 @@ app.post(
 				}),
 				cc: userEmail,
 				replyTo: userEmail,
-				fromOverride: "Richie from Cap <richie@send.cap.so>",
+				fromOverride: "Richie from Orbit <richie@send.orbit.so>",
 			});
 
 			return c.json({

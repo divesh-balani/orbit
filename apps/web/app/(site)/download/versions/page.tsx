@@ -9,8 +9,8 @@ import {
 } from "@/utils/releases";
 
 export const metadata: Metadata = {
-	title: "All Versions — Cap",
-	description: "Download previous versions of Cap for macOS and Windows.",
+	title: "All Versions — Orbit",
+	description: "Download previous versions of Orbit for macOS and Windows.",
 };
 
 export const revalidate = 3600;
@@ -173,7 +173,7 @@ export default async function VersionsPage() {
 						All Versions
 					</h1>
 					<p className="text-gray-10">
-						Download previous versions of Cap for macOS and Windows.
+						Download previous versions of Orbit for macOS and Windows.
 					</p>
 				</div>
 

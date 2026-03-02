@@ -7,8 +7,8 @@ import {
 	onCleanup,
 	Show,
 } from "solid-js";
-import IconCapZoomIn from "~icons/cap/zoom-in";
-import IconCapZoomOut from "~icons/cap/zoom-out";
+import IconOrbitZoomIn from "~icons/orbit/zoom-in";
+import IconOrbitZoomOut from "~icons/orbit/zoom-out";
 import { EditorButton, Slider } from "../editor/ui";
 import { AnnotationLayer } from "./AnnotationLayer";
 import { useScreenshotEditorContext } from "./context";
@@ -190,7 +190,7 @@ export function Preview(props: { zoom: number; setZoom: (z: number) => void }) {
 						kbd={["meta", "-"]}
 						onClick={zoomOut}
 					>
-						<IconCapZoomOut class="size-4" />
+						<IconOrbitZoomOut class="size-4" />
 					</EditorButton>
 					<Slider
 						class="w-20"
@@ -206,7 +206,7 @@ export function Preview(props: { zoom: number; setZoom: (z: number) => void }) {
 						kbd={["meta", "+"]}
 						onClick={zoomIn}
 					>
-						<IconCapZoomIn class="size-4" />
+						<IconOrbitZoomIn class="size-4" />
 					</EditorButton>
 				</div>
 				<Show

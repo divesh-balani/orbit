@@ -1,9 +1,9 @@
 "use server";
 
-import { db } from "@cap/database";
-import { s3Buckets, videos } from "@cap/database/schema";
-import { S3Buckets } from "@cap/web-backend";
-import type { Video } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { s3Buckets, videos } from "@orbit/database/schema";
+import { S3Buckets } from "@orbit/web-backend";
+import type { Video } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Effect, Option } from "effect";
 import { GROQ_MODEL, getGroqClient } from "@/lib/groq-client";

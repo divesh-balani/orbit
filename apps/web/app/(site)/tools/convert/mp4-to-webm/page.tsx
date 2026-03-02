@@ -5,7 +5,7 @@ import type { ToolPageContent } from "@/components/tools/types";
 import { createBreadcrumbSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "MP4 to WebM Converter | Free Online Video Converter | Cap",
+	title: "MP4 to WebM Converter | Free Online Video Converter | Orbit",
 	description:
 		"Convert MP4 videos to WebM format for better web compatibility directly in your browser. Free online tool with no uploads required.",
 	openGraph: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 				url: "/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap MP4 to WebM Converter Tool",
+				alt: "Orbit MP4 to WebM Converter Tool",
 			},
 		],
 	},
@@ -29,17 +29,17 @@ export const metadata: Metadata = {
 		images: ["/og.png"],
 	},
 	alternates: {
-		canonical: "https://cap.so/tools/convert/mp4-to-webm",
+		canonical: "https://orbit.so/tools/convert/mp4-to-webm",
 	},
 };
 
 const breadcrumbSchema = createBreadcrumbSchema([
-	{ name: "Home", url: "https://cap.so" },
-	{ name: "Tools", url: "https://cap.so/tools" },
-	{ name: "Convert", url: "https://cap.so/tools/convert" },
+	{ name: "Home", url: "https://orbit.so" },
+	{ name: "Tools", url: "https://orbit.so/tools" },
+	{ name: "Convert", url: "https://orbit.so/tools/convert" },
 	{
 		name: "MP4 to WebM Converter",
-		url: "https://cap.so/tools/convert/mp4-to-webm",
+		url: "https://orbit.so/tools/convert/mp4-to-webm",
 	},
 ]);
 
@@ -85,10 +85,10 @@ export default function MP4ToWebMPage() {
 			},
 		],
 		cta: {
-			title: "Cap is the open source Loom alternative",
+			title: "Orbit is the open source Loom alternative",
 			description:
-				"Record, edit, and share video messages with Cap. 100% open source and privacy focused.",
-			buttonText: "Download Cap Free",
+				"Record, edit, and share video messages with Orbit. 100% open source and privacy focused.",
+			buttonText: "Download Orbit Free",
 		},
 	};
 

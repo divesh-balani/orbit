@@ -26,7 +26,7 @@ const DOCKER_DB_ENVS = {
 };
 
 async function main() {
-	intro("Welcome to the Cap env setup CLI!");
+	intro("Welcome to the Orbit env setup CLI!");
 
 	const targets = await multiselect({
 		message: "Which apps will you be working on?",
@@ -104,27 +104,27 @@ async function main() {
 
 			const s3Values = await group(
 				{
-					CAP_AWS_ACCESS_KEY: () =>
+					ORBIT_AWS_ACCESS_KEY: () =>
 						text({
-							message: "CAP_AWS_ACCESS_KEY",
-							placeholder: allEnvs.CAP_AWS_ACCESS_KEY,
-							defaultValue: allEnvs.CAP_AWS_ACCESS_KEY,
+							message: "ORBIT_AWS_ACCESS_KEY",
+							placeholder: allEnvs.ORBIT_AWS_ACCESS_KEY,
+							defaultValue: allEnvs.ORBIT_AWS_ACCESS_KEY,
 						}),
-					CAP_AWS_SECRET_KEY: () =>
+					ORBIT_AWS_SECRET_KEY: () =>
 						text({
-							message: "CAP_AWS_SECRET_KEY",
-							placeholder: allEnvs.CAP_AWS_SECRET_KEY,
-							defaultValue: allEnvs.CAP_AWS_SECRET_KEY,
+							message: "ORBIT_AWS_SECRET_KEY",
+							placeholder: allEnvs.ORBIT_AWS_SECRET_KEY,
+							defaultValue: allEnvs.ORBIT_AWS_SECRET_KEY,
 						}),
-					CAP_AWS_BUCKET: () =>
+					ORBIT_AWS_BUCKET: () =>
 						text({
-							message: "CAP_AWS_BUCKET",
-							defaultValue: allEnvs.CAP_AWS_BUCKET,
-							placeholder: allEnvs.CAP_AWS_BUCKET,
+							message: "ORBIT_AWS_BUCKET",
+							defaultValue: allEnvs.ORBIT_AWS_BUCKET,
+							placeholder: allEnvs.ORBIT_AWS_BUCKET,
 						}),
-					CAP_AWS_BUCKET_URL: () => text({ message: "CAP_AWS_BUCKET_URL" }),
-					CAP_CLOUDFRONT_DISTRIBUTION_ID: () =>
-						text({ message: "CAP_CLOUDFRONT_DISTRIBUTION_ID" }),
+					ORBIT_AWS_BUCKET_URL: () => text({ message: "ORBIT_AWS_BUCKET_URL" }),
+					ORBIT_CLOUDFRONT_DISTRIBUTION_ID: () =>
+						text({ message: "ORBIT_CLOUDFRONT_DISTRIBUTION_ID" }),
 				},
 				{ onCancel: () => process.exit(0) },
 			);
@@ -133,11 +133,11 @@ async function main() {
 		} else {
 			envs.DATABASE_URL = DOCKER_DB_ENVS.url;
 
-			envs.CAP_AWS_ACCESS_KEY = DOCKER_S3_ENVS.accessKey;
-			envs.CAP_AWS_SECRET_KEY = DOCKER_S3_ENVS.secretKey;
-			envs.CAP_AWS_BUCKET = DOCKER_S3_ENVS.bucket;
-			envs.CAP_AWS_REGION = DOCKER_S3_ENVS.region;
-			envs.CAP_AWS_ENDPOINT = DOCKER_S3_ENVS.endpoint;
+			envs.ORBIT_AWS_ACCESS_KEY = DOCKER_S3_ENVS.accessKey;
+			envs.ORBIT_AWS_SECRET_KEY = DOCKER_S3_ENVS.secretKey;
+			envs.ORBIT_AWS_BUCKET = DOCKER_S3_ENVS.bucket;
+			envs.ORBIT_AWS_REGION = DOCKER_S3_ENVS.region;
+			envs.ORBIT_AWS_ENDPOINT = DOCKER_S3_ENVS.endpoint;
 		}
 
 		envs.NEXT_PUBLIC_WEB_URL = envs.WEB_URL;
@@ -152,15 +152,15 @@ async function main() {
 					if (!hasWeb)
 						return text({
 							message: "VITE_SERVER_URL",
-							placeholder: "https://cap.so",
-							defaultValue: "https://cap.so",
+							placeholder: "https://orbit.so",
+							defaultValue: "https://orbit.so",
 						});
 				},
 				VITE_VERCEL_AUTOMATION_BYPASS_SECRET: () => {
 					if (!hasWeb)
 						return text({
 							message:
-								"VITE_VERCEL_AUTOMATION_BYPASS_SECRET - skip if you're not a Cap team member",
+								"VITE_VERCEL_AUTOMATION_BYPASS_SECRET - skip if you're not a Orbit team member",
 							placeholder: allEnvs.VITE_VERCEL_AUTOMATION_BYPASS_SECRET,
 							defaultValue: allEnvs.VITE_VERCEL_AUTOMATION_BYPASS_SECRET,
 						});

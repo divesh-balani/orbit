@@ -246,7 +246,7 @@ export function PlayerContent() {
 						onClick={cropDialogHandler}
 						onMouseEnter={preloadCropVideoFull}
 						onFocus={preloadCropVideoFull}
-						leftIcon={<IconCapCrop class="w-5 text-gray-12" />}
+						leftIcon={<IconOrbitCrop class="w-5 text-gray-12" />}
 					>
 						Crop
 					</EditorButton>
@@ -273,7 +273,7 @@ export function PlayerContent() {
 									{props.item.rawValue.label}
 								</KSelect.ItemLabel>
 								<KSelect.ItemIndicator class="ml-auto text-blue-9">
-									<IconCapCircleCheck />
+									<IconOrbitCircleCheck />
 								</KSelect.ItemIndicator>
 							</MenuItem>
 						)}
@@ -288,7 +288,7 @@ export function PlayerContent() {
 								}
 							</KSelect.Value>
 							<KSelect.Icon>
-								<IconCapChevronDown class="size-4 text-gray-11" />
+								<IconOrbitChevronDown class="size-4 text-gray-11" />
 							</KSelect.Icon>
 						</KSelect.Trigger>
 						<KSelect.Portal>
@@ -328,7 +328,7 @@ export function PlayerContent() {
 							setEditorState("playbackTime", 0);
 						}}
 					>
-						<IconCapPrev class="text-gray-12 size-3" />
+						<IconOrbitPrev class="text-gray-12 size-3" />
 					</button>
 					<Tooltip kbd={["Space"]} content="Play/Pause video">
 						<button
@@ -337,9 +337,9 @@ export function PlayerContent() {
 							class="flex justify-center items-center rounded-full border border-gray-300 transition-colors bg-gray-3 hover:bg-gray-4 hover:text-black size-9"
 						>
 							{!editorState.playing || isAtEnd() ? (
-								<IconCapPlay class="text-gray-12 size-3" />
+								<IconOrbitPlay class="text-gray-12 size-3" />
 							) : (
-								<IconCapPause class="text-gray-12 size-3" />
+								<IconOrbitPause class="text-gray-12 size-3" />
 							)}
 						</button>
 					</Tooltip>
@@ -352,7 +352,7 @@ export function PlayerContent() {
 							setEditorState("playbackTime", totalDuration());
 						}}
 					>
-						<IconCapNext class="text-gray-12 size-3" />
+						<IconOrbitNext class="text-gray-12 size-3" />
 					</button>
 				</div>
 				<div class="flex flex-row flex-1 gap-4 justify-end items-center">
@@ -367,7 +367,7 @@ export function PlayerContent() {
 						as={KToggleButton}
 						variant="danger"
 						leftIcon={
-							<IconCapScissors
+							<IconOrbitScissors
 								class={cx(
 									editorState.timeline.interactMode === "split"
 										? "text-white"
@@ -378,7 +378,7 @@ export function PlayerContent() {
 					/>
 					<div class="w-px h-8 rounded-full bg-gray-4" />
 					<Tooltip kbd={["meta", "-"]} content="Zoom out">
-						<IconCapZoomOut
+						<IconOrbitZoomOut
 							onClick={() => {
 								editorState.timeline.transform.updateZoom(
 									editorState.timeline.transform.zoom * 1.1,
@@ -389,7 +389,7 @@ export function PlayerContent() {
 						/>
 					</Tooltip>
 					<Tooltip kbd={["meta", "+"]} content="Zoom in">
-						<IconCapZoomIn
+						<IconOrbitZoomIn
 							onClick={() => {
 								editorState.timeline.transform.updateZoom(
 									editorState.timeline.transform.zoom / 1.1,

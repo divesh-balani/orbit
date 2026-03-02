@@ -7,24 +7,24 @@ import {
 import { createFAQSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "Video Recording Software — Free HD Capture, Instant Sharing | Cap",
+	title: "Video Recording Software — Free HD Capture, Instant Sharing | Orbit",
 	description:
-		"Cap is free video recording software for Mac and Windows. Record your screen, webcam, and audio in HD, then share instantly with a link. Open-source, no watermarks, no time limits in Studio Mode.",
+		"Orbit is free video recording software for Mac and Windows. Record your screen, webcam, and audio in HD, then share instantly with a link. Open-source, no watermarks, no time limits in Studio Mode.",
 	alternates: {
-		canonical: "https://cap.so/video-recording-software",
+		canonical: "https://orbit.so/video-recording-software",
 	},
 	openGraph: {
-		title: "Video Recording Software — Free HD Capture, Instant Sharing | Cap",
+		title: "Video Recording Software — Free HD Capture, Instant Sharing | Orbit",
 		description:
-			"Cap is free video recording software for Mac and Windows. Record in HD with audio and webcam, then share with a link instantly. Open-source, no watermarks.",
-		url: "https://cap.so/video-recording-software",
-		siteName: "Cap",
+			"Orbit is free video recording software for Mac and Windows. Record in HD with audio and webcam, then share with a link instantly. Open-source, no watermarks.",
+		url: "https://orbit.so/video-recording-software",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap: Video Recording Software",
+				alt: "Orbit: Video Recording Software",
 			},
 		],
 		locale: "en_US",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Video Recording Software — Free HD Capture, Instant Sharing | Cap",
+		title: "Video Recording Software — Free HD Capture, Instant Sharing | Orbit",
 		description:
-			"Cap is free video recording software for Mac and Windows. Record in HD with audio and webcam, then share with a link instantly. Open-source, no watermarks.",
-		images: ["https://cap.so/og.png"],
+			"Orbit is free video recording software for Mac and Windows. Record in HD with audio and webcam, then share with a link instantly. Open-source, no watermarks.",
+		images: ["https://orbit.so/og.png"],
 	},
 };
 

@@ -1,5 +1,5 @@
 use anyhow::{Context, anyhow};
-use cap_recording::{
+use orbit_recording::{
     FFmpegVideoFrame,
     feeds::{self, camera::CameraFeed},
 };

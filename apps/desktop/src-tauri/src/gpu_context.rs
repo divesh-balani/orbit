@@ -114,7 +114,7 @@ async fn init_gpu_inner() -> Option<SharedGpuContext> {
 
     let (device, queue) = adapter
         .request_device(&wgpu::DeviceDescriptor {
-            label: Some("cap-shared-gpu-device"),
+            label: Some("orbit-shared-gpu-device"),
             required_features: wgpu::Features::empty(),
             ..Default::default()
         })

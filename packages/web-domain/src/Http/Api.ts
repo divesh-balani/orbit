@@ -1,12 +1,12 @@
 import { HttpApi, HttpApiError, OpenApi } from "@effect/platform";
 import { LoomHttpApi } from "../Loom.ts";
 
-export class ApiContract extends HttpApi.make("cap-web-api")
+export class ApiContract extends HttpApi.make("orbit-web-api")
 	.add(LoomHttpApi.prefix("/loom").addError(HttpApiError.ServiceUnavailable))
 	.annotateContext(
 		OpenApi.annotations({
-			title: "Cap HTTP API",
-			description: "Internal API used by Cap Desktop and external services",
+			title: "Orbit HTTP API",
+			description: "Internal API used by Orbit Desktop and external services",
 		}),
 	)
 	.prefix("/api") {}

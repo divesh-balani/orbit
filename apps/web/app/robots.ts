@@ -50,6 +50,6 @@ export default function robots(): MetadataRoute.Robots {
 				disallow: disallowPaths,
 			},
 		],
-		sitemap: "https://cap.so/sitemap.xml",
+		sitemap: "https://orbit.so/sitemap.xml",
 	};
 }

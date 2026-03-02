@@ -1,6 +1,6 @@
 "use client";
 
-import type { Space, Video } from "@cap/web-domain";
+import type { Space, Video } from "@orbit/web-domain";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -28,7 +28,7 @@ export function ClientMyCapsLink({
 
 			try {
 				if (!capData || !capData.id) {
-					console.error("Invalid cap data");
+					console.error("Invalid orbit data");
 					return;
 				}
 
@@ -65,10 +65,10 @@ export function ClientMyCapsLink({
 				e.preventDefault();
 
 				try {
-					const capData = JSON.parse(e.dataTransfer.getData("application/cap"));
+					const capData = JSON.parse(e.dataTransfer.getData("application/orbit"));
 
 					if (!capData || !capData.id) {
-						console.error("Invalid cap data");
+						console.error("Invalid orbit data");
 						return;
 					}
 
@@ -87,7 +87,7 @@ export function ClientMyCapsLink({
 	const handleDragOver = (e: React.DragEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
 
-		if (e.dataTransfer.types.includes("application/cap")) {
+		if (e.dataTransfer.types.includes("application/orbit")) {
 			setIsDragOver(true);
 		}
 	};
@@ -100,7 +100,7 @@ export function ClientMyCapsLink({
 		if (!linkRef.current) return;
 
 		const unregister = registerDropTarget(linkRef.current, (data) => {
-			if (data && data.type === "application/cap") {
+			if (data && data.type === "application/orbit") {
 				handleDrop({ id: data.id, name: data.name });
 			}
 		});

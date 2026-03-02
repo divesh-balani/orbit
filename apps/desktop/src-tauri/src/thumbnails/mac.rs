@@ -4,14 +4,14 @@ use crate::platform::get_shareable_content;
 
 use super::*;
 
-pub async fn capture_display_thumbnail(display: &scap_targets::Display) -> Option<String> {
+pub async fn capture_display_thumbnail(display: &sorbit_targets::Display) -> Option<String> {
     let content = get_shareable_content().await.ok()??;
 
     let filter = display.raw_handle().as_content_filter(content)?;
     capture_thumbnail_from_filter(filter).await
 }
 
-pub async fn capture_window_thumbnail(window: &scap_targets::Window) -> Option<String> {
+pub async fn capture_window_thumbnail(window: &sorbit_targets::Window) -> Option<String> {
     let content = get_shareable_content().await.ok()??;
 
     let sc_window = window.raw_handle().as_sc(content)?;

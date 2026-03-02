@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@cap/ui";
+import { Button } from "@orbit/ui";
 import { useCallback, useId, useRef, useState } from "react";
 import { downloadLoomVideo } from "@/actions/loom";
 

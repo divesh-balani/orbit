@@ -1,12 +1,12 @@
 "use server";
 
-import { db } from "@cap/database";
-import { nanoId } from "@cap/database/helpers";
+import { db } from "@orbit/database";
+import { nanoId } from "@orbit/database/helpers";
 import {
 	messengerConversations,
 	messengerMessages,
-} from "@cap/database/schema";
-import { buildEnv } from "@cap/env";
+} from "@orbit/database/schema";
+import { buildEnv } from "@orbit/env";
 import { asc, desc, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { generateMessengerAgentReply } from "@/lib/messenger/agent";
@@ -23,13 +23,13 @@ import {
 import {
 	getIdentityTag,
 	storeConversationInSupermemory,
-	syncCapKnowledgeBase,
+	syncOrbitKnowledgeBase,
 } from "@/lib/messenger/supermemory";
 
 const normalizeContent = (content: string) => content.trim().slice(0, 6000);
 
 const assertMessengerEnabled = () => {
-	if (buildEnv.NEXT_PUBLIC_IS_CAP !== "true") {
+	if (buildEnv.NEXT_PUBLIC_IS_ORBIT !== "true") {
 		throw new Error("Messenger is disabled");
 	}
 };
@@ -342,7 +342,7 @@ export const adminSendMessengerMessage = async ({
 export const adminSyncMessengerKnowledge = async () => {
 	assertMessengerEnabled();
 	const viewer = await requireAdminViewer();
-	const result = await syncCapKnowledgeBase(viewer.user.email);
+	const result = await syncOrbitKnowledgeBase(viewer.user.email);
 	revalidatePath("/admin");
 	return result;
 };

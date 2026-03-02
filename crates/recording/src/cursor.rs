@@ -1,7 +1,7 @@
-use cap_cursor_capture::CursorCropBounds;
-use cap_cursor_info::CursorShape;
-use cap_project::{CursorClickEvent, CursorEvents, CursorMoveEvent, XY};
-use cap_timestamp::Timestamps;
+use orbit_cursor_capture::CursorCropBounds;
+use orbit_cursor_info::CursorShape;
+use orbit_project::{CursorClickEvent, CursorEvents, CursorMoveEvent, XY};
+use orbit_timestamp::Timestamps;
 use futures::{FutureExt, future::Shared};
 use std::{
     collections::HashMap,
@@ -62,14 +62,14 @@ fn flush_cursor_data(output_path: &Path, moves: &[CursorMoveEvent], clicks: &[Cu
 #[tracing::instrument(name = "cursor", skip_all)]
 pub fn spawn_cursor_recorder(
     crop_bounds: CursorCropBounds,
-    display: scap_targets::Display,
+    display: sorbit_targets::Display,
     cursors_dir: PathBuf,
     prev_cursors: Cursors,
     next_cursor_id: u32,
     start_time: Timestamps,
     output_path: Option<PathBuf>,
 ) -> CursorActor {
-    use cap_utils::spawn_actor;
+    use orbit_utils::spawn_actor;
     use device_query::{DeviceQuery, DeviceState};
     use futures::future::Either;
     use sha2::{Digest, Sha256};
@@ -84,7 +84,7 @@ pub fn spawn_cursor_recorder(
         let device_state = DeviceState::new();
         let mut last_mouse_state = device_state.get_mouse();
 
-        let mut last_position = cap_cursor_capture::RawCursorPosition::get();
+        let mut last_position = orbit_cursor_capture::RawCursorPosition::get();
 
         std::fs::create_dir_all(&cursors_dir).unwrap();
 
@@ -110,7 +110,7 @@ pub fn spawn_cursor_recorder(
             let elapsed = start_time.instant().elapsed().as_secs_f64() * 1000.0;
             let mouse_state = device_state.get_mouse();
 
-            let position = cap_cursor_capture::RawCursorPosition::get();
+            let position = orbit_cursor_capture::RawCursorPosition::get();
             let position_changed = position != last_position;
 
             if position_changed {
@@ -251,7 +251,7 @@ fn get_cursor_data() -> Option<CursorData> {
         let image = image_data.as_bytes_unchecked().to_vec();
 
         let shape =
-            cap_cursor_info::CursorShapeMacOS::from_hash(&hex::encode(Sha256::digest(&image)));
+            orbit_cursor_info::CursorShapeMacOS::from_hash(&hex::encode(Sha256::digest(&image)));
 
         Some(CursorData {
             image,

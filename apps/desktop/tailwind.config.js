@@ -1,4 +1,4 @@
-const baseConfig = require("@cap/ui-solid/tailwind");
+const baseConfig = require("@orbit/ui-solid/tailwind");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

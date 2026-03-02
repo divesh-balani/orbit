@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("@cap/env", () => ({
+vi.mock("@orbit/env", () => ({
 	serverEnv: vi.fn(() => ({
 		DEEPGRAM_API_KEY: "test-deepgram-api-key",
 		DATABASE_URL: "mysql://test@localhost/test",
@@ -19,7 +19,7 @@ vi.mock("@/workflows/transcribe", () => ({
 
 let mockQueryResult: unknown[] = [];
 
-vi.mock("@cap/database", () => ({
+vi.mock("@orbit/database", () => ({
 	db: () => ({
 		select: () => ({
 			from: () => ({
@@ -40,7 +40,7 @@ vi.mock("@cap/database", () => ({
 	}),
 }));
 
-vi.mock("@cap/database/schema", () => ({
+vi.mock("@orbit/database/schema", () => ({
 	videos: { id: "id", settings: "settings" },
 	organizations: { id: "id", settings: "settings" },
 	s3Buckets: { id: "id" },
@@ -50,7 +50,7 @@ vi.mock("drizzle-orm", () => ({
 	eq: vi.fn((field, value) => ({ field, value })),
 }));
 
-import type { Video } from "@cap/web-domain";
+import type { Video } from "@orbit/web-domain";
 import { transcribeVideo } from "@/lib/transcribe";
 import { transcribeVideoWorkflow } from "@/workflows/transcribe";
 
@@ -62,7 +62,7 @@ describe("transcribeVideo", () => {
 
 	describe("input validation", () => {
 		it("requires DEEPGRAM_API_KEY environment variable", async () => {
-			const { serverEnv } = await import("@cap/env");
+			const { serverEnv } = await import("@orbit/env");
 			vi.mocked(serverEnv).mockReturnValueOnce({
 				DEEPGRAM_API_KEY: undefined,
 			} as ReturnType<typeof serverEnv>);

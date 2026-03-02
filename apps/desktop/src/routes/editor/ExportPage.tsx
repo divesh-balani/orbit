@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { debounce } from "@solid-primitives/scheduled";
 import { makePersisted } from "@solid-primitives/storage";
 import { createMutation } from "@tanstack/solid-query";
@@ -73,13 +73,13 @@ export const EXPORT_TO_OPTIONS = [
 	{
 		label: "File",
 		value: "file",
-		icon: IconCapFile,
+		icon: IconOrbitFile,
 		description: "Save to your computer",
 	},
 	{
 		label: "Clipboard",
 		value: "clipboard",
-		icon: IconCapCopy,
+		icon: IconOrbitCopy,
 		description: "Copy to paste anywhere",
 	},
 ] as const;
@@ -648,7 +648,7 @@ export function ExportPage() {
 
 				<div class="w-[400px] border-l border-gray-3 flex flex-col bg-gray-1 dark:bg-gray-2">
 					<div class="flex-1 overflow-y-auto p-4 space-y-5">
-						<Field name="Destination" icon={<IconCapUpload class="size-4" />}>
+						<Field name="Destination" icon={<IconOrbitUpload class="size-4" />}>
 							<div class="flex gap-1.5">
 								<For each={EXPORT_TO_OPTIONS}>
 									{(option) => {
@@ -971,13 +971,13 @@ export function ExportPage() {
 						>
 							{settings.exportTo === "file" && (
 								<>
-									<IconCapFile class="size-5" />
+									<IconOrbitFile class="size-5" />
 									Export to File
 								</>
 							)}
 							{settings.exportTo === "clipboard" && (
 								<>
-									<IconCapCopy class="size-5" />
+									<IconOrbitCopy class="size-5" />
 									Export to Clipboard
 								</>
 							)}
@@ -1279,7 +1279,7 @@ export function ExportPage() {
 														class="flex gap-2 justify-center items-center"
 													>
 														{!copyPressed() ? (
-															<IconCapCopy class="transition-colors duration-200 text-gray-1 size-4 group-hover:text-gray-12" />
+															<IconOrbitCopy class="transition-colors duration-200 text-gray-1 size-4 group-hover:text-gray-12" />
 														) : (
 															<IconLucideCheck class="transition-colors duration-200 text-gray-1 size-4 svgpathanimation group-hover:text-gray-12" />
 														)}
@@ -1290,7 +1290,7 @@ export function ExportPage() {
 															variant="dark"
 															class="flex gap-2 justify-center items-center"
 														>
-															<IconCapLink class="transition-colors duration-200 text-gray-1 size-4 group-hover:text-gray-12" />
+															<IconOrbitLink class="transition-colors duration-200 text-gray-1 size-4 group-hover:text-gray-12" />
 															<p>Open Link</p>
 														</Button>
 													</a>
@@ -1316,7 +1316,7 @@ export function ExportPage() {
 													}
 												}}
 											>
-												<IconCapFile class="size-4" />
+												<IconOrbitFile class="size-4" />
 												Open File
 											</Button>
 											<Button
@@ -1339,7 +1339,7 @@ export function ExportPage() {
 												}}
 											>
 												{!clipboardCopyPressed() ? (
-													<IconCapCopy class="size-4" />
+													<IconOrbitCopy class="size-4" />
 												) : (
 													<IconLucideCheck class="size-4 svgpathanimation" />
 												)}

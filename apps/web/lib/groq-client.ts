@@ -1,4 +1,4 @@
-import { serverEnv } from "@cap/env";
+import { serverEnv } from "@orbit/env";
 import Groq from "groq-sdk";
 
 let groqClient: Groq | null = null;

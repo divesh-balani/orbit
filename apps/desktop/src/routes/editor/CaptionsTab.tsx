@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { Select as KSelect } from "@kobalte/core/select";
 import { createWritableMemo } from "@solid-primitives/memo";
 import { appLocalDataDir, join } from "@tauri-apps/api/path";
@@ -18,8 +18,8 @@ import { Toggle } from "~/components/Toggle";
 import { defaultCaptionSettings } from "~/store/captions";
 import type { CaptionSettings } from "~/utils/tauri";
 import { commands, events } from "~/utils/tauri";
-import IconCapChevronDown from "~icons/cap/chevron-down";
-import IconCapCircleCheck from "~icons/cap/circle-check";
+import IconOrbitChevronDown from "~icons/orbit/chevron-down";
+import IconOrbitCircleCheck from "~icons/orbit/circle-check";
 import IconLucideCheck from "~icons/lucide/check";
 import IconLucideDownload from "~icons/lucide/download";
 import { useEditorContext } from "./context";
@@ -440,7 +440,7 @@ export function CaptionsTab() {
 	);
 
 	return (
-		<Field name="Captions" icon={<IconCapMessageBubble />}>
+		<Field name="Captions" icon={<IconOrbitMessageBubble />}>
 			<div class="flex flex-col gap-4">
 				<div class="space-y-6 transition-all duration-200">
 					<div class="space-y-4">
@@ -524,7 +524,7 @@ export function CaptionsTab() {
 										}}
 									</KSelect.Value>
 									<KSelect.Icon>
-										<IconCapChevronDown class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180" />
+										<IconOrbitChevronDown class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180" />
 									</KSelect.Icon>
 								</KSelect.Trigger>
 								<KSelect.Portal>
@@ -603,7 +603,7 @@ export function CaptionsTab() {
 							!hasCaptions() && "opacity-50 pointer-events-none",
 						)}
 					>
-						<Field name="Font Settings" icon={<IconCapMessageBubble />}>
+						<Field name="Font Settings" icon={<IconOrbitMessageBubble />}>
 							<div class="space-y-3">
 								<div class="flex flex-col gap-2">
 									<span class="text-gray-11 text-sm">Font Family</span>
@@ -639,7 +639,7 @@ export function CaptionsTab() {
 												}
 											</KSelect.Value>
 											<KSelect.Icon>
-												<IconCapChevronDown />
+												<IconOrbitChevronDown />
 											</KSelect.Icon>
 										</KSelect.Trigger>
 										<KSelect.Portal>
@@ -699,7 +699,7 @@ export function CaptionsTab() {
 							</div>
 						</Field>
 
-						<Field name="Background Settings" icon={<IconCapMessageBubble />}>
+						<Field name="Background Settings" icon={<IconOrbitMessageBubble />}>
 							<div class="space-y-3">
 								<div class="flex flex-col gap-2">
 									<span class="text-gray-11 text-sm">Background Color</span>
@@ -727,7 +727,7 @@ export function CaptionsTab() {
 							</div>
 						</Field>
 
-						<Field name="Position" icon={<IconCapMessageBubble />}>
+						<Field name="Position" icon={<IconOrbitMessageBubble />}>
 							<KSelect<string>
 								options={POSITION_OPTIONS.map((p) => p.value)}
 								value={getSetting("position")}
@@ -764,7 +764,7 @@ export function CaptionsTab() {
 										)}
 									</KSelect.Value>
 									<KSelect.Icon>
-										<IconCapChevronDown />
+										<IconOrbitChevronDown />
 									</KSelect.Icon>
 								</KSelect.Trigger>
 								<KSelect.Portal>
@@ -780,7 +780,7 @@ export function CaptionsTab() {
 							</KSelect>
 						</Field>
 
-						<Field name="Animation" icon={<IconCapMessageBubble />}>
+						<Field name="Animation" icon={<IconOrbitMessageBubble />}>
 							<div class="space-y-3">
 								<div class="flex flex-col gap-2">
 									<span class="text-gray-11 text-sm">Highlight Color</span>
@@ -810,7 +810,7 @@ export function CaptionsTab() {
 							</div>
 						</Field>
 
-						<Field name="Font Weight" icon={<IconCapMessageBubble />}>
+						<Field name="Font Weight" icon={<IconOrbitMessageBubble />}>
 							<KSelect
 								options={[
 									{ label: "Normal", value: 400 },
@@ -837,7 +837,7 @@ export function CaptionsTab() {
 											{selectItemProps.item.rawValue.label}
 										</KSelect.ItemLabel>
 										<KSelect.ItemIndicator class="ml-auto text-blue-9">
-											<IconCapCircleCheck />
+											<IconOrbitCircleCheck />
 										</KSelect.ItemIndicator>
 									</MenuItem>
 								)}
@@ -860,7 +860,7 @@ export function CaptionsTab() {
 										}}
 									</KSelect.Value>
 									<KSelect.Icon>
-										<IconCapChevronDown class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180 text-[--gray-500]" />
+										<IconOrbitChevronDown class="size-4 shrink-0 transform transition-transform ui-expanded:rotate-180 text-[--gray-500]" />
 									</KSelect.Icon>
 								</KSelect.Trigger>
 								<KSelect.Portal>
@@ -877,7 +877,7 @@ export function CaptionsTab() {
 							</KSelect>
 						</Field>
 
-						<Field name="Export Options" icon={<IconCapMessageBubble />}>
+						<Field name="Export Options" icon={<IconOrbitMessageBubble />}>
 							<Subfield name="Export with Subtitles">
 								<Toggle
 									checked={getSetting("exportWithSubtitles")}
@@ -891,7 +891,7 @@ export function CaptionsTab() {
 					</div>
 
 					<Show when={hasCaptions()}>
-						<Field name="Caption Segments" icon={<IconCapMessageBubble />}>
+						<Field name="Caption Segments" icon={<IconOrbitMessageBubble />}>
 							<div class="space-y-4">
 								<div class="flex items-center justify-between">
 									<Button

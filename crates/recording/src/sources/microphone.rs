@@ -2,7 +2,7 @@ use crate::{
     feeds::microphone::{self, MicrophoneFeedLock},
     output_pipeline::{AudioFrame, AudioSource},
 };
-use cap_media_info::{AudioInfo, ffmpeg_sample_format_for};
+use orbit_media_info::{AudioInfo, ffmpeg_sample_format_for};
 use cpal::SampleFormat;
 use futures::{SinkExt, channel::mpsc};
 use kameo::error::SendError;
@@ -89,7 +89,7 @@ impl MicResampler {
         source_rate: u32,
         source_channels: u16,
         source_format: SampleFormat,
-        timestamp: cap_timestamp::Timestamp,
+        timestamp: orbit_timestamp::Timestamp,
     ) -> Option<AudioFrame> {
         let ffmpeg_fmt = ffmpeg_sample_format_for(source_format)?;
         let source_info = AudioInfo::new_raw(
@@ -127,12 +127,12 @@ impl AudioSource for Microphone {
             let source_channels = source_info.channels;
             let target_channels = audio_info.channels;
             let is_wireless = source_info.is_wireless_transport;
-            let (tx, rx) = flume::bounded(128);
+            let (tx, rx) = flume::bounded(512);
 
             let send_timeout = if is_wireless {
-                Duration::from_millis(50)
+                Duration::from_millis(500)
             } else {
-                Duration::from_millis(20)
+                Duration::from_millis(200)
             };
 
             feed_lock
@@ -166,7 +166,7 @@ impl AudioSource for Microphone {
                 async move {
                     let mut resampler: Option<MicResampler> = None;
                     let mut silence_mode = false;
-                    let mut last_timestamp: Option<cap_timestamp::Timestamp> = None;
+                    let mut last_timestamp: Option<orbit_timestamp::Timestamp> = None;
                     let mut last_frame_duration = SILENCE_CHUNK_DURATION;
 
                     loop {

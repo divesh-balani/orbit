@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { writeText } from "@tauri-apps/plugin-clipboard-manager";
 import { ErrorBoundary, type ParentProps } from "solid-js";
@@ -10,7 +10,7 @@ export function OrbitErrorBoundary(props: ParentProps) {
 				console.error(e);
 				return (
 					<div class="w-full h-full flex flex-col justify-center items-center bg-gray-2 border-gray-3 max-h-screen overflow-hidden transition-[border-radius] duration-200 text-[--text-secondary] gap-y-4 max-sm:gap-y-2 px-8 text-center">
-						<IconCapLogo class="max-sm:size-16" />
+						<IconOrbitLogo class="max-sm:size-16" />
 						<h1 class="text-[--text-primary] text-3xl max-sm:text-xl font-bold">
 							An Error Occured
 						</h1>

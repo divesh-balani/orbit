@@ -9,7 +9,7 @@ import {
 	ReactionIcon,
 } from "@/app/(org)/dashboard/_components/AnimatedIcons";
 import { classNames } from "@/utils/helpers";
-import type { CapIconHandle } from "../../_components/AnimatedIcons/Cap";
+import type { CapIconHandle } from "../../_components/AnimatedIcons/Orbit";
 import ChartArea from "./ChartArea";
 
 type boxes = "caps" | "views" | "comments" | "reactions";
@@ -63,7 +63,7 @@ export default function StatsBox({
 
 	const formattedCounts = useMemo(
 		() => ({
-			caps: formatCount(counts.caps),
+			caps: formatCount(counts.orbits),
 			views: formatCount(counts.views),
 			comments: formatCount(counts.comments),
 			reactions: formatCount(counts.reactions),
@@ -115,7 +115,7 @@ export default function StatsBox({
 								onClick={() => toggleHandler("caps")}
 								isSelected={selectedBoxes.has("caps")}
 								title="Caps"
-								value={formattedCounts.caps}
+								value={formattedCounts.orbits}
 								metric="caps"
 								onMouseEnter={() => capsBoxRef.current?.startAnimation()}
 								onMouseLeave={() => capsBoxRef.current?.stopAnimation()}

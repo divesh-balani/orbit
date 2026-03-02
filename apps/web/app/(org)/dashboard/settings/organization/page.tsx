@@ -1,13 +1,13 @@
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { organizationMembers, organizations } from "@cap/database/schema";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { organizationMembers, organizations } from "@orbit/database/schema";
 import { and, eq } from "drizzle-orm";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Organization } from "./Organization";
 
 export const metadata: Metadata = {
-	title: "Organization Settings — Cap",
+	title: "Organization Settings — Orbit",
 };
 
 export default async function OrganizationPage() {

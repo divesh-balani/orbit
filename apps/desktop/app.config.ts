@@ -1,4 +1,4 @@
-import capUIPlugin from "@cap/ui-solid/vite";
+import orbitUIPlugin from "@orbit/ui-solid/vite";
 import { defineConfig } from "@solidjs/start/config";
 import topLevelAwait from "vite-plugin-top-level-await";
 import wasm from "vite-plugin-wasm";
@@ -29,7 +29,7 @@ export default defineConfig({
 		plugins: [
 			wasm(),
 			topLevelAwait(),
-			capUIPlugin,
+			orbitUIPlugin,
 			tsconfigPaths({
 				root: ".",
 			}),

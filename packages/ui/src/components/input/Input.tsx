@@ -1,4 +1,4 @@
-import { classNames } from "@cap/utils";
+import { classNames } from "@orbit/utils";
 import * as React from "react";
 
 export interface InputProps

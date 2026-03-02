@@ -1,5 +1,5 @@
-use cap_media_info::AudioInfo;
-use cap_timestamp::{Timestamp, Timestamps};
+use orbit_media_info::AudioInfo;
+use orbit_timestamp::{Timestamp, Timestamps};
 use futures::channel::{mpsc, oneshot};
 #[cfg(not(any(target_os = "macos", windows)))]
 use std::time::Instant;
@@ -203,10 +203,10 @@ impl AudioMixerBuilder {
             }
 
             #[cfg(target_os = "macos")]
-            let now = Timestamp::MachAbsoluteTime(cap_timestamp::MachAbsoluteTimestamp::now());
+            let now = Timestamp::MachAbsoluteTime(orbit_timestamp::MachAbsoluteTimestamp::now());
             #[cfg(windows)]
             let now =
-                Timestamp::PerformanceCounter(cap_timestamp::PerformanceCounterTimestamp::now());
+                Timestamp::PerformanceCounter(orbit_timestamp::PerformanceCounterTimestamp::now());
             #[cfg(not(any(target_os = "macos", windows)))]
             let now = Timestamp::Instant(Instant::now());
 
@@ -240,7 +240,7 @@ pub struct AudioMixer {
 
 impl AudioMixer {
     pub const INFO: AudioInfo = AudioInfo::new_raw(
-        cap_media_info::Sample::F32(cap_media_info::Type::Packed),
+        orbit_media_info::Sample::F32(orbit_media_info::Type::Packed),
         48_000,
         2,
     );
@@ -557,7 +557,7 @@ mod test {
 
     const SAMPLE_RATE: u32 = 48_000;
     const SOURCE_INFO: AudioInfo = AudioInfo::new_raw(
-        cap_media_info::Sample::U8(cap_media_info::Type::Packed),
+        orbit_media_info::Sample::U8(orbit_media_info::Type::Packed),
         SAMPLE_RATE,
         1,
     );

@@ -5,8 +5,8 @@ import {
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-} from "@cap/ui";
-import { Organisation } from "@cap/web-domain";
+} from "@orbit/ui";
+import { Organisation } from "@orbit/web-domain";
 import { faGlobe, faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@tanstack/react-query";
@@ -306,7 +306,7 @@ const CustomDomainDialog = ({
 		const cleanDomain = (input: string) => {
 			if (!input) return "";
 
-			if (input === "cap.so" || input === "cap.link") {
+			if (input === "orbit.so" || input === "orbit.link") {
 				return "";
 			}
 
@@ -466,7 +466,7 @@ const CustomDomainDialog = ({
 											handleClose();
 										}}
 									>
-										Upgrade To Cap Pro
+										Upgrade To Orbit Pro
 									</Button>
 								))}
 						</DialogFooter>

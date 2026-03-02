@@ -68,7 +68,7 @@ pub async fn request_permission(_permission: OSPermission) {
     {
         match _permission {
             OSPermission::ScreenRecording => {
-                scap_screencapturekit::request_permission();
+                sorbit_screencapturekit::request_permission();
             }
             OSPermission::Camera => {
                 tauri::async_runtime::spawn_blocking(|| {
@@ -164,7 +164,7 @@ pub fn do_permissions_check(_initial_check: bool) -> OSPermissionsCheck {
 
         OSPermissionsCheck {
             screen_recording: {
-                let result = scap_screencapturekit::has_permission();
+                let result = sorbit_screencapturekit::has_permission();
                 match (result, _initial_check) {
                     (true, _) => OSPermissionStatus::Granted,
                     (false, true) => OSPermissionStatus::Empty,

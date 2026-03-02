@@ -5,9 +5,9 @@ import type { ToolPageContent } from "@/components/tools/types";
 import { createBreadcrumbSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "Loom Video Downloader — Download Loom Videos Free Online | Cap",
+	title: "Loom Video Downloader — Download Loom Videos Free Online | Orbit",
 	description:
-		"Download any Loom video for free with Cap's online Loom video downloader. No signup, no software needed — just paste your Loom link and save the MP4 instantly.",
+		"Download any Loom video for free with Orbit's online Loom video downloader. No signup, no software needed — just paste your Loom link and save the MP4 instantly.",
 	keywords: [
 		"loom video downloader",
 		"download loom video",
@@ -24,30 +24,30 @@ export const metadata: Metadata = {
 		"migrate from loom",
 	],
 	openGraph: {
-		title: "Loom Video Downloader — Download Loom Videos Free | Cap",
+		title: "Loom Video Downloader — Download Loom Videos Free | Orbit",
 		description:
-			"Download any Loom video for free. Paste the link, get the MP4. No signup required. Built by Cap, the open source Loom alternative.",
-		url: "https://cap.so/tools/loom-downloader",
-		siteName: "Cap",
+			"Download any Loom video for free. Paste the link, get the MP4. No signup required. Built by Orbit, the open source Loom alternative.",
+		url: "https://orbit.so/tools/loom-downloader",
+		siteName: "Orbit",
 		type: "website",
 		images: [
 			{
 				url: "/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap — Free Loom Video Downloader",
+				alt: "Orbit — Free Loom Video Downloader",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Loom Video Downloader — Download Loom Videos Free | Cap",
+		title: "Loom Video Downloader — Download Loom Videos Free | Orbit",
 		description:
 			"Download any Loom video for free. Paste the link, get the MP4. No signup required.",
 		images: ["/og.png"],
 	},
 	alternates: {
-		canonical: "https://cap.so/tools/loom-downloader",
+		canonical: "https://orbit.so/tools/loom-downloader",
 	},
 };
 
@@ -55,9 +55,9 @@ const pageContent: ToolPageContent = {
 	title: "Loom Video Downloader",
 	description:
 		"Download any public Loom video as an MP4 file. Just paste the link — no account, no installs, completely free.",
-	featuresTitle: "Why Use Cap's Loom Video Downloader?",
+	featuresTitle: "Why Use Orbit's Loom Video Downloader?",
 	featuresDescription:
-		'Cap\'s Loom downloader is fast, free, and requires zero setup. Built by the team behind <a href="/">Cap — the open source Loom alternative</a>.',
+		'Orbit\'s Loom downloader is fast, free, and requires zero setup. Built by the team behind <a href="/">Orbit — the open source Loom alternative</a>.',
 	features: [
 		{
 			title: "Instant Downloads",
@@ -82,7 +82,7 @@ const pageContent: ToolPageContent = {
 		{
 			title: "Nothing Stored on Our Servers",
 			description:
-				"We only fetch the download URL from Loom's servers. Your videos are never uploaded to or stored on Cap.",
+				"We only fetch the download URL from Loom's servers. Your videos are never uploaded to or stored on Orbit.",
 		},
 		{
 			title: "MP4 Format",
@@ -128,30 +128,30 @@ const pageContent: ToolPageContent = {
 		},
 		{
 			question:
-				"Can I import my Loom videos into Cap instead of downloading them?",
+				"Can I import my Loom videos into Orbit instead of downloading them?",
 			answer:
-				'Yes! Cap Pro includes a built-in <a href="/loom-alternative">Loom video importer</a> that lets you transfer your Loom recordings directly into your Cap library. It\'s the easiest way to migrate from Loom without manually downloading and re-uploading each video.',
+				'Yes! Orbit Pro includes a built-in <a href="/loom-alternative">Loom video importer</a> that lets you transfer your Loom recordings directly into your Orbit library. It\'s the easiest way to migrate from Loom without manually downloading and re-uploading each video.',
 		},
 		{
-			question: "What is Cap?",
+			question: "What is Orbit?",
 			answer:
-				'Cap is the <a href="/">open source alternative to Loom</a>. It\'s a lightweight, privacy-focused screen recorder that lets you record, edit, and share videos instantly. If you\'re looking for a Loom replacement, <a href="/download">download Cap for free</a>.',
+				'Orbit is the <a href="/">open source alternative to Loom</a>. It\'s a lightweight, privacy-focused screen recorder that lets you record, edit, and share videos instantly. If you\'re looking for a Loom replacement, <a href="/download">download Orbit for free</a>.',
 		},
 	],
 	cta: {
 		title: "Looking for a Loom alternative?",
 		description:
-			"Cap is the open source screen recorder that gives you full control. Record, edit, and share — all for free. Plus, import your existing Loom videos directly into Cap with our built-in Loom video importer.",
-		buttonText: "Download Cap Free",
+			"Orbit is the open source screen recorder that gives you full control. Record, edit, and share — all for free. Plus, import your existing Loom videos directly into Orbit with our built-in Loom video importer.",
+		buttonText: "Download Orbit Free",
 	},
 };
 
 const breadcrumbSchema = createBreadcrumbSchema([
-	{ name: "Home", url: "https://cap.so" },
-	{ name: "Tools", url: "https://cap.so/tools" },
+	{ name: "Home", url: "https://orbit.so" },
+	{ name: "Tools", url: "https://orbit.so/tools" },
 	{
 		name: "Loom Video Downloader",
-		url: "https://cap.so/tools/loom-downloader",
+		url: "https://orbit.so/tools/loom-downloader",
 	},
 ]);
 

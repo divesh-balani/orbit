@@ -180,7 +180,7 @@ impl<'a> Iterator for IAMStreamConfigMediaTypes<'a> {
 
         unsafe {
             self.stream_config
-                .GetStreamCaps(i, &mut media_type, (&raw mut self.caps).cast::<u8>())
+                .GetStreamCaps(i, &mut media_type, (&raw mut self.orbits).cast::<u8>())
                 .unwrap();
 
             if media_type.is_null() {

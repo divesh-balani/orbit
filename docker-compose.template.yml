@@ -1,13 +1,13 @@
-name: cap-so-docker-template
+name: orbit-so-docker-template
 
 # THIS IS A TEMPLATE FOR DOCKER COMPOSE FILES
 # IT IS NOT MEANT FOR PRODUCTION DEPLOYMENT WITHOUT MODIFICATIONS TO ENVIRONMENT VARIABLES
 # IT IS MEANT FOR LOCAL EVALUATION AND DEVELOPMENT PURPOSES ONLY
 
 services:
-  cap-web:
-    container_name: cap-web
-    image: ghcr.io/capsoftware/cap-web:latest
+  orbit-web:
+    container_name: orbit-web
+    image: ghcr.io/capsoftware/orbit-web:latest
     restart: unless-stopped
     environment:
       DATABASE_URL: 'mysql://root:@ps-mysql:3306/planetscale?ssl={"rejectUnauthorized":false}'
@@ -17,13 +17,13 @@ services:
       DATABASE_ENCRYPTION_KEY: c7a1e98e1e5e4cec5a3fbf5eaf502d262fb99807ae2be8ee70537409e29cb6f9
       NEXTAUTH_SECRET: c7a1e98e1e5e4cec5a3fbf5eaf502d262fb99807ae2be8ee70537409e29cb6f9
       # CHANGE THESE TO MATCH YOUR MINIO or S3 STORAGE SETUP
-      CAP_AWS_ACCESS_KEY: capS3root
-      CAP_AWS_SECRET_KEY: capS3root
-      CAP_AWS_BUCKET: capso
-      CAP_AWS_REGION: us-east-1
+      ORBIT_AWS_ACCESS_KEY: capS3root
+      ORBIT_AWS_SECRET_KEY: capS3root
+      ORBIT_AWS_BUCKET: capso
+      ORBIT_AWS_REGION: us-east-1
       S3_PUBLIC_ENDPOINT: http://localhost:3902
       S3_INTERNAL_ENDPOINT: http://minio:3902
-      MEDIA_SERVER_URL: http://cap-media-server:3456
+      MEDIA_SERVER_URL: http://orbit-media-server:3456
       # CHANGE THESE TO YOUR OWN VALUES
       MEDIA_SERVER_WEBHOOK_SECRET: fe337b52749070bb7b5d2c78cff9948439ea73cbc1869ba39d350e6c24db53b1
 
@@ -31,7 +31,7 @@ services:
       - 3000:3000
 
   ps-mysql:
-    container_name: cap-primary-db
+    container_name: orbit-primary-db
     image: mysql:8.0
     restart: unless-stopped
     environment:
@@ -49,8 +49,8 @@ services:
     volumes:
       - ps-mysql:/var/lib/mysql
 
-  cap-media-server:
-    container_name: cap-media-server
+  orbit-media-server:
+    container_name: orbit-media-server
     build:
       context: ./apps/media-server
       dockerfile: Dockerfile.standalone
@@ -68,7 +68,7 @@ services:
 
   # Local S3 Strorage
   minio:
-    container_name: cap-minio-storage
+    container_name: orbit-minio-storage
     image: "bitnami/minio:latest"
     restart: unless-stopped
     ports:

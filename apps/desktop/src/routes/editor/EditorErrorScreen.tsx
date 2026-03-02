@@ -1,4 +1,4 @@
-import { Button } from "@cap/ui-solid";
+import { Button } from "@orbit/ui-solid";
 import { createMutation } from "@tanstack/solid-query";
 import { revealItemInDir } from "@tauri-apps/plugin-opener";
 import { type as ostype } from "@tauri-apps/plugin-os";
@@ -134,7 +134,7 @@ export function EditorErrorScreen(props: {
 								>
 									<p class="text-xs text-gray-10 italic">
 										Tip: Right-click and select "Show Enclosing Folder" to see
-										the .cap bundle contents.
+										the .orbit bundle contents.
 									</p>
 								</Show>
 							</div>

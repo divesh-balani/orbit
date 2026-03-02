@@ -2,9 +2,9 @@ import {
 	CloudFrontClient,
 	CreateInvalidationCommand,
 } from "@aws-sdk/client-cloudfront";
-import { updateIfDefined } from "@cap/database";
-import * as Db from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
+import { updateIfDefined } from "@orbit/database";
+import * as Db from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
 import {
 	AwsCredentials,
 	Database,
@@ -13,8 +13,8 @@ import {
 	S3Buckets,
 	VideosPolicy,
 	VideosRepo,
-} from "@cap/web-backend";
-import { Policy, Video } from "@cap/web-domain";
+} from "@orbit/web-backend";
+import { Policy, Video } from "@orbit/web-domain";
 import { zValidator } from "@hono/zod-validator";
 import { and, eq } from "drizzle-orm";
 import { Effect, Option, Schedule } from "effect";
@@ -127,7 +127,7 @@ app.post(
 						ContentType: finalContentType,
 						Metadata: {
 							userId: user.id,
-							source: "cap-multipart-upload",
+							source: "orbit-multipart-upload",
 						},
 						CacheControl: "max-age=31536000",
 					});
@@ -435,7 +435,7 @@ app.post(
 								CacheControl: "max-age=31536000",
 								Metadata: {
 									userId: user.id,
-									source: "cap-multipart-upload",
+									source: "orbit-multipart-upload",
 								},
 							},
 						);
@@ -475,10 +475,10 @@ app.post(
 					}
 
 					if (Option.isNone(customBucket)) {
-						const distributionId = serverEnv().CAP_CLOUDFRONT_DISTRIBUTION_ID;
+						const distributionId = serverEnv().ORBIT_CLOUDFRONT_DISTRIBUTION_ID;
 						if (distributionId) {
 							const cloudfront = new CloudFrontClient({
-								region: serverEnv().CAP_AWS_REGION || "us-east-1",
+								region: serverEnv().ORBIT_AWS_REGION || "us-east-1",
 								credentials: yield* Effect.map(
 									AwsCredentials,
 									(c) => c.credentials,

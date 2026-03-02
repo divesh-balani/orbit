@@ -1,13 +1,13 @@
 "use client";
 
-import type { VideoMetadata } from "@cap/database/types";
-import type { Video } from "@cap/web-domain";
+import type { VideoMetadata } from "@orbit/database/types";
+import type { Video } from "@orbit/web-domain";
 import { faBuilding, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CapCard } from "../../../caps/components/CapCard/CapCard";
 
 interface SharedCapCardProps {
-	cap: {
+	orbit: {
 		id: Video.VideoId;
 		ownerId: string;
 		name: string;
@@ -29,7 +29,7 @@ interface SharedCapCardProps {
 }
 
 export const SharedCapCard: React.FC<SharedCapCardProps> = ({
-	cap,
+	orbit,
 	analytics,
 	organizationName,
 	userId,
@@ -41,24 +41,24 @@ export const SharedCapCard: React.FC<SharedCapCardProps> = ({
 }) => {
 	const displayCount =
 		analytics === 0
-			? Math.max(cap.totalComments, cap.totalReactions)
+			? Math.max(orbit.totalComments, orbit.totalReactions)
 			: analytics;
-	const isOwner = userId === cap.ownerId;
+	const isOwner = userId === orbit.ownerId;
 
 	return (
 		<div onDragStart={onDragStart} onDragEnd={onDragEnd}>
 			<CapCard
 				hideSharedStatus={hideSharedStatus}
 				isLoadingAnalytics={isLoadingAnalytics}
-				cap={cap}
+				orbit={orbit}
 				analytics={displayCount}
 				userId={userId}
 			>
 				<div className="mb-2 space-y-1">
-					{cap.ownerName && (
+					{orbit.ownerName && (
 						<div className="flex gap-2 items-center">
 							<FontAwesomeIcon icon={faUser} className="text-gray-10 size-3" />
-							<span className="text-sm text-gray-10">{cap.ownerName}</span>
+							<span className="text-sm text-gray-10">{orbit.ownerName}</span>
 						</div>
 					)}
 					{isOwner && (

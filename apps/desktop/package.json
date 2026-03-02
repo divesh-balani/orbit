@@ -1,8 +1,8 @@
 {
-	"name": "@cap/desktop",
+	"name": "@orbit/desktop",
 	"type": "module",
 	"scripts": {
-		"dev": "pnpm -w cap-setup && dotenv -e ../../.env -- pnpm run preparescript && dotenv -e ../../.env -- pnpm tauri dev",
+		"dev": "pnpm -w orbit-setup && dotenv -e ../../.env -- pnpm run preparescript && dotenv -e ../../.env -- pnpm tauri dev",
 		"build:tauri": "dotenv -e ../../.env -- pnpm run preparescript && dotenv -e ../../.env -- pnpm tauri build",
 		"preparescript": "node scripts/prepare.js",
 		"localdev": "dotenv -e ../../.env -- vinxi dev --port 3002",
@@ -11,10 +11,10 @@
 	},
 	"dependencies": {
 		"@aerofoil/rive-solid-canvas": "^2.1.4",
-		"@cap/database": "workspace:*",
-		"@cap/ui-solid": "workspace:*",
-		"@cap/utils": "workspace:*",
-		"@cap/web-api-contract": "workspace:*",
+		"@orbit/database": "workspace:*",
+		"@orbit/ui-solid": "workspace:*",
+		"@orbit/utils": "workspace:*",
+		"@orbit/web-api-contract": "workspace:*",
 		"@corvu/tooltip": "^0.2.1",
 		"@kobalte/core": "^0.13.7",
 		"@radix-ui/colors": "^3.0.0",

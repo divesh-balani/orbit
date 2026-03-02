@@ -1885,7 +1885,7 @@ declare var FLAGS: Flags;
 declare global {
 	interface Window {
 		FLAGS: Flags;
-		__CAP__: {
+		__ORBIT__: {
 			cameraWsPort: number;
 			cameraOnlyMode?: boolean;
 		};

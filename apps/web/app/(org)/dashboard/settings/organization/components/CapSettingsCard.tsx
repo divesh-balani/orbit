@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardDescription, CardHeader, CardTitle, Switch } from "@cap/ui";
+import { Card, CardDescription, CardHeader, CardTitle, Switch } from "@orbit/ui";
 import { useDebounce } from "@uidotdev/usehooks";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
@@ -148,7 +148,7 @@ const CapSettingsCard = () => {
 	return (
 		<Card className="flex relative flex-col flex-1 gap-6 w-full min-h-fit">
 			<CardHeader>
-				<CardTitle>Cap Settings</CardTitle>
+				<CardTitle>Orbit Settings</CardTitle>
 				<CardDescription>
 					Enable or disable specific settings for your organization. These
 					settings will be applied as defaults for new caps.

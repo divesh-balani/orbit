@@ -1,19 +1,19 @@
 "use server";
 
 import { randomUUID } from "node:crypto";
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { nanoId } from "@cap/database/helpers";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { nanoId } from "@orbit/database/helpers";
 import {
 	importedVideos,
 	s3Buckets,
 	videos,
 	videoUploads,
-} from "@cap/database/schema";
-import { buildEnv, NODE_ENV, serverEnv } from "@cap/env";
-import { dub, userIsPro } from "@cap/utils";
-import type { Organisation } from "@cap/web-domain";
-import { Video } from "@cap/web-domain";
+} from "@orbit/database/schema";
+import { buildEnv, NODE_ENV, serverEnv } from "@orbit/env";
+import { dub, userIsPro } from "@orbit/utils";
+import type { Organisation } from "@orbit/web-domain";
+import { Video } from "@orbit/web-domain";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { start } from "workflow/api";
@@ -231,7 +231,7 @@ export async function importFromLoom({
 	if (!userIsPro(user)) {
 		return {
 			success: false,
-			error: "Importing from Loom requires a Cap Pro subscription.",
+			error: "Importing from Loom requires a Orbit Pro subscription.",
 		};
 	}
 
@@ -295,7 +295,7 @@ export async function importFromLoom({
 			orgId,
 			source: { type: "webMP4" as const },
 			bucket: customBucket?.id,
-			public: serverEnv().CAP_VIDEOS_DEFAULT_PUBLIC,
+			public: serverEnv().ORBIT_VIDEOS_DEFAULT_PUBLIC,
 			...(oembedMeta?.duration ? { duration: oembedMeta.duration } : {}),
 			...(oembedMeta?.width ? { width: oembedMeta.width } : {}),
 			...(oembedMeta?.height ? { height: oembedMeta.height } : {}),
@@ -318,11 +318,11 @@ export async function importFromLoom({
 
 	const rawFileKey = `${user.id}/${videoId}/raw-upload.mp4`;
 
-	if (buildEnv.NEXT_PUBLIC_IS_CAP && NODE_ENV === "production") {
+	if (buildEnv.NEXT_PUBLIC_IS_ORBIT && NODE_ENV === "production") {
 		await dub()
 			.links.create({
 				url: `${serverEnv().WEB_URL}/s/${videoId}`,
-				domain: "cap.link",
+				domain: "orbit.link",
 				key: videoId,
 			})
 			.catch(() => {});

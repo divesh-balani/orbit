@@ -7,24 +7,24 @@ import {
 import { createFAQSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "Screen Recording — Free HD Capture, Instant Sharing | Cap",
+	title: "Screen Recording — Free HD Capture, Instant Sharing | Orbit",
 	description:
-		"Record your screen in HD with audio and webcam overlay, then share instantly with a link. Cap is free, open-source screen recording software for Mac and Windows.",
+		"Record your screen in HD with audio and webcam overlay, then share instantly with a link. Orbit is free, open-source screen recording software for Mac and Windows.",
 	alternates: {
-		canonical: "https://cap.so/screen-recording",
+		canonical: "https://orbit.so/screen-recording",
 	},
 	openGraph: {
-		title: "Screen Recording — Free HD Capture, Instant Sharing | Cap",
+		title: "Screen Recording — Free HD Capture, Instant Sharing | Orbit",
 		description:
 			"Record your screen in HD with audio and webcam overlay, then share instantly with a link. Free, open-source, available on Mac and Windows.",
-		url: "https://cap.so/screen-recording",
-		siteName: "Cap",
+		url: "https://orbit.so/screen-recording",
+		siteName: "Orbit",
 		images: [
 			{
-				url: "https://cap.so/og.png",
+				url: "https://orbit.so/og.png",
 				width: 1200,
 				height: 630,
-				alt: "Cap: Screen Recording Software",
+				alt: "Orbit: Screen Recording Software",
 			},
 		],
 		locale: "en_US",
@@ -32,10 +32,10 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Screen Recording — Free HD Capture, Instant Sharing | Cap",
+		title: "Screen Recording — Free HD Capture, Instant Sharing | Orbit",
 		description:
 			"Record your screen in HD with audio and webcam overlay, then share instantly with a link. Free, open-source, available on Mac and Windows.",
-		images: ["https://cap.so/og.png"],
+		images: ["https://orbit.so/og.png"],
 	},
 };
 

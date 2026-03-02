@@ -1,5 +1,5 @@
-import { Button, Label } from "@cap/ui";
-import type { Organisation } from "@cap/web-domain";
+import { Button, Label } from "@orbit/ui";
+import type { Organisation } from "@orbit/web-domain";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";

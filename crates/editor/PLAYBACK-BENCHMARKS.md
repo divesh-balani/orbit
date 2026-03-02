@@ -1,6 +1,6 @@
-# Cap Playback Benchmark Results
+# Orbit Playback Benchmark Results
 
-This document tracks performance benchmarks for Cap's playback and decoding system over time. Each benchmark run is timestamped, enabling comparison across different versions, configurations, and hardware.
+This document tracks performance benchmarks for Orbit's playback and decoding system over time. Each benchmark run is timestamped, enabling comparison across different versions, configurations, and hardware.
 
 ## Quick Reference
 
@@ -39,39 +39,39 @@ This document tracks performance benchmarks for Cap's playback and decoding syst
 
 ```bash
 # Run full playback validation on recordings from real-device-test-runner
-cargo run -p cap-recording --example playback-test-runner -- full
+cargo run -p orbit-recording --example playback-test-runner -- full
 
 # Run specific test categories
-cargo run -p cap-recording --example playback-test-runner -- decoder
-cargo run -p cap-recording --example playback-test-runner -- playback
-cargo run -p cap-recording --example playback-test-runner -- audio-sync
-cargo run -p cap-recording --example playback-test-runner -- camera-sync
+cargo run -p orbit-recording --example playback-test-runner -- decoder
+cargo run -p orbit-recording --example playback-test-runner -- playback
+cargo run -p orbit-recording --example playback-test-runner -- audio-sync
+cargo run -p orbit-recording --example playback-test-runner -- camera-sync
 
 # Test a specific recording
-cargo run -p cap-recording --example playback-test-runner -- --recording-path /path/to/recording full
+cargo run -p orbit-recording --example playback-test-runner -- --recording-path /path/to/recording full
 
 # List available recordings
-cargo run -p cap-recording --example playback-test-runner -- list
+cargo run -p orbit-recording --example playback-test-runner -- list
 ```
 
 #### Decode Performance Benchmark
 
 ```bash
 # Benchmark decode performance on a video file
-cargo run -p cap-editor --example decode-benchmark -- --video /path/to/video.mp4
+cargo run -p orbit-editor --example decode-benchmark -- --video /path/to/video.mp4
 
 # With custom FPS and iterations
-cargo run -p cap-editor --example decode-benchmark -- --video /path/to/video.mp4 --fps 60 --iterations 50
+cargo run -p orbit-editor --example decode-benchmark -- --video /path/to/video.mp4 --fps 60 --iterations 50
 ```
 
 #### Combined Workflow (Recording → Playback)
 
 ```bash
 # Step 1: Create test recordings with outputs kept
-cargo run -p cap-recording --example real-device-test-runner -- full --keep-outputs
+cargo run -p orbit-recording --example real-device-test-runner -- full --keep-outputs
 
 # Step 2: Validate playback of those recordings
-cargo run -p cap-recording --example playback-test-runner -- full
+cargo run -p orbit-recording --example playback-test-runner -- full
 ```
 
 ---
@@ -188,5 +188,5 @@ When analyzing benchmark results, focus on:
 ## Related Documentation
 
 - [Recording Benchmarks](../recording/BENCHMARKS.md) - Recording performance tracking
-- [cap-rendering/decoder](../rendering/src/decoder.rs) - Decoder implementation
-- [cap-video-decode](../video-decode/) - Platform-specific decoders
+- [orbit-rendering/decoder](../rendering/src/decoder.rs) - Decoder implementation
+- [orbit-video-decode](../video-decode/) - Platform-specific decoders

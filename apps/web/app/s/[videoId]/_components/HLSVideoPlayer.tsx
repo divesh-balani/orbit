@@ -1,8 +1,8 @@
 "use client";
 
-import { LogoSpinner } from "@cap/ui";
-import { calculateStrokeDashoffset, getProgressCircleConfig } from "@cap/utils";
-import type { Video } from "@cap/web-domain";
+import { LogoSpinner } from "@orbit/ui";
+import { calculateStrokeDashoffset, getProgressCircleConfig } from "@orbit/utils";
+import type { Video } from "@orbit/web-domain";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
@@ -344,8 +344,8 @@ export function HLSVideoPlayer({
 					<AlertTriangleIcon className="text-red-500 size-12" />
 					<p className="text-gray-11 text-sm leading-relaxed text-center text-balance w-full max-w-[340px] mx-auto">
 						{isUploadError
-							? "Processing failed. Please try re-uploading from the Cap desktop app via Settings > Previous Recordings."
-							: "Upload stalled. Please try re-uploading from the Cap desktop app via Settings > Previous Recordings."}
+							? "Processing failed. Please try re-uploading from the Orbit desktop app via Settings > Previous Recordings."
+							: "Upload stalled. Please try re-uploading from the Orbit desktop app via Settings > Previous Recordings."}
 					</p>
 				</div>
 			)}

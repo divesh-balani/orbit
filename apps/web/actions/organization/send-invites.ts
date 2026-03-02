@@ -1,13 +1,13 @@
 "use server";
 
-import { db } from "@cap/database";
-import { getCurrentUser } from "@cap/database/auth/session";
-import { sendEmail } from "@cap/database/emails/config";
-import { OrganizationInvite } from "@cap/database/emails/organization-invite";
-import { nanoId } from "@cap/database/helpers";
-import { organizationInvites, organizations } from "@cap/database/schema";
-import { serverEnv } from "@cap/env";
-import type { Organisation } from "@cap/web-domain";
+import { db } from "@orbit/database";
+import { getCurrentUser } from "@orbit/database/auth/session";
+import { sendEmail } from "@orbit/database/emails/config";
+import { OrganizationInvite } from "@orbit/database/emails/organization-invite";
+import { nanoId } from "@orbit/database/helpers";
+import { organizationInvites, organizations } from "@orbit/database/schema";
+import { serverEnv } from "@orbit/env";
+import type { Organisation } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -53,7 +53,7 @@ export async function sendOrganizationInvites(
 		const inviteUrl = `${serverEnv().WEB_URL}/invite/${inviteId}`;
 		await sendEmail({
 			email: email.trim(),
-			subject: `Invitation to join ${organization[0].name} on Cap`,
+			subject: `Invitation to join ${organization[0].name} on Orbit`,
 			react: OrganizationInvite({
 				email: email.trim(),
 				url: inviteUrl,

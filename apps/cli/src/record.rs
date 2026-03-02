@@ -1,6 +1,6 @@
-use cap_recording::{screen_capture::ScreenCaptureTarget, studio_recording};
+use orbit_recording::{screen_capture::ScreenCaptureTarget, studio_recording};
 use clap::Args;
-use scap_targets::{DisplayId, WindowId};
+use sorbit_targets::{DisplayId, WindowId};
 use std::{env::current_dir, path::PathBuf};
 use tokio::io::AsyncBufReadExt;
 use uuid::Uuid;
@@ -18,7 +18,7 @@ pub struct RecordStart {
     /// Whether to capture system audio
     #[arg(long)]
     system_audio: bool,
-    /// Path to save the '.cap' project to
+    /// Path to save the '.orbit' project to
     #[arg(long)]
     path: Option<PathBuf>,
     /// Maximum fps to record at (max 60)
@@ -29,12 +29,12 @@ pub struct RecordStart {
 impl RecordStart {
     pub async fn run(self) -> Result<(), String> {
         let target_info = match (self.target.screen, self.target.window) {
-            (Some(id), _) => cap_recording::screen_capture::list_displays()
+            (Some(id), _) => orbit_recording::screen_capture::list_displays()
                 .into_iter()
                 .find(|s| s.0.id == id)
                 .map(|(s, _)| ScreenCaptureTarget::Display { id: s.id })
                 .ok_or(format!("Screen with id '{id}' not found")),
-            (_, Some(id)) => cap_recording::screen_capture::list_windows()
+            (_, Some(id)) => orbit_recording::screen_capture::list_windows()
                 .into_iter()
                 .find(|s| s.0.id == id)
                 .map(|(s, _)| ScreenCaptureTarget::Window { id: s.id })
@@ -56,14 +56,14 @@ impl RecordStart {
         let id = Uuid::new_v4().to_string();
         let path = self
             .path
-            .unwrap_or_else(|| current_dir().unwrap().join(format!("{id}.cap")));
+            .unwrap_or_else(|| current_dir().unwrap().join(format!("{id}.orbit")));
 
         let actor = studio_recording::Actor::builder(path, target_info)
             .with_system_audio(self.system_audio)
             .with_custom_cursor(false)
             .build(
                 #[cfg(target_os = "macos")]
-                Some(cap_recording::SendableShareableContent::from(
+                Some(orbit_recording::SendableShareableContent::from(
                     cidre::sc::ShareableContent::current().await.unwrap(),
                 )),
             )

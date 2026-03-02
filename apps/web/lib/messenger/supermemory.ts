@@ -1,6 +1,6 @@
 import "server-only";
 
-import { serverEnv } from "@cap/env";
+import { serverEnv } from "@orbit/env";
 import Supermemory from "supermemory";
 import {
 	MESSENGER_ADMIN_EMAIL,
@@ -34,8 +34,8 @@ export const getIdentityTag = (
 	anonymousId: string | null,
 ) =>
 	userId
-		? `cap-support-user:${userId}`
-		: `cap-support-anon:${anonymousId ?? "unknown"}`;
+		? `orbit-support-user:${userId}`
+		: `orbit-support-anon:${anonymousId ?? "unknown"}`;
 
 export const isSupermemoryConfigured = () => Boolean(getApiKey());
 
@@ -100,7 +100,7 @@ export const storeConversationInSupermemory = async ({
 	});
 };
 
-export const syncCapKnowledgeBase = async (requestedByEmail: string) => {
+export const syncOrbitKnowledgeBase = async (requestedByEmail: string) => {
 	if (requestedByEmail !== MESSENGER_ADMIN_EMAIL) {
 		throw new Error("Unauthorized");
 	}
@@ -112,52 +112,52 @@ export const syncCapKnowledgeBase = async (requestedByEmail: string) => {
 
 	const knowledgeTag = getKnowledgeTag();
 	const sources = [
-		"https://cap.so",
-		"https://cap.so/download",
-		"https://cap.so/download/versions",
-		"https://cap.so/pricing",
-		"https://cap.so/features",
-		"https://cap.so/features/instant-mode",
-		"https://cap.so/features/studio-mode",
-		"https://cap.so/docs",
-		"https://cap.so/docs/commercial-license",
-		"https://cap.so/faq",
-		"https://cap.so/blog",
-		"https://cap.so/about",
-		"https://cap.so/self-hosting",
-		"https://cap.so/testimonials",
-		"https://cap.so/student-discount",
-		"https://cap.so/deactivate-license",
-		"https://cap.so/terms",
-		"https://cap.so/privacy",
+		"https://orbit.so",
+		"https://orbit.so/download",
+		"https://orbit.so/download/versions",
+		"https://orbit.so/pricing",
+		"https://orbit.so/features",
+		"https://orbit.so/features/instant-mode",
+		"https://orbit.so/features/studio-mode",
+		"https://orbit.so/docs",
+		"https://orbit.so/docs/commercial-license",
+		"https://orbit.so/faq",
+		"https://orbit.so/blog",
+		"https://orbit.so/about",
+		"https://orbit.so/self-hosting",
+		"https://orbit.so/testimonials",
+		"https://orbit.so/student-discount",
+		"https://orbit.so/deactivate-license",
+		"https://orbit.so/terms",
+		"https://orbit.so/privacy",
 
-		"https://cap.so/screen-recorder",
-		"https://cap.so/free-screen-recorder",
-		"https://cap.so/screen-recorder-mac",
-		"https://cap.so/screen-recorder-windows",
-		"https://cap.so/screen-recording-software",
-		"https://cap.so/loom-alternative",
+		"https://orbit.so/screen-recorder",
+		"https://orbit.so/free-screen-recorder",
+		"https://orbit.so/screen-recorder-mac",
+		"https://orbit.so/screen-recorder-windows",
+		"https://orbit.so/screen-recording-software",
+		"https://orbit.so/loom-alternative",
 
-		"https://cap.so/solutions/remote-team-collaboration",
-		"https://cap.so/solutions/employee-onboarding-platform",
-		"https://cap.so/solutions/daily-standup-software",
-		"https://cap.so/solutions/online-classroom-tools",
-		"https://cap.so/solutions/agencies",
+		"https://orbit.so/solutions/remote-team-collaboration",
+		"https://orbit.so/solutions/employee-onboarding-platform",
+		"https://orbit.so/solutions/daily-standup-software",
+		"https://orbit.so/solutions/online-classroom-tools",
+		"https://orbit.so/solutions/agencies",
 
-		"https://cap.so/tools",
-		"https://cap.so/tools/loom-downloader",
-		"https://cap.so/tools/video-speed-controller",
-		"https://cap.so/tools/trim",
-		"https://cap.so/tools/convert",
-		"https://cap.so/tools/convert/webm-to-mp4",
-		"https://cap.so/tools/convert/mov-to-mp4",
-		"https://cap.so/tools/convert/avi-to-mp4",
-		"https://cap.so/tools/convert/mkv-to-mp4",
-		"https://cap.so/tools/convert/mp4-to-gif",
-		"https://cap.so/tools/convert/mp4-to-mp3",
-		"https://cap.so/tools/convert/mp4-to-webm",
+		"https://orbit.so/tools",
+		"https://orbit.so/tools/loom-downloader",
+		"https://orbit.so/tools/video-speed-controller",
+		"https://orbit.so/tools/trim",
+		"https://orbit.so/tools/convert",
+		"https://orbit.so/tools/convert/webm-to-mp4",
+		"https://orbit.so/tools/convert/mov-to-mp4",
+		"https://orbit.so/tools/convert/avi-to-mp4",
+		"https://orbit.so/tools/convert/mkv-to-mp4",
+		"https://orbit.so/tools/convert/mp4-to-gif",
+		"https://orbit.so/tools/convert/mp4-to-mp3",
+		"https://orbit.so/tools/convert/mp4-to-webm",
 
-		"https://github.com/CapSoftware/Cap",
+		"https://github.com/CapSoftware/Orbit",
 	];
 
 	await client.documents.batchAdd({

@@ -8,8 +8,8 @@ import {
 	DialogHeader,
 	DialogTitle,
 	Input,
-} from "@cap/ui";
-import type { Organisation } from "@cap/web-domain";
+} from "@orbit/ui";
+import type { Organisation } from "@orbit/web-domain";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@tanstack/react-query";

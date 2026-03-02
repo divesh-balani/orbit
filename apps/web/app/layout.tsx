@@ -1,6 +1,6 @@
 import "@/app/globals.css";
-import { buildEnv, serverEnv } from "@cap/env";
-import { STRIPE_PLAN_IDS } from "@cap/utils";
+import { buildEnv, serverEnv } from "@orbit/env";
+import { STRIPE_PLAN_IDS } from "@orbit/utils";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { Effect } from "effect";
 import type { Metadata } from "next";
@@ -61,16 +61,16 @@ const defaultFont = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "Cap — Beautiful screen recordings, owned by you.",
+	title: "Orbit — Beautiful screen recordings, owned by you.",
 	description:
-		"Cap is the open source alternative to Loom. Lightweight, powerful, and cross-platform. Record and share in seconds.",
+		"Orbit is the open source alternative to Loom. Lightweight, powerful, and cross-platform. Record and share in seconds.",
 	openGraph: {
-		title: "Cap — Beautiful screen recordings, owned by you.",
+		title: "Orbit — Beautiful screen recordings, owned by you.",
 		description:
-			"Cap is the open source alternative to Loom. Lightweight, powerful, and cross-platform. Record and share in seconds.",
+			"Orbit is the open source alternative to Loom. Lightweight, powerful, and cross-platform. Record and share in seconds.",
 		type: "website",
-		url: "https://cap.so",
-		images: ["https://cap.so/og.png"],
+		url: "https://orbit.so",
+		images: ["https://orbit.so/og.png"],
 	},
 };
 

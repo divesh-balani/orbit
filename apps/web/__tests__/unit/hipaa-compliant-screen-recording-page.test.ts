@@ -22,18 +22,18 @@ const componentSource = readFileSync(
 describe("HipaaCompliantScreenRecordingPage metadata", () => {
 	it("contains canonical URL", () => {
 		expect(pageSource).toContain(
-			'canonical: "https://cap.so/hipaa-compliant-screen-recording"',
+			'canonical: "https://orbit.so/hipaa-compliant-screen-recording"',
 		);
 	});
 
 	it("contains OG url field", () => {
 		expect(pageSource).toContain(
-			'url: "https://cap.so/hipaa-compliant-screen-recording"',
+			'url: "https://orbit.so/hipaa-compliant-screen-recording"',
 		);
 	});
 
 	it("contains OG siteName field", () => {
-		expect(pageSource).toContain('siteName: "Cap"');
+		expect(pageSource).toContain('siteName: "Orbit"');
 	});
 
 	it("contains OG locale field", () => {
@@ -41,7 +41,7 @@ describe("HipaaCompliantScreenRecordingPage metadata", () => {
 	});
 
 	it("contains full OG image URL", () => {
-		expect(pageSource).toContain('"https://cap.so/og.png"');
+		expect(pageSource).toContain('"https://orbit.so/og.png"');
 	});
 
 	it("title targets hipaa-compliant-screen-recording keyword", () => {
@@ -94,39 +94,39 @@ describe("HipaaCompliantScreenRecordingPage component content", () => {
 describe("HipaaCompliantScreenRecordingPage FAQ schema", () => {
 	const faqs = [
 		{
-			question: "Can Cap be used for HIPAA-compliant screen recording?",
+			question: "Can Orbit be used for HIPAA-compliant screen recording?",
 			answer:
-				"Cap supports HIPAA-compliant workflows when configured with self-hosted storage.",
+				"Orbit supports HIPAA-compliant workflows when configured with self-hosted storage.",
 		},
 		{
-			question: "Does Cap store recordings on its own servers?",
+			question: "Does Orbit store recordings on its own servers?",
 			answer:
-				"By default, Cap uploads recordings to Cap's cloud storage. However, Cap fully supports custom S3-compatible storage.",
+				"By default, Orbit uploads recordings to Orbit's cloud storage. However, Orbit fully supports custom S3-compatible storage.",
 		},
 		{
 			question:
-				"Is Cap open source and auditable for HIPAA vendor assessments?",
-			answer: "Yes. Cap is MIT-licensed and fully open source on GitHub.",
+				"Is Orbit open source and auditable for HIPAA vendor assessments?",
+			answer: "Yes. Orbit is MIT-licensed and fully open source on GitHub.",
 		},
 		{
-			question: "Can I disable AI transcription in Cap for HIPAA compliance?",
+			question: "Can I disable AI transcription in Orbit for HIPAA compliance?",
 			answer:
-				"Yes. Cap's AI auto-captions are optional and can be disabled entirely in settings.",
+				"Yes. Orbit's AI auto-captions are optional and can be disabled entirely in settings.",
 		},
 		{
-			question: "Does Cap support AWS S3 for HIPAA-eligible storage?",
+			question: "Does Orbit support AWS S3 for HIPAA-eligible storage?",
 			answer:
-				"Yes. Cap supports AWS S3 as a storage backend. AWS S3 is HIPAA-eligible when covered by an AWS Business Associate Agreement (BAA).",
+				"Yes. Orbit supports AWS S3 as a storage backend. AWS S3 is HIPAA-eligible when covered by an AWS Business Associate Agreement (BAA).",
 		},
 		{
-			question: "Can the entire Cap platform be self-hosted?",
+			question: "Can the entire Orbit platform be self-hosted?",
 			answer:
-				"Yes. The complete Cap platform can be self-hosted on your own infrastructure.",
+				"Yes. The complete Orbit platform can be self-hosted on your own infrastructure.",
 		},
 		{
 			question:
-				"How do I restrict access to HIPAA screen recordings shared via Cap?",
-			answer: "Cap supports password-protected sharing links.",
+				"How do I restrict access to HIPAA screen recordings shared via Orbit?",
+			answer: "Orbit supports password-protected sharing links.",
 		},
 		{
 			question: "What screen recording tools are HIPAA-compliant?",
@@ -148,7 +148,7 @@ describe("HipaaCompliantScreenRecordingPage FAQ schema", () => {
 
 		expect(schema.mainEntity[0]).toEqual({
 			"@type": "Question",
-			name: "Can Cap be used for HIPAA-compliant screen recording?",
+			name: "Can Orbit be used for HIPAA-compliant screen recording?",
 			acceptedAnswer: {
 				"@type": "Answer",
 				text: faqs[0].answer,

@@ -1,9 +1,9 @@
 pub mod gif;
 pub mod mp4;
 
-use cap_editor::SegmentMedia;
-use cap_project::{ProjectConfiguration, RecordingMeta, StudioRecordingMeta};
-use cap_rendering::{ProjectRecordingsMeta, RenderVideoConstants};
+use orbit_editor::SegmentMedia;
+use orbit_project::{ProjectConfiguration, RecordingMeta, StudioRecordingMeta};
+use orbit_rendering::{ProjectRecordingsMeta, RenderVideoConstants};
 use std::{path::PathBuf, sync::Arc};
 
 #[derive(thiserror::Error, Debug)]
@@ -15,10 +15,10 @@ pub enum ExportError {
     IO(#[from] std::io::Error),
 
     #[error("Rendering: {0}")]
-    Rendering(#[from] cap_rendering::RenderingError),
+    Rendering(#[from] orbit_rendering::RenderingError),
 
     #[error("Media/{0}")]
-    Media(#[from] cap_media::MediaError),
+    Media(#[from] orbit_media::MediaError),
 
     #[error("Join: {0}")]
     Join(#[from] tokio::task::JoinError),
@@ -41,7 +41,7 @@ pub enum ExporterBuildError {
     #[error("Failed to load recordings meta: {0}")]
     RecordingsMeta(String),
     #[error("Failed to setup renderer: {0}")]
-    RendererSetup(#[source] cap_rendering::RenderingError),
+    RendererSetup(#[source] orbit_rendering::RenderingError),
     #[error("Failed to load media: {0}")]
     MediaLoad(String),
     #[error("IO error at path '{0}': {1}")]
@@ -97,7 +97,7 @@ impl ExporterBuilder {
         );
 
         let segments =
-            cap_editor::create_segments(&recording_meta, studio_meta, self.force_ffmpeg_decoder)
+            orbit_editor::create_segments(&recording_meta, studio_meta, self.force_ffmpeg_decoder)
                 .await
                 .map_err(Error::MediaLoad)?;
 
@@ -136,7 +136,7 @@ pub struct ExporterBase {
 
 impl ExporterBase {
     pub fn total_frames(&self, fps: u32) -> u32 {
-        let duration = cap_rendering::get_duration(
+        let duration = orbit_rendering::get_duration(
             &self.recordings,
             &self.recording_meta,
             &self.studio_meta,

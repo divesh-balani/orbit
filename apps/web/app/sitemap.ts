@@ -86,7 +86,7 @@ export default async function sitemap() {
 
 	const routes = [...(homeRoute ? [homeRoute] : []), ...otherRoutes].map(
 		(route) => ({
-			url: `https://cap.so${route.path}`,
+			url: `https://orbit.so${route.path}`,
 			lastModified: route.lastModified,
 		}),
 	);

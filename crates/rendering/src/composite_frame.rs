@@ -10,7 +10,7 @@ pub struct CompositeVideoFramePipeline {
 static PIPELINE_CACHE_DATA: std::sync::OnceLock<Vec<u8>> = std::sync::OnceLock::new();
 
 fn get_cache_path() -> Option<std::path::PathBuf> {
-    dirs::data_local_dir().map(|p| p.join("Cap").join("shader_cache.bin"))
+    dirs::data_local_dir().map(|p| p.join("Orbit").join("shader_cache.bin"))
 }
 
 fn load_pipeline_cache(device: &wgpu::Device) -> Option<wgpu::PipelineCache> {
@@ -21,7 +21,7 @@ fn load_pipeline_cache(device: &wgpu::Device) -> Option<wgpu::PipelineCache> {
     if let Some(cached_data) = PIPELINE_CACHE_DATA.get() {
         return Some(unsafe {
             device.create_pipeline_cache(&wgpu::PipelineCacheDescriptor {
-                label: Some("Cap Pipeline Cache"),
+                label: Some("Orbit Pipeline Cache"),
                 data: Some(cached_data),
                 fallback: true,
             })
@@ -35,7 +35,7 @@ fn load_pipeline_cache(device: &wgpu::Device) -> Option<wgpu::PipelineCache> {
         let _ = PIPELINE_CACHE_DATA.set(data.clone());
         return Some(unsafe {
             device.create_pipeline_cache(&wgpu::PipelineCacheDescriptor {
-                label: Some("Cap Pipeline Cache"),
+                label: Some("Orbit Pipeline Cache"),
                 data: Some(&data),
                 fallback: true,
             })
@@ -44,7 +44,7 @@ fn load_pipeline_cache(device: &wgpu::Device) -> Option<wgpu::PipelineCache> {
 
     Some(unsafe {
         device.create_pipeline_cache(&wgpu::PipelineCacheDescriptor {
-            label: Some("Cap Pipeline Cache"),
+            label: Some("Orbit Pipeline Cache"),
             data: None,
             fallback: true,
         })

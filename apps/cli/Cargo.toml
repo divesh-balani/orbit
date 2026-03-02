@@ -1,20 +1,20 @@
 [package]
-name = "cap"
+name = "orbit"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
 clap = { version = "4.5.23", features = ["derive"] }
-cap-utils = { path = "../../crates/utils" }
-cap-project = { path = "../../crates/project" }
-cap-rendering = { path = "../../crates/rendering" }
-cap-editor = { path = "../../crates/editor" }
-cap-media = { path = "../../crates/media" }
-cap-flags = { path = "../../crates/flags" }
-cap-recording = { path = "../../crates/recording" }
-cap-export = { path = "../../crates/export" }
-cap-camera = { path = "../../crates/camera" }
-scap-targets = { path = "../../crates/scap-targets" }
+orbit-utils = { path = "../../crates/utils" }
+orbit-project = { path = "../../crates/project" }
+orbit-rendering = { path = "../../crates/rendering" }
+orbit-editor = { path = "../../crates/editor" }
+orbit-media = { path = "../../crates/media" }
+orbit-flags = { path = "../../crates/flags" }
+orbit-recording = { path = "../../crates/recording" }
+orbit-export = { path = "../../crates/export" }
+orbit-camera = { path = "../../crates/camera" }
+sorbit-targets = { path = "../../crates/sorbit-targets" }
 serde = { workspace = true }
 serde_json = "1.0.133"
 tokio.workspace = true

@@ -1,7 +1,7 @@
 import * as S3 from "@aws-sdk/client-s3";
 import * as CloudFrontPresigner from "@aws-sdk/cloudfront-signer";
-import { decrypt } from "@cap/database/crypto";
-import type { S3Bucket, User } from "@cap/web-domain";
+import { decrypt } from "@orbit/database/crypto";
+import type { S3Bucket, User } from "@orbit/web-domain";
 import { Config, Effect, Layer, Option } from "effect";
 
 import { AwsCredentials } from "../Aws.ts";
@@ -17,20 +17,20 @@ export class S3Buckets extends Effect.Service<S3Buckets>()("S3Buckets", {
 
 		const defaultConfigs = {
 			publicEndpoint: yield* Config.string("S3_PUBLIC_ENDPOINT").pipe(
-				Config.orElse(() => Config.string("CAP_AWS_ENDPOINT")),
+				Config.orElse(() => Config.string("ORBIT_AWS_ENDPOINT")),
 				Config.option,
 			),
 			internalEndpoint: yield* Config.string("S3_INTERNAL_ENDPOINT").pipe(
-				Config.orElse(() => Config.string("CAP_AWS_ENDPOINT")),
+				Config.orElse(() => Config.string("ORBIT_AWS_ENDPOINT")),
 				Config.option,
 			),
-			region: yield* Config.string("CAP_AWS_REGION"),
+			region: yield* Config.string("ORBIT_AWS_REGION"),
 			credentials,
 			forcePathStyle:
 				Option.getOrNull(
 					yield* Config.boolean("S3_PATH_STYLE").pipe(Config.option),
 				) ?? true,
-			bucket: yield* Config.string("CAP_AWS_BUCKET"),
+			bucket: yield* Config.string("ORBIT_AWS_BUCKET"),
 		};
 
 		const createDefaultClient = (internal: boolean) =>
@@ -81,10 +81,10 @@ export class S3Buckets extends Effect.Service<S3Buckets>()("S3Buckets", {
 		};
 
 		const cloudfrontEnvs = yield* Config.all({
-			distributionId: Config.string("CAP_CLOUDFRONT_DISTRIBUTION_ID"),
+			distributionId: Config.string("ORBIT_CLOUDFRONT_DISTRIBUTION_ID"),
 			keypairId: Config.string("CLOUDFRONT_KEYPAIR_ID"),
 			privateKey: Config.string("CLOUDFRONT_KEYPAIR_PRIVATE_KEY"),
-			bucketUrl: Config.string("CAP_AWS_BUCKET_URL"),
+			bucketUrl: Config.string("ORBIT_AWS_BUCKET_URL"),
 		}).pipe(
 			Effect.match({
 				onSuccess: (v) => v,

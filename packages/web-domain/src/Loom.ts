@@ -45,7 +45,7 @@ export const ImportVideoLoomData = Schema.Struct({
 export const ImportVideo = Workflow.make({
 	name: "LoomImportVideo",
 	payload: {
-		cap: Schema.Struct({
+		orbit: Schema.Struct({
 			userId: UserId,
 			orgId: OrganisationId,
 		}),
@@ -63,7 +63,7 @@ export const ImportVideo = Workflow.make({
 		VideoInvalidError,
 	),
 	idempotencyKey: (p) =>
-		`${p.cap.userId}-${p.loom.orgId}-${p.loom.video.id}-${p.attempt ?? 0}`,
+		`${p.orbit.userId}-${p.loom.orgId}-${p.loom.video.id}-${p.attempt ?? 0}`,
 });
 
 export class LoomHttpApi extends HttpApiGroup.make("loom")
@@ -71,7 +71,7 @@ export class LoomHttpApi extends HttpApiGroup.make("loom")
 		HttpApiEndpoint.post("importVideo", "/video")
 			.setPayload(
 				Schema.Struct({
-					cap: Schema.Struct({ orgId: OrganisationId }),
+					orbit: Schema.Struct({ orgId: OrganisationId }),
 					loom: ImportVideoLoomData,
 				}),
 			)
@@ -87,6 +87,6 @@ export class LoomHttpApi extends HttpApiGroup.make("loom")
 		OpenApi.annotations({
 			title: "Loom",
 			description:
-				"Endpoints to import Loom videos to Cap. Mostly used by the Loom importer extension.",
+				"Endpoints to import Loom videos to Orbit. Mostly used by the Loom importer extension.",
 		}),
 	) {}

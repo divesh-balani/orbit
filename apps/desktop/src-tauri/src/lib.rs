@@ -40,12 +40,12 @@ mod windows;
 use audio::AppSounds;
 use auth::{AuthStore, Plan};
 use camera::{CameraPreviewManager, CameraPreviewState};
-use cap_editor::{EditorInstance, EditorState};
-use cap_project::{
+use orbit_editor::{EditorInstance, EditorState};
+use orbit_project::{
     InstantRecordingMeta, ProjectConfiguration, RecordingMeta, RecordingMetaInner, SharingMeta,
     StudioRecordingMeta, StudioRecordingStatus, UploadMeta, VideoUploadInfo, XY, ZoomSegment,
 };
-use cap_recording::{
+use orbit_recording::{
     RecordingMode,
     feeds::{
         self,
@@ -54,7 +54,7 @@ use cap_recording::{
     },
     sources::screen_capture::ScreenCaptureTarget,
 };
-use cap_rendering::ProjectRecordingsMeta;
+use orbit_rendering::ProjectRecordingsMeta;
 use clipboard_rs::common::RustImage;
 use clipboard_rs::{Clipboard, ClipboardContext};
 use cpal::StreamError;
@@ -64,7 +64,7 @@ use general_settings::GeneralSettingsStore;
 use kameo::{Actor, actor::ActorRef};
 use notifications::NotificationType;
 use recording::{InProgressRecording, RecordingEvent, RecordingInputKind};
-use scap_targets::{Display, DisplayId, WindowId, bounds::LogicalBounds};
+use sorbit_targets::{Display, DisplayId, WindowId, bounds::LogicalBounds};
 use screenshot_editor::{
     ScreenshotEditorInstances, create_screenshot_editor_instance, update_screenshot_config,
 };
@@ -101,7 +101,7 @@ use upload::{create_or_get_video, upload_image, upload_video};
 use web_api::AuthedApiError;
 use web_api::ManagerExt as WebManagerExt;
 use windows::{
-    CapWindowId, EditorWindowIds, ScreenshotEditorWindowIds, ShowCapWindow, set_window_transparent,
+    OrbitWindowId, EditorWindowIds, ScreenshotEditorWindowIds, ShowCapWindow, set_window_transparent,
 };
 
 use crate::{recording::start_recording, upload::build_video_meta};
@@ -234,7 +234,7 @@ pub struct App {
     #[deprecated = "can be removed when native camera preview is ready"]
     camera_ws_port: u16,
     #[deprecated = "can be removed when native camera preview is ready"]
-    camera_ws_sender: flume::Sender<cap_recording::FFmpegVideoFrame>,
+    camera_ws_sender: flume::Sender<orbit_recording::FFmpegVideoFrame>,
     camera_preview: CameraPreviewManager,
     handle: AppHandle,
     recording_state: RecordingState,
@@ -565,8 +565,8 @@ async fn upload_logs(app_handle: AppHandle) -> Result<(), String> {
 
 #[tauri::command]
 #[specta::specta]
-fn get_system_diagnostics() -> cap_recording::diagnostics::SystemDiagnostics {
-    cap_recording::diagnostics::collect_diagnostics()
+fn get_system_diagnostics() -> orbit_recording::diagnostics::SystemDiagnostics {
+    orbit_recording::diagnostics::collect_diagnostics()
 }
 
 #[tauri::command]
@@ -802,7 +802,7 @@ fn spawn_device_watchers(app_handle: AppHandle) {
 
 #[derive(Serialize, Type, tauri_specta::Event, Debug, Clone)]
 pub struct DevicesUpdated {
-    cameras: Vec<cap_camera::CameraInfo>,
+    cameras: Vec<orbit_camera::CameraInfo>,
     microphones: Vec<String>,
     permissions: permissions::OSPermissionsCheck,
 }
@@ -812,7 +812,7 @@ pub struct DevicesUpdated {
 async fn get_devices_snapshot() -> DevicesUpdated {
     let permissions = permissions::do_permissions_check(false);
     let cameras = if permissions.camera.permitted() {
-        cap_camera::list_cameras().collect()
+        orbit_camera::list_cameras().collect()
     } else {
         Vec::new()
     };
@@ -837,7 +837,7 @@ fn spawn_devices_snapshot_emitter(app_handle: AppHandle) {
         loop {
             let permissions = permissions::do_permissions_check(false);
             let cameras = if permissions.camera.permitted() {
-                cap_camera::list_cameras().collect::<Vec<_>>()
+                orbit_camera::list_cameras().collect::<Vec<_>>()
             } else {
                 Vec::new()
             };
@@ -975,7 +975,7 @@ async fn cleanup_camera_after_overlay_close(app: AppHandle, captured_session_id:
             return;
         }
 
-        let has_camera_window = CapWindowId::Camera.get(&app).is_some();
+        let has_camera_window = OrbitWindowId::Camera.get(&app).is_some();
         if has_camera_window {
             return;
         }
@@ -1022,7 +1022,7 @@ async fn cleanup_app_resources_for_exit(app: &AppHandle) {
     #[cfg(target_os = "macos")]
     {
         app.state::<CameraWindowCloseGate>().set_allow_close(true);
-        if let Some(camera_window) = CapWindowId::Camera.get(app) {
+        if let Some(camera_window) = OrbitWindowId::Camera.get(app) {
             let _ = camera_window.close();
         }
     }
@@ -1168,7 +1168,7 @@ fn spawn_camera_watcher(app_handle: AppHandle) {
 }
 
 fn is_camera_available(id: &DeviceOrModelID) -> bool {
-    let cameras: Vec<_> = cap_camera::list_cameras().collect();
+    let cameras: Vec<_> = orbit_camera::list_cameras().collect();
     debug!(
         "is_camera_available: looking for {:?} in {} cameras",
         id,
@@ -1337,7 +1337,7 @@ async fn get_current_recording(
         ScreenCaptureTarget::Display { id } => CurrentRecordingTarget::Screen { id: id.clone() },
         ScreenCaptureTarget::Window { id } => {
             let bounds =
-                scap_targets::Window::from_id(id).and_then(|w| w.display_relative_logical_bounds());
+                sorbit_targets::Window::from_id(id).and_then(|w| w.display_relative_logical_bounds());
             CurrentRecordingTarget::Window {
                 id: id.clone(),
                 bounds,
@@ -1746,7 +1746,7 @@ struct SerializedEditorInstance {
 #[specta::specta]
 #[instrument(skip(window))]
 async fn create_editor_instance(window: Window) -> Result<SerializedEditorInstance, String> {
-    let CapWindowId::Editor { id } = CapWindowId::from_str(window.label()).unwrap() else {
+    let OrbitWindowId::Editor { id } = OrbitWindowId::from_str(window.label()).unwrap() else {
         return Err("Invalid window".to_string());
     };
 
@@ -1782,7 +1782,7 @@ async fn create_editor_instance(window: Window) -> Result<SerializedEditorInstan
 #[specta::specta]
 #[instrument(skip(window))]
 async fn get_editor_project_path(window: Window) -> Result<PathBuf, String> {
-    let CapWindowId::Editor { id } = CapWindowId::from_str(window.label()).unwrap() else {
+    let OrbitWindowId::Editor { id } = OrbitWindowId::from_str(window.label()).unwrap() else {
         return Err("Invalid window".to_string());
     };
 
@@ -1925,7 +1925,7 @@ fn close_recordings_overlay_window(app: AppHandle) {
         app.run_on_main_thread(move || {
             use tauri_nspanel::ManagerExt;
             if let Ok(panel) =
-                app_for_close.get_webview_panel(&CapWindowId::RecordingsOverlay.label())
+                app_for_close.get_webview_panel(&OrbitWindowId::RecordingsOverlay.label())
             {
                 panel.released_when_closed(false);
                 panel.close();
@@ -1935,7 +1935,7 @@ fn close_recordings_overlay_window(app: AppHandle) {
     }
 
     if !cfg!(target_os = "macos")
-        && let Some(window) = CapWindowId::RecordingsOverlay.get(&app)
+        && let Some(window) = OrbitWindowId::RecordingsOverlay.get(&app)
     {
         let _ = window.close();
     }
@@ -1951,7 +1951,7 @@ fn focus_captures_panel(_app: AppHandle) {
         _app.run_on_main_thread(move || {
             use tauri_nspanel::ManagerExt;
             if let Ok(panel) =
-                app_for_focus.get_webview_panel(&CapWindowId::RecordingsOverlay.label())
+                app_for_focus.get_webview_panel(&OrbitWindowId::RecordingsOverlay.label())
             {
                 panel.make_key_window();
             }
@@ -2247,10 +2247,10 @@ async fn save_file_dialog(
     println!("save_file_dialog called with file_name: {file_name}, file_type: {file_type}");
 
     let file_name = file_name
-        .strip_suffix(".cap")
+        .strip_suffix(".orbit")
         .unwrap_or(&file_name)
         .to_string();
-    println!("File name after removing .cap suffix: {file_name}");
+    println!("File name after removing .orbit suffix: {file_name}");
 
     let (name, extension) = match file_type.as_str() {
         "recording" => {
@@ -2422,7 +2422,7 @@ fn list_screenshots(app: AppHandle) -> Result<Vec<(PathBuf, RecordingMeta)>, Str
         .filter_map(|entry| {
             let entry = entry.ok()?;
             let path = entry.path();
-            if path.is_dir() && path.extension().and_then(|s| s.to_str()) == Some("cap") {
+            if path.is_dir() && path.extension().and_then(|s| s.to_str()) == Some("orbit") {
                 let meta = match get_recording_meta(path.clone(), FileType::Screenshot) {
                     Ok(meta) => meta.inner,
                     Err(_) => return None,
@@ -2542,7 +2542,7 @@ async fn reset_camera_permissions(_app: AppHandle) -> Result<(), String> {
     {
         #[cfg(debug_assertions)]
         let bundle_id =
-            std::env::var("CAP_BUNDLE_ID").unwrap_or_else(|_| "com.apple.Terminal".to_string());
+            std::env::var("ORBIT_BUNDLE_ID").unwrap_or_else(|_| "com.apple.Terminal".to_string());
         #[cfg(not(debug_assertions))]
         let bundle_id = "so.orbit.desktop";
 
@@ -2587,7 +2587,7 @@ async fn clear_presets(app: AppHandle) -> Result<(), String> {
 #[specta::specta]
 #[instrument(skip(app))]
 async fn is_camera_window_open(app: AppHandle) -> bool {
-    CapWindowId::Camera
+    OrbitWindowId::Camera
         .get(&app)
         .map(|w| w.is_visible().unwrap_or(false))
         .unwrap_or(false)
@@ -2613,8 +2613,8 @@ async fn get_display_frame_for_cropping(
     editor_instance: WindowEditorInstance,
     fps: u32,
 ) -> Result<Vec<u8>, String> {
-    use cap_project::ClipOffsets;
-    use cap_rendering::{PixelFormat, cpu_yuv};
+    use orbit_project::ClipOffsets;
+    use orbit_rendering::{PixelFormat, cpu_yuv};
     use image::{ImageEncoder, codecs::png::PngEncoder};
     use std::io::Cursor;
 
@@ -2749,6 +2749,12 @@ async fn editor_delete_project(
 
     RecordingDeleted { path }.emit(&app).ok();
 
+    let _ = ShowCapWindow::Main {
+        init_target_mode: None,
+    }
+    .show(&app)
+    .await;
+
     Ok(())
 }
 
@@ -2772,14 +2778,14 @@ async fn show_window(app: AppHandle, window: ShowCapWindow) -> Result<(), String
 #[specta::specta]
 #[instrument]
 fn list_fails() -> Result<BTreeMap<String, bool>, ()> {
-    Ok(cap_fail::get_state())
+    Ok(orbit_fail::get_state())
 }
 
 #[tauri::command(async)]
 #[specta::specta]
 #[instrument]
 fn set_fail(name: String, value: bool) {
-    cap_fail::set_fail(&name, value)
+    orbit_fail::set_fail(&name, value)
 }
 
 async fn check_notification_permissions(app: AppHandle) {
@@ -2816,10 +2822,10 @@ async fn check_notification_permissions(app: AppHandle) {
 }
 
 // fn configure_logging(folder: &PathBuf) -> tracing_appender::non_blocking::WorkerGuard {
-//     let file_appender = tracing_appender::rolling::daily(folder, "cap-logs.log");
+//     let file_appender = tracing_appender::rolling::daily(folder, "orbit-logs.log");
 //     let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
 
-//     let filter = || tracing_subscriber::filter::EnvFilter::builder().parse_lossy("cap-*=TRACE");
+//     let filter = || tracing_subscriber::filter::EnvFilter::builder().parse_lossy("orbit-*=TRACE");
 
 //     tracing_subscriber::registry()
 //         .with(
@@ -2922,7 +2928,7 @@ pub async fn open_target_picker(
 ) {
     use tauri::Manager;
 
-    if let Some(window) = CapWindowId::Main.get(app) {
+    if let Some(window) = OrbitWindowId::Main.get(app) {
         window.hide().ok();
     }
 
@@ -3113,7 +3119,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
         .typ::<hotkeys::HotkeysStore>()
         .typ::<general_settings::GeneralSettingsStore>()
         .typ::<recording_settings::RecordingSettingsStore>()
-        .typ::<cap_flags::Flags>()
+        .typ::<orbit_flags::Flags>()
         .typ::<crate::window_exclusion::WindowExclusion>();
 
     #[cfg(debug_assertions)]
@@ -3156,9 +3162,9 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
             trace!("Single instance invoked with args {args:?}");
 
             // This is also handled as a deeplink on some platforms (eg macOS), see deeplink_actions
-            let Some(cap_file) = args
+            let Some(orbit_file) = args
                 .iter()
-                .find(|arg| arg.ends_with(".cap"))
+                .find(|arg| arg.ends_with(".orbit"))
                 .map(PathBuf::from)
             else {
                 let app = app.clone();
@@ -3172,7 +3178,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                 return;
             };
 
-            let _ = open_project_from_path(&cap_file, app.clone());
+            let _ = open_project_from_path(&orbit_file, app.clone());
         }));
 
     #[cfg(target_os = "macos")]
@@ -3204,15 +3210,15 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                     flags
                 })
                 .with_denylist(&[
-                    CapWindowId::Setup.label().as_str(),
-                    CapWindowId::Main.label().as_str(),
+                    OrbitWindowId::Setup.label().as_str(),
+                    OrbitWindowId::Main.label().as_str(),
                     "window-capture-occluder",
                     "target-select-overlay",
-                    CapWindowId::CaptureArea.label().as_str(),
-                    CapWindowId::Camera.label().as_str(),
-                    CapWindowId::RecordingsOverlay.label().as_str(),
-                    CapWindowId::RecordingControls.label().as_str(),
-                    CapWindowId::Upgrade.label().as_str(),
+                    OrbitWindowId::CaptureArea.label().as_str(),
+                    OrbitWindowId::Camera.label().as_str(),
+                    OrbitWindowId::RecordingsOverlay.label().as_str(),
+                    OrbitWindowId::RecordingControls.label().as_str(),
+                    OrbitWindowId::Upgrade.label().as_str(),
                     "editor",
                     "screenshot-editor",
                 ])
@@ -3260,7 +3266,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                     camera_feed
                         .tell(feeds::camera::OnFeedDisconnect(Box::new({
                             move || {
-                                if let Some(win) = CapWindowId::Camera.get(&app) {
+                                if let Some(win) = OrbitWindowId::Camera.get(&app) {
                                     win.hide().ok();
                                 }
                             }
@@ -3459,9 +3465,9 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
 
             match event {
                 WindowEvent::CloseRequested { api, .. } => {
-                    if let Ok(window_id) = CapWindowId::from_str(label) {
+                    if let Ok(window_id) = OrbitWindowId::from_str(label) {
                         match window_id {
-                            CapWindowId::Camera => {
+                            OrbitWindowId::Camera => {
                                 let close_gate = app.state::<CameraWindowCloseGate>();
                                 if close_gate.allow_close() {
                                     return;
@@ -3477,7 +3483,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                                     cleanup_camera_window(app, session_id).await;
                                 });
                             }
-                            CapWindowId::Main => {
+                            OrbitWindowId::Main => {
                                 api.prevent_close();
                                 let _ = window.hide();
 
@@ -3488,13 +3494,13 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                                     .unwrap_or(true);
 
                                 if !is_recording {
-                                    if let Some(camera_window) = CapWindowId::Camera.get(app) {
+                                    if let Some(camera_window) = OrbitWindowId::Camera.get(app) {
                                         let _ = camera_window.hide();
                                     }
 
                                     for (id, overlay_window) in app.webview_windows() {
-                                        if let Ok(CapWindowId::TargetSelectOverlay { .. }) =
-                                            CapWindowId::from_str(&id)
+                                        if let Ok(OrbitWindowId::TargetSelectOverlay { .. }) =
+                                            OrbitWindowId::from_str(&id)
                                         {
                                             let _ = overlay_window.hide();
                                         }
@@ -3524,23 +3530,23 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                     }
                 }
                 WindowEvent::Destroyed => {
-                    if let Ok(window_id) = CapWindowId::from_str(label) {
-                        if matches!(window_id, CapWindowId::Camera) {
+                    if let Ok(window_id) = OrbitWindowId::from_str(label) {
+                        if matches!(window_id, OrbitWindowId::Camera) {
                             tracing::warn!("Camera window Destroyed event received!");
                         }
                         match window_id {
-                            CapWindowId::Main => {
+                            OrbitWindowId::Main => {
                                 let app = app.clone();
 
                                 for (id, window) in app.webview_windows() {
-                                    if let Ok(CapWindowId::TargetSelectOverlay { .. }) =
-                                        CapWindowId::from_str(&id)
+                                    if let Ok(OrbitWindowId::TargetSelectOverlay { .. }) =
+                                        OrbitWindowId::from_str(&id)
                                     {
                                         let _ = window.hide();
                                     }
                                 }
 
-                                if let Some(camera) = CapWindowId::Camera.get(&app) {
+                                if let Some(camera) = OrbitWindowId::Camera.get(&app) {
                                     let _ = camera.hide();
                                 }
 
@@ -3562,7 +3568,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                                     }
                                 });
                             }
-                            CapWindowId::Editor { id } => {
+                            OrbitWindowId::Editor { id } => {
                                 let window_ids = EditorWindowIds::get(window.app_handle());
                                 window_ids.ids.lock().unwrap().retain(|(_, _id)| *_id != id);
 
@@ -3570,7 +3576,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
 
                                 restore_main_windows_if_no_editors(app);
                             }
-                            CapWindowId::ScreenshotEditor { id } => {
+                            OrbitWindowId::ScreenshotEditor { id } => {
                                 let window_ids =
                                     ScreenshotEditorWindowIds::get(window.app_handle());
                                 window_ids.ids.lock().unwrap().retain(|(_, _id)| *_id != id);
@@ -3579,14 +3585,14 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
 
                                 restore_main_windows_if_no_editors(app);
                             }
-                            CapWindowId::Settings => {
+                            OrbitWindowId::Settings => {
                                 for (label, window) in app.webview_windows() {
-                                    if let Ok(id) = CapWindowId::from_str(&label)
+                                    if let Ok(id) = OrbitWindowId::from_str(&label)
                                         && matches!(
                                             id,
-                                            CapWindowId::TargetSelectOverlay { .. }
-                                                | CapWindowId::Main
-                                                | CapWindowId::Camera
+                                            OrbitWindowId::TargetSelectOverlay { .. }
+                                                | OrbitWindowId::Main
+                                                | OrbitWindowId::Camera
                                         )
                                     {
                                         let _ = window.show();
@@ -3600,14 +3606,14 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
 
                                 return;
                             }
-                            CapWindowId::Upgrade | CapWindowId::ModeSelect => {
+                            OrbitWindowId::Upgrade | OrbitWindowId::ModeSelect => {
                                 for (label, window) in app.webview_windows() {
-                                    if let Ok(id) = CapWindowId::from_str(&label)
+                                    if let Ok(id) = OrbitWindowId::from_str(&label)
                                         && matches!(
                                             id,
-                                            CapWindowId::TargetSelectOverlay { .. }
-                                                | CapWindowId::Main
-                                                | CapWindowId::Camera
+                                            OrbitWindowId::TargetSelectOverlay { .. }
+                                                | OrbitWindowId::Main
+                                                | OrbitWindowId::Camera
                                         )
                                     {
                                         let _ = window.show();
@@ -3615,7 +3621,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                                 }
                                 return;
                             }
-                            CapWindowId::TargetSelectOverlay { display_id } => {
+                            OrbitWindowId::TargetSelectOverlay { display_id } => {
                                 app.state::<target_select_overlay::WindowFocusManager>()
                                     .destroy(&display_id, app.global_shortcut());
                                 let session_id =
@@ -3625,7 +3631,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                                     session_id,
                                 ));
                             }
-                            CapWindowId::Camera => {
+                            OrbitWindowId::Camera => {
                                 tracing::info!(
                                     "Camera window Destroyed event - resetting panel state"
                                 );
@@ -3653,7 +3659,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                         && app
                             .webview_windows()
                             .keys()
-                            .all(|label| !CapWindowId::from_str(label).unwrap().activates_dock())
+                            .all(|label| !OrbitWindowId::from_str(label).unwrap().activates_dock())
                     {
                         #[cfg(target_os = "macos")]
                         app.set_activation_policy(tauri::ActivationPolicy::Accessory)
@@ -3662,12 +3668,12 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                 }
                 #[cfg(target_os = "macos")]
                 WindowEvent::Focused(focused) => {
-                    let window_id = CapWindowId::from_str(label);
+                    let window_id = OrbitWindowId::from_str(label);
 
-                    if matches!(window_id, Ok(CapWindowId::Upgrade)) {
+                    if matches!(window_id, Ok(OrbitWindowId::Upgrade)) {
                         for (label, window) in app.webview_windows() {
-                            if let Ok(id) = CapWindowId::from_str(&label)
-                                && matches!(id, CapWindowId::TargetSelectOverlay { .. })
+                            if let Ok(id) = OrbitWindowId::from_str(&label)
+                                && matches!(id, OrbitWindowId::TargetSelectOverlay { .. })
                             {
                                 let _ = window.hide();
                             }
@@ -3688,11 +3694,11 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                     }
                 }
                 WindowEvent::Moved(position) => {
-                    if let Ok(window_id) = CapWindowId::from_str(label) {
+                    if let Ok(window_id) = OrbitWindowId::from_str(label) {
                         let scale_factor = window.scale_factor().unwrap_or(1.0);
                         let logical_pos = position.to_logical::<f64>(scale_factor);
                         match window_id {
-                            CapWindowId::Main => {
+                            OrbitWindowId::Main => {
                                 let display_id =
                                     display_id_for_position(logical_pos.x, logical_pos.y);
                                 let _ = GeneralSettingsStore::update(app, |settings| {
@@ -3704,7 +3710,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                                         });
                                 });
                             }
-                            CapWindowId::Camera => {
+                            OrbitWindowId::Camera => {
                                 let guard = app.state::<CameraWindowPositionGuard>();
                                 if guard.should_ignore() {
                                     return;
@@ -3800,22 +3806,22 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
 fn has_open_editor_window(app: &AppHandle) -> bool {
     app.webview_windows()
         .keys()
-        .any(|label| matches!(CapWindowId::from_str(label), Ok(CapWindowId::Editor { .. })))
+        .any(|label| matches!(OrbitWindowId::from_str(label), Ok(OrbitWindowId::Editor { .. })))
 }
 
 fn restore_main_windows_if_no_editors(app: &AppHandle) {
     let has_other_editors = app.webview_windows().keys().any(|label| {
         matches!(
-            CapWindowId::from_str(label),
-            Ok(CapWindowId::Editor { .. } | CapWindowId::ScreenshotEditor { .. })
+            OrbitWindowId::from_str(label),
+            Ok(OrbitWindowId::Editor { .. } | OrbitWindowId::ScreenshotEditor { .. })
         )
     });
 
-    if !has_other_editors && CapWindowId::Settings.get(app).is_none() {
-        if let Some(main) = CapWindowId::Main.get(app) {
+    if !has_other_editors && OrbitWindowId::Settings.get(app).is_none() {
+        if let Some(main) = OrbitWindowId::Main.get(app) {
             let _ = main.show();
         }
-        if let Some(camera) = CapWindowId::Camera.get(app) {
+        if let Some(camera) = OrbitWindowId::Camera.get(app) {
             let _ = camera.show();
         }
     }
@@ -3823,7 +3829,7 @@ fn restore_main_windows_if_no_editors(app: &AppHandle) {
 
 #[cfg(target_os = "windows")]
 fn reopen_main_window(app: &AppHandle) {
-    if let Some(main) = CapWindowId::Main.get(app) {
+    if let Some(main) = OrbitWindowId::Main.get(app) {
         let _ = main.show();
         let _ = main.set_focus();
     } else {
@@ -3848,7 +3854,7 @@ async fn resume_uploads(app: AppHandle) -> Result<(), String> {
         .map_err(|e| format!("Failed to read recordings directory: {e}"))?;
     for entry in entries.flatten() {
         let path = entry.path();
-        if path.is_dir() && path.extension().and_then(|s| s.to_str()) == Some("cap") {
+        if path.is_dir() && path.extension().and_then(|s| s.to_str()) == Some("orbit") {
             // Load recording meta to check for in-progress recordings
             if let Ok(mut meta) = RecordingMeta::load_for_project(&path) {
                 let mut needs_save = false;
@@ -3965,14 +3971,14 @@ async fn resume_uploads(app: AppHandle) -> Result<(), String> {
 async fn create_editor_instance_impl(
     app: &AppHandle,
     path: PathBuf,
-    frame_cb: Box<dyn FnMut(cap_editor::EditorFrameOutput) + Send>,
+    frame_cb: Box<dyn FnMut(orbit_editor::EditorFrameOutput) + Send>,
 ) -> Result<Arc<EditorInstance>, String> {
     let app = app.clone();
 
     wait_for_recording_ready(&app, &path).await?;
 
     let shared_device = if let Some(shared) = gpu_context::get_shared_gpu().await {
-        Some(cap_rendering::SharedWgpuDevice {
+        Some(orbit_rendering::SharedWgpuDevice {
             instance: (*shared.instance).clone(),
             adapter: (*shared.adapter).clone(),
             device: (*shared.device).clone(),
@@ -4091,7 +4097,7 @@ fn recordings_path(app: &AppHandle) -> PathBuf {
 }
 
 // fn recording_path(app: &AppHandle, recording_id: &str) -> PathBuf {
-//     recordings_path(app).join(format!("{recording_id}.cap"))
+//     recordings_path(app).join(format!("{recording_id}.orbit"))
 // }
 
 fn screenshots_path(app: &AppHandle) -> PathBuf {
@@ -4101,7 +4107,7 @@ fn screenshots_path(app: &AppHandle) -> PathBuf {
 }
 
 // fn screenshot_path(app: &AppHandle, screenshot_id: &str) -> PathBuf {
-//     screenshots_path(app).join(format!("{screenshot_id}.cap"))
+//     screenshots_path(app).join(format!("{screenshot_id}.orbit"))
 // }
 
 #[tauri::command]
@@ -4188,7 +4194,7 @@ fn open_project_from_path(path: &Path, app: AppHandle) -> Result<(), String> {
                 let _ = app
                     .opener()
                     .open_path(mp4_path.to_str().unwrap_or_default(), None::<String>);
-                if let Some(main_window) = CapWindowId::Main.get(&app) {
+                if let Some(main_window) = OrbitWindowId::Main.get(&app) {
                     main_window.hide().ok();
                 }
             }

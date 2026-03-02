@@ -3,7 +3,7 @@ import { OTLPHttpJsonTraceExporter, registerOTel } from "@vercel/otel";
 export async function register() {
 	if (process.env.NEXT_PUBLIC_AXIOM_TOKEN) {
 		registerOTel({
-			serviceName: "cap-web-backend",
+			serviceName: "orbit-web-backend",
 			traceExporter: new OTLPHttpJsonTraceExporter({
 				url: "https://api.axiom.co/v1/traces",
 				headers: {
@@ -14,7 +14,7 @@ export async function register() {
 		});
 	} else if (process.env.NODE_ENV === "development") {
 		registerOTel({
-			serviceName: "cap-web-backend",
+			serviceName: "orbit-web-backend",
 			traceExporter: new OTLPHttpJsonTraceExporter({}),
 		});
 	}

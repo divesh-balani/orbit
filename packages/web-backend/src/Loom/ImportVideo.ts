@@ -1,4 +1,4 @@
-import { DatabaseError, Loom, S3Bucket, S3Error, Video } from "@cap/web-domain";
+import { DatabaseError, Loom, S3Bucket, S3Error, Video } from "@orbit/web-domain";
 import { Headers, HttpClient, HttpClientResponse } from "@effect/platform";
 import { Activity } from "@effect/workflow";
 import { Effect, Option, Schedule, Schema, Stream } from "effect";
@@ -63,14 +63,14 @@ export const LoomImportVideoLive = Loom.ImportVideo.toLayer(
 				const loomVideo = payload.loom.video;
 
 				const [_, customBucket] = yield* s3Buckets.getBucketAccessForUser(
-					payload.cap.userId,
+					payload.orbit.userId,
 				);
 
 				const customBucketId = Option.map(customBucket, (b) => b.id);
 
 				const videoId = yield* videos.create({
-					ownerId: payload.cap.userId,
-					orgId: payload.cap.orgId,
+					ownerId: payload.orbit.userId,
+					orgId: payload.orbit.orgId,
 					bucketId: customBucketId,
 					source: { type: "desktopMP4" as const },
 					name: payload.loom.video.name,
@@ -98,7 +98,7 @@ export const LoomImportVideoLive = Loom.ImportVideo.toLayer(
 
 		const source = new Video.Mp4Source({
 			videoId: videoId,
-			ownerId: payload.cap.userId,
+			ownerId: payload.orbit.userId,
 		});
 
 		yield* Activity.make({
@@ -157,7 +157,7 @@ export const LoomImportVideoLive = Loom.ImportVideo.toLayer(
 				}).pipe(Effect.scoped);
 
 				yield* Effect.log(
-					`Uploaded video for user '${payload.cap.userId}' at key '${key}'`,
+					`Uploaded video for user '${payload.orbit.userId}' at key '${key}'`,
 				);
 			}),
 		});

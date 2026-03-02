@@ -252,7 +252,7 @@ function createScreenshotEditorContext() {
 			};
 
 			const pathStr = instance.path;
-			const isCapDir = pathStr.endsWith(".cap");
+			const isCapDir = pathStr.endsWith(".orbit");
 			const imagePath = isCapDir ? `${pathStr}/original.png` : pathStr;
 			loadImage(imagePath);
 		}
