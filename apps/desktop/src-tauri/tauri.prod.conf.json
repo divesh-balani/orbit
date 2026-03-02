@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.tauri.app/config/2",
+	"productName": "Orbit",
+	"mainBinaryName": "Orbit",
+	"identifier": "so.orbit.desktop",
+	"build": {
+		"beforeBundleCommand": "node scripts/prodBeforeBundle.js"
+	},
+	"plugins": {
+		"updater": {
+			"active": false
+		}
+	},
+	"bundle": {
+		"macOS": {
+			"entitlements": "Entitlements.plist"
+		},
+		"windows": {
+			"wix": {
+				"upgradeCode": "a765d9de-0ecc-55d0-b8a0-61e9d3276664"
+			}
+		}
+	}
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40" fill="none">
+<rect x="0.25" y="0.25" width="39.5" height="39.5" rx="7.75" fill="white"/>
+<rect x="0.25" y="0.25" width="39.5" height="39.5" rx="7.75" stroke="#E7EAF0" stroke-width="0.5"/>
+<path d="M20 36C28.8365 36 36 28.8365 36 20C36 11.1635 28.8365 4 20 4C11.1635 4 4 11.1635 4 20C4 28.8365 11.1635 36 20 36Z" fill="#4785FF"/>
+<path d="M20.0001 33C27.1797 33 33 27.1797 33 20.0001C33 12.8203 27.1797 7 20.0001 7C12.8203 7 7 12.8204 7 20.0001C7 27.1797 12.8204 33 20.0001 33Z" fill="#ADC9FF"/>
+<path d="M20.0001 30.0002C25.5229 30.0002 30.0002 25.5229 30.0002 20.0001C30.0002 14.4773 25.5229 10.0002 20.0001 10.0002C14.4773 10.0002 10.0002 14.4773 10.0002 20.0001C10.0002 25.5229 14.4773 30.0002 20.0001 30.0002Z" fill="white"/>
+<text x="48" y="28" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#12161F" letter-spacing="-0.5">Orbit</text>
+</svg>

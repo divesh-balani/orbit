@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cap</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>icon.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Orbit Recording</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSTypeIsPackage</key>
+			<true/>
+		</dict>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Orbit uses your camera to record you</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Orbit uses your microphone to record audio</string>
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>Orbit captures your screen for recording</string>
+	<key>NSCameraUseContinuityCameraDeviceType</key>
+	<true/>
+</dict>
+</plist>
