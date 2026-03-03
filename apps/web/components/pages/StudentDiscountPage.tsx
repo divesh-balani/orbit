@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@orbit/ui";
 import {
 	faBookOpen,
 	faCopy,
@@ -8,6 +7,7 @@ import {
 	faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@orbit/ui";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -85,8 +85,9 @@ export const StudentDiscountPage = () => {
 						variants={fadeIn}
 						custom={2}
 					>
-						Level up your presentations and portfolio with 30% off Orbit's premium
-						features. Perfect for students, researchers, and future creators.
+						Level up your presentations and portfolio with 30% off Orbit's
+						premium features. Perfect for students, researchers, and future
+						creators.
 					</motion.p>
 
 					{/* Clean Discount Badge */}

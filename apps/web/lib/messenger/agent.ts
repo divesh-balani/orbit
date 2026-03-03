@@ -3,7 +3,7 @@ import "server-only";
 import type { MessengerMessageRole } from "@orbit/database/schema";
 import { serverEnv } from "@orbit/env";
 import { GROQ_MODEL, getGroqClient } from "@/lib/groq-client";
-import { ORBIT_REFERENCE_GUIDE, MESSENGER_AGENT_PROMPT } from "./constants";
+import { MESSENGER_AGENT_PROMPT, ORBIT_REFERENCE_GUIDE } from "./constants";
 import { getKnowledgeTag, searchSupermemory } from "./supermemory";
 
 type ConversationMessage = {

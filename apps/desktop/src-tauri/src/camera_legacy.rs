@@ -1,7 +1,7 @@
 use std::time::Instant;
 
-use orbit_recording::FFmpegVideoFrame;
 use flume::Sender;
+use orbit_recording::FFmpegVideoFrame;
 use tokio_util::sync::CancellationToken;
 
 use crate::frame_ws::{WSFrame, create_frame_ws};

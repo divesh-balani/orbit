@@ -1,10 +1,10 @@
 "use client";
 
+import { faFolderPlus, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { VideoMetadata } from "@orbit/database/types";
 import { Button } from "@orbit/ui";
 import type { Organisation, Space, User, Video } from "@orbit/web-domain";
-import { faFolderPlus, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useVideosAnalyticsQuery } from "@/lib/Queries/Analytics";

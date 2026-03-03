@@ -7,7 +7,8 @@ import {
 import { createFAQSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "Best Screen Recorder in 2026 — Free, No Watermark, 4K Quality | Orbit",
+	title:
+		"Best Screen Recorder in 2026 — Free, No Watermark, 4K Quality | Orbit",
 	description:
 		"Orbit is the best screen recorder for Mac and Windows. Record in 4K with audio and webcam overlay, then share instantly. 100% free with no watermarks, no time limits in Studio Mode.",
 	alternates: {

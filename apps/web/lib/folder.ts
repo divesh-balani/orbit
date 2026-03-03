@@ -12,7 +12,12 @@ import {
 	videoUploads,
 } from "@orbit/database/schema";
 import { Database, ImageUploads } from "@orbit/web-backend";
-import type { ImageUpload, Organisation, Space, Video } from "@orbit/web-domain";
+import type {
+	ImageUpload,
+	Organisation,
+	Space,
+	Video,
+} from "@orbit/web-domain";
 import { CurrentUser, Folder } from "@orbit/web-domain";
 import { and, desc, eq, isNull } from "drizzle-orm";
 import { sql } from "drizzle-orm/sql";

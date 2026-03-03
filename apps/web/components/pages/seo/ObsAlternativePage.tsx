@@ -266,7 +266,8 @@ export const obsAlternativeContent: SeoPageContent = {
 				"Yes. Orbit records at up to 4K resolution and 60 frames per second with system audio and microphone. You get the same video quality as OBS without the encoder configuration. Orbit handles bitrate, format, and compression automatically so you don't have to tune settings before every recording.",
 		},
 		{
-			question: "What happens to my recordings after I stop recording in Orbit?",
+			question:
+				"What happens to my recordings after I stop recording in Orbit?",
 			answer:
 				"Orbit automatically uploads your recording and generates a shareable link in seconds. You can paste this link anywhere — Slack, email, GitHub, Notion — and viewers can watch without downloading any files. You can also configure Orbit to store recordings in your own S3-compatible bucket for complete data control.",
 		},

@@ -101,7 +101,8 @@ export const remoteTeamCollaborationContent: SeoPageContent = {
 	faqsTitle: "Remote Team Collaboration FAQs",
 	faqs: [
 		{
-			question: "How does Orbit help remote teams collaborate more effectively?",
+			question:
+				"How does Orbit help remote teams collaborate more effectively?",
 			answer:
 				"Orbit enables asynchronous visual communication that eliminates time zone constraints. Team members can record detailed screen captures with webcam overlay, share them instantly, and collect feedback through threaded comments—all without scheduling meetings. This typically saves teams 30+ minutes per person daily and improves information clarity.",
 		},

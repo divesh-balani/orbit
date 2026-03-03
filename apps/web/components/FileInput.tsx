@@ -1,13 +1,13 @@
 "use client";
 
-import { Button, Input, LoadingSpinner } from "@orbit/ui";
-import { ImageUpload } from "@orbit/web-domain";
 import {
 	faCloudUpload,
 	faSpinner,
 	faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Input, LoadingSpinner } from "@orbit/ui";
+import { ImageUpload } from "@orbit/web-domain";
 import clsx from "clsx";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";

@@ -1,5 +1,7 @@
 "use client";
 
+import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { buildEnv } from "@orbit/env";
 import {
 	Command,
@@ -9,8 +11,6 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@orbit/ui";
-import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useClickAway } from "@uidotdev/usehooks";
 import clsx from "clsx";

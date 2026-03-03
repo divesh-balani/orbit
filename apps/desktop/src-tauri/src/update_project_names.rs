@@ -4,8 +4,8 @@ use std::{
     sync::Arc,
 };
 
-use orbit_project::RecordingMeta;
 use futures::StreamExt;
+use orbit_project::RecordingMeta;
 use tauri::AppHandle;
 use tauri_plugin_store::StoreExt;
 use tokio::{fs, sync::Mutex};

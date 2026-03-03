@@ -88,7 +88,8 @@ export const metadata: Metadata = {
 	description:
 		"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Orbit for Agencies on macOS & Windows.",
 	openGraph: {
-		title: "Orbit for Agencies — Faster Client Updates with Instant Video Links",
+		title:
+			"Orbit for Agencies — Faster Client Updates with Instant Video Links",
 		description:
 			"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Orbit for Agencies on macOS & Windows.",
 		url: "https://orbit.so/solutions/agencies",
@@ -106,7 +107,8 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Orbit for Agencies — Faster Client Updates with Instant Video Links",
+		title:
+			"Orbit for Agencies — Faster Client Updates with Instant Video Links",
 		description:
 			"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Orbit for Agencies on macOS & Windows.",
 		images: ["https://orbit.so/og.png"],

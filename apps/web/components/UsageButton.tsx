@@ -1,6 +1,6 @@
-import { Button } from "@orbit/ui";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@orbit/ui";
 import { Fit, Layout, useRive } from "@rive-app/react-canvas";
 import clsx from "clsx";
 import Link from "next/link";
@@ -41,7 +41,9 @@ export const UsageButton = memo(
 								)}
 								icon={faCheck}
 							/>
-							{sidebarCollapsed ? null : <p className="text-white">Orbit Pro</p>}
+							{sidebarCollapsed ? null : (
+								<p className="text-white">Orbit Pro</p>
+							)}
 						</Button>
 					</Link>
 				</Tooltip>

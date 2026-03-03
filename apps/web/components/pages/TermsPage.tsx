@@ -17,12 +17,12 @@ export const TermsPage = () => {
 						<li>
 							<h3>Introduction</h3>
 							<br />
-							Welcome to Orbit Software, Inc. ("Orbit," "we," "us," or "our"). These
-							Terms of Service ("Terms") govern your access to and use of our
-							website, software, and services (collectively, the "Services"). By
-							accessing or using our Services, you agree to be bound by these
-							Terms. If you do not agree to these Terms, you may not access or
-							use our Services.
+							Welcome to Orbit Software, Inc. ("Orbit," "we," "us," or "our").
+							These Terms of Service ("Terms") govern your access to and use of
+							our website, software, and services (collectively, the
+							"Services"). By accessing or using our Services, you agree to be
+							bound by these Terms. If you do not agree to these Terms, you may
+							not access or use our Services.
 						</li>
 						<li>
 							<h3>Services</h3>
@@ -58,12 +58,12 @@ export const TermsPage = () => {
 							<h3>Intellectual Property</h3>
 							<br />
 							Our Services and their original content, features, and
-							functionality are owned by Orbit and are protected by international
-							copyright, trademark, patent, trade secret, and other intellectual
-							property or proprietary rights laws. You may not copy, modify,
-							distribute, sell, or lease any part of our Services, nor may you
-							reverse engineer or attempt to extract the source code of our
-							software.
+							functionality are owned by Orbit and are protected by
+							international copyright, trademark, patent, trade secret, and
+							other intellectual property or proprietary rights laws. You may
+							not copy, modify, distribute, sell, or lease any part of our
+							Services, nor may you reverse engineer or attempt to extract the
+							source code of our software.
 						</li>
 						<li>
 							<h3>User Conduct</h3>

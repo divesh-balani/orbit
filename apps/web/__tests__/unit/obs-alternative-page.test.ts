@@ -15,7 +15,9 @@ const componentSource = readFileSync(
 
 describe("ObsAlternativePage metadata", () => {
 	it("contains canonical URL", () => {
-		expect(pageSource).toContain('canonical: "https://orbit.so/obs-alternative"');
+		expect(pageSource).toContain(
+			'canonical: "https://orbit.so/obs-alternative"',
+		);
 	});
 
 	it("contains OG url field", () => {
@@ -121,7 +123,8 @@ describe("ObsAlternativePage FAQ schema", () => {
 				"Yes. Orbit records at up to 4K resolution and 60 frames per second with system audio and microphone.",
 		},
 		{
-			question: "What happens to my recordings after I stop recording in Orbit?",
+			question:
+				"What happens to my recordings after I stop recording in Orbit?",
 			answer:
 				"Orbit automatically uploads your recording and generates a shareable link in seconds.",
 		},

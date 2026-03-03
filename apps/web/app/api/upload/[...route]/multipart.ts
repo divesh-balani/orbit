@@ -2,6 +2,7 @@ import {
 	CloudFrontClient,
 	CreateInvalidationCommand,
 } from "@aws-sdk/client-cloudfront";
+import { zValidator } from "@hono/zod-validator";
 import { updateIfDefined } from "@orbit/database";
 import * as Db from "@orbit/database/schema";
 import { serverEnv } from "@orbit/env";
@@ -15,7 +16,6 @@ import {
 	VideosRepo,
 } from "@orbit/web-backend";
 import { Policy, Video } from "@orbit/web-domain";
-import { zValidator } from "@hono/zod-validator";
 import { and, eq } from "drizzle-orm";
 import { Effect, Option, Schedule } from "effect";
 import { Hono, type MiddlewareHandler } from "hono";

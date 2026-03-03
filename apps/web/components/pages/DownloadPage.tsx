@@ -54,9 +54,9 @@ export const DownloadPage = () => {
 									style={{ maxWidth: "300px" }}
 								/>
 								<p className="mt-2 text-sm text-gray-8">
-									Whilst Orbit for Windows is in early beta, after downloading and
-									running the app, follow the steps above to whitelist Orbit on
-									your PC.
+									Whilst Orbit for Windows is in early beta, after downloading
+									and running the app, follow the steps above to whitelist Orbit
+									on your PC.
 								</p>
 							</div>
 						)}

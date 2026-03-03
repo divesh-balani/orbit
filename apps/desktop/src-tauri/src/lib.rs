@@ -40,6 +40,14 @@ mod windows;
 use audio::AppSounds;
 use auth::{AuthStore, Plan};
 use camera::{CameraPreviewManager, CameraPreviewState};
+use clipboard_rs::common::RustImage;
+use clipboard_rs::{Clipboard, ClipboardContext};
+use cpal::StreamError;
+use editor_window::{EditorInstances, WindowEditorInstance};
+use ffmpeg::ffi::AV_TIME_BASE;
+use general_settings::GeneralSettingsStore;
+use kameo::{Actor, actor::ActorRef};
+use notifications::NotificationType;
 use orbit_editor::{EditorInstance, EditorState};
 use orbit_project::{
     InstantRecordingMeta, ProjectConfiguration, RecordingMeta, RecordingMetaInner, SharingMeta,
@@ -55,19 +63,11 @@ use orbit_recording::{
     sources::screen_capture::ScreenCaptureTarget,
 };
 use orbit_rendering::ProjectRecordingsMeta;
-use clipboard_rs::common::RustImage;
-use clipboard_rs::{Clipboard, ClipboardContext};
-use cpal::StreamError;
-use editor_window::{EditorInstances, WindowEditorInstance};
-use ffmpeg::ffi::AV_TIME_BASE;
-use general_settings::GeneralSettingsStore;
-use kameo::{Actor, actor::ActorRef};
-use notifications::NotificationType;
 use recording::{InProgressRecording, RecordingEvent, RecordingInputKind};
-use sorbit_targets::{Display, DisplayId, WindowId, bounds::LogicalBounds};
 use screenshot_editor::{
     ScreenshotEditorInstances, create_screenshot_editor_instance, update_screenshot_config,
 };
+use sorbit_targets::{Display, DisplayId, WindowId, bounds::LogicalBounds};
 
 mod gpu_context;
 pub use gpu_context::{PendingScreenshot, PendingScreenshots};
@@ -98,10 +98,10 @@ use tauri_specta::Event;
 use tokio::sync::{Mutex, RwLock, oneshot, watch};
 use tracing::*;
 use upload::{create_or_get_video, upload_image, upload_video};
-use web_api::AuthedApiError;
 use web_api::ManagerExt as WebManagerExt;
 use windows::{
-    OrbitWindowId, EditorWindowIds, ScreenshotEditorWindowIds, ShowCapWindow, set_window_transparent,
+    EditorWindowIds, OrbitWindowId, ScreenshotEditorWindowIds, ShowCapWindow,
+    set_window_transparent,
 };
 
 use crate::{recording::start_recording, upload::build_video_meta};
@@ -902,30 +902,35 @@ fn spawn_devices_snapshot_emitter(app_handle: AppHandle) {
 }
 async fn cleanup_camera_window(app: AppHandle, session_id: u64) {
     let state = app.state::<ArcLock<App>>();
-    let mut app_state = state.write().await;
 
-    let current_session_id = app_state
-        .camera_preview
-        .session_id_handle()
-        .load(Ordering::Acquire);
+    let camera_feed = {
+        let mut app_state = state.write().await;
 
-    if current_session_id != session_id {
-        tracing::info!(
-            "Camera cleanup aborted: session mismatch (cleanup session {} vs current {})",
-            session_id,
-            current_session_id
-        );
-        return;
-    }
+        let current_session_id = app_state
+            .camera_preview
+            .session_id_handle()
+            .load(Ordering::Acquire);
 
-    if app_state.camera_cleanup_done {
-        return;
-    }
+        if current_session_id != session_id {
+            tracing::info!(
+                "Camera cleanup aborted: session mismatch (cleanup session {} vs current {})",
+                session_id,
+                current_session_id
+            );
+            return;
+        }
 
-    app_state.camera_cleanup_done = true;
-    app_state.camera_preview.pause();
+        if app_state.camera_cleanup_done {
+            return;
+        }
 
-    if !app_state.is_recording_active_or_pending() {
+        app_state.camera_cleanup_done = true;
+        app_state.camera_preview.pause();
+
+        if app_state.is_recording_active_or_pending() {
+            return;
+        }
+
         let has_visible_target_overlay = app.webview_windows().iter().any(|(label, window)| {
             label.starts_with("target-select-overlay-") && window.is_visible().unwrap_or(false)
         });
@@ -941,11 +946,17 @@ async fn cleanup_camera_window(app: AppHandle, session_id: u64) {
             return;
         }
 
-        if !has_visible_target_overlay {
-            let _ = app_state.camera_feed.ask(feeds::camera::RemoveInput).await;
-            app_state.camera_in_use = false;
+        if has_visible_target_overlay {
+            return;
         }
-    }
+
+        app_state.camera_feed.clone()
+    };
+
+    let _ = camera_feed.ask(feeds::camera::RemoveInput).await;
+
+    let mut app_state = state.write().await;
+    app_state.camera_in_use = false;
 }
 
 async fn cleanup_camera_after_overlay_close(app: AppHandle, captured_session_id: u64) {
@@ -1336,8 +1347,8 @@ async fn get_current_recording(
     let target = match capture_target {
         ScreenCaptureTarget::Display { id } => CurrentRecordingTarget::Screen { id: id.clone() },
         ScreenCaptureTarget::Window { id } => {
-            let bounds =
-                sorbit_targets::Window::from_id(id).and_then(|w| w.display_relative_logical_bounds());
+            let bounds = sorbit_targets::Window::from_id(id)
+                .and_then(|w| w.display_relative_logical_bounds());
             CurrentRecordingTarget::Window {
                 id: id.clone(),
                 bounds,
@@ -2119,8 +2130,6 @@ async fn upload_exported_video(
     .await
     {
         Ok(data) => data,
-        Err(AuthedApiError::InvalidAuthentication) => return Ok(UploadResult::NotAuthenticated),
-        Err(AuthedApiError::UpgradeRequired) => return Ok(UploadResult::UpgradeRequired),
         Err(err) => return Err(err.to_string()),
     };
 
@@ -2166,7 +2175,6 @@ async fn upload_exported_video(
             NotificationType::ShareableLinkCopied.send(&app);
             Ok(UploadResult::Success(uploaded_video.link))
         }
-        Err(AuthedApiError::UpgradeRequired) => Ok(UploadResult::UpgradeRequired),
         Err(e) => {
             error!("Failed to upload video: {e}");
 
@@ -2613,9 +2621,9 @@ async fn get_display_frame_for_cropping(
     editor_instance: WindowEditorInstance,
     fps: u32,
 ) -> Result<Vec<u8>, String> {
+    use image::{ImageEncoder, codecs::png::PngEncoder};
     use orbit_project::ClipOffsets;
     use orbit_rendering::{PixelFormat, cpu_yuv};
-    use image::{ImageEncoder, codecs::png::PngEncoder};
     use std::io::Cursor;
 
     let frame_number = editor_instance.state.lock().await.playhead_position;
@@ -2738,12 +2746,36 @@ async fn editor_delete_project(
     editor_instance: WindowEditorInstance,
     window: tauri::Window,
 ) -> Result<(), String> {
-    let _ = window.close();
-
-    tokio::time::sleep(std::time::Duration::from_millis(20)).await;
-
     let path = editor_instance.0.project_path.clone();
     drop(editor_instance);
+
+    let _ = window.close();
+
+    let start = std::time::Instant::now();
+    let timeout = std::time::Duration::from_millis(500);
+    while start.elapsed() < timeout && window.is_visible().unwrap_or(false) {
+        tokio::time::sleep(std::time::Duration::from_millis(25)).await;
+    }
+
+    let camera_feed = {
+        let state = app.state::<ArcLock<App>>();
+        let mut app_state = state.write().await;
+        app_state.camera_in_use = false;
+        app_state.camera_cleanup_done = true;
+        app_state.disconnected_inputs.clear();
+        app_state.camera_preview.pause();
+        app_state.selected_mic_label = None;
+        app_state.selected_camera_id = None;
+        app_state.camera_feed.clone()
+    };
+
+    let _ = camera_feed
+        .ask(orbit_recording::feeds::camera::RemoveInput)
+        .await;
+
+    if let Some(camera_window) = OrbitWindowId::Camera.get(&app) {
+        let _ = camera_window.hide();
+    }
 
     let _ = tokio::fs::remove_dir_all(&path).await;
 
@@ -3509,17 +3541,19 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                                     let app = app.clone();
                                     tokio::spawn(async move {
                                         let state = app.state::<ArcLock<App>>();
-                                        let app_state = &mut *state.write().await;
+                                        let (mic_feed, camera_feed) = {
+                                            let mut app_state = state.write().await;
+                                            app_state.camera_preview.pause();
+                                            (
+                                                app_state.mic_feed.clone(),
+                                                app_state.camera_feed.clone(),
+                                            )
+                                        };
 
-                                        app_state.camera_preview.pause();
+                                        let _ = mic_feed.ask(microphone::RemoveInput).await;
+                                        let _ = camera_feed.ask(feeds::camera::RemoveInput).await;
 
-                                        let _ =
-                                            app_state.mic_feed.ask(microphone::RemoveInput).await;
-                                        let _ = app_state
-                                            .camera_feed
-                                            .ask(feeds::camera::RemoveInput)
-                                            .await;
-
+                                        let mut app_state = state.write().await;
                                         app_state.selected_mic_label = None;
                                         app_state.camera_in_use = false;
                                     });
@@ -3552,20 +3586,21 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
 
                                 tokio::spawn(async move {
                                     let state = app.state::<ArcLock<App>>();
-                                    let app_state = &mut *state.write().await;
+                                    let (mic_feed, camera_feed) = {
+                                        let app_state = state.read().await;
+                                        if app_state.is_recording_active_or_pending() {
+                                            return;
+                                        }
+                                        (app_state.mic_feed.clone(), app_state.camera_feed.clone())
+                                    };
 
-                                    if !app_state.is_recording_active_or_pending() {
-                                        let _ =
-                                            app_state.mic_feed.ask(microphone::RemoveInput).await;
-                                        let _ = app_state
-                                            .camera_feed
-                                            .ask(feeds::camera::RemoveInput)
-                                            .await;
+                                    let _ = mic_feed.ask(microphone::RemoveInput).await;
+                                    let _ = camera_feed.ask(feeds::camera::RemoveInput).await;
 
-                                        app_state.selected_mic_label = None;
-                                        app_state.selected_camera_id = None;
-                                        app_state.camera_in_use = false;
-                                    }
+                                    let mut app_state = state.write().await;
+                                    app_state.selected_mic_label = None;
+                                    app_state.selected_camera_id = None;
+                                    app_state.camera_in_use = false;
                                 });
                             }
                             OrbitWindowId::Editor { id } => {
@@ -3804,9 +3839,12 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
 
 #[cfg(target_os = "windows")]
 fn has_open_editor_window(app: &AppHandle) -> bool {
-    app.webview_windows()
-        .keys()
-        .any(|label| matches!(OrbitWindowId::from_str(label), Ok(OrbitWindowId::Editor { .. })))
+    app.webview_windows().keys().any(|label| {
+        matches!(
+            OrbitWindowId::from_str(label),
+            Ok(OrbitWindowId::Editor { .. })
+        )
+    })
 }
 
 fn restore_main_windows_if_no_editors(app: &AppHandle) {

@@ -1,3 +1,4 @@
+import { HttpApiError, HttpServerRequest } from "@effect/platform";
 import { getServerSession } from "@orbit/database/auth/auth-options";
 import * as Db from "@orbit/database/schema";
 import {
@@ -5,7 +6,6 @@ import {
 	type DatabaseError,
 	HttpAuthMiddleware,
 } from "@orbit/web-domain";
-import { HttpApiError, HttpServerRequest } from "@effect/platform";
 import * as Dz from "drizzle-orm";
 import { type Cause, Effect, Layer, Option, Schema } from "effect";
 

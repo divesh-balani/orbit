@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@orbit/ui";
 import MuxPlayer from "@mux/mux-player-react";
+import { Button } from "@orbit/ui";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId } from "react";

@@ -1,12 +1,17 @@
 import { promises as fs } from "node:fs";
+import { createClient } from "@deepgram/sdk";
 import { db } from "@orbit/database";
-import { organizations, s3Buckets, users, videos } from "@orbit/database/schema";
+import {
+	organizations,
+	s3Buckets,
+	users,
+	videos,
+} from "@orbit/database/schema";
 import type { VideoMetadata } from "@orbit/database/types";
 import { serverEnv } from "@orbit/env";
 import { userIsPro } from "@orbit/utils";
 import { S3Buckets } from "@orbit/web-backend";
 import type { S3Bucket, Video } from "@orbit/web-domain";
-import { createClient } from "@deepgram/sdk";
 import { eq } from "drizzle-orm";
 import { Option } from "effect";
 import { FatalError } from "workflow";

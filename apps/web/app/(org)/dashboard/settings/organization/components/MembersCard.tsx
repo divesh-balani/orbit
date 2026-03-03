@@ -1,5 +1,7 @@
 "use client";
 
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { buildEnv } from "@orbit/env";
 import {
 	Button,
@@ -14,8 +16,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@orbit/ui";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

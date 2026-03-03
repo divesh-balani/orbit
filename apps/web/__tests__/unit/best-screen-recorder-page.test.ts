@@ -21,7 +21,9 @@ describe("BestScreenRecorderPage metadata", () => {
 	});
 
 	it("contains OG url field", () => {
-		expect(pageSource).toContain('url: "https://orbit.so/best-screen-recorder"');
+		expect(pageSource).toContain(
+			'url: "https://orbit.so/best-screen-recorder"',
+		);
 	});
 
 	it("contains OG siteName field", () => {

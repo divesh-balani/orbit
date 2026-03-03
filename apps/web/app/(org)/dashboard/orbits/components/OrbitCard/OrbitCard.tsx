@@ -1,15 +1,5 @@
 "use client";
 
-import type { VideoMetadata } from "@orbit/database/types";
-import { buildEnv, NODE_ENV } from "@orbit/env";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@orbit/ui";
-import { calculateStrokeDashoffset, getProgressCircleConfig } from "@orbit/utils";
-import type { ImageUpload, Video } from "@orbit/web-domain";
 import { HttpClient } from "@effect/platform";
 import {
 	faChartSimple,
@@ -26,6 +16,19 @@ import {
 	faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { VideoMetadata } from "@orbit/database/types";
+import { buildEnv, NODE_ENV } from "@orbit/env";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@orbit/ui";
+import {
+	calculateStrokeDashoffset,
+	getProgressCircleConfig,
+} from "@orbit/utils";
+import type { ImageUpload, Video } from "@orbit/web-domain";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Effect, Option } from "effect";

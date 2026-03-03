@@ -14,11 +14,11 @@ use crate::{
     window_exclusion::WindowExclusion,
     windows::{OrbitWindowId, ShowCapWindow},
 };
+use serde::Serialize;
 use sorbit_targets::{
     Display, DisplayId, Window, WindowId,
     bounds::{LogicalBounds, LogicalSize, PhysicalSize},
 };
-use serde::Serialize;
 use specta::Type;
 use tauri::{AppHandle, Manager, WebviewWindow};
 use tauri_plugin_global_shortcut::{GlobalShortcut, GlobalShortcutExt};
@@ -179,7 +179,10 @@ pub async fn open_target_select_overlays(
                         .unwrap_or_else(sorbit_targets::Display::get_containing_cursor);
                     let window = focused_target
                         .as_ref()
-                        .map(|v| v.window().and_then(|id| sorbit_targets::Window::from_id(&id)))
+                        .map(|v| {
+                            v.window()
+                                .and_then(|id| sorbit_targets::Window::from_id(&id))
+                        })
                         .unwrap_or_else(sorbit_targets::Window::get_topmost_at_cursor);
 
                     let _ = TargetUnderCursor {
@@ -297,7 +300,8 @@ pub async fn close_target_select_overlays(
     let mut closed_display_ids = Vec::new();
 
     for (id, window) in app.webview_windows() {
-        if let Ok(OrbitWindowId::TargetSelectOverlay { display_id }) = OrbitWindowId::from_str(&id) {
+        if let Ok(OrbitWindowId::TargetSelectOverlay { display_id }) = OrbitWindowId::from_str(&id)
+        {
             let _ = window.hide();
             closed_display_ids.push(display_id);
         }

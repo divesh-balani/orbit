@@ -1,4 +1,10 @@
-import { Button, Card, CardDescription, CardHeader, CardTitle } from "@orbit/ui";
+import {
+	Button,
+	Card,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@orbit/ui";
 import { useState } from "react";
 import { useDashboardContext } from "../../../Contexts";
 import DeleteOrgDialog from "./DeleteOrgDialog";

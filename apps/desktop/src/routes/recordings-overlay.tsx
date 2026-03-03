@@ -1,5 +1,5 @@
-import { Button } from "@orbit/ui-solid";
 import Tooltip from "@corvu/tooltip";
+import { Button } from "@orbit/ui-solid";
 import { createElementBounds } from "@solid-primitives/bounds";
 import { makePersisted } from "@solid-primitives/storage";
 import { createMutation, createQuery } from "@tanstack/solid-query";
@@ -25,9 +25,9 @@ import { TransitionGroup } from "solid-transition-group";
 import { createTauriEventListener } from "~/utils/createEventListener";
 import { exportVideo } from "~/utils/export";
 import { commands, events, type FramesRendered } from "~/utils/tauri";
-import IconOrbitEditor from "~icons/orbit/editor";
 import IconLucideClock from "~icons/lucide/clock";
 import IconLucideEye from "~icons/lucide/eye";
+import IconOrbitEditor from "~icons/orbit/editor";
 import { FPS, OUTPUT_SIZE } from "./editor/context";
 
 type MediaEntry = {

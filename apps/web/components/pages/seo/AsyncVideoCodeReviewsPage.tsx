@@ -92,7 +92,13 @@ export const asyncVideoCodeReviewsContent: SeoPageContent = {
 
 	comparisonTable: {
 		title: "Orbit vs Other Code Review Tools",
-		headers: ["Feature", "Orbit", "Loom", "GitHub PR Comments", "Zoom Recording"],
+		headers: [
+			"Feature",
+			"Orbit",
+			"Loom",
+			"GitHub PR Comments",
+			"Zoom Recording",
+		],
 		rows: [
 			[
 				"Async video code reviews",

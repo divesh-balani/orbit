@@ -1,3 +1,8 @@
+use ffmpeg::{
+    ChannelLayout,
+    codec::{self as avcodec},
+    format::{self as avformat},
+};
 use orbit_enc_ffmpeg::{
     AudioEncoder,
     h264::{H264EncoderBuilder, H264Preset},
@@ -8,11 +13,6 @@ use orbit_media_info::{AudioInfo, FFRational, Pixel, VideoInfo, ensure_even};
 use orbit_project::{
     AudioMeta, Cursors, InstantRecordingMeta, MultipleSegment, MultipleSegments, Platform,
     RecordingMeta, RecordingMetaInner, StudioRecordingMeta, StudioRecordingStatus, VideoMeta,
-};
-use ffmpeg::{
-    ChannelLayout,
-    codec::{self as avcodec},
-    format::{self as avformat},
 };
 use relative_path::RelativePathBuf;
 use serde::Serialize;

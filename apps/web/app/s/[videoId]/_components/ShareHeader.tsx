@@ -1,13 +1,13 @@
 "use client";
 
-import { buildEnv, NODE_ENV } from "@orbit/env";
-import { Button } from "@orbit/ui";
 import {
 	faChartSimple,
 	faChevronDown,
 	faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { buildEnv, NODE_ENV } from "@orbit/env";
+import { Button } from "@orbit/ui";
 import { Check, Copy, Globe2 } from "lucide-react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
@@ -99,7 +99,11 @@ export const ShareHeader = ({
 			return `https://${customDomain}/s/${data.id}`;
 		} else if (NODE_ENV === "development" && !customDomain && !domainVerified) {
 			return `${webUrl}/s/${data.id}`;
-		} else if (buildEnv.NEXT_PUBLIC_IS_ORBIT && customDomain && domainVerified) {
+		} else if (
+			buildEnv.NEXT_PUBLIC_IS_ORBIT &&
+			customDomain &&
+			domainVerified
+		) {
 			return `https://${customDomain}/s/${data.id}`;
 		} else if (
 			buildEnv.NEXT_PUBLIC_IS_ORBIT &&
@@ -117,7 +121,11 @@ export const ShareHeader = ({
 			return `${customDomain}/s/${data.id}`;
 		} else if (NODE_ENV === "development" && !customDomain && !domainVerified) {
 			return `${webUrl}/s/${data.id}`;
-		} else if (buildEnv.NEXT_PUBLIC_IS_ORBIT && customDomain && domainVerified) {
+		} else if (
+			buildEnv.NEXT_PUBLIC_IS_ORBIT &&
+			customDomain &&
+			domainVerified
+		) {
 			return `${customDomain}/s/${data.id}`;
 		} else if (
 			buildEnv.NEXT_PUBLIC_IS_ORBIT &&

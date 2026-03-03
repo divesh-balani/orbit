@@ -1,6 +1,3 @@
-import { serverEnv } from "@orbit/env";
-import { provideOptionalAuth, S3Buckets, Videos } from "@orbit/web-backend";
-import { Video } from "@orbit/web-domain";
 import {
 	HttpApi,
 	HttpApiBuilder,
@@ -9,6 +6,9 @@ import {
 	HttpApiGroup,
 	HttpServerResponse,
 } from "@effect/platform";
+import { serverEnv } from "@orbit/env";
+import { provideOptionalAuth, S3Buckets, Videos } from "@orbit/web-backend";
+import { Video } from "@orbit/web-domain";
 import { Effect, Layer, Option, Schema } from "effect";
 import { apiToHandler } from "@/lib/server";
 import { CACHE_CONTROL_HEADERS } from "@/utils/helpers";

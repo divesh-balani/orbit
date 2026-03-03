@@ -14,7 +14,8 @@ export const metadata: Metadata = {
 		canonical: "https://orbit.so/mac-screen-recording-with-audio",
 	},
 	openGraph: {
-		title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
+		title:
+			"Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
 		description:
 			"Record your Mac screen with system audio and microphone using Orbit. No BlackHole, no plugins required. Free and open-source for macOS.",
 		url: "https://orbit.so/mac-screen-recording-with-audio",
@@ -32,7 +33,8 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
+		title:
+			"Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
 		description:
 			"Record your Mac screen with system audio and microphone using Orbit. No BlackHole, no plugins required. Free and open-source for macOS.",
 		images: ["https://orbit.so/og.png"],

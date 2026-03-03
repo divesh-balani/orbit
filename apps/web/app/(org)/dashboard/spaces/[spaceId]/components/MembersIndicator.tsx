@@ -1,5 +1,8 @@
 "use client";
 
+import { faPlus, faUserGroup } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	Button,
 	Dialog,
@@ -13,9 +16,6 @@ import {
 	FormField,
 } from "@orbit/ui";
 import { type Space, User } from "@orbit/web-domain";
-import { faPlus, faUserGroup } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";

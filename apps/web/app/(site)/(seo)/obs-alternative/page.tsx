@@ -7,7 +7,8 @@ import {
 import { createFAQSchema } from "@/utils/web-schema";
 
 export const metadata: Metadata = {
-	title: "OBS Alternative — Easier Screen Recording with Instant Sharing | Orbit",
+	title:
+		"OBS Alternative — Easier Screen Recording with Instant Sharing | Orbit",
 	description:
 		"Orbit is the modern OBS alternative for async screen sharing. Record in 4K, get a shareable link in seconds, and collaborate with timestamped comments. No configuration required.",
 	alternates: {

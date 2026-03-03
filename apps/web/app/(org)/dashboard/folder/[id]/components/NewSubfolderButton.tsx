@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@orbit/ui";
-import type { Folder } from "@orbit/web-domain";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@orbit/ui";
+import type { Folder } from "@orbit/web-domain";
 import { useState } from "react";
 import { SubfolderDialog } from "./SubfolderDialog";
 

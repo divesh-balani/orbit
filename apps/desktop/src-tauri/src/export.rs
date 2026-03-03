@@ -1,12 +1,12 @@
 use crate::editor_window::{OptionalWindowEditorInstance, WindowEditorInstance};
 use crate::{FramesRendered, get_video_metadata};
+use image::codecs::jpeg::JpegEncoder;
 use orbit_export::ExporterBase;
 use orbit_project::{RecordingMeta, XY};
 use orbit_rendering::{
     FrameRenderer, ProjectRecordingsMeta, ProjectUniforms, RenderSegment, RenderVideoConstants,
     RendererLayers, ZoomFocusInterpolator, spring_mass_damper::SpringMassDamperSimulationConfig,
 };
-use image::codecs::jpeg::JpegEncoder;
 use serde::{Deserialize, Serialize};
 use specta::Type;
 use std::{

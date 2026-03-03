@@ -1,5 +1,5 @@
-import { Button } from "@orbit/ui-solid";
 import Tooltip from "@corvu/tooltip";
+import { Button } from "@orbit/ui-solid";
 import {
 	createQuery,
 	queryOptions,
@@ -20,13 +20,12 @@ import { Input } from "~/routes/editor/ui";
 import { trackEvent } from "~/utils/analytics";
 import { createTauriEventListener } from "~/utils/createEventListener";
 import { commands, events, type RecordingMeta } from "~/utils/tauri";
-
-// Icons
-import IconOrbitTrash from "~icons/orbit/trash";
 import IconLucideCopy from "~icons/lucide/copy";
 import IconLucideEdit from "~icons/lucide/edit";
 import IconLucideFolder from "~icons/lucide/folder";
 import IconLucideSearch from "~icons/lucide/search";
+// Icons
+import IconOrbitTrash from "~icons/orbit/trash";
 
 type Screenshot = RecordingMeta & {
 	path: string;

@@ -97,7 +97,10 @@ const toolPages: Array<{ file: string; breadcrumbItems: string[] }> = [
 	},
 	{
 		file: "(site)/tools/convert/page.tsx",
-		breadcrumbItems: ["https://orbit.so/tools", "https://orbit.so/tools/convert"],
+		breadcrumbItems: [
+			"https://orbit.so/tools",
+			"https://orbit.so/tools/convert",
+		],
 	},
 	{
 		file: "(site)/tools/convert/mov-to-mp4/page.tsx",

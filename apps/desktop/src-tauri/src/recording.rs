@@ -1,4 +1,6 @@
 use anyhow::anyhow;
+use futures::FutureExt;
+use lazy_static::lazy_static;
 use orbit_fail::fail;
 use orbit_project::CursorMoveEvent;
 use orbit_project::cursor::SHORT_CURSOR_SHAPE_DEBOUNCE_MS;
@@ -26,8 +28,6 @@ use orbit_recording::{
 };
 use orbit_rendering::ProjectRecordingsMeta;
 use orbit_utils::{ensure_dir, moment_format_to_chrono, spawn_actor};
-use futures::FutureExt;
-use lazy_static::lazy_static;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use specta::Type;
@@ -409,8 +409,6 @@ pub enum RecordingEvent {
 #[derive(Serialize, Type)]
 pub enum RecordingAction {
     Started,
-    InvalidAuthentication,
-    UpgradeRequired,
 }
 
 pub fn format_project_name<'a>(
@@ -1112,20 +1110,33 @@ pub async fn restart_recording(
     app: AppHandle,
     state: MutableState<'_, App>,
 ) -> Result<RecordingAction, String> {
-    let recording = {
+    let (recording, inputs) = {
         let mut app_state = state.write().await;
-        app_state.clear_current_recording()
+        let recording = app_state.clear_current_recording();
+        app_state.disconnected_inputs.clear();
+        app_state.camera_in_use = false;
+        if app_state.was_camera_only_recording {
+            app_state.was_camera_only_recording = false;
+            let default_state = CameraPreviewState::default();
+            if let Err(err) = app_state.camera_preview.set_state(default_state) {
+                error!("Failed to reset camera preview state after restart: {err}");
+            }
+        }
+        let _ = app_state.recording_logging_handle.reload(None);
+        let inputs = recording.as_ref().map(|r| r.inputs().clone());
+        (recording, inputs)
     };
 
     let Some(recording) = recording else {
         return Err("No recording in progress".to_string());
     };
 
+    let inputs = inputs.unwrap();
+
     let _ = CurrentRecordingChanged.emit(&app);
-
-    let inputs = recording.inputs().clone();
-
     let _ = recording.cancel().await;
+
+    hide_recording_windows(&app).await;
 
     tokio::time::sleep(Duration::from_millis(100)).await;
 
@@ -1138,23 +1149,50 @@ pub async fn restart_recording(
 pub async fn delete_recording(app: AppHandle, state: MutableState<'_, App>) -> Result<(), String> {
     let recording_data = {
         let mut app_state = state.write().await;
-        app_state.clear_current_recording()
+        let recording = app_state.clear_current_recording();
+        app_state.disconnected_inputs.clear();
+        app_state.camera_in_use = false;
+        if app_state.was_camera_only_recording {
+            app_state.was_camera_only_recording = false;
+            let default_state = CameraPreviewState::default();
+            if let Err(err) = app_state.camera_preview.set_state(default_state) {
+                error!("Failed to reset camera preview state after delete: {err}");
+            }
+        }
+        let _ = app_state.recording_logging_handle.reload(None);
+        recording
     };
 
     if let Some(recording) = recording_data {
         let recording_dir = recording.recording_dir().clone();
 
-        if let Some(window) = OrbitWindowId::RecordingControls.get(&app) {
-            let _ = window.close();
-        }
+        let _ = recording.cancel().await;
+
+        hide_recording_windows(&app).await;
 
         CurrentRecordingChanged.emit(&app).ok();
         RecordingStopped {}.emit(&app).ok();
 
+        let dir_to_remove = recording_dir.clone();
         tokio::spawn(async move {
-            let _ = recording.cancel().await;
-            let _ = tokio::fs::remove_dir_all(&recording_dir).await;
+            let _ = tokio::fs::remove_dir_all(&dir_to_remove).await;
         });
+
+        if OrbitWindowId::Main.get(&app).is_none() {
+            let (mic_feed, camera_feed) = {
+                let app_state = state.read().await;
+                (app_state.mic_feed.clone(), app_state.camera_feed.clone())
+            };
+            let _ = mic_feed
+                .ask(orbit_recording::feeds::microphone::RemoveInput)
+                .await;
+            let _ = camera_feed
+                .ask(orbit_recording::feeds::camera::RemoveInput)
+                .await;
+            let mut app_state = state.write().await;
+            app_state.selected_mic_label = None;
+            app_state.selected_camera_id = None;
+        }
 
         let settings = GeneralSettingsStore::get(&app)
             .ok()
@@ -1162,16 +1200,7 @@ pub async fn delete_recording(app: AppHandle, state: MutableState<'_, App>) -> R
             .unwrap_or_default();
 
         match settings.post_deletion_behaviour {
-            PostDeletionBehaviour::DoNothing => {
-                // Even if DoNothing, if we close the controls we should probably show the main window
-                // so the user isn't stuck.
-                let _ = ShowCapWindow::Main {
-                    init_target_mode: None,
-                }
-                .show(&app)
-                .await;
-            }
-            PostDeletionBehaviour::ReopenRecordingWindow => {
+            PostDeletionBehaviour::DoNothing | PostDeletionBehaviour::ReopenRecordingWindow => {
                 let _ = ShowCapWindow::Main {
                     init_target_mode: None,
                 }
@@ -1194,8 +1223,8 @@ pub async fn take_screenshot(
     use crate::NewScreenshotAdded;
     use crate::notifications;
     use crate::{PendingScreenshot, PendingScreenshots};
-    use orbit_recording::screenshot::capture_screenshot;
     use image::ImageEncoder;
+    use orbit_recording::screenshot::capture_screenshot;
     use std::time::Instant;
 
     let general_settings = GeneralSettingsStore::get(&app).ok().flatten();
@@ -1413,7 +1442,7 @@ async fn handle_recording_end(
 
     let _ = app.recording_logging_handle.reload(None);
 
-    hide_recording_windows(&handle);
+    hide_recording_windows(&handle).await;
 
     if OrbitWindowId::Main.get(&handle).is_none() {
         let _ = app.mic_feed.ask(microphone::RemoveInput).await;

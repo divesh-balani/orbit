@@ -45,8 +45,8 @@ export function OrganizationInvite({
 						<Text className="text-sm leading-6 text-black">Hello,</Text>
 						<Text className="text-sm leading-6 text-black">
 							You've been invited to join the {organizationName} organization on
-							Orbit. Click the button below to accept the invitation and join the
-							team.
+							Orbit. Click the button below to accept the invitation and join
+							the team.
 						</Text>
 						<Section className="my-8 text-center">
 							<Link

@@ -1,9 +1,9 @@
 import { Select as KSelect } from "@kobalte/core/select";
 import { createSignal, Show } from "solid-js";
 import type { AspectRatio } from "~/utils/tauri";
+import IconLucideCheckCircle from "~icons/lucide/check-circle-2";
 import IconOrbitChevronDown from "~icons/orbit/chevron-down";
 import IconOrbitLayout from "~icons/orbit/layout";
-import IconLucideCheckCircle from "~icons/lucide/check-circle-2";
 import { ASPECT_RATIOS } from "../../editor/projectConfig";
 import { useScreenshotEditorContext } from "../context";
 import {

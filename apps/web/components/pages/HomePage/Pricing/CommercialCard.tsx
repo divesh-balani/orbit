@@ -1,4 +1,3 @@
-import { Button, Switch } from "@orbit/ui";
 import {
 	faBriefcase,
 	faDownload,
@@ -9,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFlow from "@number-flow/react";
+import { Button, Switch } from "@orbit/ui";
 import clsx from "clsx";
 import { useRef, useState } from "react";
 import { toast } from "sonner";

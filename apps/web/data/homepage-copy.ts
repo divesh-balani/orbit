@@ -258,7 +258,8 @@ export const homepageCopy: HomePageCopy = {
 		title: "Questions? We've got answers.",
 		items: [
 			{
-				question: "What is the difference between Orbit Pro and Desktop License?",
+				question:
+					"What is the difference between Orbit Pro and Desktop License?",
 				answer:
 					"Orbit Pro is a paid plan that includes all the features of the Desktop License plus cloud features for seamless sharing and collaboration. Desktop License grants you commercial usage rights for a single user.",
 			},

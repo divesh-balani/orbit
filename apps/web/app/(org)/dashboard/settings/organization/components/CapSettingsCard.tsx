@@ -1,6 +1,12 @@
 "use client";
 
-import { Card, CardDescription, CardHeader, CardTitle, Switch } from "@orbit/ui";
+import {
+	Card,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+	Switch,
+} from "@orbit/ui";
 import { useDebounce } from "@uidotdev/usehooks";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";

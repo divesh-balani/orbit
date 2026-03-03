@@ -1,5 +1,5 @@
-import { Button } from "@orbit/ui-solid";
 import { Select as KSelect } from "@kobalte/core/select";
+import { Button } from "@orbit/ui-solid";
 import { createWritableMemo } from "@solid-primitives/memo";
 import { appLocalDataDir, join } from "@tauri-apps/api/path";
 import { exists } from "@tauri-apps/plugin-fs";
@@ -18,10 +18,10 @@ import { Toggle } from "~/components/Toggle";
 import { defaultCaptionSettings } from "~/store/captions";
 import type { CaptionSettings } from "~/utils/tauri";
 import { commands, events } from "~/utils/tauri";
-import IconOrbitChevronDown from "~icons/orbit/chevron-down";
-import IconOrbitCircleCheck from "~icons/orbit/circle-check";
 import IconLucideCheck from "~icons/lucide/check";
 import IconLucideDownload from "~icons/lucide/download";
+import IconOrbitChevronDown from "~icons/orbit/chevron-down";
+import IconOrbitCircleCheck from "~icons/orbit/circle-check";
 import { useEditorContext } from "./context";
 import { TextInput } from "./TextInput";
 import {

@@ -1,5 +1,8 @@
 "use client";
 
+import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	Button,
 	CardDescription,
@@ -15,9 +18,6 @@ import {
 	Label,
 } from "@orbit/ui";
 import type { ImageUpload } from "@orbit/web-domain";
-import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";

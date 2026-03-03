@@ -1,5 +1,14 @@
 import "server-only";
 
+import {
+	FetchHttpClient,
+	Headers,
+	type HttpApi,
+	HttpApiBuilder,
+	HttpMiddleware,
+	HttpServer,
+} from "@effect/platform";
+import { RpcClient, RpcMiddleware } from "@effect/rpc";
 import { decrypt } from "@orbit/database/crypto";
 import { serverEnv } from "@orbit/env";
 import {
@@ -21,15 +30,6 @@ import {
 	Workflows,
 } from "@orbit/web-backend";
 import { type HttpAuthMiddleware, Video } from "@orbit/web-domain";
-import {
-	FetchHttpClient,
-	Headers,
-	type HttpApi,
-	HttpApiBuilder,
-	HttpMiddleware,
-	HttpServer,
-} from "@effect/platform";
-import { RpcClient, RpcMiddleware } from "@effect/rpc";
 import {
 	Cause,
 	Config,

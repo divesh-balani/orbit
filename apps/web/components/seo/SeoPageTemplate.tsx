@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@orbit/ui";
 import {
 	faCheck,
 	faExclamation,
@@ -11,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MuxPlayer from "@mux/mux-player-react";
+import { Button } from "@orbit/ui";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";

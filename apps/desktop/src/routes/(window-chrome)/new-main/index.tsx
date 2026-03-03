@@ -55,9 +55,6 @@ import {
 	type RecordingTargetMode,
 	type ScreenCaptureTarget,
 } from "~/utils/tauri";
-import IconOrbitLogoFull from "~icons/orbit/logo-full";
-import IconOrbitLogoFullDark from "~icons/orbit/logo-full-dark";
-import IconOrbitSettings from "~icons/orbit/settings";
 import IconLucideAppWindowMac from "~icons/lucide/app-window-mac";
 import IconLucideArrowLeft from "~icons/lucide/arrow-left";
 import IconLucideBug from "~icons/lucide/bug";
@@ -68,6 +65,9 @@ import IconLucideSquarePlay from "~icons/lucide/square-play";
 import IconLucideVideo from "~icons/lucide/video";
 import IconMaterialSymbolsScreenshotFrame2Rounded from "~icons/material-symbols/screenshot-frame-2-rounded";
 import IconMdiMonitor from "~icons/mdi/monitor";
+import IconOrbitLogoFull from "~icons/orbit/logo-full";
+import IconOrbitLogoFullDark from "~icons/orbit/logo-full-dark";
+import IconOrbitSettings from "~icons/orbit/settings";
 import { WindowChromeHeader } from "../Context";
 import {
 	RecordingOptionsProvider,

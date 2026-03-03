@@ -1,5 +1,5 @@
-import { Button } from "@orbit/ui-solid";
 import { Select as KSelect } from "@kobalte/core/select";
+import { Button } from "@orbit/ui-solid";
 import { createMutation } from "@tanstack/solid-query";
 import { Channel } from "@tauri-apps/api/core";
 import { createSignal, Show } from "solid-js";

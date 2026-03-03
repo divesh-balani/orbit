@@ -1,5 +1,7 @@
 "use client";
 
+import { faFileImport } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	Button,
 	Dialog,
@@ -9,8 +11,6 @@ import {
 	DialogTitle,
 	Input,
 } from "@orbit/ui";
-import { faFileImport } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";

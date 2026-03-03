@@ -65,7 +65,9 @@ export function ClientMyCapsLink({
 				e.preventDefault();
 
 				try {
-					const capData = JSON.parse(e.dataTransfer.getData("application/orbit"));
+					const capData = JSON.parse(
+						e.dataTransfer.getData("application/orbit"),
+					);
 
 					if (!capData || !capData.id) {
 						console.error("Invalid orbit data");

@@ -83,10 +83,11 @@ export const PricingPage = () => {
 							variants={fadeIn}
 							custom={2}
 						>
-							Orbit is currently in public beta, and we're offering special early
-							adopter pricing to our first users. This pricing will be locked in
-							for the lifetime of your subscription. Switching from Loom? Import
-							all your existing videos with our built-in Loom importer.
+							Orbit is currently in public beta, and we're offering special
+							early adopter pricing to our first users. This pricing will be
+							locked in for the lifetime of your subscription. Switching from
+							Loom? Import all your existing videos with our built-in Loom
+							importer.
 						</motion.p>
 						<motion.div
 							onClick={scrollToTestimonials}

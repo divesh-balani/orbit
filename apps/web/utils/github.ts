@@ -3,15 +3,18 @@ interface GitHubRepoResponse {
 }
 
 export async function getGitHubStars(): Promise<number> {
-	const response = await fetch("https://api.github.com/repos/CapSoftware/Orbit", {
-		headers: {
-			Accept: "application/vnd.github.v3+json",
-			"User-Agent": "Orbit-Web",
+	const response = await fetch(
+		"https://api.github.com/repos/CapSoftware/Orbit",
+		{
+			headers: {
+				Accept: "application/vnd.github.v3+json",
+				"User-Agent": "Orbit-Web",
+			},
+			next: {
+				revalidate: 172800,
+			},
 		},
-		next: {
-			revalidate: 172800,
-		},
-	});
+	);
 
 	if (!response.ok) {
 		return 0;

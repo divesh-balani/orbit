@@ -1,4 +1,3 @@
-import { Button, Switch } from "@orbit/ui";
 import {
 	faCloud,
 	faCreditCard,
@@ -10,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFlow from "@number-flow/react";
+import { Button, Switch } from "@orbit/ui";
 import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useRef, useState } from "react";
@@ -24,7 +24,8 @@ export const ProCard = () => {
 	const [isAnnually, setIsAnnually] = useState(true);
 	const proArtRef = useRef<ProArtRef>(null);
 
-	const ORBIT_PRO_ANNUAL_PRICE_PER_USER = homepageCopy.pricing.pro.pricing.annual;
+	const ORBIT_PRO_ANNUAL_PRICE_PER_USER =
+		homepageCopy.pricing.pro.pricing.annual;
 	const ORBIT_PRO_MONTHLY_PRICE_PER_USER =
 		homepageCopy.pricing.pro.pricing.monthly;
 

@@ -2047,7 +2047,10 @@ function BackgroundConfig(props: { scrollRef: HTMLDivElement }) {
 			<KCollapsible open={project.background.border?.enabled ?? false}>
 				<KCollapsible.Content class="overflow-hidden opacity-0 transition-opacity animate-collapsible-up ui-expanded:animate-collapsible-down ui-expanded:opacity-100">
 					<div class="flex flex-col gap-6 pb-6">
-						<Field name="Border Width" icon={<IconOrbitEnlarge class="size-4" />}>
+						<Field
+							name="Border Width"
+							icon={<IconOrbitEnlarge class="size-4" />}
+						>
 							<Slider
 								value={[project.background.border?.width ?? 5.0]}
 								onChange={(v) =>

@@ -1,7 +1,7 @@
 use crate::window_exclusion::WindowExclusion;
-use sorbit_targets::DisplayId;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use sorbit_targets::DisplayId;
 use specta::Type;
 use std::collections::BTreeMap;
 use tauri::{AppHandle, Wry};

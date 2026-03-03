@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@orbit/ui";
-import type { Folder, Space } from "@orbit/web-domain";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@orbit/ui";
+import type { Folder, Space } from "@orbit/web-domain";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { addVideosToFolder } from "@/actions/folders/add-videos";

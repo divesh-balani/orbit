@@ -15,8 +15,6 @@ import {
 	type RecordingMeta,
 	type RecordingMetaWithMetadata,
 } from "~/utils/tauri";
-import IconOrbitLink from "~icons/orbit/link";
-import IconOrbitTrash from "~icons/orbit/trash";
 import IconLucideAppWindowMac from "~icons/lucide/app-window-mac";
 import IconLucideCopy from "~icons/lucide/copy";
 import IconLucideEdit from "~icons/lucide/edit";
@@ -26,6 +24,8 @@ import IconLucideRotateCcw from "~icons/lucide/rotate-ccw";
 import IconLucideSave from "~icons/lucide/save";
 import IconLucideSquarePlay from "~icons/lucide/square-play";
 import IconMdiMonitor from "~icons/mdi/monitor";
+import IconOrbitLink from "~icons/orbit/link";
+import IconOrbitTrash from "~icons/orbit/trash";
 import IconPhWarningBold from "~icons/ph/warning-bold";
 
 export type RecordingWithPath = RecordingMetaWithMetadata & { path: string };

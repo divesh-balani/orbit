@@ -1,6 +1,6 @@
-import { Rpcs } from "@orbit/web-domain";
 import { FetchHttpClient } from "@effect/platform";
 import { RpcClient, RpcSerialization } from "@effect/rpc";
+import { Rpcs } from "@orbit/web-domain";
 import { Effect, Layer } from "effect";
 
 const RpcProtocol = RpcClient.layerProtocolHttp({ url: "/api/erpc" }).pipe(

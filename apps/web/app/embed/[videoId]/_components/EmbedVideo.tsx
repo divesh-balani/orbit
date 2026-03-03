@@ -1,7 +1,10 @@
 "use client";
 
 import type { userSelectProps } from "@orbit/database/auth/session";
-import type { comments as commentsSchema, videos } from "@orbit/database/schema";
+import type {
+	comments as commentsSchema,
+	videos,
+} from "@orbit/database/schema";
 import { NODE_ENV } from "@orbit/env";
 import { Avatar, Logo } from "@orbit/ui";
 import { AnimatePresence, motion } from "framer-motion";

@@ -91,8 +91,8 @@ export const AboutPage = () => {
 							</h2>
 							<div className="space-y-5 text-[1.0625rem] leading-[1.8] text-gray-11">
 								<p>
-									Orbit is fully open source under the AGPL license. Every line of
-									code, from the Rust-powered recording engine to the web
+									Orbit is fully open source under the AGPL license. Every line
+									of code, from the Rust-powered recording engine to the web
 									sharing platform, is public and auditable. This isn't a
 									marketing decision. It's a core belief about how software
 									should be built.
@@ -100,9 +100,9 @@ export const AboutPage = () => {
 								<p>
 									Open source means you can verify exactly what Orbit does with
 									your data. The community can contribute improvements, report
-									issues, and shape the product's direction. And Orbit will never
-									disappear behind a paywall or pivot away from what makes it
-									useful.
+									issues, and shape the product's direction. And Orbit will
+									never disappear behind a paywall or pivot away from what makes
+									it useful.
 								</p>
 								<p>
 									We've seen what happens when closed-source tools change their
@@ -204,9 +204,9 @@ export const AboutPage = () => {
 						<section>
 							<div className="space-y-5 text-[1.0625rem] leading-[1.8] text-gray-11">
 								<p>
-									We're building Orbit because we think the tools people use every
-									day should be open, honest, and designed to last. Not built to
-									extract value, but to create it.
+									We're building Orbit because we think the tools people use
+									every day should be open, honest, and designed to last. Not
+									built to extract value, but to create it.
 								</p>
 								<p>
 									If that resonates with you, we'd love for you to try Orbit,

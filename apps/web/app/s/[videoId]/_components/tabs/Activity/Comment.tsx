@@ -1,7 +1,7 @@
-import { Button } from "@orbit/ui";
-import type { Comment } from "@orbit/web-domain";
 import { faReply, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@orbit/ui";
+import type { Comment } from "@orbit/web-domain";
 
 import clsx from "clsx";
 import { motion } from "framer-motion";

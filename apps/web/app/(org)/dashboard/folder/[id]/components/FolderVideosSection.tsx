@@ -31,58 +31,60 @@ export default function FolderVideosSection({
 
 	const rpc = useRpcClient();
 
-	const { mutate: deleteOrbits, isPending: isDeletingCaps } = useEffectMutation({
-		mutationFn: Effect.fn(function* (ids: Video.VideoId[]) {
-			if (ids.length === 0) return;
+	const { mutate: deleteOrbits, isPending: isDeletingCaps } = useEffectMutation(
+		{
+			mutationFn: Effect.fn(function* (ids: Video.VideoId[]) {
+				if (ids.length === 0) return;
 
-			const fiber = yield* Effect.gen(function* () {
-				const results = yield* Effect.all(
-					ids.map((id) => rpc.VideoDelete(id).pipe(Effect.exit)),
-					{ concurrency: 10 },
-				);
-
-				const successCount = results.filter(Exit.isSuccess).length;
-
-				const errorCount = ids.length - successCount;
-
-				if (successCount > 0 && errorCount > 0) {
-					return { success: successCount, error: errorCount };
-				} else if (successCount > 0) {
-					return { success: successCount };
-				} else {
-					return yield* Effect.fail(
-						new Error(
-							`Failed to delete ${errorCount} orbit${errorCount === 1 ? "" : "s"}`,
-						),
+				const fiber = yield* Effect.gen(function* () {
+					const results = yield* Effect.all(
+						ids.map((id) => rpc.VideoDelete(id).pipe(Effect.exit)),
+						{ concurrency: 10 },
 					);
-				}
-			}).pipe(Effect.fork);
 
-			toast.promise(Effect.runPromise(fiber.await.pipe(Effect.flatten)), {
-				loading: `Deleting ${ids.length} orbit${ids.length === 1 ? "" : "s"}...`,
-				success: (data) => {
-					if (data.error) {
+					const successCount = results.filter(Exit.isSuccess).length;
+
+					const errorCount = ids.length - successCount;
+
+					if (successCount > 0 && errorCount > 0) {
+						return { success: successCount, error: errorCount };
+					} else if (successCount > 0) {
+						return { success: successCount };
+					} else {
+						return yield* Effect.fail(
+							new Error(
+								`Failed to delete ${errorCount} orbit${errorCount === 1 ? "" : "s"}`,
+							),
+						);
+					}
+				}).pipe(Effect.fork);
+
+				toast.promise(Effect.runPromise(fiber.await.pipe(Effect.flatten)), {
+					loading: `Deleting ${ids.length} orbit${ids.length === 1 ? "" : "s"}...`,
+					success: (data) => {
+						if (data.error) {
+							return `Successfully deleted ${data.success} orbit${
+								data.success === 1 ? "" : "s"
+							}, but failed to delete ${data.error} orbit${
+								data.error === 1 ? "" : "s"
+							}`;
+						}
 						return `Successfully deleted ${data.success} orbit${
 							data.success === 1 ? "" : "s"
-						}, but failed to delete ${data.error} orbit${
-							data.error === 1 ? "" : "s"
 						}`;
-					}
-					return `Successfully deleted ${data.success} orbit${
-						data.success === 1 ? "" : "s"
-					}`;
-				},
-				error: (error) =>
-					error.message || "An error occurred while deleting caps",
-			});
+					},
+					error: (error) =>
+						error.message || "An error occurred while deleting caps",
+				});
 
-			return yield* fiber.await.pipe(Effect.flatten);
-		}),
-		onSuccess: () => {
-			setSelectedCaps([]);
-			router.refresh();
+				return yield* fiber.await.pipe(Effect.flatten);
+			}),
+			onSuccess: () => {
+				setSelectedCaps([]);
+				router.refresh();
+			},
 		},
-	});
+	);
 
 	const { mutate: deleteOrbit, isPending: isDeletingCap } = useEffectMutation({
 		mutationFn: (id: Video.VideoId) => rpc.VideoDelete(id),

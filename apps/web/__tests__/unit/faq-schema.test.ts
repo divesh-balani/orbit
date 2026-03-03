@@ -32,7 +32,9 @@ describe("createFAQSchema", () => {
 				text: "Yes, Orbit is free.",
 			},
 		});
-		expect(schema.mainEntity[1].name).toBe("What platforms does Orbit support?");
+		expect(schema.mainEntity[1].name).toBe(
+			"What platforms does Orbit support?",
+		);
 		expect(schema.mainEntity).toHaveLength(2);
 	});
 
@@ -145,7 +147,8 @@ describe("createFAQSchema", () => {
 			},
 			{
 				question: "Can I store my recordings in the cloud?",
-				answer: "Yes, from just $6/month, Orbit offers unlimited cloud storage.",
+				answer:
+					"Yes, from just $6/month, Orbit offers unlimited cloud storage.",
 			},
 			{
 				question: "What makes Orbit's free screen recorder different?",

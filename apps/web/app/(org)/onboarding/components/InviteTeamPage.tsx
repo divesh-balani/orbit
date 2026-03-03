@@ -1,9 +1,9 @@
 "use client";
 
-import { Button, Switch } from "@orbit/ui";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFlow from "@number-flow/react";
+import { Button, Switch } from "@orbit/ui";
 import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
@@ -22,7 +22,8 @@ export function InviteTeamPage() {
 	const router = useRouter();
 	const rpc = useRpcClient();
 
-	const ORBIT_PRO_ANNUAL_PRICE_PER_USER = homepageCopy.pricing.pro.pricing.annual;
+	const ORBIT_PRO_ANNUAL_PRICE_PER_USER =
+		homepageCopy.pricing.pro.pricing.annual;
 	const ORBIT_PRO_MONTHLY_PRICE_PER_USER =
 		homepageCopy.pricing.pro.pricing.monthly;
 

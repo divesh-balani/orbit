@@ -1,3 +1,5 @@
+import { faCopy, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	Button,
 	Dialog,
@@ -9,8 +11,6 @@ import {
 	Switch,
 } from "@orbit/ui";
 import { type ImageUpload, Space, type Video } from "@orbit/web-domain";
-import { faCopy, faShareNodes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
 import { motion } from "framer-motion";
@@ -300,7 +300,9 @@ export const SharingDialog: React.FC<SharingDialogProps> = ({
 					}
 				>
 					<DialogTitle className="truncate w-full max-w-[320px]">
-						{activeTab === "Share" ? `Share ${orbitName}` : `Embed ${orbitName}`}
+						{activeTab === "Share"
+							? `Share ${orbitName}`
+							: `Embed ${orbitName}`}
 					</DialogTitle>
 				</DialogHeader>
 

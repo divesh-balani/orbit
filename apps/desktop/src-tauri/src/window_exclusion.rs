@@ -1,6 +1,6 @@
+use serde::{Deserialize, Serialize};
 #[cfg(target_os = "macos")]
 use sorbit_targets::{Window, WindowId};
-use serde::{Deserialize, Serialize};
 use specta::Type;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Type, PartialEq, Eq)]

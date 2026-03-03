@@ -118,7 +118,8 @@ describe("VideoRecordingSoftwarePage FAQ schema", () => {
 		},
 		{
 			question: "What video recording software has no watermark?",
-			answer: "Orbit has no watermark on any recording, including the free plan.",
+			answer:
+				"Orbit has no watermark on any recording, including the free plan.",
 		},
 		{
 			question: "Can I self-host my video recordings with Orbit?",

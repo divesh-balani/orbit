@@ -1,5 +1,3 @@
-import { Button } from "@orbit/ui";
-import { Organisation } from "@orbit/web-domain";
 import {
 	faCheckCircle,
 	faExclamationCircle,
@@ -7,6 +5,8 @@ import {
 	faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@orbit/ui";
+import { Organisation } from "@orbit/web-domain";
 import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";

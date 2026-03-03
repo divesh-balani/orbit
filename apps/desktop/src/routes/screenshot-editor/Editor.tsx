@@ -1,5 +1,5 @@
-import { Button } from "@orbit/ui-solid";
 import { NumberField } from "@kobalte/core/number-field";
+import { Button } from "@orbit/ui-solid";
 import { makePersisted } from "@solid-primitives/storage";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { LogicalPosition } from "@tauri-apps/api/dpi";
@@ -23,9 +23,9 @@ import {
 	type Ratio,
 } from "~/components/Cropper";
 import { composeEventHandlers } from "~/utils/composeEventHandlers";
-import IconOrbitCircleX from "~icons/orbit/circle-x";
 import IconLucideMaximize from "~icons/lucide/maximize";
 import IconLucideRatio from "~icons/lucide/ratio";
+import IconOrbitCircleX from "~icons/orbit/circle-x";
 import { AnnotationConfigBar } from "./AnnotationConfig";
 import { useScreenshotEditorContext } from "./context";
 import { Header } from "./Header";

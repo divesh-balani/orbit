@@ -1,10 +1,10 @@
 "use client";
 
+import { faFolderPlus, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { VideoMetadata } from "@orbit/database/types";
 import { Button } from "@orbit/ui";
 import type { ImageUpload, Video } from "@orbit/web-domain";
-import { faFolderPlus, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Effect, Exit } from "effect";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -19,11 +19,11 @@ import {
 	UploadPlaceholderCard,
 	WebRecorderDialog,
 } from "./components";
-import { OrbitCard } from "./components/OrbitCard/OrbitCard";
-import { OrbitPagination } from "./components/OrbitPagination";
 import { EmptyOrbitState } from "./components/EmptyOrbitState";
 import type { FolderDataType } from "./components/Folder";
 import Folder from "./components/Folder";
+import { OrbitCard } from "./components/OrbitCard/OrbitCard";
+import { OrbitPagination } from "./components/OrbitPagination";
 import { useUploadingStatus } from "./UploadingContext";
 
 export type VideoData = {
@@ -100,63 +100,64 @@ export const Orbits = ({
 		VideoDelete: (id: Video.VideoId) => Effect.Effect<void, unknown, never>;
 	};
 
-	const { mutate: deleteOrbits, isPending: isDeletingOrbits } = useEffectMutation({
-		mutationFn: Effect.fn(function* (ids: Video.VideoId[]) {
-			if (ids.length === 0) return { success: 0 };
+	const { mutate: deleteOrbits, isPending: isDeletingOrbits } =
+		useEffectMutation({
+			mutationFn: Effect.fn(function* (ids: Video.VideoId[]) {
+				if (ids.length === 0) return { success: 0 };
 
-			const results = yield* Effect.all(
-				ids.map((id) => rpc.VideoDelete(id).pipe(Effect.exit)),
-				{ concurrency: 10 },
-			);
-
-			const successCount = results.filter(Exit.isSuccess).length;
-
-			const errorCount = ids.length - successCount;
-
-			if (successCount > 0 && errorCount > 0) {
-				return { success: successCount, error: errorCount };
-			} else if (successCount > 0) {
-				return { success: successCount };
-			} else {
-				return yield* Effect.fail(
-					new Error(
-						`Failed to delete ${errorCount} orbit${errorCount === 1 ? "" : "s"}`,
-					),
+				const results = yield* Effect.all(
+					ids.map((id) => rpc.VideoDelete(id).pipe(Effect.exit)),
+					{ concurrency: 10 },
 				);
-			}
-		}),
-		onMutate: (ids: Video.VideoId[]) => {
-			toast.loading(
-				`Deleting ${ids.length} orbit${ids.length === 1 ? "" : "s"}...`,
-			);
-		},
-		onSuccess: (data: { success: number; error?: number }) => {
-			setSelectedOrbits([]);
-			router.refresh();
-			if (data.error) {
-				toast.success(
-					`Successfully deleted ${data.success} orbit${
-						data.success === 1 ? "" : "s"
-					}, but failed to delete ${data.error} orbit${
-						data.error === 1 ? "" : "s"
-					}`,
+
+				const successCount = results.filter(Exit.isSuccess).length;
+
+				const errorCount = ids.length - successCount;
+
+				if (successCount > 0 && errorCount > 0) {
+					return { success: successCount, error: errorCount };
+				} else if (successCount > 0) {
+					return { success: successCount };
+				} else {
+					return yield* Effect.fail(
+						new Error(
+							`Failed to delete ${errorCount} orbit${errorCount === 1 ? "" : "s"}`,
+						),
+					);
+				}
+			}),
+			onMutate: (ids: Video.VideoId[]) => {
+				toast.loading(
+					`Deleting ${ids.length} orbit${ids.length === 1 ? "" : "s"}...`,
 				);
-			} else {
-				toast.success(
-					`Successfully deleted ${data.success} orbit${
-						data.success === 1 ? "" : "s"
-					}`,
-				);
-			}
-		},
-		onError: (error: unknown) => {
-			const message =
-				error instanceof Error
-					? error.message
-					: "An error occurred while deleting caps";
-			toast.error(message);
-		},
-	});
+			},
+			onSuccess: (data: { success: number; error?: number }) => {
+				setSelectedOrbits([]);
+				router.refresh();
+				if (data.error) {
+					toast.success(
+						`Successfully deleted ${data.success} orbit${
+							data.success === 1 ? "" : "s"
+						}, but failed to delete ${data.error} orbit${
+							data.error === 1 ? "" : "s"
+						}`,
+					);
+				} else {
+					toast.success(
+						`Successfully deleted ${data.success} orbit${
+							data.success === 1 ? "" : "s"
+						}`,
+					);
+				}
+			},
+			onError: (error: unknown) => {
+				const message =
+					error instanceof Error
+						? error.message
+						: "An error occurred while deleting caps";
+				toast.error(message);
+			},
+		});
 
 	const { mutate: deleteOrbit, isPending: isDeletingCap } = useEffectMutation({
 		mutationFn: Effect.fn(function* (id: Video.VideoId) {

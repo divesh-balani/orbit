@@ -1,5 +1,4 @@
 import ArrowUpIcon from "./ArrowUp";
-import CapIcon from "./Orbit";
 import ChartLineIcon from "./ChartLine";
 import MessageCircleMoreIcon from "./Chat";
 import ChatIcon from "./Chat";
@@ -10,6 +9,7 @@ import HomeIcon from "./Home";
 import ImportIcon from "./Import";
 import LayersIcon from "./Layers";
 import LogoutIcon from "./Logout";
+import CapIcon from "./Orbit";
 import ReactionIcon from "./Reaction";
 import RecordIcon from "./Record";
 import ReferIcon from "./Refer";

@@ -1,8 +1,8 @@
 "use client";
 
-import { LogoBadge } from "@orbit/ui";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { LogoBadge } from "@orbit/ui";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 

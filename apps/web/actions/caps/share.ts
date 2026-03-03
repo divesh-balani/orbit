@@ -32,7 +32,10 @@ export async function shareOrbit({
 			return { success: false, error: "Unauthorized" };
 		}
 
-		const [orbit] = await db().select().from(videos).where(eq(videos.id, capId));
+		const [orbit] = await db()
+			.select()
+			.from(videos)
+			.where(eq(videos.id, capId));
 		if (!orbit || orbit.ownerId !== user.id) {
 			return { success: false, error: "Unauthorized" };
 		}

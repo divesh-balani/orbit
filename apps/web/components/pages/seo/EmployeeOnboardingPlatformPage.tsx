@@ -4,7 +4,8 @@ import { SeoPageTemplate } from "@/components/seo/SeoPageTemplate";
 import type { SeoPageContent } from "@/components/seo/types";
 
 export const employeeOnboardingContent: SeoPageContent = {
-	title: "Employee Onboarding Platform: Streamline New-Hire Training with Orbit",
+	title:
+		"Employee Onboarding Platform: Streamline New-Hire Training with Orbit",
 	description:
 		"Looking for a powerful employee onboarding platform? Discover how Orbit's open-source screen recorder and asynchronous features simplify new-hire training.",
 

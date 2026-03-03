@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@orbit/ui";
-import type { Video } from "@orbit/web-domain";
 import {
 	faRectangleList,
 	faRotateRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@orbit/ui";
+import type { Video } from "@orbit/web-domain";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 

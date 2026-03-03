@@ -3,8 +3,8 @@
 
 use anyhow::anyhow;
 use futures::pin_mut;
-use sorbit_targets::{Display, DisplayId};
 use serde::Deserialize;
+use sorbit_targets::{Display, DisplayId};
 use specta::Type;
 use std::{
     ops::Deref,
@@ -82,12 +82,15 @@ fn is_system_dark_mode() -> bool {
     false
 }
 
-pub fn hide_recording_windows(app: &AppHandle) {
-    for (label, window) in app.webview_windows() {
+pub async fn hide_recording_windows(app: &AppHandle) {
+    let windows: Vec<_> = app.webview_windows().into_iter().collect();
+    for (label, window) in windows {
         if let Ok(id) = OrbitWindowId::from_str(&label) {
             match id {
-                OrbitWindowId::RecordingControls
-                | OrbitWindowId::TargetSelectOverlay { .. }
+                OrbitWindowId::RecordingControls => {
+                    destroy_recording_controls_window(app, &window).await;
+                }
+                OrbitWindowId::TargetSelectOverlay { .. }
                 | OrbitWindowId::WindowCaptureOccluder { .. }
                 | OrbitWindowId::CaptureArea => {
                     let _ = window.close();
@@ -98,6 +101,37 @@ pub fn hide_recording_windows(app: &AppHandle) {
                 _ => {}
             }
         }
+    }
+}
+
+pub async fn destroy_recording_controls_window(app: &AppHandle, window: &WebviewWindow) {
+    #[cfg(target_os = "macos")]
+    {
+        let label = window.label().to_string();
+        let app_clone = app.clone();
+        let (tx, rx) = tokio::sync::oneshot::channel();
+        app.run_on_main_thread(move || {
+            use tauri_nspanel::ManagerExt;
+            if let Ok(panel) = app_clone.get_webview_panel(&label) {
+                panel.released_when_closed(false);
+                panel.close();
+            }
+            let _ = tx.send(());
+        })
+        .ok();
+        let _ = tokio::time::timeout(std::time::Duration::from_millis(500), rx).await;
+    }
+
+    let _ = window.destroy();
+
+    let max_wait = std::time::Duration::from_millis(500);
+    let poll_interval = std::time::Duration::from_millis(25);
+    let start = std::time::Instant::now();
+    while start.elapsed() < max_wait {
+        if OrbitWindowId::RecordingControls.get(app).is_none() {
+            break;
+        }
+        tokio::time::sleep(poll_interval).await;
     }
 }
 
@@ -875,10 +909,26 @@ impl ShowCapWindow {
                 return Ok(window);
             } else {
                 warn!("InProgressRecording window handle invalid, destroying and recreating...");
+
+                let label = window.label().to_string();
+                let app_clone = app.clone();
+                let (panel_close_tx, panel_close_rx) = tokio::sync::oneshot::channel();
+                app.run_on_main_thread(move || {
+                    use tauri_nspanel::ManagerExt;
+                    if let Ok(panel) = app_clone.get_webview_panel(&label) {
+                        panel.released_when_closed(false);
+                        panel.close();
+                    }
+                    let _ = panel_close_tx.send(());
+                })
+                .ok();
+                let _ = tokio::time::timeout(std::time::Duration::from_millis(200), panel_close_rx)
+                    .await;
+
                 let _ = window.destroy();
 
                 let window_id = self.id(app);
-                let max_wait = std::time::Duration::from_millis(500);
+                let max_wait = std::time::Duration::from_millis(1000);
                 let poll_interval = std::time::Duration::from_millis(25);
                 let start = std::time::Instant::now();
                 while start.elapsed() < max_wait {

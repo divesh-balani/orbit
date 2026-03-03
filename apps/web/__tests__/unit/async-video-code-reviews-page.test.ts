@@ -126,7 +126,8 @@ describe("AsyncVideoCodeReviewsPage FAQ schema", () => {
 		{
 			question:
 				"Can I keep code review recordings private or password-protected?",
-			answer: "Yes. Orbit supports password protection on individual recordings.",
+			answer:
+				"Yes. Orbit supports password protection on individual recordings.",
 		},
 		{
 			question: "What is the best tool for async video code reviews?",

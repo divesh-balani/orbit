@@ -1,7 +1,10 @@
 "use client";
 
 import { LogoSpinner } from "@orbit/ui";
-import { calculateStrokeDashoffset, getProgressCircleConfig } from "@orbit/utils";
+import {
+	calculateStrokeDashoffset,
+	getProgressCircleConfig,
+} from "@orbit/utils";
 import { useStore } from "@tanstack/react-store";
 import { type UploadStatus, useUploadingContext } from "../UploadingContext";
 

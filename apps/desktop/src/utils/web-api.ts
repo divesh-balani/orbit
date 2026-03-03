@@ -60,9 +60,6 @@ export async function maybeProtectedHeaders() {
 
 export async function protectedHeaders() {
 	const { authorization } = await maybeProtectedHeaders();
-	if (!authorization)
-		throw new Error(
-			"Please sign in to continue.",
-		);
+	if (!authorization) throw new Error("Please sign in to continue.");
 	return { authorization };
 }

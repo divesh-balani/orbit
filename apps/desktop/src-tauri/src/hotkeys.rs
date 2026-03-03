@@ -4,8 +4,8 @@ use crate::{
     tray,
     windows::ShowCapWindow,
 };
-use orbit_recording::screen_capture::ScreenCaptureTarget;
 use global_hotkey::HotKeyState;
+use orbit_recording::screen_capture::ScreenCaptureTarget;
 use serde::{Deserialize, Serialize};
 use specta::Type;
 use std::collections::HashMap;
@@ -168,8 +168,12 @@ async fn handle_hotkey(app: AppHandle, action: HotkeyAction) -> Result<(), Strin
 
             let next = match current {
                 orbit_recording::RecordingMode::Studio => orbit_recording::RecordingMode::Instant,
-                orbit_recording::RecordingMode::Instant => orbit_recording::RecordingMode::Screenshot,
-                orbit_recording::RecordingMode::Screenshot => orbit_recording::RecordingMode::Studio,
+                orbit_recording::RecordingMode::Instant => {
+                    orbit_recording::RecordingMode::Screenshot
+                }
+                orbit_recording::RecordingMode::Screenshot => {
+                    orbit_recording::RecordingMode::Studio
+                }
             };
 
             RecordingSettingsStore::set_mode(&app, next)

@@ -80,7 +80,8 @@ export const seoMetadata = {
 		ogImage: "/og.png",
 	},
 	"screen-recording-software": {
-		title: "Screen Recording Software | Orbit - Professional Video Capture Tool",
+		title:
+			"Screen Recording Software | Orbit - Professional Video Capture Tool",
 		description:
 			"Orbit is an all-in-one screen recording software offering high-quality video capture with an intuitive interface. Ideal for creating tutorials, presentations, and educational content.",
 		keywords: [
@@ -134,7 +135,8 @@ export const seoMetadata = {
 		ogImage: "/og.png",
 	},
 	"solutions/agencies": {
-		title: "Orbit for Agencies — Faster Client Updates with Instant Video Links",
+		title:
+			"Orbit for Agencies — Faster Client Updates with Instant Video Links",
 		description:
 			"Send clearer client updates in minutes. Share instant links with comments, or craft polished walkthroughs. Orbit for Agencies on macOS & Windows.",
 		keywords: [
@@ -197,7 +199,8 @@ export const seoMetadata = {
 		ogImage: "/og.png",
 	},
 	"video-recording-software": {
-		title: "Video Recording Software — Free HD Capture, Instant Sharing | Orbit",
+		title:
+			"Video Recording Software — Free HD Capture, Instant Sharing | Orbit",
 		description:
 			"Orbit is free video recording software for Mac and Windows. Record your screen, webcam, and audio in HD, then share instantly with a link. Open-source, no watermarks, no time limits in Studio Mode.",
 		keywords: [
@@ -211,7 +214,8 @@ export const seoMetadata = {
 		ogImage: "/og.png",
 	},
 	"mac-screen-recording-with-audio": {
-		title: "Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
+		title:
+			"Mac Screen Recording with Audio — Capture System Sound & Mic | Orbit",
 		description:
 			"Record your Mac screen with system audio and microphone using Orbit. No BlackHole, no plugins required. Free, open-source screen recorder for macOS.",
 		keywords: [
@@ -270,7 +274,8 @@ export const seoMetadata = {
 		ogImage: "/og.png",
 	},
 	"async-video-code-reviews": {
-		title: "Async Video Code Reviews — Ship Faster Without the Meetings | Orbit",
+		title:
+			"Async Video Code Reviews — Ship Faster Without the Meetings | Orbit",
 		description:
 			"Record screen walkthroughs of pull requests and share a timestamped link your team watches on their schedule. Orbit makes async code reviews faster and calendar-free.",
 		keywords: [

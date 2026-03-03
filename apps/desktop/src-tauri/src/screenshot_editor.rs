@@ -2,6 +2,7 @@ use crate::PendingScreenshots;
 use crate::frame_ws::{WSFrame, create_watch_frame_ws};
 use crate::gpu_context;
 use crate::windows::{OrbitWindowId, ScreenshotEditorWindowIds};
+use image::{GenericImageView, RgbImage, buffer::ConvertBuffer};
 use orbit_project::{
     ProjectConfiguration, RecordingMeta, RecordingMetaInner, SingleSegment, StudioRecordingMeta,
     VideoMeta,
@@ -10,7 +11,6 @@ use orbit_rendering::{
     DecodedFrame, DecodedSegmentFrames, FrameRenderer, ProjectUniforms, RenderVideoConstants,
     RendererLayers, ZoomFocusInterpolator,
 };
-use image::{GenericImageView, RgbImage, buffer::ConvertBuffer};
 use relative_path::RelativePathBuf;
 use serde::Serialize;
 use specta::Type;

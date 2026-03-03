@@ -1,8 +1,8 @@
 "use client";
 
+import NumberFlow from "@number-flow/react";
 import { buildEnv } from "@orbit/env";
 import { Button, Dialog, DialogContent, Switch } from "@orbit/ui";
-import NumberFlow from "@number-flow/react";
 import { Fit, Layout, useRive } from "@rive-app/react-canvas";
 import { useMutation } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";

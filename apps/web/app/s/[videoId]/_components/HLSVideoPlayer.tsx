@@ -1,10 +1,13 @@
 "use client";
 
-import { LogoSpinner } from "@orbit/ui";
-import { calculateStrokeDashoffset, getProgressCircleConfig } from "@orbit/utils";
-import type { Video } from "@orbit/web-domain";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { LogoSpinner } from "@orbit/ui";
+import {
+	calculateStrokeDashoffset,
+	getProgressCircleConfig,
+} from "@orbit/utils";
+import type { Video } from "@orbit/web-domain";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import Hls from "hls.js";

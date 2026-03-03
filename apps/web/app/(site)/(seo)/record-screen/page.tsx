@@ -14,7 +14,8 @@ export const metadata: Metadata = {
 		canonical: "https://orbit.so/record-screen",
 	},
 	openGraph: {
-		title: "Record Screen — Free HD Screen Recorder with Instant Sharing | Orbit",
+		title:
+			"Record Screen — Free HD Screen Recorder with Instant Sharing | Orbit",
 		description:
 			"Record your screen in HD on Mac or Windows. Capture audio and webcam, then share with a link instantly. Free, open-source, no watermarks.",
 		url: "https://orbit.so/record-screen",
@@ -32,7 +33,8 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Record Screen — Free HD Screen Recorder with Instant Sharing | Orbit",
+		title:
+			"Record Screen — Free HD Screen Recorder with Instant Sharing | Orbit",
 		description:
 			"Record your screen in HD on Mac or Windows. Capture audio and webcam, then share with a link instantly. Free, open-source, no watermarks.",
 		images: ["https://orbit.so/og.png"],

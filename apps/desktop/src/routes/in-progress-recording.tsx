@@ -341,7 +341,7 @@ function InProgressRecordingInner() {
 
 			if (!shouldRestart) return;
 
-			await handleRecordingResult(commands.restartRecording(), undefined);
+			await handleRecordingResult(commands.restartRecording());
 
 			setState({ variant: "recording" });
 			setTime(Date.now());

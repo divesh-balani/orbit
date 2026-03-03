@@ -1,4 +1,10 @@
 "use client";
+import {
+	faBuilding,
+	faCircleInfo,
+	faLink,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { buildEnv } from "@orbit/env";
 import {
 	Button,
@@ -18,12 +24,6 @@ import {
 	PopoverTrigger,
 } from "@orbit/ui";
 import { classNames } from "@orbit/utils";
-import {
-	faBuilding,
-	faCircleInfo,
-	faLink,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Check, ChevronDown, Plus } from "lucide-react";
