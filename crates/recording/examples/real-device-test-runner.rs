@@ -1,4 +1,7 @@
 use anyhow::{Context, bail};
+use chrono::{Local, Utc};
+use clap::{Parser, Subcommand};
+use kameo::Actor as _;
 use orbit_project::{Platform, RecordingMeta, RecordingMetaInner, StudioRecordingMeta};
 use orbit_recording::{
     CameraFeed, MicrophoneFeed,
@@ -6,9 +9,6 @@ use orbit_recording::{
     screen_capture::ScreenCaptureTarget,
     studio_recording,
 };
-use chrono::{Local, Utc};
-use clap::{Parser, Subcommand};
-use kameo::Actor as _;
 use sorbit_targets::Display;
 use std::{
     fs,
@@ -1437,7 +1437,9 @@ async fn execute_recording(
 
     let completed = handle.stop().await?;
 
-    let pretty_name = Local::now().format("Orbit %Y-%m-%d at %H.%M.%S").to_string();
+    let pretty_name = Local::now()
+        .format("Orbit %Y-%m-%d at %H.%M.%S")
+        .to_string();
     let meta = RecordingMeta {
         platform: Some(Platform::default()),
         project_path: recording_dir.clone(),

@@ -1,6 +1,6 @@
+use futures::channel::{mpsc, oneshot};
 use orbit_media_info::AudioInfo;
 use orbit_timestamp::{Timestamp, Timestamps};
-use futures::channel::{mpsc, oneshot};
 #[cfg(not(any(target_os = "macos", windows)))]
 use std::time::Instant;
 use std::{

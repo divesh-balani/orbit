@@ -1,7 +1,5 @@
 use crate::sources::audio_mixer::AudioMixer;
 use anyhow::{Context, anyhow};
-use orbit_media_info::{AudioInfo, VideoInfo};
-use orbit_timestamp::{Timestamp, Timestamps};
 use futures::{
     FutureExt, SinkExt, StreamExt, TryFutureExt,
     channel::{mpsc, oneshot},
@@ -9,6 +7,8 @@ use futures::{
     lock::Mutex,
     stream::FuturesUnordered,
 };
+use orbit_media_info::{AudioInfo, VideoInfo};
+use orbit_timestamp::{Timestamp, Timestamps};
 use std::{
     any::Any,
     future,

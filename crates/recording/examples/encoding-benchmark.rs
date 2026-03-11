@@ -1,8 +1,8 @@
+use ffmpeg::format::Pixel;
 use orbit_frame_converter::{
     AsyncConverterPool, ConversionConfig, ConverterPoolConfig, DropStrategy,
 };
 use orbit_recording::benchmark::{BenchmarkConfig, EncoderInfo, MetricsSnapshot, PipelineMetrics};
-use ffmpeg::format::Pixel;
 use std::{
     sync::{
         Arc,

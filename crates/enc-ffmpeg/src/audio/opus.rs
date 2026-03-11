@@ -1,12 +1,12 @@
 use std::{thread, time::Duration};
 
-use orbit_media_info::{AudioInfo, FFRational};
 use ffmpeg::{
     codec::{context, encoder},
     format::{self, Sample, sample::Type},
     frame,
     threading::Config,
 };
+use orbit_media_info::{AudioInfo, FFRational};
 
 use crate::audio::{
     audio_encoder::AudioEncoder, base::AudioEncoderBase, buffered_resampler::BufferedResampler,

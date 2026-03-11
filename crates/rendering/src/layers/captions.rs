@@ -1,11 +1,11 @@
 use bytemuck::{Pod, Zeroable};
-use orbit_project::XY;
 use glyphon::cosmic_text::LayoutRunIter;
 use glyphon::{
     Attrs, Buffer, Cache, Color, Family, FontSystem, Metrics, Resolution, Shaping, SwashCache,
     TextArea, TextAtlas, TextBounds, TextRenderer, Viewport, Weight,
 };
 use log::warn;
+use orbit_project::XY;
 use wgpu::{Device, Queue, include_wgsl, util::DeviceExt};
 
 use crate::{DecodedSegmentFrames, ProjectUniforms, RenderVideoConstants, parse_color_component};

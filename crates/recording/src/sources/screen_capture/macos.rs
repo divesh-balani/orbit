@@ -7,9 +7,9 @@ use crate::{
     },
 };
 use anyhow::{Context, anyhow};
-use orbit_timestamp::Timestamp;
 use cidre::*;
 use futures::{FutureExt as _, channel::mpsc, future::BoxFuture};
+use orbit_timestamp::Timestamp;
 use std::{
     ptr,
     sync::{

@@ -8,13 +8,13 @@ use ::windows::Win32::Graphics::Direct3D11::{
 };
 use ::windows::Win32::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC;
 use anyhow::anyhow;
-use orbit_media_info::{AudioInfo, VideoInfo};
-use orbit_timestamp::{PerformanceCounterTimestamp, Timestamp};
 use cpal::traits::{DeviceTrait, HostTrait};
 use futures::{
     FutureExt, StreamExt,
     channel::{mpsc, oneshot},
 };
+use orbit_media_info::{AudioInfo, VideoInfo};
+use orbit_timestamp::{PerformanceCounterTimestamp, Timestamp};
 use sorbit_ffmpeg::*;
 use sorbit_targets::{Display, DisplayId};
 use std::{
@@ -34,7 +34,8 @@ use tracing::*;
 pub struct Direct3DCapture;
 
 impl Direct3DCapture {
-    pub const PIXEL_FORMAT: sorbit_direct3d::PixelFormat = sorbit_direct3d::PixelFormat::R8G8B8A8Unorm;
+    pub const PIXEL_FORMAT: sorbit_direct3d::PixelFormat =
+        sorbit_direct3d::PixelFormat::R8G8B8A8Unorm;
 }
 
 impl ScreenCaptureFormat for Direct3DCapture {

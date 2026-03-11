@@ -2,10 +2,10 @@ use crate::{
     feeds::microphone::{self, MicrophoneFeedLock},
     output_pipeline::{AudioFrame, AudioSource},
 };
-use orbit_media_info::{AudioInfo, ffmpeg_sample_format_for};
 use cpal::SampleFormat;
 use futures::{SinkExt, channel::mpsc};
 use kameo::error::SendError;
+use orbit_media_info::{AudioInfo, ffmpeg_sample_format_for};
 use std::{
     borrow::Cow,
     sync::{

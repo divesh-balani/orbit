@@ -1,11 +1,11 @@
 use anyhow::{Context, Result};
+use clap::{Parser, ValueEnum};
+use image::{ImageBuffer, ImageFormat};
 use orbit_project::{ProjectConfiguration, RecordingMeta, StudioRecordingMeta, XY};
 use orbit_rendering::{
     ProjectRecordingsMeta, RecordingSegmentDecoders, RenderSegment, RenderVideoConstants,
     RenderedFrame, SegmentVideoPaths,
 };
-use clap::{Parser, ValueEnum};
-use image::{ImageBuffer, ImageFormat};
 use std::path::PathBuf;
 use std::sync::Arc;
 use tokio::sync::mpsc;

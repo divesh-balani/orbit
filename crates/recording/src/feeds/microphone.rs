@@ -1,6 +1,3 @@
-use orbit_audio::estimate_input_latency;
-use orbit_media_info::{AudioInfo, ffmpeg_sample_format_for};
-use orbit_timestamp::Timestamp;
 use cpal::{
     BufferSize, Device, InputCallbackInfo, SampleFormat, StreamError, SupportedStreamConfig,
     SupportedStreamConfigRange,
@@ -10,6 +7,9 @@ use flume::TrySendError;
 use futures::{FutureExt, channel::oneshot, future::BoxFuture};
 use indexmap::IndexMap;
 use kameo::prelude::*;
+use orbit_audio::estimate_input_latency;
+use orbit_media_info::{AudioInfo, ffmpeg_sample_format_for};
+use orbit_timestamp::Timestamp;
 use replace_with::replace_with_or_abort;
 use std::{
     ops::Deref,

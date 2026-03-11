@@ -219,23 +219,23 @@ impl FfmpegDecoder {
             } else {
                 None
             };
-            let mut this = match orbit_video_decode::FFmpegDecoder::new(path.clone(), hw_device_type)
-            {
-                Err(e) => {
-                    let _ = ready_tx.send(Err(e));
-                    return;
-                }
-                Ok(v) => {
-                    let is_hw = v.is_hardware_accelerated();
-                    let width = v.decoder().width();
-                    let height = v.decoder().height();
-                    info!(
-                        "FFmpeg decoder created for '{}': {}x{}, hw_accel={}",
-                        name, width, height, is_hw
-                    );
-                    v
-                }
-            };
+            let mut this =
+                match orbit_video_decode::FFmpegDecoder::new(path.clone(), hw_device_type) {
+                    Err(e) => {
+                        let _ = ready_tx.send(Err(e));
+                        return;
+                    }
+                    Ok(v) => {
+                        let is_hw = v.is_hardware_accelerated();
+                        let width = v.decoder().width();
+                        let height = v.decoder().height();
+                        info!(
+                            "FFmpeg decoder created for '{}': {}x{}, hw_accel={}",
+                            name, width, height, is_hw
+                        );
+                        v
+                    }
+                };
 
             let time_base = this.decoder().time_base();
             let start_time = this.start_time();

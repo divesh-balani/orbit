@@ -1,7 +1,7 @@
 use crate::output_pipeline::{AudioFrame, AudioSource, SetupCtx};
+use futures::channel::mpsc;
 use orbit_media_info::{AudioInfo, Sample, Type};
 use orbit_timestamp::{Timestamp, Timestamps};
-use futures::channel::mpsc;
 use std::{
     f32::consts::PI,
     sync::{

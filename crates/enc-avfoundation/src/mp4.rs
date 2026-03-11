@@ -1,6 +1,6 @@
-use orbit_media_info::{AudioInfo, VideoInfo, ensure_even};
 use cidre::{cm::SampleTimingInfo, objc::Obj, *};
 use ffmpeg::{frame, software::resampling};
+use orbit_media_info::{AudioInfo, VideoInfo, ensure_even};
 use std::{path::PathBuf, time::Duration};
 use tracing::*;
 

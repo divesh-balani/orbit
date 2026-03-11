@@ -1,5 +1,5 @@
-use orbit_media_info::RawVideoFormat;
 use ffmpeg::{format, frame};
+use orbit_media_info::RawVideoFormat;
 use std::{path::PathBuf, time::Duration};
 use tracing::*;
 

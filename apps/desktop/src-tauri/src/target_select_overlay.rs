@@ -102,6 +102,10 @@ pub async fn open_target_select_overlays(
         }
     }
 
+    if let Some(window) = OrbitWindowId::Main.get(&app) {
+        let _ = window.hide();
+    }
+
     for display_id in &display_ids {
         let should_focus = display_id == &focus_display_id;
 
@@ -111,6 +115,23 @@ pub async fn open_target_select_overlays(
         .get(&app);
 
         if let Some(window) = existing_window {
+            #[cfg(target_os = "macos")]
+            {
+                let label = window.label().to_string();
+                app.run_on_main_thread({
+                    let app = app.clone();
+                    move || {
+                        use tauri_nspanel::ManagerExt;
+                        if let Ok(panel) = app.get_webview_panel(&label) {
+                            panel.order_front_regardless();
+                            panel.show();
+                        }
+                    }
+                })
+                .ok();
+            }
+
+            #[cfg(not(target_os = "macos"))]
             window.show().ok();
 
             if should_focus {

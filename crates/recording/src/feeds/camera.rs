@@ -1,13 +1,13 @@
-use orbit_camera::CameraInfo;
-use orbit_camera_ffmpeg::*;
-use orbit_fail::fail_err;
-use orbit_media_info::VideoInfo;
-use orbit_timestamp::Timestamp;
 use futures::{
     FutureExt,
     future::{BoxFuture, Shared},
 };
 use kameo::prelude::*;
+use orbit_camera::CameraInfo;
+use orbit_camera_ffmpeg::*;
+use orbit_fail::fail_err;
+use orbit_media_info::VideoInfo;
+use orbit_timestamp::Timestamp;
 use replace_with::replace_with_or_abort;
 use std::{
     cmp::Ordering,
@@ -471,9 +471,12 @@ async fn setup_camera(
             let callback_num =
                 CAMERA_CALLBACK_COUNTER.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
 
-            let timestamp = Timestamp::MachAbsoluteTime(orbit_timestamp::MachAbsoluteTimestamp::new(
-                cidre::cm::Clock::convert_host_time_to_sys_units(frame.native().sample_buf().pts()),
-            ));
+            let timestamp =
+                Timestamp::MachAbsoluteTime(orbit_timestamp::MachAbsoluteTimestamp::new(
+                    cidre::cm::Clock::convert_host_time_to_sys_units(
+                        frame.native().sample_buf().pts(),
+                    ),
+                ));
 
             let _ = native_recipient
                 .tell(NewNativeFrame(NativeCameraFrame {

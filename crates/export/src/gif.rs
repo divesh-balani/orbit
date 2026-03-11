@@ -1,6 +1,6 @@
+use futures::FutureExt;
 use orbit_project::XY;
 use orbit_rendering::{ProjectUniforms, RenderSegment, RenderedFrame};
-use futures::FutureExt;
 use serde::Deserialize;
 use specta::Type;
 use std::path::PathBuf;

@@ -88,12 +88,12 @@ pub async fn hide_recording_windows(app: &AppHandle) {
         if let Ok(id) = OrbitWindowId::from_str(&label) {
             match id {
                 OrbitWindowId::RecordingControls => {
-                    destroy_recording_controls_window(app, &window).await;
+                    hide_recording_controls_window(app, &window).await;
                 }
                 OrbitWindowId::TargetSelectOverlay { .. }
                 | OrbitWindowId::WindowCaptureOccluder { .. }
                 | OrbitWindowId::CaptureArea => {
-                    let _ = window.close();
+                    let _ = window.hide();
                 }
                 OrbitWindowId::Main | OrbitWindowId::Camera => {
                     let _ = window.hide();
@@ -104,34 +104,26 @@ pub async fn hide_recording_windows(app: &AppHandle) {
     }
 }
 
-pub async fn destroy_recording_controls_window(app: &AppHandle, window: &WebviewWindow) {
+async fn hide_recording_controls_window(
+    #[allow(unused_variables)] app: &AppHandle,
+    window: &WebviewWindow,
+) {
     #[cfg(target_os = "macos")]
     {
         let label = window.label().to_string();
         let app_clone = app.clone();
-        let (tx, rx) = tokio::sync::oneshot::channel();
         app.run_on_main_thread(move || {
             use tauri_nspanel::ManagerExt;
             if let Ok(panel) = app_clone.get_webview_panel(&label) {
-                panel.released_when_closed(false);
-                panel.close();
+                panel.order_out(None);
             }
-            let _ = tx.send(());
         })
         .ok();
-        let _ = tokio::time::timeout(std::time::Duration::from_millis(500), rx).await;
     }
 
-    let _ = window.destroy();
-
-    let max_wait = std::time::Duration::from_millis(500);
-    let poll_interval = std::time::Duration::from_millis(25);
-    let start = std::time::Instant::now();
-    while start.elapsed() < max_wait {
-        if OrbitWindowId::RecordingControls.get(app).is_none() {
-            break;
-        }
-        tokio::time::sleep(poll_interval).await;
+    #[cfg(not(target_os = "macos"))]
+    {
+        let _ = window.hide();
     }
 }
 
@@ -646,11 +638,30 @@ impl ShowCapWindow {
                 | Self::Upgrade
                 | Self::ModeSelect
                 | Self::Settings { .. }
+                | Self::InProgressRecording { .. }
         ) {
             let target_label = self.id(app).label();
             for (label, window) in app.webview_windows() {
                 if label != target_label {
-                    let _ = window.close();
+                    if let Ok(id) = OrbitWindowId::from_str(&label) {
+                        match id {
+                            OrbitWindowId::TargetSelectOverlay { .. }
+                            | OrbitWindowId::WindowCaptureOccluder { .. }
+                            | OrbitWindowId::CaptureArea
+                            | OrbitWindowId::Main
+                            | OrbitWindowId::Camera => {
+                                let _ = window.hide();
+                            }
+                            OrbitWindowId::RecordingControls => {
+                                let _ = window.hide();
+                            }
+                            _ => {
+                                let _ = window.close();
+                            }
+                        }
+                    } else {
+                        let _ = window.close();
+                    }
                 }
             }
         }
@@ -886,6 +897,9 @@ impl ShowCapWindow {
         {
             use crate::panel_manager::is_window_handle_valid;
 
+            // Hide immediately so it's not visible while we validate or recreate
+            let _ = window.hide();
+
             if is_window_handle_valid(&window) {
                 debug!("InProgressRecording: reusing existing window");
                 let width = 320.0;
@@ -943,10 +957,12 @@ impl ShowCapWindow {
                 }
 
                 if window_id.get(app).is_some() {
-                    error!("InProgressRecording window STILL in registry, cannot recreate");
-                    return Err(tauri::Error::WindowNotFound);
+                    warn!(
+                        "InProgressRecording window STILL in registry after 1s, attempting force destroy"
+                    );
+                    let _ = window.destroy();
+                    tokio::time::sleep(std::time::Duration::from_millis(100)).await;
                 }
-                debug!("InProgressRecording window cleaned up, will recreate");
             }
         }
 
@@ -978,6 +994,22 @@ impl ShowCapWindow {
             } else {
                 None
             };
+
+            #[cfg(target_os = "macos")]
+            {
+                let label = window.label().to_string();
+                app.run_on_main_thread({
+                    let app = app.clone();
+                    move || {
+                        use tauri_nspanel::ManagerExt;
+                        if let Ok(panel) = app.get_webview_panel(&label) {
+                            panel.order_front_regardless();
+                            panel.show();
+                        }
+                    }
+                })
+                .ok();
+            }
 
             if let Self::Main {
                 init_target_mode: Some(target_mode),
@@ -1107,7 +1139,6 @@ impl ShowCapWindow {
                                 Ok(p) => p,
                                 Err(e) => {
                                     tracing::error!("Failed to convert main window to panel: {}", e);
-                                    app.set_activation_policy(ActivationPolicy::Regular).ok();
                                     return;
                                 }
                             };
@@ -1127,8 +1158,6 @@ impl ShowCapWindow {
                             panel.show();
 
                             crate::platform::apply_squircle_corners(&window, 16.0);
-
-                            app.set_activation_policy(ActivationPolicy::Regular).ok();
                         }
                     })
                     .ok();
@@ -1246,9 +1275,11 @@ impl ShowCapWindow {
 
                 #[cfg(target_os = "macos")]
                 {
+                    // Small non-blocking delay to ensure the window is fully registered on macOS
+                    tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+
                     app.run_on_main_thread({
                         let window = window.clone();
-                        let app = app.clone();
                         move || {
                             use tauri::ActivationPolicy;
                             use tauri_nspanel::cocoa::appkit::NSWindowCollectionBehavior;
@@ -1274,7 +1305,6 @@ impl ShowCapWindow {
                                 Ok(p) => p,
                                 Err(e) => {
                                     tracing::error!("Failed to convert target select overlay to panel: {:?}", e);
-                                    app.set_activation_policy(ActivationPolicy::Regular).ok();
                                     return;
                                 }
                             };
@@ -1291,8 +1321,6 @@ impl ShowCapWindow {
 
                             panel.order_front_regardless();
                             panel.show();
-
-                            app.set_activation_policy(ActivationPolicy::Regular).ok();
                         }
                     })
                     .ok();
@@ -1683,7 +1711,6 @@ impl ShowCapWindow {
                                     Ok(p) => p,
                                     Err(e) => {
                                         tracing::error!("Failed to convert camera to panel: {}", e);
-                                        app.set_activation_policy(ActivationPolicy::Regular).ok();
                                         let _ = panel_tx.send(false);
                                         return;
                                     }
@@ -1709,7 +1736,6 @@ impl ShowCapWindow {
                                 panel.order_front_regardless();
                                 panel.show();
 
-                                app.set_activation_policy(ActivationPolicy::Regular).ok();
                                 let _ = panel_tx.send(true);
                             }
                         })
@@ -1913,9 +1939,11 @@ impl ShowCapWindow {
 
                 #[cfg(target_os = "macos")]
                 {
+                    // Small non-blocking delay to ensure the window is fully registered on macOS
+                    tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+
                     app.run_on_main_thread({
                         let window = window.clone();
-                        let app = app.clone();
                         move || {
                             use tauri::ActivationPolicy;
                             use tauri_nspanel::cocoa::appkit::NSWindowCollectionBehavior;
@@ -1941,7 +1969,6 @@ impl ShowCapWindow {
                                 Ok(p) => p,
                                 Err(e) => {
                                     tracing::error!("Failed to convert recording controls to panel: {:?}", e);
-                                    app.set_activation_policy(ActivationPolicy::Regular).ok();
                                     return;
                                 }
                             };
@@ -1958,8 +1985,6 @@ impl ShowCapWindow {
 
                             panel.order_front_regardless();
                             panel.show();
-
-                            app.set_activation_policy(ActivationPolicy::Regular).ok();
                         }
                     })
                     .ok();

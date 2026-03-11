@@ -1,6 +1,5 @@
 use std::{thread, time::Duration};
 
-use orbit_media_info::{Pixel, VideoInfo, ensure_even};
 use ffmpeg::{
     Dictionary,
     codec::{codec::Codec, context, encoder},
@@ -9,6 +8,7 @@ use ffmpeg::{
     frame,
     threading::Config,
 };
+use orbit_media_info::{Pixel, VideoInfo, ensure_even};
 use tracing::{debug, error, trace, warn};
 
 use crate::base::EncoderBase;

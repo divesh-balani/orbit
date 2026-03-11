@@ -1,8 +1,8 @@
+use futures::{FutureExt, future::Shared};
 use orbit_cursor_capture::CursorCropBounds;
 use orbit_cursor_info::CursorShape;
 use orbit_project::{CursorClickEvent, CursorEvents, CursorMoveEvent, XY};
 use orbit_timestamp::Timestamps;
-use futures::{FutureExt, future::Shared};
 use std::{
     collections::HashMap,
     path::{Path, PathBuf},
@@ -69,9 +69,9 @@ pub fn spawn_cursor_recorder(
     start_time: Timestamps,
     output_path: Option<PathBuf>,
 ) -> CursorActor {
-    use orbit_utils::spawn_actor;
     use device_query::{DeviceQuery, DeviceState};
     use futures::future::Either;
+    use orbit_utils::spawn_actor;
     use sha2::{Digest, Sha256};
     use std::{pin::pin, time::Duration};
     use tracing::{error, info};

@@ -11,11 +11,11 @@ use crate::{
     sources::screen_capture::{ScreenCaptureConfig, ScreenCaptureTarget},
 };
 use anyhow::Context as _;
+use kameo::{Actor as _, prelude::*};
 use orbit_media_info::{AudioInfo, VideoInfo};
 use orbit_project::InstantRecordingMeta;
 use orbit_timestamp::Timestamps;
 use orbit_utils::ensure_dir;
-use kameo::{Actor as _, prelude::*};
 use std::{
     path::PathBuf,
     sync::Arc,
@@ -324,7 +324,10 @@ impl ActorBuilder {
     }
 
     #[cfg(target_os = "macos")]
-    pub fn with_excluded_windows(mut self, excluded_windows: Vec<sorbit_targets::WindowId>) -> Self {
+    pub fn with_excluded_windows(
+        mut self,
+        excluded_windows: Vec<sorbit_targets::WindowId>,
+    ) -> Self {
         self.excluded_windows = excluded_windows;
         self
     }

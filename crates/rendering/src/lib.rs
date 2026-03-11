@@ -1,8 +1,4 @@
 use anyhow::Result;
-use orbit_project::{
-    AspectRatio, CameraShape, CameraXPosition, CameraYPosition, ClipOffsets, CornerStyle, Crop,
-    CursorEvents, MaskKind, ProjectConfiguration, RecordingMeta, StudioRecordingMeta, XY,
-};
 use composite_frame::CompositeVideoFrameUniforms;
 use core::f64;
 use cursor_interpolation::{InterpolatedCursorPosition, interpolate_cursor};
@@ -12,6 +8,10 @@ use futures::future::OptionFuture;
 use layers::{
     Background, BackgroundLayer, BlurLayer, CameraLayer, CaptionsLayer, CursorLayer, DisplayLayer,
     MaskLayer, TextLayer,
+};
+use orbit_project::{
+    AspectRatio, CameraShape, CameraXPosition, CameraYPosition, ClipOffsets, CornerStyle, Crop,
+    CursorEvents, MaskKind, ProjectConfiguration, RecordingMeta, StudioRecordingMeta, XY,
 };
 use specta::Type;
 use spring_mass_damper::SpringMassDamperSimulationConfig;

@@ -1,11 +1,11 @@
+use ffmpeg::format::Pixel;
+use kameo::Actor;
 use orbit_camera::CameraInfo;
 use orbit_recording::{
     CameraFeed,
     benchmark::{BenchmarkConfig, EncoderInfo, PipelineMetrics},
     feeds::camera::{self, DeviceOrModelID},
 };
-use ffmpeg::format::Pixel;
-use kameo::Actor;
 use std::{
     fmt::Display,
     time::{Duration, Instant},

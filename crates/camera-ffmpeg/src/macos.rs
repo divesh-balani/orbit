@@ -1,7 +1,7 @@
-use orbit_camera::CapturedFrame;
-use orbit_camera_avfoundation::ImageBufExt;
 use cidre::*;
 use ffmpeg::{format::Pixel, software::scaling};
+use orbit_camera::CapturedFrame;
+use orbit_camera_avfoundation::ImageBufExt;
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use crate::CapturedFrameExt;

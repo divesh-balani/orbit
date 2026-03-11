@@ -1,9 +1,9 @@
 use crate::{AudioFrame, AudioMuxer, Muxer, TaskPool, VideoFrame, VideoMuxer, screen_capture};
 use anyhow::{Context, anyhow};
+use futures::channel::oneshot;
 use orbit_enc_ffmpeg::aac::AACEncoder;
 use orbit_media_info::{AudioInfo, VideoInfo};
 use orbit_timestamp::Timestamp;
-use futures::channel::oneshot;
 use std::{
     path::PathBuf,
     sync::{
@@ -148,7 +148,10 @@ impl Muxer for WindowsMuxer {
         let mut output = ffmpeg::format::output(&output_path)?;
 
         if fragmented {
-            orbit_mediafoundation_ffmpeg::set_fragmented_mp4_options(&mut output, frag_duration_us)?;
+            orbit_mediafoundation_ffmpeg::set_fragmented_mp4_options(
+                &mut output,
+                frag_duration_us,
+            )?;
         }
         let audio_encoder = audio_config
             .map(|config| AACEncoder::init(config, &mut output))
@@ -584,9 +587,8 @@ impl NativeCameraFrame {
     pub fn dxgi_format(&self) -> DXGI_FORMAT {
         match self.pixel_format {
             orbit_camera_windows::PixelFormat::NV12 => DXGI_FORMAT_NV12,
-            orbit_camera_windows::PixelFormat::YUYV422 | orbit_camera_windows::PixelFormat::UYVY422 => {
-                DXGI_FORMAT_YUY2
-            }
+            orbit_camera_windows::PixelFormat::YUYV422
+            | orbit_camera_windows::PixelFormat::UYVY422 => DXGI_FORMAT_YUY2,
             orbit_camera_windows::PixelFormat::ARGB | orbit_camera_windows::PixelFormat::RGB32 => {
                 DXGI_FORMAT_B8G8R8A8_UNORM
             }
@@ -681,7 +683,10 @@ impl Muxer for WindowsCameraMuxer {
         let mut output = ffmpeg::format::output(&output_path)?;
 
         if fragmented {
-            orbit_mediafoundation_ffmpeg::set_fragmented_mp4_options(&mut output, frag_duration_us)?;
+            orbit_mediafoundation_ffmpeg::set_fragmented_mp4_options(
+                &mut output,
+                frag_duration_us,
+            )?;
         }
 
         let audio_encoder = audio_config
@@ -1614,7 +1619,9 @@ pub fn upload_mf_buffer_to_texture(
     let dxgi_format = frame.dxgi_format();
     let bytes_per_pixel: u32 = match frame.pixel_format {
         orbit_camera_windows::PixelFormat::NV12 => 1,
-        orbit_camera_windows::PixelFormat::YUYV422 | orbit_camera_windows::PixelFormat::UYVY422 => 2,
+        orbit_camera_windows::PixelFormat::YUYV422 | orbit_camera_windows::PixelFormat::UYVY422 => {
+            2
+        }
         orbit_camera_windows::PixelFormat::ARGB | orbit_camera_windows::PixelFormat::RGB32 => 4,
         orbit_camera_windows::PixelFormat::RGB24 => 3,
         _ => 2,

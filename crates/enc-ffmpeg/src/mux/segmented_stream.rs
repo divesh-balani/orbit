@@ -1,5 +1,5 @@
-use orbit_media_info::VideoInfo;
 use ffmpeg::{format, frame};
+use orbit_media_info::VideoInfo;
 use serde::Serialize;
 use std::{
     ffi::CString,
@@ -203,7 +203,7 @@ impl SegmentedVideoEncoder {
                 "seg_duration",
                 &config.segment_duration.as_secs_f64().to_string(),
             );
-            set_opt("use_timeline", "0");
+            set_opt("use_timeline", "1");
             set_opt("use_template", "1");
             set_opt("single_file", "0");
             set_opt("hls_playlist", "1");

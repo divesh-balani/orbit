@@ -143,11 +143,11 @@ impl ScenarioRunner {
         pre_action: Option<&str>,
         mid_action: Option<(&str, u64)>,
     ) -> Result<ValidationResult> {
+        use cpal::StreamError;
+        use kameo::Actor as _;
         use orbit_recording::{
             CameraFeed, MicrophoneFeed, screen_capture::ScreenCaptureTarget, studio_recording,
         };
-        use cpal::StreamError;
-        use kameo::Actor as _;
         use sorbit_targets::Display;
 
         let temp_dir = TempDir::new()?;
@@ -173,7 +173,9 @@ impl ScenarioRunner {
                     .await?;
                 tokio::time::sleep(Duration::from_millis(100)).await;
                 Some(Arc::new(
-                    mic_feed.ask(orbit_recording::feeds::microphone::Lock).await?,
+                    mic_feed
+                        .ask(orbit_recording::feeds::microphone::Lock)
+                        .await?,
                 ))
             } else {
                 warn!("Scenario [{}]: no microphone available", description);
@@ -188,13 +190,17 @@ impl ScenarioRunner {
                 let camera_feed = CameraFeed::spawn(CameraFeed::default());
                 camera_feed
                     .ask(orbit_recording::feeds::camera::SetInput {
-                        id: orbit_recording::feeds::camera::DeviceOrModelID::from_info(&camera_info),
+                        id: orbit_recording::feeds::camera::DeviceOrModelID::from_info(
+                            &camera_info,
+                        ),
                     })
                     .await?
                     .await?;
                 tokio::time::sleep(Duration::from_millis(100)).await;
                 Some(Arc::new(
-                    camera_feed.ask(orbit_recording::feeds::camera::Lock).await?,
+                    camera_feed
+                        .ask(orbit_recording::feeds::camera::Lock)
+                        .await?,
                 ))
             } else {
                 warn!("Scenario [{}]: no camera available", description);

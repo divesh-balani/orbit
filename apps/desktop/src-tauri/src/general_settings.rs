@@ -121,7 +121,7 @@ pub struct GeneralSettingsStore {
         skip_serializing_if = "no"
     )]
     pub enable_native_camera_preview: bool,
-    #[serde(default)]
+    #[serde(default = "default_true")]
     pub auto_zoom_on_clicks: bool,
     #[serde(default)]
     pub post_deletion_behaviour: PostDeletionBehaviour,
@@ -202,7 +202,7 @@ impl Default for GeneralSettingsStore {
             server_url: default_server_url(),
             recording_countdown: Some(3),
             enable_native_camera_preview: default_enable_native_camera_preview(),
-            auto_zoom_on_clicks: false,
+            auto_zoom_on_clicks: true,
             post_deletion_behaviour: PostDeletionBehaviour::DoNothing,
             excluded_windows: default_excluded_windows(),
             delete_instant_recordings_after_upload: false,

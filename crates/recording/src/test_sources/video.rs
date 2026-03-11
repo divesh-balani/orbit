@@ -1,8 +1,8 @@
 use crate::output_pipeline::{FFmpegVideoFrame, SetupCtx, VideoSource};
-use orbit_media_info::{Pixel, VideoInfo};
-use orbit_timestamp::{Timestamp, Timestamps};
 use ffmpeg::util::rational::Rational as FFRational;
 use futures::{FutureExt, channel::mpsc};
+use orbit_media_info::{Pixel, VideoInfo};
+use orbit_timestamp::{Timestamp, Timestamps};
 use std::{
     sync::{
         Arc,

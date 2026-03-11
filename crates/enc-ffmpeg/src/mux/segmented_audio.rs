@@ -1,6 +1,6 @@
 use crate::audio::aac::{AACEncoder, AACEncoderError};
-use orbit_media_info::AudioInfo;
 use ffmpeg::{format, frame};
+use orbit_media_info::AudioInfo;
 use serde::Serialize;
 use std::{
     io::Write,

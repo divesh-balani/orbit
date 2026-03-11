@@ -1,5 +1,5 @@
-use orbit_recording::{screen_capture::ScreenCaptureTarget, studio_recording};
 use clap::Args;
+use orbit_recording::{screen_capture::ScreenCaptureTarget, studio_recording};
 use sorbit_targets::{DisplayId, WindowId};
 use std::{env::current_dir, path::PathBuf};
 use tokio::io::AsyncBufReadExt;

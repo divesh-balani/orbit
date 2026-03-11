@@ -34,23 +34,8 @@ const SettingsScreenshotsPage = lazy(
 const SettingsHotkeysPage = lazy(
 	() => import("./routes/(window-chrome)/settings/hotkeys"),
 );
-const SettingsChangelogPage = lazy(
-	() => import("./routes/(window-chrome)/settings/changelog"),
-);
-const SettingsFeedbackPage = lazy(
-	() => import("./routes/(window-chrome)/settings/feedback"),
-);
 const SettingsExperimentalPage = lazy(
 	() => import("./routes/(window-chrome)/settings/experimental"),
-);
-const SettingsLicensePage = lazy(
-	() => import("./routes/(window-chrome)/settings/license"),
-);
-const SettingsIntegrationsPage = lazy(
-	() => import("./routes/(window-chrome)/settings/integrations"),
-);
-const SettingsS3ConfigPage = lazy(
-	() => import("./routes/(window-chrome)/settings/integrations/s3-config"),
 );
 const UpgradePage = lazy(() => import("./routes/(window-chrome)/upgrade"));
 const UpdatePage = lazy(() => import("./routes/(window-chrome)/update"));
@@ -159,20 +144,9 @@ function Inner() {
 							<Route path="/recordings" component={SettingsRecordingsPage} />
 							<Route path="/screenshots" component={SettingsScreenshotsPage} />
 							<Route path="/hotkeys" component={SettingsHotkeysPage} />
-							<Route path="/changelog" component={SettingsChangelogPage} />
-							<Route path="/feedback" component={SettingsFeedbackPage} />
 							<Route
 								path="/experimental"
 								component={SettingsExperimentalPage}
-							/>
-							<Route path="/license" component={SettingsLicensePage} />
-							<Route
-								path="/integrations"
-								component={SettingsIntegrationsPage}
-							/>
-							<Route
-								path="/integrations/s3-config"
-								component={SettingsS3ConfigPage}
 							/>
 						</Route>
 						<Route path="/upgrade" component={UpgradePage} />

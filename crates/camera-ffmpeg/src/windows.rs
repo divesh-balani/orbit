@@ -1,8 +1,8 @@
 use std::{cell::RefCell, collections::VecDeque};
 
+use ffmpeg::{Packet, format::Pixel, frame::Video as FFVideo};
 use orbit_camera::CapturedFrame;
 use orbit_camera_windows::PixelFormat;
-use ffmpeg::{Packet, format::Pixel, frame::Video as FFVideo};
 
 use crate::CapturedFrameExt;
 

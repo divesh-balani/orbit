@@ -25,14 +25,14 @@ use crate::output_pipeline::{
     WindowsFragmentedM4SCameraMuxerConfig,
 };
 use anyhow::{Context as _, anyhow, bail};
+use futures::{FutureExt, StreamExt, future::OptionFuture, stream::FuturesUnordered};
+use kameo::{Actor as _, prelude::*};
 use orbit_media_info::VideoInfo;
 use orbit_project::{
     CursorEvents, MultipleSegments, Platform, RecordingMeta, RecordingMetaInner,
     StudioRecordingMeta, StudioRecordingStatus,
 };
 use orbit_timestamp::{Timestamp, Timestamps};
-use futures::{FutureExt, StreamExt, future::OptionFuture, stream::FuturesUnordered};
-use kameo::{Actor as _, prelude::*};
 use relative_path::RelativePathBuf;
 use std::{
     path::{Path, PathBuf},
@@ -531,7 +531,10 @@ impl ActorBuilder {
     }
 
     #[cfg(target_os = "macos")]
-    pub fn with_excluded_windows(mut self, excluded_windows: Vec<sorbit_targets::WindowId>) -> Self {
+    pub fn with_excluded_windows(
+        mut self,
+        excluded_windows: Vec<sorbit_targets::WindowId>,
+    ) -> Self {
         self.excluded_windows = excluded_windows;
         self
     }

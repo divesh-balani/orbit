@@ -4,8 +4,8 @@ use orbit_cursor_capture::CursorCropBounds;
 #[cfg(target_os = "macos")]
 use orbit_media_info::ensure_even;
 use orbit_media_info::{AudioInfo, VideoInfo};
-use sorbit_targets::{Display, DisplayId, Window, WindowId, bounds::*};
 use serde::{Deserialize, Serialize};
+use sorbit_targets::{Display, DisplayId, Window, WindowId, bounds::*};
 use specta::Type;
 use std::time::SystemTime;
 use tracing::*;

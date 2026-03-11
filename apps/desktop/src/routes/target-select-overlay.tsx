@@ -139,9 +139,7 @@ function Inner() {
 	onCleanup(() => unsubTargetUnderCursor.then((unsub) => unsub()));
 
 	const unsubSetTargetMode = events.requestSetTargetMode.listen((event) => {
-		if (event.payload.target_mode) {
-			setOptions("targetMode", event.payload.target_mode);
-		}
+		setOptions("targetMode", event.payload.target_mode ?? null);
 	});
 	onCleanup(() => unsubSetTargetMode.then((unsub) => unsub()));
 

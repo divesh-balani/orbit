@@ -1,12 +1,12 @@
+use ffmpeg::{
+    ChannelLayout, Dictionary, format as avformat, frame::Audio as FFAudio, software::resampling,
+};
 use orbit_audio::{
     AudioData, AudioRendererTrack, FromSampleBytes, StereoMode, cast_f32_slice_to_bytes,
 };
 use orbit_media::MediaError;
 use orbit_media_info::AudioInfo;
 use orbit_project::{AudioConfiguration, ClipOffsets, ProjectConfiguration, TimelineConfiguration};
-use ffmpeg::{
-    ChannelLayout, Dictionary, format as avformat, frame::Audio as FFAudio, software::resampling,
-};
 #[cfg(not(target_os = "windows"))]
 use ringbuf::{
     HeapRb,

@@ -3,7 +3,9 @@ use std::{fmt::Display, ops::Deref, time::Duration};
 use orbit_camera::{CameraInfo, Format};
 
 fn main() {
-    let cameras: Vec<_> = orbit_camera::list_cameras().map(CameraSelectOption).collect();
+    let cameras: Vec<_> = orbit_camera::list_cameras()
+        .map(CameraSelectOption)
+        .collect();
 
     if cameras.is_empty() {
         eprintln!("No cameras found");

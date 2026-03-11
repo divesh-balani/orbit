@@ -184,6 +184,7 @@ function InProgressRecordingInner() {
 	createTauriEventListener(events.recordingEvent, (payload) => {
 		switch (payload.variant) {
 			case "Countdown":
+				console.log("[in-progress-recording] Received Countdown event:", payload.value);
 				setDisconnectedInputs({ microphone: false, camera: false });
 				setRecordingFailure(null);
 				setDegradedReason(null);
@@ -195,6 +196,7 @@ function InProgressRecordingInner() {
 				});
 				break;
 			case "Started":
+				console.log("[in-progress-recording] Received Started event");
 				setDisconnectedInputs({ microphone: false, camera: false });
 				setRecordingFailure(null);
 				setDegradedReason(null);
@@ -307,12 +309,16 @@ function InProgressRecordingInner() {
 	);
 
 	createEffect(() => {
+		const s = state();
+		const recording = currentRecording.data;
 		if (
-			state().variant === "stopped" &&
+			s.variant === "stopped" &&
 			!currentRecording.isPending &&
-			(currentRecording.data === undefined || currentRecording.data === null)
-		)
+			recording === null
+		) {
+			console.log("[in-progress-recording] Hiding window due to stopped state and no active recording");
 			getCurrentWindow().hide();
+		}
 	});
 
 	const stopRecording = createMutation(() => ({

@@ -1,6 +1,6 @@
 use bytemuck::{Pod, Zeroable};
-use orbit_project::BackgroundSource;
 use image::GenericImageView;
+use orbit_project::BackgroundSource;
 use serde::{Deserialize, Serialize};
 use specta::Type;
 use wgpu::{include_wgsl, util::DeviceExt};

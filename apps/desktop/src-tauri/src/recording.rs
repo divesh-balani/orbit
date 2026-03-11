@@ -650,6 +650,7 @@ pub async fn start_recording(
             win.hide().ok();
         }
     }
+
     let _ = ShowCapWindow::InProgressRecording { countdown }
         .show(&app)
         .await;

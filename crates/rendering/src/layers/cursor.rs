@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
 use bytemuck::{Pod, Zeroable};
-use orbit_project::*;
 use image::GenericImageView;
+use orbit_project::*;
 use tracing::error;
 use wgpu::{BindGroup, FilterMode, include_wgsl, util::DeviceExt};
 

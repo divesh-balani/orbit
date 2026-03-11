@@ -1,10 +1,10 @@
+use ffmpeg::format::Pixel;
+use image::{ColorType, codecs::jpeg};
+use kameo::Actor;
 use orbit_recording::{
     CameraFeed,
     feeds::camera::{self, DeviceOrModelID},
 };
-use ffmpeg::format::Pixel;
-use image::{ColorType, codecs::jpeg};
-use kameo::Actor;
 use std::fmt::Display;
 
 #[tokio::main]

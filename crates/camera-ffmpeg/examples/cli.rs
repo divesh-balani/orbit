@@ -4,7 +4,9 @@ use orbit_camera::{CameraInfo, Format};
 use orbit_camera_ffmpeg::CapturedFrameExt;
 
 fn main() {
-    let cameras = orbit_camera::list_cameras().map(CameraSelectOption).collect();
+    let cameras = orbit_camera::list_cameras()
+        .map(CameraSelectOption)
+        .collect();
 
     let selected_camera = inquire::Select::new("Select a device", cameras)
         .prompt()

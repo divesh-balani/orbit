@@ -1,3 +1,4 @@
+use kameo::Actor;
 use orbit_recording::{
     CameraFeed, MicrophoneFeed,
     feeds::{
@@ -6,7 +7,6 @@ use orbit_recording::{
     },
     screen_capture::ScreenCaptureTarget,
 };
-use kameo::Actor;
 use sorbit_targets::Display;
 use std::{
     sync::Arc,

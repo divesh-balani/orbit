@@ -362,8 +362,9 @@ fn test_d3d11_converter_capability() {
     println!("=== D3D11 Converter Capability Tests ===");
 
     for (name, input, output, width, height) in test_configs {
-        let config =
-            orbit_frame_converter::ConversionConfig::new(input, width, height, output, width, height);
+        let config = orbit_frame_converter::ConversionConfig::new(
+            input, width, height, output, width, height,
+        );
 
         match orbit_frame_converter::create_converter_with_details(config) {
             Ok(result) => {

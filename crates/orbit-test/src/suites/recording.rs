@@ -50,10 +50,10 @@ impl RecordingTestRunner {
     }
 
     async fn run_real_recording(&self) -> Result<RecordingMetrics> {
+        use kameo::Actor as _;
         use orbit_recording::{
             CameraFeed, MicrophoneFeed, screen_capture::ScreenCaptureTarget, studio_recording,
         };
-        use kameo::Actor as _;
         use sorbit_targets::Display;
 
         let temp_dir = TempDir::new()?;
@@ -102,7 +102,9 @@ impl RecordingTestRunner {
                     .await?;
                 tokio::time::sleep(Duration::from_millis(100)).await;
                 Some(Arc::new(
-                    mic_feed.ask(orbit_recording::feeds::microphone::Lock).await?,
+                    mic_feed
+                        .ask(orbit_recording::feeds::microphone::Lock)
+                        .await?,
                 ))
             } else {
                 warn!("No microphone device found");
@@ -117,13 +119,17 @@ impl RecordingTestRunner {
                 let camera_feed = CameraFeed::spawn(CameraFeed::default());
                 camera_feed
                     .ask(orbit_recording::feeds::camera::SetInput {
-                        id: orbit_recording::feeds::camera::DeviceOrModelID::from_info(&camera_info),
+                        id: orbit_recording::feeds::camera::DeviceOrModelID::from_info(
+                            &camera_info,
+                        ),
                     })
                     .await?
                     .await?;
                 tokio::time::sleep(Duration::from_millis(100)).await;
                 Some(Arc::new(
-                    camera_feed.ask(orbit_recording::feeds::camera::Lock).await?,
+                    camera_feed
+                        .ask(orbit_recording::feeds::camera::Lock)
+                        .await?,
                 ))
             } else {
                 warn!("No camera device found");

@@ -276,7 +276,7 @@ impl MacOSFragmentedM4SMuxer {
                 let mut slow_convert_count = 0u32;
                 let mut slow_encode_count = 0u32;
                 let mut total_frames = 0u64;
-                const SLOW_THRESHOLD_MS: u128 = 5;
+                const SLOW_THRESHOLD_MS: u128 = 50;
 
                 while let Ok(Some((sample_buf, timestamp))) = video_rx.recv() {
                     let convert_start = std::time::Instant::now();
@@ -774,7 +774,7 @@ impl MacOSFragmentedM4SCameraMuxer {
                 let mut slow_convert_count = 0u32;
                 let mut slow_encode_count = 0u32;
                 let mut total_frames = 0u64;
-                const SLOW_THRESHOLD_MS: u128 = 5;
+                const SLOW_THRESHOLD_MS: u128 = 50;
 
                 while let Ok(Some((sample_buf, timestamp))) = video_rx.recv() {
                     let convert_start = std::time::Instant::now();

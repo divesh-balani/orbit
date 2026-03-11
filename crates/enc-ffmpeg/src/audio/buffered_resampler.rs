@@ -1,7 +1,7 @@
 use std::collections::VecDeque;
 
-use orbit_media_info::AudioInfo;
 use ffmpeg::software::resampling;
+use orbit_media_info::AudioInfo;
 
 /// Consumes audio frames, resmaples them, buffers the results,
 /// and allows retrieving new frames of any size.
@@ -280,7 +280,11 @@ mod test {
 
     fn create_resampler(out_rate: u32) -> BufferedResampler {
         BufferedResampler::new(
-            AudioInfo::new_raw(format::Sample::U8(orbit_media_info::Type::Packed), IN_RATE, 1),
+            AudioInfo::new_raw(
+                format::Sample::U8(orbit_media_info::Type::Packed),
+                IN_RATE,
+                1,
+            ),
             AudioInfo::new_raw(
                 format::Sample::U8(orbit_media_info::Type::Packed),
                 out_rate,

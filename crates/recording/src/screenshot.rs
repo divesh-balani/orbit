@@ -703,7 +703,8 @@ fn capture_screenshot_fallback(target: ScreenCaptureTarget) -> anyhow::Result<Rg
             Ok(image)
         }
         ScreenCaptureTarget::Area { screen, .. } => {
-            let display = sorbit_targets::Display::from_id(&screen).ok_or_else(unsupported_error)?;
+            let display =
+                sorbit_targets::Display::from_id(&screen).ok_or_else(unsupported_error)?;
             let bounds = display
                 .raw_handle()
                 .physical_bounds()

@@ -1,8 +1,8 @@
 use super::*;
 
-use orbit_camera_avfoundation::*;
 use cidre::*;
 use objc2_av_foundation::*;
+use orbit_camera_avfoundation::*;
 
 pub(super) fn list_cameras_impl() -> impl Iterator<Item = CameraInfo> {
     let devices = orbit_camera_avfoundation::list_video_devices();

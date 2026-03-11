@@ -7,8 +7,8 @@ use std::{
     time::Duration,
 };
 
-use orbit_media_info::{AudioInfo, AudioInfoError};
 use ffmpeg::{ChannelLayout, codec as avcodec, format as avformat, packet::Mut as PacketMut};
+use orbit_media_info::{AudioInfo, AudioInfoError};
 
 use crate::audio::opus::{OpusEncoder, OpusEncoderError};
 

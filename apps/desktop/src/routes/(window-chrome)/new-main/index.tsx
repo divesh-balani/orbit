@@ -74,7 +74,6 @@ import {
 	useRecordingOptions,
 } from "../OptionsContext";
 import CameraSelect from "./CameraSelect";
-import ChangelogButton from "./ChangeLogButton";
 import MicrophoneSelect from "./MicrophoneSelect";
 import ModeInfoPanel from "./ModeInfoPanel";
 import SystemAudio from "./SystemAudio";
@@ -1022,9 +1021,32 @@ function Page() {
 
 	const recordings = useQuery(() => listRecordings);
 
-	createTauriEventListener(events.recordingDeleted, () => recordings.refetch());
+	createTauriEventListener(events.recordingDeleted, () => {
+		recordings.refetch();
+		setOptions("captureTarget", reconcile({ variant: "display", id: "" }));
+		setOptions("targetMode", null);
+	});
+	createTauriEventListener(events.currentRecordingChanged, async () => {
+		const res = await currentRecording.refetch();
+		if (!res.data) {
+			setOptions("captureTarget", reconcile({ variant: "display", id: "" }));
+			setOptions("targetMode", null);
+		}
+	});
 	createTauriEventListener(events.recordingStarted, () => recordings.refetch());
 	createTauriEventListener(events.recordingStopped, () => recordings.refetch());
+
+	createTauriEventListener(events.requestSetTargetMode, async (payload) => {
+		const newTargetMode = payload.target_mode;
+		const displayId = payload.display_id;
+		if (newTargetMode) {
+			await commands.openTargetSelectOverlays(null, displayId, newTargetMode);
+			setOptions({ targetMode: newTargetMode });
+		} else {
+			setOptions({ targetMode: newTargetMode });
+			await commands.closeTargetSelectOverlays();
+		}
+	});
 
 	const screenshots = useQuery(() =>
 		queryOptions<ScreenshotWithPath[]>({
@@ -1199,11 +1221,21 @@ function Page() {
 		);
 
 		const unlistenFocus = currentWindow.onFocusChanged(
-			({ payload: focused }) => {
+			async ({ payload: focused }) => {
 				if (focused) {
 					currentWindow.setSize(
 						new LogicalSize(WINDOW_SIZE.width, WINDOW_SIZE.height),
 					);
+
+					const { __ORBIT__ } = window as typeof window & {
+						__ORBIT__?: { initialTargetMode?: RecordingTargetMode | null };
+					};
+					const targetMode = __ORBIT__?.initialTargetMode ?? null;
+					if (targetMode) {
+						__ORBIT__.initialTargetMode = null;
+						await commands.openTargetSelectOverlays(null, null, targetMode);
+						setOptions({ targetMode });
+					}
 				}
 			},
 		);
@@ -1214,28 +1246,9 @@ function Page() {
 			);
 		});
 
-		const unlistenSetTargetMode = events.requestSetTargetMode.listen(
-			async (event) => {
-				const newTargetMode = event.payload.target_mode;
-				const displayId = event.payload.display_id;
-				if (newTargetMode) {
-					await commands.openTargetSelectOverlays(
-						null,
-						displayId,
-						newTargetMode,
-					);
-					setOptions({ targetMode: newTargetMode });
-				} else {
-					setOptions({ targetMode: newTargetMode });
-					await commands.closeTargetSelectOverlays();
-				}
-			},
-		);
-
 		onCleanup(async () => {
 			(await unlistenFocus)?.();
 			(await unlistenResize)?.();
-			(await unlistenSetTargetMode)?.();
 		});
 	});
 
@@ -1658,7 +1671,6 @@ function Page() {
 								<IconLucideSquarePlay class="transition-colors text-gray-11 size-4 hover:text-gray-12" />
 							</button>
 						</Tooltip>
-						<ChangelogButton />
 						{import.meta.env.DEV && (
 							<button
 								type="button"

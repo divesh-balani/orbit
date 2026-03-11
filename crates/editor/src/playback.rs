@@ -1,3 +1,11 @@
+#[cfg(not(target_os = "windows"))]
+use cpal::{BufferSize, SupportedBufferSize};
+use cpal::{
+    SampleFormat,
+    traits::{DeviceTrait, HostTrait, StreamTrait},
+};
+use futures::stream::{FuturesUnordered, StreamExt};
+use lru::LruCache;
 use orbit_audio::FromSampleBytes;
 #[cfg(not(target_os = "windows"))]
 use orbit_audio::{LatencyCorrectionConfig, LatencyCorrector, default_output_latency_hint};
@@ -8,14 +16,6 @@ use orbit_rendering::{
     DecodedSegmentFrames, ProjectUniforms, RenderVideoConstants, ZoomFocusInterpolator,
     spring_mass_damper::SpringMassDamperSimulationConfig,
 };
-#[cfg(not(target_os = "windows"))]
-use cpal::{BufferSize, SupportedBufferSize};
-use cpal::{
-    SampleFormat,
-    traits::{DeviceTrait, HostTrait, StreamTrait},
-};
-use futures::stream::{FuturesUnordered, StreamExt};
-use lru::LruCache;
 use std::{
     collections::{HashSet, VecDeque},
     num::NonZeroUsize,

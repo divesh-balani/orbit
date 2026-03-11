@@ -70,7 +70,7 @@ const createDefaultGeneralSettings = (): ExtendedGeneralSettingsStore => ({
 	autoCreateShareableLink: false,
 	enableNotifications: true,
 	enableNativeCameraPreview: false,
-	autoZoomOnClicks: false,
+	autoZoomOnClicks: true,
 	custom_cursor_capture2: true,
 	excludedWindows: [],
 	instantModeMaxResolution: 1920,
@@ -491,6 +491,12 @@ function Inner(props: { initialStore: GeneralSettingsStore | null }) {
 						description="Records in fragmented segments that can be recovered if the app crashes or your system loses power. May have slightly higher storage usage during recording."
 						value={settings.crashRecoveryRecording ?? true}
 						onChange={(value) => handleChange("crashRecoveryRecording", value)}
+					/>
+					<ToggleSettingItem
+						label="Auto-zoom on clicks"
+						description="Automatically zoom in on cursor clicks when editing studio recordings."
+						value={!!settings.autoZoomOnClicks}
+						onChange={(value) => handleChange("autoZoomOnClicks", value)}
 					/>
 					<div class="flex flex-col gap-1">
 						<SelectSettingItem

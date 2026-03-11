@@ -1,3 +1,4 @@
+use clap::{Parser, Subcommand};
 use orbit_recording::{
     Mp4Muxer, OggMuxer, OutputPipeline, SegmentedVideoMuxer, SegmentedVideoMuxerConfig,
     test_sources::{
@@ -8,7 +9,6 @@ use orbit_recording::{
     },
 };
 use orbit_timestamp::Timestamps;
-use clap::{Parser, Subcommand};
 use std::{
     path::{Path, PathBuf},
     time::{Duration, Instant},

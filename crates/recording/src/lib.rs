@@ -22,10 +22,10 @@ pub use feeds::{camera::CameraFeed, microphone::MicrophoneFeed};
 pub use output_pipeline::*;
 pub use sources::screen_capture;
 
-use orbit_media::MediaError;
 use feeds::microphone::MicrophoneFeedLock;
-use sorbit_targets::bounds::LogicalBounds;
+use orbit_media::MediaError;
 use serde::{Deserialize, Serialize};
+use sorbit_targets::bounds::LogicalBounds;
 use std::sync::Arc;
 use thiserror::Error;
 

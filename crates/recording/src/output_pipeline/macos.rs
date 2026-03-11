@@ -3,10 +3,10 @@ use crate::{
     sources::screen_capture,
 };
 use anyhow::anyhow;
+use cidre::arc;
 use orbit_enc_avfoundation::QueueFrameError;
 use orbit_media_info::{AudioInfo, VideoInfo};
 use orbit_timestamp::Timestamp;
-use cidre::arc;
 use std::{
     path::PathBuf,
     sync::{

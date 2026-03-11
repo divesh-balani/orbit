@@ -1,10 +1,10 @@
+use kameo::Actor;
 use orbit_recording::{
     CameraFeed,
     benchmark::{BenchmarkConfig, EncoderInfo},
     feeds::camera::{self, DeviceOrModelID},
     screen_capture::ScreenCaptureTarget,
 };
-use kameo::Actor;
 use sorbit_targets::Display;
 use std::{
     sync::Arc,
