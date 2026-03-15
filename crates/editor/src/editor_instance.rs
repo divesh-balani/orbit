@@ -527,11 +527,18 @@ impl EditorInstance {
                                     },
                                 );
 
-                                let zoom_focus_interpolator = ZoomFocusInterpolator::new_arc(
+                                let mut zoom_focus_interpolator = ZoomFocusInterpolator::new_arc(
                                     segment_medias.cursor.clone(),
                                     cursor_smoothing,
                                     project.screen_movement_spring,
                                     total_duration,
+                                );
+                                zoom_focus_interpolator.set_zoom_segments(
+                                    project
+                                        .timeline
+                                        .as_ref()
+                                        .map(|t| t.zoom_segments.clone())
+                                        .unwrap_or_default(),
                                 );
 
                                 let uniforms = ProjectUniforms::new(

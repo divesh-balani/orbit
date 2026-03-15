@@ -141,8 +141,6 @@ export function ZoomTrack(props: {
 			onMouseEnter={() => setEditorState("timeline", "hoveredTrack", "zoom")}
 			onMouseLeave={() => setEditorState("timeline", "hoveredTrack", null)}
 			onContextMenu={async (e) => {
-				if (!import.meta.env.DEV) return;
-
 				e.preventDefault();
 				const menu = await Menu.new({
 					id: "zoom-track-options",
@@ -195,12 +193,7 @@ export function ZoomTrack(props: {
 										start: baseSegment.start,
 										end: Math.max(minEndTime, endTime),
 										amount: 1.5,
-										mode: {
-											manual: {
-												x: 0.5,
-												y: 0.5,
-											},
-										},
+										mode: "auto",
 									});
 
 									createdSegmentIndex = index;

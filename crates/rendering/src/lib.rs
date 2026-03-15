@@ -347,6 +347,12 @@ pub async fn render_video_to_channel(
             friction: project.cursor.friction,
         });
 
+    let zoom_segments_vec: Vec<orbit_project::ZoomSegment> = project
+        .timeline
+        .as_ref()
+        .map(|t| t.zoom_segments.clone())
+        .unwrap_or_default();
+
     let zoom_focus_interpolators: Vec<ZoomFocusInterpolator> = render_segments
         .iter()
         .map(|segment| {
@@ -356,6 +362,7 @@ pub async fn render_video_to_channel(
                 project.screen_movement_spring,
                 duration,
             );
+            interp.set_zoom_segments(zoom_segments_vec.clone());
             interp.precompute();
             interp
         })
@@ -639,6 +646,12 @@ pub async fn render_video_to_channel_nv12(
             friction: project.cursor.friction,
         });
 
+    let zoom_segments_vec: Vec<orbit_project::ZoomSegment> = project
+        .timeline
+        .as_ref()
+        .map(|t| t.zoom_segments.clone())
+        .unwrap_or_default();
+
     let zoom_focus_interpolators: Vec<ZoomFocusInterpolator> = render_segments
         .iter()
         .map(|segment| {
@@ -648,6 +661,7 @@ pub async fn render_video_to_channel_nv12(
                 project.screen_movement_spring,
                 duration,
             );
+            interp.set_zoom_segments(zoom_segments_vec.clone());
             interp.precompute();
             interp
         })

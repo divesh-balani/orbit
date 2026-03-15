@@ -448,9 +448,9 @@ pub struct ScreenMovementSpring {
 impl Default for ScreenMovementSpring {
     fn default() -> Self {
         Self {
-            stiffness: 200.0,
-            damping: 40.0,
-            mass: 2.25,
+            stiffness: 70.0,
+            damping: 35.0,
+            mass: 5.0,
         }
     }
 }
@@ -459,14 +459,14 @@ impl CursorAnimationStyle {
     pub fn preset(self) -> Option<CursorSmoothingPreset> {
         match self {
             Self::Slow => Some(CursorSmoothingPreset {
-                tension: 200.0,
-                mass: 2.25,
-                friction: 40.0,
+                tension: 120.0,
+                mass: 3.5,
+                friction: 35.0,
             }),
             Self::Mellow => Some(CursorSmoothingPreset {
-                tension: 470.0,
-                mass: 3.0,
-                friction: 70.0,
+                tension: 280.0,
+                mass: 3.5,
+                friction: 55.0,
             }),
             Self::Custom => None,
         }

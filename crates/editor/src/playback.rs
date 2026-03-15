@@ -672,11 +672,18 @@ impl Playback {
                             friction: cached_project.cursor.friction,
                         });
 
-                    let zoom_focus_interpolator = ZoomFocusInterpolator::new_arc(
+                    let mut zoom_focus_interpolator = ZoomFocusInterpolator::new_arc(
                         segment_media.cursor.clone(),
                         cursor_smoothing,
                         cached_project.screen_movement_spring,
                         duration,
+                    );
+                    zoom_focus_interpolator.set_zoom_segments(
+                        cached_project
+                            .timeline
+                            .as_ref()
+                            .map(|t| t.zoom_segments.clone())
+                            .unwrap_or_default(),
                     );
 
                     let uniforms = ProjectUniforms::new(

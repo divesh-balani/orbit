@@ -7,6 +7,7 @@ use crate::{
 };
 
 const SAMPLE_INTERVAL_MS: f64 = 8.0;
+const DEAD_ZONE_RATIO: f32 = 0.45;
 
 #[derive(Clone)]
 struct SmoothedFocusEvent {
@@ -20,6 +21,7 @@ pub struct ZoomFocusInterpolator {
     cursor_smoothing: Option<SpringMassDamperSimulationConfig>,
     screen_spring: ScreenMovementSpring,
     duration_secs: f64,
+    zoom_segments: Vec<ZoomSegment>,
 }
 
 impl ZoomFocusInterpolator {
@@ -35,6 +37,7 @@ impl ZoomFocusInterpolator {
             cursor_smoothing,
             screen_spring,
             duration_secs,
+            zoom_segments: Vec::new(),
         }
     }
 
@@ -50,7 +53,21 @@ impl ZoomFocusInterpolator {
             cursor_smoothing,
             screen_spring,
             duration_secs,
+            zoom_segments: Vec::new(),
         }
+    }
+
+    pub fn set_zoom_segments(&mut self, segments: Vec<ZoomSegment>) {
+        self.zoom_segments = segments;
+    }
+
+    fn zoom_amount_at_time(&self, time_secs: f64) -> f64 {
+        for segment in &self.zoom_segments {
+            if time_secs >= segment.start && time_secs <= segment.end {
+                return segment.amount;
+            }
+        }
+        1.0
     }
 
     pub fn precompute(&mut self) {
@@ -95,11 +112,44 @@ impl ZoomFocusInterpolator {
             if let Some(cursor) =
                 interpolate_cursor(&self.cursor_events, time_secs, self.cursor_smoothing)
             {
-                let target = XY::new(
+                let cursor_pos = XY::new(
                     cursor.position.coord.x as f32,
                     cursor.position.coord.y as f32,
                 );
-                sim.set_target_position(target);
+
+                let zoom_amount = self.zoom_amount_at_time(time_secs as f64) as f32;
+
+                if zoom_amount > 1.01 {
+                    let viewport_half = 0.5 / zoom_amount;
+                    let dead_zone = viewport_half * DEAD_ZONE_RATIO;
+
+                    let dx = cursor_pos.x - sim.position.x;
+                    let dy = cursor_pos.y - sim.position.y;
+
+                    let needs_move_x = dx.abs() > dead_zone;
+                    let needs_move_y = dy.abs() > dead_zone;
+
+                    if needs_move_x || needs_move_y {
+                        let target_x = if needs_move_x {
+                            sim.position.x + dx - dx.signum() * dead_zone
+                        } else {
+                            sim.position.x
+                        };
+                        let target_y = if needs_move_y {
+                            sim.position.y + dy - dy.signum() * dead_zone
+                        } else {
+                            sim.position.y
+                        };
+                        sim.set_target_position(XY::new(
+                            target_x.clamp(viewport_half, 1.0 - viewport_half),
+                            target_y.clamp(viewport_half, 1.0 - viewport_half),
+                        ));
+                    } else {
+                        sim.set_target_position(sim.position);
+                    }
+                } else {
+                    sim.set_target_position(cursor_pos);
+                }
             }
 
             sim.run(SAMPLE_INTERVAL_MS as f32);

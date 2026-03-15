@@ -2,11 +2,11 @@ use orbit_project::{XY, ZoomSegment};
 
 use crate::{Coord, RawDisplayUVSpace};
 
-pub const ZOOM_DURATION: f64 = 1.0;
+pub const ZOOM_DURATION: f64 = 0.7;
 
-const SCREEN_SPRING_STIFFNESS: f64 = 200.0;
-const SCREEN_SPRING_DAMPING: f64 = 40.0;
-const SCREEN_SPRING_MASS: f64 = 2.25;
+const SCREEN_SPRING_STIFFNESS: f64 = 100.0;
+const SCREEN_SPRING_DAMPING: f64 = 32.0;
+const SCREEN_SPRING_MASS: f64 = 3.5;
 
 #[derive(Debug, Clone, Copy)]
 pub struct SegmentsCursor<'a> {
@@ -730,7 +730,13 @@ mod test {
     fn two_segments_small_gap() {
         let segments = vec![
             test_segment(2.0, 4.0, 2.0, 0.5, 0.5),
-            test_segment(4.0 + ZOOM_DURATION * 0.75, 6.0, 4.0, 0.5, 0.5),
+            test_segment(
+                4.0 + ZOOM_DURATION * 0.75,
+                4.0 + ZOOM_DURATION * 2.75,
+                4.0,
+                0.5,
+                0.5,
+            ),
         ];
 
         test_interp(

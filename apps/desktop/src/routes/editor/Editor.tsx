@@ -202,11 +202,38 @@ function EditorContent(props: { projectPath: string }) {
 function Inner() {
 	const {
 		project,
+		setProject,
 		editorState,
 		setEditorState,
 		previewResolutionBase,
 		dialog,
 	} = useEditorContext();
+
+	const [autoZoomGenerated, setAutoZoomGenerated] = createSignal(false);
+
+	createEffect(() => {
+		if (autoZoomGenerated()) return;
+		const existingSegments = project.timeline?.zoomSegments;
+		if (existingSegments && existingSegments.length > 0) {
+			setAutoZoomGenerated(true);
+			return;
+		}
+		setAutoZoomGenerated(true);
+		commands
+			.generateZoomSegmentsFromClicks()
+			.then((zoomSegments) => {
+				if (zoomSegments.length > 0) {
+					setProject("timeline", "zoomSegments", zoomSegments);
+					const currentSize = project.cursor?.size ?? 0;
+					if (currentSize < 200) {
+						setProject("cursor", "size", 200);
+					}
+				}
+			})
+			.catch((error) => {
+				console.error("Failed to auto-generate zoom segments:", error);
+			});
+	});
 
 	const isExportMode = () => {
 		const d = dialog();

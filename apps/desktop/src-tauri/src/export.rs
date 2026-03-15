@@ -333,11 +333,18 @@ pub async fn generate_export_preview(
             friction: project_config.cursor.friction,
         });
 
-    let zoom_focus_interpolator = ZoomFocusInterpolator::new(
+    let mut zoom_focus_interpolator = ZoomFocusInterpolator::new(
         &render_segment.cursor,
         cursor_smoothing,
         project_config.screen_movement_spring,
         total_duration,
+    );
+    zoom_focus_interpolator.set_zoom_segments(
+        project_config
+            .timeline
+            .as_ref()
+            .map(|t| t.zoom_segments.clone())
+            .unwrap_or_default(),
     );
 
     let uniforms = ProjectUniforms::new(
@@ -479,11 +486,18 @@ pub async fn generate_export_preview_fast(
             friction: project_config.cursor.friction,
         });
 
-    let zoom_focus_interpolator = ZoomFocusInterpolator::new(
+    let mut zoom_focus_interpolator = ZoomFocusInterpolator::new(
         &segment_media.cursor,
         cursor_smoothing,
         project_config.screen_movement_spring,
         total_duration,
+    );
+    zoom_focus_interpolator.set_zoom_segments(
+        project_config
+            .timeline
+            .as_ref()
+            .map(|t| t.zoom_segments.clone())
+            .unwrap_or_default(),
     );
 
     let uniforms = ProjectUniforms::new(
