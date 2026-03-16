@@ -37,7 +37,6 @@ pub mod spring_mass_damper;
 mod text;
 pub mod yuv_converter;
 mod zoom;
-pub mod zoom_focus_interpolation;
 
 pub use coord::*;
 pub use decoder::{DecodedFrame, DecoderStatus, DecoderType, PixelFormat};
@@ -48,7 +47,6 @@ use mask::interpolate_masks;
 use scene::*;
 use text::{PreparedText, prepare_texts};
 use zoom::*;
-pub use zoom_focus_interpolation::ZoomFocusInterpolator;
 
 const STANDARD_CURSOR_HEIGHT: f32 = 75.0;
 
@@ -340,34 +338,6 @@ pub async fn render_video_to_channel(
 
     let total_frames = (fps as f64 * duration).ceil() as u32;
 
-    let cursor_smoothing =
-        (!project.cursor.raw).then_some(spring_mass_damper::SpringMassDamperSimulationConfig {
-            tension: project.cursor.tension,
-            mass: project.cursor.mass,
-            friction: project.cursor.friction,
-        });
-
-    let zoom_segments_vec: Vec<orbit_project::ZoomSegment> = project
-        .timeline
-        .as_ref()
-        .map(|t| t.zoom_segments.clone())
-        .unwrap_or_default();
-
-    let zoom_focus_interpolators: Vec<ZoomFocusInterpolator> = render_segments
-        .iter()
-        .map(|segment| {
-            let mut interp = ZoomFocusInterpolator::new(
-                &segment.cursor,
-                cursor_smoothing,
-                project.screen_movement_spring,
-                duration,
-            );
-            interp.set_zoom_segments(zoom_segments_vec.clone());
-            interp.precompute();
-            interp
-        })
-        .collect();
-
     let mut frame_number = 0;
 
     let mut frame_renderer = FrameRenderer::new(constants);
@@ -452,8 +422,6 @@ pub async fn render_video_to_channel(
         if let Some(segment_frames) = segment_frames {
             consecutive_failures = 0;
 
-            let zoom_focus_interp = &zoom_focus_interpolators[segment_clip_index];
-
             let uniforms = ProjectUniforms::new(
                 constants,
                 project,
@@ -463,7 +431,6 @@ pub async fn render_video_to_channel(
                 &render_segment.cursor,
                 &segment_frames,
                 duration,
-                zoom_focus_interp,
             );
 
             let next_frame_number = frame_number;
@@ -639,34 +606,6 @@ pub async fn render_video_to_channel_nv12(
 
     let total_frames = (fps as f64 * duration).ceil() as u32;
 
-    let cursor_smoothing =
-        (!project.cursor.raw).then_some(spring_mass_damper::SpringMassDamperSimulationConfig {
-            tension: project.cursor.tension,
-            mass: project.cursor.mass,
-            friction: project.cursor.friction,
-        });
-
-    let zoom_segments_vec: Vec<orbit_project::ZoomSegment> = project
-        .timeline
-        .as_ref()
-        .map(|t| t.zoom_segments.clone())
-        .unwrap_or_default();
-
-    let zoom_focus_interpolators: Vec<ZoomFocusInterpolator> = render_segments
-        .iter()
-        .map(|segment| {
-            let mut interp = ZoomFocusInterpolator::new(
-                &segment.cursor,
-                cursor_smoothing,
-                project.screen_movement_spring,
-                duration,
-            );
-            interp.set_zoom_segments(zoom_segments_vec.clone());
-            interp.precompute();
-            interp
-        })
-        .collect();
-
     let mut frame_number = 0;
 
     let mut frame_renderer = FrameRenderer::new(constants);
@@ -752,8 +691,6 @@ pub async fn render_video_to_channel_nv12(
         if let Some(segment_frames) = segment_frames {
             consecutive_failures = 0;
 
-            let zoom_focus_interp = &zoom_focus_interpolators[segment_clip_index];
-
             let uniforms = ProjectUniforms::new(
                 constants,
                 project,
@@ -763,7 +700,6 @@ pub async fn render_video_to_channel_nv12(
                 &render_segment.cursor,
                 &segment_frames,
                 duration,
-                zoom_focus_interp,
             );
 
             let next_frame_number = frame_number;
@@ -1800,7 +1736,6 @@ impl ProjectUniforms {
         cursor_events: &CursorEvents,
         segment_frames: &DecodedSegmentFrames,
         total_duration: f64,
-        zoom_focus_interpolator: &ZoomFocusInterpolator,
     ) -> Self {
         let options = &constants.options;
         let output_size = Self::get_output_size(options, project, resolution_base);
@@ -1862,29 +1797,10 @@ impl ProjectUniforms {
             .map(|t| t.scene_segments.as_slice())
             .unwrap_or(&[]);
 
-        let zoom_focus = zoom_focus_interpolator.interpolate(current_recording_time);
+        let zoom = InterpolatedZoom::new(SegmentsCursor::new(frame_time as f64, zoom_segments));
 
-        let prev_zoom_focus = zoom_focus_interpolator.interpolate(prev_recording_time);
-
-        let actual_cursor_coord = interpolated_cursor
-            .as_ref()
-            .map(|c| Coord::<RawDisplayUVSpace>::new(c.position.coord));
-
-        let prev_actual_cursor_coord = prev_interpolated_cursor
-            .as_ref()
-            .map(|c| Coord::<RawDisplayUVSpace>::new(c.position.coord));
-
-        let zoom = InterpolatedZoom::new_with_cursor(
-            SegmentsCursor::new(frame_time as f64, zoom_segments),
-            zoom_focus,
-            actual_cursor_coord,
-        );
-
-        let prev_zoom = InterpolatedZoom::new_with_cursor(
-            SegmentsCursor::new(prev_frame_time as f64, zoom_segments),
-            prev_zoom_focus,
-            prev_actual_cursor_coord,
-        );
+        let prev_zoom =
+            InterpolatedZoom::new(SegmentsCursor::new(prev_frame_time as f64, zoom_segments));
 
         let scene =
             InterpolatedScene::new(SceneSegmentsCursor::new(frame_time as f64, scene_segments));

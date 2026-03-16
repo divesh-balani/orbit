@@ -9,7 +9,7 @@ use orbit_project::{
 };
 use orbit_rendering::{
     DecodedFrame, DecodedSegmentFrames, FrameRenderer, ProjectUniforms, RenderVideoConstants,
-    RendererLayers, ZoomFocusInterpolator,
+    RendererLayers,
 };
 use relative_path::RelativePathBuf;
 use serde::Serialize;
@@ -351,12 +351,6 @@ impl ScreenshotEditorInstances {
                             ProjectUniforms::get_base_size(&constants.options, &current_config);
 
                         let cursor_events = orbit_project::CursorEvents::default();
-                        let zoom_focus_interpolator = ZoomFocusInterpolator::new(
-                            &cursor_events,
-                            None,
-                            current_config.screen_movement_spring,
-                            0.0,
-                        );
 
                         let uniforms = ProjectUniforms::new(
                             &constants,
@@ -367,7 +361,6 @@ impl ScreenshotEditorInstances {
                             &cursor_events,
                             &segment_frames,
                             0.0,
-                            &zoom_focus_interpolator,
                         );
 
                         let rendered_frame = frame_renderer

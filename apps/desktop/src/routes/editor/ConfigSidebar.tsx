@@ -3042,12 +3042,10 @@ function ZoomSegmentConfig(props: {
 		projectHistory,
 	} = useEditorContext();
 
-	const states = {
-		manual:
-			props.segment.mode === "auto"
-				? { x: 0.5, y: 0.5 }
-				: props.segment.mode.manual,
-	};
+	const manual = () =>
+		props.segment.mode === "auto"
+			? { x: 0.5, y: 0.5 }
+			: props.segment.mode.manual;
 
 	return (
 		<>
@@ -3072,48 +3070,9 @@ function ZoomSegmentConfig(props: {
 					formatTooltip="x"
 				/>
 			</Field>
-			<Field name="Zoom Mode" icon={<IconOrbitSettings />}>
-				<KTabs
-					class="space-y-6"
-					value={props.segment.mode === "auto" ? "auto" : "manual"}
-					onChange={(v) => {
-						setProject(
-							"timeline",
-							"zoomSegments",
-							props.segmentIndex,
-							"mode",
-							v === "auto" ? "auto" : { manual: states.manual },
-						);
-					}}
-				>
-					<KTabs.List class="flex flex-row items-center rounded-[0.5rem] relative border">
-						<KTabs.Trigger
-							value="auto"
-							class="z-10 flex-1 py-2.5 text-gray-11 transition-colors duration-100 outline-none ui-selected:text-gray-12 peer"
-							disabled={!generalSettings.data?.custom_cursor_capture2}
-						>
-							Auto
-						</KTabs.Trigger>
-						<KTabs.Trigger
-							value="manual"
-							class="z-10 flex-1 py-2.5 text-gray-11 transition-colors duration-100 outline-none ui-selected:text-gray-12 peer"
-						>
-							Manual
-						</KTabs.Trigger>
-						<KTabs.Indicator class="absolute flex p-px inset-0 transition-transform peer-focus-visible:outline outline-2 outline-blue-9 outline-offset-2 rounded-[0.6rem] overflow-hidden">
-							<div class="flex-1 bg-gray-3" />
-						</KTabs.Indicator>
-					</KTabs.List>
-					<KTabs.Content value="manual" tabIndex="">
-						<Show
-							when={(() => {
-								const m = props.segment.mode;
-								if (m === "auto") return;
-
-								return m.manual;
-							})()}
-						>
-							{(mode) => {
+			<Field name="Zoom Position" icon={<IconOrbitSettings />}>
+				{(() => {
+					const mode = manual;
 								const start = createMemo<number>((prev) => {
 									if (projectHistory.isPaused()) return prev;
 
@@ -3322,10 +3281,7 @@ function ZoomSegmentConfig(props: {
 										</div>
 									</div>
 								);
-							}}
-						</Show>
-					</KTabs.Content>
-				</KTabs>
+				})()}
 			</Field>
 		</>
 	);

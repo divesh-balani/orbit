@@ -12,10 +12,7 @@ use orbit_audio::{LatencyCorrectionConfig, LatencyCorrector, default_output_late
 use orbit_media::MediaError;
 use orbit_media_info::AudioInfo;
 use orbit_project::{ProjectConfiguration, XY};
-use orbit_rendering::{
-    DecodedSegmentFrames, ProjectUniforms, RenderVideoConstants, ZoomFocusInterpolator,
-    spring_mass_damper::SpringMassDamperSimulationConfig,
-};
+use orbit_rendering::{DecodedSegmentFrames, ProjectUniforms, RenderVideoConstants};
 use std::{
     collections::{HashSet, VecDeque},
     num::NonZeroUsize,
@@ -665,27 +662,6 @@ impl Playback {
                         );
                     }
 
-                    let cursor_smoothing =
-                        (!cached_project.cursor.raw).then_some(SpringMassDamperSimulationConfig {
-                            tension: cached_project.cursor.tension,
-                            mass: cached_project.cursor.mass,
-                            friction: cached_project.cursor.friction,
-                        });
-
-                    let mut zoom_focus_interpolator = ZoomFocusInterpolator::new_arc(
-                        segment_media.cursor.clone(),
-                        cursor_smoothing,
-                        cached_project.screen_movement_spring,
-                        duration,
-                    );
-                    zoom_focus_interpolator.set_zoom_segments(
-                        cached_project
-                            .timeline
-                            .as_ref()
-                            .map(|t| t.zoom_segments.clone())
-                            .unwrap_or_default(),
-                    );
-
                     let uniforms = ProjectUniforms::new(
                         &self.render_constants,
                         &cached_project,
@@ -695,7 +671,6 @@ impl Playback {
                         &segment_media.cursor,
                         &segment_frames,
                         duration,
-                        &zoom_focus_interpolator,
                     );
 
                     self.renderer.render_frame(

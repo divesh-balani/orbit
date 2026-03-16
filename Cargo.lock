@@ -5615,33 +5615,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8c04f5d74368e4d0dfe06c45c8627c81bd7c317d52762d118fb9b3076f6420fd"
 
 [[package]]
-name = "orbit"
-version = "0.1.0"
-dependencies = [
- "cidre",
- "clap",
- "ffmpeg-next",
- "flume",
- "orbit-camera",
- "orbit-editor",
- "orbit-export",
- "orbit-flags",
- "orbit-media",
- "orbit-project",
- "orbit-recording",
- "orbit-rendering",
- "orbit-utils",
- "serde",
- "serde_json",
- "sorbit-targets",
- "tokio",
- "tracing",
- "tracing-subscriber",
- "uuid",
- "workspace-hack",
-]
-
-[[package]]
 name = "orbit-api"
 version = "0.0.0"
 dependencies = [

@@ -5,7 +5,7 @@ use orbit_export::ExporterBase;
 use orbit_project::{RecordingMeta, XY};
 use orbit_rendering::{
     FrameRenderer, ProjectRecordingsMeta, ProjectUniforms, RenderSegment, RenderVideoConstants,
-    RendererLayers, ZoomFocusInterpolator, spring_mass_damper::SpringMassDamperSimulationConfig,
+    RendererLayers,
 };
 use serde::{Deserialize, Serialize};
 use specta::Type;
@@ -326,27 +326,6 @@ pub async fn generate_export_preview(
         .map(|t| t.duration())
         .unwrap_or(0.0);
 
-    let cursor_smoothing =
-        (!project_config.cursor.raw).then_some(SpringMassDamperSimulationConfig {
-            tension: project_config.cursor.tension,
-            mass: project_config.cursor.mass,
-            friction: project_config.cursor.friction,
-        });
-
-    let mut zoom_focus_interpolator = ZoomFocusInterpolator::new(
-        &render_segment.cursor,
-        cursor_smoothing,
-        project_config.screen_movement_spring,
-        total_duration,
-    );
-    zoom_focus_interpolator.set_zoom_segments(
-        project_config
-            .timeline
-            .as_ref()
-            .map(|t| t.zoom_segments.clone())
-            .unwrap_or_default(),
-    );
-
     let uniforms = ProjectUniforms::new(
         &render_constants,
         &project_config,
@@ -356,7 +335,6 @@ pub async fn generate_export_preview(
         &render_segment.cursor,
         &segment_frames,
         total_duration,
-        &zoom_focus_interpolator,
     );
 
     let mut frame_renderer = FrameRenderer::new(&render_constants);
@@ -479,27 +457,6 @@ pub async fn generate_export_preview_fast(
         .map(|t| t.duration())
         .unwrap_or(0.0);
 
-    let cursor_smoothing =
-        (!project_config.cursor.raw).then_some(SpringMassDamperSimulationConfig {
-            tension: project_config.cursor.tension,
-            mass: project_config.cursor.mass,
-            friction: project_config.cursor.friction,
-        });
-
-    let mut zoom_focus_interpolator = ZoomFocusInterpolator::new(
-        &segment_media.cursor,
-        cursor_smoothing,
-        project_config.screen_movement_spring,
-        total_duration,
-    );
-    zoom_focus_interpolator.set_zoom_segments(
-        project_config
-            .timeline
-            .as_ref()
-            .map(|t| t.zoom_segments.clone())
-            .unwrap_or_default(),
-    );
-
     let uniforms = ProjectUniforms::new(
         &editor.render_constants,
         &project_config,
@@ -509,7 +466,6 @@ pub async fn generate_export_preview_fast(
         &segment_media.cursor,
         &segment_frames,
         total_duration,
-        &zoom_focus_interpolator,
     );
 
     let mut frame_renderer = FrameRenderer::new(&editor.render_constants);

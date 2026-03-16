@@ -8,8 +8,7 @@ use orbit_project::{
 };
 use orbit_rendering::{
     ProjectRecordingsMeta, ProjectUniforms, RecordingSegmentDecoders, RenderVideoConstants,
-    SegmentVideoPaths, SharedWgpuDevice, Video, ZoomFocusInterpolator, get_duration,
-    spring_mass_damper::SpringMassDamperSimulationConfig,
+    SegmentVideoPaths, SharedWgpuDevice, Video, get_duration,
 };
 use std::{
     path::{Path, PathBuf},
@@ -519,28 +518,6 @@ impl EditorInstance {
                                     .map(|t| t.duration())
                                     .unwrap_or(0.0);
 
-                                let cursor_smoothing = (!project.cursor.raw).then_some(
-                                    SpringMassDamperSimulationConfig {
-                                        tension: project.cursor.tension,
-                                        mass: project.cursor.mass,
-                                        friction: project.cursor.friction,
-                                    },
-                                );
-
-                                let mut zoom_focus_interpolator = ZoomFocusInterpolator::new_arc(
-                                    segment_medias.cursor.clone(),
-                                    cursor_smoothing,
-                                    project.screen_movement_spring,
-                                    total_duration,
-                                );
-                                zoom_focus_interpolator.set_zoom_segments(
-                                    project
-                                        .timeline
-                                        .as_ref()
-                                        .map(|t| t.zoom_segments.clone())
-                                        .unwrap_or_default(),
-                                );
-
                                 let uniforms = ProjectUniforms::new(
                                     &self.render_constants,
                                     &project,
@@ -550,7 +527,6 @@ impl EditorInstance {
                                     &segment_medias.cursor,
                                     &segment_frames,
                                     total_duration,
-                                    &zoom_focus_interpolator,
                                 );
                                 self.renderer
                                     .render_frame(segment_frames, uniforms, segment_medias.cursor.clone());
