@@ -1627,7 +1627,6 @@ impl ProjectUniforms {
         resolve_motion_descriptor(&analysis, base_amount, CAMERA_MULTIPLIER, CAMERA_MULTIPLIER)
     }
 
-    #[allow(dead_code)]
     fn auto_zoom_focus(
         cursor_events: &CursorEvents,
         time_secs: f32,
@@ -1797,10 +1796,39 @@ impl ProjectUniforms {
             .map(|t| t.scene_segments.as_slice())
             .unwrap_or(&[]);
 
-        let zoom = InterpolatedZoom::new(SegmentsCursor::new(frame_time as f64, zoom_segments));
+        let zoom_focus = Self::auto_zoom_focus(
+            cursor_events,
+            cursor_time_for_interp,
+            cursor_smoothing,
+            interpolated_cursor.clone(),
+        );
 
-        let prev_zoom =
-            InterpolatedZoom::new(SegmentsCursor::new(prev_frame_time as f64, zoom_segments));
+        let prev_zoom_focus = Self::auto_zoom_focus(
+            cursor_events,
+            prev_cursor_time_for_interp,
+            cursor_smoothing,
+            prev_interpolated_cursor.clone(),
+        );
+
+        let actual_cursor_coord = interpolated_cursor
+            .as_ref()
+            .map(|cursor| Coord::<RawDisplayUVSpace>::new(cursor.position.coord));
+
+        let prev_actual_cursor_coord = prev_interpolated_cursor
+            .as_ref()
+            .map(|cursor| Coord::<RawDisplayUVSpace>::new(cursor.position.coord));
+
+        let zoom = InterpolatedZoom::new_with_cursor(
+            SegmentsCursor::new(frame_time as f64, zoom_segments),
+            zoom_focus,
+            actual_cursor_coord,
+        );
+
+        let prev_zoom = InterpolatedZoom::new_with_cursor(
+            SegmentsCursor::new(prev_frame_time as f64, zoom_segments),
+            prev_zoom_focus,
+            prev_actual_cursor_coord,
+        );
 
         let scene =
             InterpolatedScene::new(SceneSegmentsCursor::new(frame_time as f64, scene_segments));
