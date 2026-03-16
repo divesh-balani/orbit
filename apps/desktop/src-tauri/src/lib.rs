@@ -38,12 +38,12 @@ mod window_exclusion;
 mod windows;
 
 use audio::AppSounds;
-use auth::{AuthStore, Plan};
+use auth::{AuthStore, DesktopAccessSnapshot, Plan};
 use camera::{CameraPreviewManager, CameraPreviewState};
 use clipboard_rs::common::RustImage;
 use clipboard_rs::{Clipboard, ClipboardContext};
 use cpal::StreamError;
-use editor_window::{EditorInstances, WindowEditorInstance};
+use editor_window::{EditorInstances, PendingEditorInstances, WindowEditorInstance};
 use ffmpeg::ffi::AV_TIME_BASE;
 use general_settings::GeneralSettingsStore;
 use kameo::{Actor, actor::ActorRef};
@@ -2545,6 +2545,7 @@ async fn check_upgraded_and_update(app: AppHandle) -> Result<bool, String> {
             last_checked: chrono::Utc::now().timestamp() as i32,
         }),
         organizations: auth.organizations,
+        desktop_access: auth.desktop_access,
     };
     println!("Updating auth store with new pro status");
     AuthStore::set(&app, Some(updated_auth)).map_err(|e| e.to_string())?;
@@ -2980,6 +2981,13 @@ async fn update_auth_plan(app: AppHandle) {
     AuthStore::update_auth_plan(&app).await.ok();
 }
 
+#[tauri::command]
+#[specta::specta]
+#[instrument(skip(app))]
+async fn refresh_desktop_access(app: AppHandle) -> Result<DesktopAccessSnapshot, String> {
+    AuthStore::refresh_desktop_access(&app).await
+}
+
 pub async fn open_target_picker(
     app: &tauri::AppHandle,
     target_mode: recording_settings::RecordingTargetMode,
@@ -3115,6 +3123,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
             list_fails,
             set_fail,
             update_auth_plan,
+            refresh_desktop_access,
             set_window_transparent,
             get_editor_meta,
             get_recording_meta_by_path,
@@ -3820,6 +3829,8 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                     {
                         window.set_focus().ok();
                     }
+                } else if PendingEditorInstances::get(&_handle).has_pending() {
+                    return;
                 } else {
                     let handle = _handle.clone();
                     tokio::spawn(async move {

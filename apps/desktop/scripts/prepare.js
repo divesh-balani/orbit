@@ -7,38 +7,30 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-/**
- * Creates a Microsoft Windows Installer (TM) compatible version from the provided crate's semver version.
- * `major.minor.patch.build`
- *
- * @see {@link https://tauri.app/reference/config/#version-1}
- * @param {string} cargoFilePath
- * @returns {Promise<string>}
- */
-async function semverToWIXCompatibleVersion(cargoFilePath) {
-	const config = await fs.readFile(cargoFilePath, "utf-8");
-	const match = /version\s*=\s*"([\w.-]+)"/.exec(config);
-	if (!match)
-		throw new Error(
-			'Failed to extract version from "Cargo.toml". Have you removed the main crate version by accident?',
-		);
+function resolveUpdaterConfig() {
+	const repository =
+		process.env.TAURI_UPDATER_REPOSITORY ||
+		process.env.GITHUB_REPOSITORY ||
+		"divesh-balani/orbit";
+	const endpoints = process.env.TAURI_UPDATER_ENDPOINTS
+		? process.env.TAURI_UPDATER_ENDPOINTS.split(",")
+				.map((endpoint) => endpoint.trim())
+				.filter(Boolean)
+		: [`https://github.com/${repository}/releases/latest/download/latest.json`];
+	const pubkey = process.env.TAURI_UPDATER_PUBLIC_KEY ?? "";
 
-	const ver = match[1];
-	const [core, buildOrPrerelease] = ver.includes("+")
-		? ver.split("+")
-		: ver.split("-");
-	const [major, minor, patch] = core.split(".");
-	let build = 0;
-	if (buildOrPrerelease) {
-		const numMatch = buildOrPrerelease.match(/\d+$/);
-		build = numMatch ? parseInt(numMatch[0], 10) : 0;
-	}
-	const wixVersion = `${major}.${minor}.${patch}${
-		build === 0 ? "" : `.${build}`
-	}`;
-	if (wixVersion !== ver)
-		console.log(`Using wix-compatible version ${ver} --> ${wixVersion}`);
-	return wixVersion;
+	return {
+		plugins: {
+			updater: {
+				active: Boolean(pubkey),
+				pubkey,
+				endpoints,
+				windows: {
+					installMode: "passive",
+				},
+			},
+		},
+	};
 }
 /**
  * Deeply merges two objects
@@ -80,17 +72,23 @@ export async function createTauriPlatformConfigs(
 		baseConfig = {
 			...baseConfig,
 			bundle: {
+				targets: ["nsis"],
 				resources: {
 					"../../../target/ffmpeg/bin/*.dll": "./",
 				},
-				windows: {
-					wix: {
-						version: await semverToWIXCompatibleVersion(
-							path.join(srcTauri, "Cargo.toml"),
-						),
-					},
-				},
 			},
+			...resolveUpdaterConfig(),
+		};
+	}
+
+	if (platform === "darwin") {
+		configFileName = "tauri.macos.conf.json";
+		baseConfig = {
+			...baseConfig,
+			bundle: {
+				targets: ["dmg"],
+			},
+			...resolveUpdaterConfig(),
 		};
 	}
 

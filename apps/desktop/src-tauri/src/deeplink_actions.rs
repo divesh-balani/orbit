@@ -6,7 +6,12 @@ use std::path::{Path, PathBuf};
 use tauri::{AppHandle, Manager, Url};
 use tracing::trace;
 
-use crate::{App, ArcLock, recording::StartRecordingInputs, windows::ShowCapWindow};
+use crate::{
+    App, ArcLock,
+    auth::{AuthSecret, AuthStore},
+    recording::StartRecordingInputs,
+    windows::ShowCapWindow,
+};
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -34,46 +39,16 @@ pub enum DeepLinkAction {
     },
 }
 
-pub fn handle(app_handle: &AppHandle, urls: Vec<Url>) {
-    trace!("Handling deep actions for: {:?}", &urls);
-
-    let actions: Vec<_> = urls
-        .into_iter()
-        .filter(|url| !url.as_str().is_empty())
-        .filter_map(|url| {
-            DeepLinkAction::try_from(&url)
-                .map_err(|e| match e {
-                    ActionParseFromUrlError::ParseFailed(msg) => {
-                        eprintln!("Failed to parse deep link \"{}\": {}", &url, msg)
-                    }
-                    ActionParseFromUrlError::Invalid => {
-                        eprintln!("Invalid deep link format \"{}\"", &url)
-                    }
-                    // Likely login action, not handled here.
-                    ActionParseFromUrlError::NotAction => {}
-                })
-                .ok()
-        })
-        .collect();
-
-    if actions.is_empty() {
-        return;
-    }
-
-    let app_handle = app_handle.clone();
-    tauri::async_runtime::spawn(async move {
-        for action in actions {
-            if let Err(e) = action.execute(&app_handle).await {
-                eprintln!("Failed to handle deep link action: {e}");
-            }
-        }
-    });
-}
-
 pub enum ActionParseFromUrlError {
     ParseFailed(String),
     Invalid,
     NotAction,
+}
+
+#[derive(Debug)]
+pub struct DeepLinkSignIn {
+    secret: AuthSecret,
+    user_id: Option<String>,
 }
 
 impl TryFrom<&Url> for DeepLinkAction {
@@ -87,7 +62,7 @@ impl TryFrom<&Url> for DeepLinkAction {
             });
         }
 
-        match url.domain() {
+        match url.domain().or_else(|| url.host_str()) {
             Some(v) if v != "action" => Err(ActionParseFromUrlError::NotAction),
             _ => Err(ActionParseFromUrlError::Invalid),
         }?;
@@ -101,6 +76,48 @@ impl TryFrom<&Url> for DeepLinkAction {
         let action: Self = serde_json::from_str(json_value)
             .map_err(|e| ActionParseFromUrlError::ParseFailed(e.to_string()))?;
         Ok(action)
+    }
+}
+
+impl TryFrom<&Url> for DeepLinkSignIn {
+    type Error = ActionParseFromUrlError;
+
+    fn try_from(url: &Url) -> Result<Self, Self::Error> {
+        if !matches!(url.domain().or_else(|| url.host_str()), Some("signin")) {
+            return Err(ActionParseFromUrlError::NotAction);
+        }
+
+        let params = url
+            .query_pairs()
+            .collect::<std::collections::HashMap<_, _>>();
+        let user_id = params.get("user_id").map(|value| value.to_string());
+
+        if let Some(api_key) = params.get("api_key") {
+            return Ok(Self {
+                secret: AuthSecret::ApiKey {
+                    api_key: api_key.to_string(),
+                },
+                user_id,
+            });
+        }
+
+        if let Some(token) = params.get("token") {
+            let expires = params
+                .get("expires")
+                .ok_or(ActionParseFromUrlError::Invalid)?
+                .parse::<i32>()
+                .map_err(|e| ActionParseFromUrlError::ParseFailed(e.to_string()))?;
+
+            return Ok(Self {
+                secret: AuthSecret::Session {
+                    token: token.to_string(),
+                    expires,
+                },
+                user_id,
+            });
+        }
+
+        Err(ActionParseFromUrlError::Invalid)
     }
 }
 
@@ -154,4 +171,73 @@ impl DeepLinkAction {
             }
         }
     }
+}
+
+impl DeepLinkSignIn {
+    async fn execute(self, app: &AppHandle) -> Result<(), String> {
+        AuthStore::set(
+            app,
+            Some(AuthStore {
+                secret: self.secret,
+                user_id: self.user_id,
+                plan: None,
+                organizations: Vec::new(),
+                desktop_access: None,
+            }),
+        )?;
+
+        ShowCapWindow::Main {
+            init_target_mode: None,
+        }
+        .show(app)
+        .await
+        .map(|_| ())
+        .map_err(|e| e.to_string())
+    }
+}
+
+pub fn handle(app_handle: &AppHandle, urls: Vec<Url>) {
+    trace!("Handling deep actions for: {:?}", &urls);
+
+    let mut actions = Vec::new();
+    let mut sign_ins = Vec::new();
+
+    for url in urls.into_iter().filter(|url| !url.as_str().is_empty()) {
+        if let Ok(sign_in) = DeepLinkSignIn::try_from(&url) {
+            sign_ins.push(sign_in);
+            continue;
+        }
+
+        match DeepLinkAction::try_from(&url) {
+            Ok(action) => actions.push(action),
+            Err(error) => match error {
+                ActionParseFromUrlError::ParseFailed(msg) => {
+                    eprintln!("Failed to parse deep link \"{}\": {}", &url, msg)
+                }
+                ActionParseFromUrlError::Invalid => {
+                    eprintln!("Invalid deep link format \"{}\"", &url)
+                }
+                ActionParseFromUrlError::NotAction => {}
+            },
+        }
+    }
+
+    if actions.is_empty() && sign_ins.is_empty() {
+        return;
+    }
+
+    let app_handle = app_handle.clone();
+    tauri::async_runtime::spawn(async move {
+        for sign_in in sign_ins {
+            if let Err(e) = sign_in.execute(&app_handle).await {
+                eprintln!("Failed to handle sign-in deep link: {e}");
+            }
+        }
+
+        for action in actions {
+            if let Err(e) = action.execute(&app_handle).await {
+                eprintln!("Failed to handle deep link action: {e}");
+            }
+        }
+    });
 }

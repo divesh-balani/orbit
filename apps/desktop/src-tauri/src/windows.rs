@@ -1119,7 +1119,6 @@ impl ShowCapWindow {
                 {
                     app.run_on_main_thread({
                         let window = window.clone();
-                        let app = app.clone();
                         move || {
                             use tauri::ActivationPolicy;
                             use tauri_nspanel::cocoa::appkit::NSWindowCollectionBehavior;
@@ -1362,10 +1361,6 @@ impl ShowCapWindow {
                 window
             }
             Self::Editor { .. } => {
-                #[cfg(target_os = "macos")]
-                app.set_activation_policy(tauri::ActivationPolicy::Regular)
-                    .ok();
-
                 let window = self
                     .window_builder(app, "/editor")
                     .maximizable(true)
@@ -1376,6 +1371,10 @@ impl ShowCapWindow {
 
                 let (pos_x, pos_y) = cursor_monitor.center_position(1275.0, 800.0);
                 let _ = window.set_position(tauri::LogicalPosition::new(pos_x, pos_y));
+
+                #[cfg(target_os = "macos")]
+                app.set_activation_policy(tauri::ActivationPolicy::Regular)
+                    .ok();
 
                 #[cfg(windows)]
                 {
@@ -1391,10 +1390,6 @@ impl ShowCapWindow {
                 window
             }
             Self::ScreenshotEditor { path: _ } => {
-                #[cfg(target_os = "macos")]
-                app.set_activation_policy(tauri::ActivationPolicy::Regular)
-                    .ok();
-
                 let window = self
                     .window_builder(app, "/screenshot-editor")
                     .maximizable(true)
@@ -1405,6 +1400,10 @@ impl ShowCapWindow {
 
                 let (pos_x, pos_y) = cursor_monitor.center_position(1240.0, 800.0);
                 let _ = window.set_position(tauri::LogicalPosition::new(pos_x, pos_y));
+
+                #[cfg(target_os = "macos")]
+                app.set_activation_policy(tauri::ActivationPolicy::Regular)
+                    .ok();
 
                 #[cfg(windows)]
                 {

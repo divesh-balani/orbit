@@ -8,7 +8,7 @@ import {
 	Show,
 } from "solid-js";
 import toast from "solid-toast";
-import { useEditorContext } from "./context";
+import { FPS, useEditorContext } from "./context";
 
 type PerformanceOverlayProps = {
 	size: { width: number; height: number };
@@ -124,7 +124,7 @@ export function PerformanceOverlay(_props: PerformanceOverlayProps) {
 					frameIntervals.push(interval);
 					frameTimestamps.push(now);
 
-					const expectedInterval = 1000 / 60;
+					const expectedInterval = 1000 / FPS;
 					if (interval > expectedInterval * 1.8) {
 						const missedFrames = Math.floor(interval / expectedInterval) - 1;
 						droppedFrameCount += missedFrames;

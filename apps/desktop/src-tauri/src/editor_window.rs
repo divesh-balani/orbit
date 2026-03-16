@@ -82,6 +82,13 @@ impl PendingEditorInstances {
         }
     }
 
+    pub fn has_pending(&self) -> bool {
+        self.0
+            .try_read()
+            .map(|instances| !instances.is_empty())
+            .unwrap_or(false)
+    }
+
     pub async fn start_prewarm(app: &AppHandle, window_label: String, path: PathBuf) {
         let pending = Self::get(app);
         let app = app.clone();

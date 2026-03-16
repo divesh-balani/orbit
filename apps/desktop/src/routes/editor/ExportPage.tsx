@@ -2,7 +2,6 @@ import { Button } from "@orbit/ui-solid";
 import { debounce } from "@solid-primitives/scheduled";
 import { makePersisted } from "@solid-primitives/storage";
 import { createMutation } from "@tanstack/solid-query";
-import { CheckMenuItem, Menu } from "@tauri-apps/api/menu";
 import { ask, save as saveDialog } from "@tauri-apps/plugin-dialog";
 import { remove } from "@tauri-apps/plugin-fs";
 import { type as ostype } from "@tauri-apps/plugin-os";
@@ -16,7 +15,6 @@ import {
 	on,
 	onCleanup,
 	Show,
-	Suspense,
 	Switch,
 } from "solid-js";
 import { createStore, produce, reconcile } from "solid-js/store";
@@ -56,8 +54,6 @@ const COMPRESSION_TO_BPP: Record<ExportCompression, number> = {
 };
 
 export const FPS_OPTIONS = [
-	{ label: "15 FPS", value: 15 },
-	{ label: "30 FPS", value: 30 },
 	{ label: "60 FPS", value: 60 },
 	{ label: "120 FPS", value: 120 },
 ] satisfies Array<{ label: string; value: number }>;
@@ -111,7 +107,6 @@ export function ExportPage() {
 		setExportState,
 		exportState,
 		meta,
-		refetchMeta,
 	} = useEditorContext();
 
 	const handleBack = () => {
@@ -138,7 +133,7 @@ export function ExportPage() {
 	const [_settings, setSettings] = makePersisted(
 		createStore<Settings>({
 			format: "Mp4",
-			fps: 30,
+			fps: 60,
 			exportTo: "file",
 			resolution: { label: "720p", value: "720p", width: 1280, height: 720 },
 			compression: "Maximum",
@@ -161,6 +156,13 @@ export function ExportPage() {
 
 		if (!VALID_COMPRESSIONS.includes(_settings.compression))
 			ret.compression = "Maximum";
+
+		const validFpsOptions = (
+			_settings.format === "Gif" ? GIF_FPS_OPTIONS : FPS_OPTIONS
+		).map((option) => option.value);
+		if (!validFpsOptions.includes(_settings.fps)) {
+			ret.fps = _settings.format === "Gif" ? 15 : 60;
+		}
 
 		return ret;
 	});
@@ -204,13 +206,6 @@ export function ExportPage() {
 	const isCustomBpp = () => {
 		const currentBpp = compressionBpp();
 		return !COMPRESSION_OPTIONS.some(
-			(opt) => Math.abs(opt.bpp - currentBpp) < 0.001,
-		);
-	};
-
-	const matchingPreset = () => {
-		const currentBpp = compressionBpp();
-		return COMPRESSION_OPTIONS.find(
 			(opt) => Math.abs(opt.bpp - currentBpp) < 0.001,
 		);
 	};
@@ -737,7 +732,7 @@ export function ExportPage() {
 																	(v) => v.value !== settings.fps,
 																)
 															)
-																newSettings.fps = 30;
+																newSettings.fps = 60;
 														}),
 													);
 												}}

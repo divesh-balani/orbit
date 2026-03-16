@@ -114,6 +114,20 @@ export type CanvasControls = {
 	captureFrame: () => Promise<Blob | null>;
 };
 
+type DirectFrameTiming = {
+	frameNumber: number;
+	targetTimeNs: bigint;
+};
+
+type DirectNv12Frame = {
+	buffer: ArrayBuffer;
+	width: number;
+	height: number;
+	yStride: number;
+	totalSize: number;
+	timing: DirectFrameTiming;
+};
+
 interface ReadyMessage {
 	type: "ready";
 }
@@ -209,6 +223,11 @@ export function createImageDataWS(
 	let mainThreadWebGPU: WebGPURenderer | null = null;
 	let mainThreadWebGPUInitializing = false;
 	let pendingNv12Frame: ArrayBuffer | null = null;
+	let directNv12Queue: DirectNv12Frame[] = [];
+	let directRenderFrameId: number | null = null;
+	let directPresentationStartTime: number | null = null;
+	let directPresentationStartTargetTimeNs: bigint | null = null;
+	let directLastRenderedFrameNumber = -1;
 
 	let lastRenderedFrameData: {
 		data: Uint8ClampedArray;
@@ -248,6 +267,227 @@ export function createImageDataWS(
 		}
 	}
 
+	function resetDirectNv12State() {
+		if (directRenderFrameId !== null) {
+			cancelAnimationFrame(directRenderFrameId);
+			directRenderFrameId = null;
+		}
+		directNv12Queue = [];
+		directPresentationStartTime = null;
+		directPresentationStartTargetTimeNs = null;
+		directLastRenderedFrameNumber = -1;
+	}
+
+	function parseDirectNv12Frame(buffer: ArrayBuffer): DirectNv12Frame | null {
+		const NV12_MAGIC = 0x4e563132;
+		if (buffer.byteLength < 28) return null;
+
+		const formatCheck = new DataView(buffer, buffer.byteLength - 4, 4);
+		if (formatCheck.getUint32(0, true) !== NV12_MAGIC) return null;
+
+		const metadataOffset = buffer.byteLength - 28;
+		const meta = new DataView(buffer, metadataOffset, 28);
+		const yStride = meta.getUint32(0, true);
+		const height = meta.getUint32(4, true);
+		const width = meta.getUint32(8, true);
+		const frameNumber = meta.getUint32(12, true);
+		const targetTimeNs = meta.getBigUint64(16, true);
+
+		if (width === 0 || height === 0) return null;
+
+		const ySize = yStride * height;
+		const uvSize = yStride * (height / 2);
+		const totalSize = ySize + uvSize;
+
+		if (buffer.byteLength - 28 < totalSize) return null;
+
+		return {
+			buffer,
+			width,
+			height,
+			yStride,
+			totalSize,
+			timing: {
+				frameNumber,
+				targetTimeNs,
+			},
+		};
+	}
+
+	function syncDirectCanvasContext() {
+		if (!directCanvas || !directCtx || directCanvas.isConnected) return true;
+
+		const domCanvas = document.getElementById(
+			"canvas",
+		) as HTMLCanvasElement | null;
+		if (!domCanvas) return false;
+
+		if (domCanvas !== directCanvas) {
+			directCanvas = domCanvas;
+			directCtx = domCanvas.getContext("2d", { alpha: false });
+		}
+
+		return !!directCanvas && !!directCtx;
+	}
+
+	function renderDirectNv12Frame(frame: DirectNv12Frame) {
+		if (!directCanvas) return;
+
+		const frameData = new Uint8ClampedArray(frame.buffer, 0, frame.totalSize);
+
+		if (
+			directCanvas.width !== frame.width ||
+			directCanvas.height !== frame.height
+		) {
+			directCanvas.width = frame.width;
+			directCanvas.height = frame.height;
+		}
+
+		if (mainThreadWebGPU) {
+			renderNv12FrameWebGPU(
+				mainThreadWebGPU,
+				frameData,
+				frame.width,
+				frame.height,
+				frame.yStride,
+			);
+		} else {
+			if (!syncDirectCanvasContext() || !directCtx) return;
+
+			const rgba = convertNv12ToRgbaMainThread(
+				frameData,
+				frame.width,
+				frame.height,
+				frame.yStride,
+			);
+
+			if (
+				!cachedDirectImageData ||
+				cachedDirectWidth !== frame.width ||
+				cachedDirectHeight !== frame.height
+			) {
+				cachedDirectImageData = new ImageData(frame.width, frame.height);
+				cachedDirectWidth = frame.width;
+				cachedDirectHeight = frame.height;
+			}
+
+			cachedDirectImageData.data.set(rgba);
+			directCtx.putImageData(cachedDirectImageData, 0, 0);
+		}
+
+		actualRendersCount++;
+		renderFrameCount++;
+		storeRenderedFrame(
+			frameData,
+			frame.width,
+			frame.height,
+			frame.yStride,
+			true,
+		);
+		onmessage({ width: frame.width, height: frame.height });
+	}
+
+	function renderDirectQueue(now: number) {
+		directRenderFrameId = null;
+
+		if (!directCanvas || directNv12Queue.length === 0) return;
+
+		if (!mainThreadWebGPU && !directCtx) {
+			directRenderFrameId = requestAnimationFrame(renderDirectQueue);
+			return;
+		}
+
+		if (
+			directPresentationStartTime === null ||
+			directPresentationStartTargetTimeNs === null
+		) {
+			directPresentationStartTime = now;
+			directPresentationStartTargetTimeNs =
+				directNv12Queue[0].timing.targetTimeNs;
+		}
+
+		const elapsedNs = BigInt(
+			Math.max(0, Math.round((now - directPresentationStartTime) * 1_000_000)),
+		);
+		const presentationTargetNs =
+			directPresentationStartTargetTimeNs + elapsedNs;
+
+		let selectedIndex = -1;
+		for (let i = 0; i < directNv12Queue.length; i++) {
+			if (directNv12Queue[i].timing.targetTimeNs <= presentationTargetNs) {
+				selectedIndex = i;
+			} else {
+				break;
+			}
+		}
+
+		if (selectedIndex < 0) {
+			if (directLastRenderedFrameNumber < 0) {
+				selectedIndex = 0;
+			} else {
+				directRenderFrameId = requestAnimationFrame(renderDirectQueue);
+				return;
+			}
+		}
+
+		if (selectedIndex > 0) {
+			framesDropped += selectedIndex;
+		}
+
+		const frame = directNv12Queue[selectedIndex];
+		directNv12Queue.splice(0, selectedIndex + 1);
+
+		if (
+			directLastRenderedFrameNumber >= 0 &&
+			frame.timing.frameNumber > directLastRenderedFrameNumber + 1
+		) {
+			framesDropped +=
+				frame.timing.frameNumber - directLastRenderedFrameNumber - 1;
+		}
+
+		renderDirectNv12Frame(frame);
+		directLastRenderedFrameNumber = frame.timing.frameNumber;
+
+		if (directNv12Queue.length > 0) {
+			directRenderFrameId = requestAnimationFrame(renderDirectQueue);
+		}
+	}
+
+	function queueDirectNv12Frame(buffer: ArrayBuffer) {
+		const frame = parseDirectNv12Frame(buffer);
+		if (!frame) return false;
+
+		const isDiscontinuity =
+			directLastRenderedFrameNumber >= 0 &&
+			(frame.timing.frameNumber < directLastRenderedFrameNumber ||
+				frame.timing.frameNumber > directLastRenderedFrameNumber + 30);
+
+		if (isDiscontinuity) {
+			resetDirectNv12State();
+		}
+
+		directNv12Queue.push(frame);
+
+		if (directNv12Queue.length > 8) {
+			framesDropped += directNv12Queue.length - 8;
+			directNv12Queue = directNv12Queue.slice(-8);
+		}
+
+		if (directRenderFrameId === null) {
+			directRenderFrameId = requestAnimationFrame(renderDirectQueue);
+		}
+
+		return true;
+	}
+
+	function flushPendingNv12Frame() {
+		if (!pendingNv12Frame) return;
+
+		const buffer = pendingNv12Frame;
+		pendingNv12Frame = null;
+		queueDirectNv12Frame(buffer);
+	}
+
 	function cleanup() {
 		if (isCleanedUp) return;
 		isCleanedUp = true;
@@ -269,6 +509,7 @@ export function createImageDataWS(
 		pendingFrame = null;
 		nextFrame = null;
 		isProcessing = false;
+		resetDirectNv12State();
 
 		if (mainThreadWebGPU) {
 			disposeWebGPU(mainThreadWebGPU);
@@ -288,97 +529,6 @@ export function createImageDataWS(
 		setIsConnected(false);
 	}
 
-	function renderPendingNv12Frame() {
-		if (!pendingNv12Frame || !mainThreadWebGPU || !directCanvas) return;
-
-		const buffer = pendingNv12Frame;
-		pendingNv12Frame = null;
-
-		const NV12_MAGIC = 0x4e563132;
-		if (buffer.byteLength < 28) return;
-
-		const formatCheck = new DataView(buffer, buffer.byteLength - 4, 4);
-		if (formatCheck.getUint32(0, true) !== NV12_MAGIC) return;
-
-		const metadataOffset = buffer.byteLength - 28;
-		const meta = new DataView(buffer, metadataOffset, 28);
-		const yStride = meta.getUint32(0, true);
-		const height = meta.getUint32(4, true);
-		const width = meta.getUint32(8, true);
-
-		if (width > 0 && height > 0) {
-			const ySize = yStride * height;
-			const uvSize = yStride * (height / 2);
-			const totalSize = ySize + uvSize;
-
-			const frameData = new Uint8ClampedArray(buffer, 0, totalSize);
-
-			if (directCanvas.width !== width || directCanvas.height !== height) {
-				directCanvas.width = width;
-				directCanvas.height = height;
-			}
-
-			renderNv12FrameWebGPU(
-				mainThreadWebGPU,
-				frameData,
-				width,
-				height,
-				yStride,
-			);
-
-			storeRenderedFrame(frameData, width, height, yStride, true);
-			onmessage({ width, height });
-		}
-	}
-
-	function renderPendingFrameCanvas2D() {
-		if (!pendingNv12Frame || !directCanvas || !directCtx) return;
-
-		const buffer = pendingNv12Frame;
-		pendingNv12Frame = null;
-
-		const NV12_MAGIC = 0x4e563132;
-		if (buffer.byteLength < 28) return;
-
-		const formatCheck = new DataView(buffer, buffer.byteLength - 4, 4);
-		if (formatCheck.getUint32(0, true) !== NV12_MAGIC) return;
-
-		const metadataOffset = buffer.byteLength - 28;
-		const meta = new DataView(buffer, metadataOffset, 28);
-		const yStride = meta.getUint32(0, true);
-		const height = meta.getUint32(4, true);
-		const width = meta.getUint32(8, true);
-
-		if (width > 0 && height > 0) {
-			const ySize = yStride * height;
-			const uvSize = yStride * (height / 2);
-			const totalSize = ySize + uvSize;
-
-			const frameData = new Uint8ClampedArray(buffer, 0, totalSize);
-
-			if (directCanvas.width !== width || directCanvas.height !== height) {
-				directCanvas.width = width;
-				directCanvas.height = height;
-			}
-
-			const rgba = convertNv12ToRgbaMainThread(
-				frameData,
-				width,
-				height,
-				yStride,
-			);
-			const imageData = new ImageData(
-				new Uint8ClampedArray(rgba),
-				width,
-				height,
-			);
-			directCtx.putImageData(imageData, 0, 0);
-
-			storeRenderedFrame(frameData, width, height, yStride, true);
-			onmessage({ width, height });
-		}
-	}
-
 	const canvasControls: CanvasControls = {
 		initCanvas: (canvas: OffscreenCanvas) => {
 			worker.postMessage({ type: "init-canvas", canvas }, [canvas]);
@@ -395,6 +545,7 @@ export function createImageDataWS(
 					disposeWebGPU(mainThreadWebGPU);
 					mainThreadWebGPU = null;
 				}
+				resetDirectNv12State();
 				directCtx = null;
 				mainThreadWebGPUInitializing = false;
 			}
@@ -409,9 +560,7 @@ export function createImageDataWS(
 							.then((renderer) => {
 								mainThreadWebGPU = renderer;
 								mainThreadWebGPUInitializing = false;
-								if (pendingNv12Frame && directCanvas) {
-									renderPendingNv12Frame();
-								}
+								flushPendingNv12Frame();
 								onRequestFrame?.();
 							})
 							.catch((e) => {
@@ -419,18 +568,14 @@ export function createImageDataWS(
 								console.error("[Socket] Main thread WebGPU init failed:", e);
 								directCtx =
 									directCanvas?.getContext("2d", { alpha: false }) ?? null;
-								if (pendingNv12Frame && directCanvas && directCtx) {
-									renderPendingFrameCanvas2D();
-								}
+								flushPendingNv12Frame();
 								onRequestFrame?.();
 							});
 					} else {
 						mainThreadWebGPUInitializing = false;
 						directCtx =
 							directCanvas?.getContext("2d", { alpha: false }) ?? null;
-						if (pendingNv12Frame && directCanvas && directCtx) {
-							renderPendingFrameCanvas2D();
-						}
+						flushPendingNv12Frame();
 						onRequestFrame?.();
 					}
 				});
@@ -470,6 +615,7 @@ export function createImageDataWS(
 			};
 		},
 		resetFrameState: () => {
+			resetDirectNv12State();
 			worker.postMessage({ type: "reset-frame-state" });
 		},
 		captureFrame: async () => {
@@ -659,114 +805,23 @@ export function createImageDataWS(
 		lastFrameTime = now;
 
 		if (isNv12Format) {
-			if (mainThreadWebGPU && directCanvas) {
-				const metadataOffset = buffer.byteLength - 28;
-				const meta = new DataView(buffer, metadataOffset, 28);
-				const yStride = meta.getUint32(0, true);
-				const height = meta.getUint32(4, true);
-				const width = meta.getUint32(8, true);
-				const frameNumber = meta.getUint32(12, true);
-
-				if (width > 0 && height > 0) {
-					const ySize = yStride * height;
-					const uvSize = yStride * (height / 2);
-					const totalSize = ySize + uvSize;
-
-					const frameData = new Uint8ClampedArray(buffer, 0, totalSize);
-
-					if (directCanvas.width !== width || directCanvas.height !== height) {
-						directCanvas.width = width;
-						directCanvas.height = height;
-					}
-
-					renderNv12FrameWebGPU(
-						mainThreadWebGPU,
-						frameData,
-						width,
-						height,
-						yStride,
-					);
-					actualRendersCount++;
-					renderFrameCount++;
-
-					storeRenderedFrame(frameData, width, height, yStride, true);
-					onmessage({ width, height });
+			if (directCanvas && (mainThreadWebGPU || directCtx)) {
+				if (queueDirectNv12Frame(buffer)) {
+					return;
 				}
-				return;
 			}
 
-			if (mainThreadWebGPUInitializing || !directCanvas) {
+			if (
+				mainThreadWebGPUInitializing ||
+				!directCanvas ||
+				(!mainThreadWebGPU && !directCtx)
+			) {
 				pendingNv12Frame = buffer;
 				const metadataOffset = buffer.byteLength - 28;
 				const meta = new DataView(buffer, metadataOffset, 28);
 				const height = meta.getUint32(4, true);
 				const width = meta.getUint32(8, true);
 				if (width > 0 && height > 0) {
-					onmessage({ width, height });
-				}
-				return;
-			}
-
-			if (directCanvas && directCtx) {
-				if (!directCanvas.isConnected) {
-					const domCanvas = document.getElementById(
-						"canvas",
-					) as HTMLCanvasElement | null;
-					if (domCanvas && domCanvas !== directCanvas) {
-						directCanvas = domCanvas;
-						directCtx = domCanvas.getContext("2d", { alpha: false });
-						if (!directCtx) {
-							console.error(
-								"[Socket] Failed to get 2D context from DOM canvas",
-							);
-							return;
-						}
-					} else {
-						return;
-					}
-				}
-
-				const metadataOffset = buffer.byteLength - 28;
-				const meta = new DataView(buffer, metadataOffset, 28);
-				const yStride = meta.getUint32(0, true);
-				const height = meta.getUint32(4, true);
-				const width = meta.getUint32(8, true);
-				const frameNumber = meta.getUint32(12, true);
-
-				if (width > 0 && height > 0) {
-					const ySize = yStride * height;
-					const uvSize = yStride * (height / 2);
-					const totalSize = ySize + uvSize;
-
-					const nv12Data = new Uint8ClampedArray(buffer, 0, totalSize);
-					const rgbaData = convertNv12ToRgbaMainThread(
-						nv12Data,
-						width,
-						height,
-						yStride,
-					);
-
-					if (directCanvas.width !== width || directCanvas.height !== height) {
-						directCanvas.width = width;
-						directCanvas.height = height;
-					}
-
-					if (
-						!cachedDirectImageData ||
-						cachedDirectWidth !== width ||
-						cachedDirectHeight !== height
-					) {
-						cachedDirectImageData = new ImageData(width, height);
-						cachedDirectWidth = width;
-						cachedDirectHeight = height;
-					}
-					cachedDirectImageData.data.set(rgbaData);
-					directCtx.putImageData(cachedDirectImageData, 0, 0);
-
-					storeRenderedFrame(nv12Data, width, height, yStride, true);
-					actualRendersCount++;
-					renderFrameCount++;
-
 					onmessage({ width, height });
 				}
 				return;

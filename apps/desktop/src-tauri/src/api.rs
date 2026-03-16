@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use specta::Type;
 use tauri::AppHandle;
 
-use crate::web_api::AuthedApiError;
+use crate::web_api::{AuthedApiError, ManagerExt};
 
 #[derive(Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
@@ -24,6 +24,16 @@ pub struct Organization {
 }
 
 pub async fn fetch_organizations(app: &AppHandle) -> Result<Vec<Organization>, AuthedApiError> {
-    let _ = app;
-    Err(AuthedApiError::Other("Cloud features are disabled".into()))
+    let response = app
+        .authed_api_request("/api/desktop/organizations", |client, url| client.get(url))
+        .await?;
+
+    if !response.status().is_success() {
+        return Err(AuthedApiError::Other(format!(
+            "Failed to fetch organizations: {}",
+            response.status()
+        )));
+    }
+
+    response.json().await.map_err(Into::into)
 }

@@ -73,6 +73,7 @@ import {
 	RecordingOptionsProvider,
 	useRecordingOptions,
 } from "../OptionsContext";
+import AccessGate from "./AccessGate";
 import CameraSelect from "./CameraSelect";
 import MicrophoneSelect from "./MicrophoneSelect";
 import ModeInfoPanel from "./ModeInfoPanel";
@@ -893,7 +894,9 @@ function TargetMenuPanel(props: TargetMenuPanelProps & SharedTargetMenuProps) {
 export default function () {
 	return (
 		<RecordingOptionsProvider>
-			<Page />
+			<AccessGate>
+				<Page />
+			</AccessGate>
 		</RecordingOptionsProvider>
 	);
 }

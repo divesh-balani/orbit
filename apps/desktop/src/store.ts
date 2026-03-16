@@ -2,8 +2,8 @@ import { createQuery } from "@tanstack/solid-query";
 import { Store } from "@tauri-apps/plugin-store";
 import { onCleanup } from "solid-js";
 
+import type { AuthStore } from "~/utils/auth-types";
 import type {
-	AuthStore,
 	GeneralSettingsStore,
 	HotkeysStore,
 	PresetsStore,
