@@ -1,4 +1,5 @@
 import { createEventListenerMap } from "@solid-primitives/event-listener";
+import { invoke } from "@tauri-apps/api/core";
 import { cx } from "cva";
 import { Array, Option } from "effect";
 import {
@@ -47,6 +48,25 @@ export function ZoomTrack(props: {
 	const [creatingSegmentViaDrag, setCreatingSegmentViaDrag] =
 		createSignal(false);
 
+	const updateManualZoomTarget = async (index: number, time: number) => {
+		try {
+			const position = await invoke<{ x: number; y: number } | null>(
+				"get_cursor_position_at_time",
+				{ time },
+			);
+			if (!position) return;
+
+			setProject("timeline", "zoomSegments", index, "mode", {
+				manual: position,
+			});
+		} catch (error) {
+			console.error(
+				"Failed to resolve zoom target from cursor position",
+				error,
+			);
+		}
+	};
+
 	const newSegmentMinDuration = () =>
 		Math.max(
 			MIN_NEW_SEGMENT_PIXEL_WIDTH * secsPerPixel(),
@@ -58,12 +78,11 @@ export function ZoomTrack(props: {
 	const newSegmentDetails = () => {
 		if (
 			creatingSegmentViaDrag() ||
-			editorState.timeline.hoveredTrack !== "zoom" ||
-			editorState.previewTime === null
+			editorState.timeline.hoveredTrack !== "zoom"
 		)
 			return;
 
-		const { previewTime } = editorState;
+		const previewTime = editorState.previewTime ?? editorState.playbackTime;
 
 		const nextSegment = Array.findFirstWithIndex(
 			project.timeline?.zoomSegments ?? [],
@@ -162,7 +181,7 @@ export function ZoomTrack(props: {
 										start: baseSegment.start,
 										end: Math.max(minEndTime, endTime),
 										amount: 1.5,
-										mode: "auto",
+										mode: { manual: { x: 0.5, y: 0.5 } },
 									});
 
 									createdSegmentIndex = index;
@@ -170,6 +189,7 @@ export function ZoomTrack(props: {
 							);
 						});
 						segmentCreated = true;
+						void updateManualZoomTarget(createdSegmentIndex, baseSegment.start);
 					};
 
 					const updateSegment = (endTime: number) => {
@@ -229,7 +249,7 @@ export function ZoomTrack(props: {
 			}}
 		>
 			<Show
-				when={project.timeline?.zoomSegments}
+				when={(project.timeline?.zoomSegments?.length ?? 0) > 0}
 				fallback={
 					<div class="text-center text-sm text-[--text-tertiary] flex flex-col justify-center items-center inset-0 w-full bg-gray-3/20 dark:bg-gray-3/10 hover:bg-gray-3/30 dark:hover:bg-gray-3/20 transition-colors rounded-xl pointer-events-none">
 						<div>Click to add zoom segment</div>
@@ -412,7 +432,8 @@ export function ZoomTrack(props: {
 											const maxValue = segment().end - 1;
 
 											for (let i = zoomSegments().length - 1; i >= 0; i--) {
-												const segment = zoomSegments()[i]!;
+												const segment = zoomSegments()[i];
+												if (!segment) continue;
 												if (segment.end <= start) {
 													minValue = segment.end;
 													break;
@@ -526,7 +547,8 @@ export function ZoomTrack(props: {
 											let maxValue = duration();
 
 											for (let i = 0; i < zoomSegments().length; i++) {
-												const segment = zoomSegments()[i]!;
+												const segment = zoomSegments()[i];
+												if (!segment) continue;
 												if (segment.start > end) {
 													maxValue = segment.start;
 													break;

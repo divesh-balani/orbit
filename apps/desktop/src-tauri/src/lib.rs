@@ -2043,6 +2043,32 @@ async fn generate_zoom_segments_from_clicks(
 
 #[tauri::command]
 #[specta::specta]
+#[instrument(skip(editor_instance))]
+async fn get_cursor_position_at_time(
+    editor_instance: WindowEditorInstance,
+    time: f64,
+) -> Result<Option<XY<f64>>, String> {
+    let project = editor_instance.project_config.1.borrow().clone();
+    let Some(timeline) = project.timeline.as_ref() else {
+        return Ok(None);
+    };
+
+    let Some((recording_time, segment)) = timeline.get_segment_time(time.max(0.0)) else {
+        return Ok(None);
+    };
+
+    let Some(segment_media) = editor_instance
+        .segment_medias
+        .get(segment.recording_clip as usize)
+    else {
+        return Ok(None);
+    };
+
+    Ok(segment_media.cursor.cursor_position_at(recording_time))
+}
+
+#[tauri::command]
+#[specta::specta]
 #[instrument]
 async fn list_audio_devices() -> Result<Vec<String>, ()> {
     if !permissions::do_permissions_check(false)
@@ -3057,6 +3083,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
             set_project_config,
             update_project_config_in_memory,
             generate_zoom_segments_from_clicks,
+            get_cursor_position_at_time,
             permissions::open_permission_settings,
             permissions::do_permissions_check,
             permissions::request_permission,

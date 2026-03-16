@@ -146,6 +146,9 @@ export function Timeline() {
 	}
 
 	onMount(() => {
+		const shouldHydrateZoomSegments =
+			(project.timeline?.zoomSegments?.length ?? 0) === 0;
+
 		if (!project.timeline) {
 			const resume = projectHistory.pause();
 			setProject("timeline", {
@@ -162,6 +165,23 @@ export function Timeline() {
 				textSegments: [],
 			});
 			resume();
+		}
+
+		if (shouldHydrateZoomSegments) {
+			void commands
+				.generateZoomSegmentsFromClicks()
+				.then((zoomSegments) => {
+					if (zoomSegments.length === 0) return;
+
+					const resume = projectHistory.pause();
+					setProject("timeline", "zoomSegments", (current) =>
+						(current?.length ?? 0) > 0 ? current : zoomSegments,
+					);
+					resume();
+				})
+				.catch((error) => {
+					console.error("Failed to hydrate zoom segments from clicks", error);
+				});
 		}
 
 		const checkBounds = () => {

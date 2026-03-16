@@ -1633,14 +1633,14 @@ impl ProjectUniforms {
         smoothing: Option<SpringMassDamperSimulationConfig>,
         current_cursor: Option<InterpolatedCursorPosition>,
     ) -> Coord<RawDisplayUVSpace> {
-        const PREVIOUS_SAMPLE_DELTA: f32 = 0.1;
-        const MIN_LOOKAHEAD: f64 = 0.05;
-        const MAX_LOOKAHEAD: f64 = 0.18;
-        const MIN_FOLLOW_FACTOR: f64 = 0.2;
-        const MAX_FOLLOW_FACTOR: f64 = 0.65;
-        const SPEED_RESPONSE: f64 = 12.0;
-        const VELOCITY_BLEND: f64 = 0.25;
-        const MAX_SHIFT: f64 = 0.25;
+        const PREVIOUS_SAMPLE_DELTA: f32 = 0.08;
+        const MIN_LOOKAHEAD: f64 = 0.02;
+        const MAX_LOOKAHEAD: f64 = 0.08;
+        const MIN_FOLLOW_FACTOR: f64 = 0.12;
+        const MAX_FOLLOW_FACTOR: f64 = 0.38;
+        const SPEED_RESPONSE: f64 = 10.0;
+        const VELOCITY_BLEND: f64 = 0.15;
+        const MAX_SHIFT: f64 = 0.12;
         const MIN_SPEED: f64 = 0.002;
 
         let fallback = Coord::<RawDisplayUVSpace>::new(XY::new(0.5, 0.5));
@@ -1711,7 +1711,7 @@ impl ProjectUniforms {
         let predicted_center = current_position + predicted_shift;
         let base_center = previous_cursor
             .map(|prev| {
-                let retention = 0.45 + 0.25 * speed_factor;
+                let retention = 0.65 + 0.15 * speed_factor;
                 prev.position.coord * retention + current_position * (1.0 - retention)
             })
             .unwrap_or(current_position);

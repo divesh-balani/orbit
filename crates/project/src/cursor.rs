@@ -195,65 +195,31 @@ impl CursorEvents {
     }
 
     pub fn cursor_position_at(&self, time: f64) -> Option<XY<f64>> {
-        // Debug print to understand what we're looking for
-        println!("Looking for cursor position at time: {time}");
-        println!("Total cursor events: {}", self.moves.len());
-
-        // Check if we have any move events at all
         if self.moves.is_empty() {
-            println!("No cursor move events available");
             return None;
         }
 
-        // Find the move event closest to the given time, preferring events that happened before
-        let filtered_events = self
+        if let Some(event) = self
             .moves
             .iter()
             .filter(|event| event.time_ms <= time * 1000.0)
-            .collect::<Vec<_>>();
-
-        println!(
-            "Found {} events before or at time {}",
-            filtered_events.len(),
-            time
-        );
-
-        if !filtered_events.is_empty() {
-            // Take the most recent one before the given time
-            let closest = filtered_events
-                .iter()
-                .max_by(|a, b| {
-                    a.time_ms
-                        .partial_cmp(&b.time_ms)
-                        .unwrap_or(std::cmp::Ordering::Equal)
-                })
-                .unwrap();
-
-            println!(
-                "Selected event at time {} with pos ({}, {})",
-                closest.time_ms, closest.x, closest.y
-            );
-
-            return Some(XY::new(closest.x, closest.y));
-        }
-
-        // If no events happened before, find the earliest one
-        let earliest = self.moves.iter().min_by(|a, b| {
-            a.time_ms
-                .partial_cmp(&b.time_ms)
-                .unwrap_or(std::cmp::Ordering::Equal)
-        });
-
-        if let Some(event) = earliest {
-            println!(
-                "No events before requested time, using earliest at {} with pos ({}, {})",
-                event.time_ms, event.x, event.y
-            );
+            .max_by(|a, b| {
+                a.time_ms
+                    .partial_cmp(&b.time_ms)
+                    .unwrap_or(std::cmp::Ordering::Equal)
+            })
+        {
             return Some(XY::new(event.x, event.y));
         }
 
-        println!("Could not find any usable cursor position");
-        None
+        self.moves
+            .iter()
+            .min_by(|a, b| {
+                a.time_ms
+                    .partial_cmp(&b.time_ms)
+                    .unwrap_or(std::cmp::Ordering::Equal)
+            })
+            .map(|event| XY::new(event.x, event.y))
     }
 }
 

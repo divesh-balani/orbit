@@ -59,6 +59,7 @@ export const FPS_OPTIONS = [
 	{ label: "15 FPS", value: 15 },
 	{ label: "30 FPS", value: 30 },
 	{ label: "60 FPS", value: 60 },
+	{ label: "120 FPS", value: 120 },
 ] satisfies Array<{ label: string; value: number }>;
 
 export const GIF_FPS_OPTIONS = [

@@ -5,7 +5,7 @@ use crate::{Coord, RawDisplayUVSpace};
 pub const ZOOM_DURATION: f64 = 0.7;
 
 const SCREEN_SPRING_STIFFNESS: f64 = 100.0;
-const SCREEN_SPRING_DAMPING: f64 = 32.0;
+const SCREEN_SPRING_DAMPING: f64 = 38.0;
 const SCREEN_SPRING_MASS: f64 = 3.5;
 
 #[derive(Debug, Clone, Copy)]

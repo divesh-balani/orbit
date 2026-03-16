@@ -7,7 +7,7 @@ use crate::{
     spring_mass_damper::{SpringMassDamperSimulation, SpringMassDamperSimulationConfig},
 };
 
-const CLICK_REACTION_WINDOW_MS: f64 = 160.0;
+const CLICK_REACTION_WINDOW_MS: f64 = 120.0;
 const MIN_MASS: f32 = 0.1;
 const SHAKE_THRESHOLD_UV: f64 = 0.015;
 const SHAKE_DETECTION_WINDOW_MS: f64 = 100.0;
@@ -37,15 +37,15 @@ impl CursorSpringPresets {
                 friction: c.friction,
             })
             .unwrap_or(SpringMassDamperSimulationConfig {
-                tension: 700.0,
-                mass: 1.0,
-                friction: 30.0,
+                tension: 520.0,
+                mass: 1.4,
+                friction: 42.0,
             });
 
         Self {
             default: base,
             snappy,
-            drag: scale_config(base, 0.8, 1.2, 1.3),
+            drag: scale_config(base, 1.1, 0.9, 1.1),
         }
     }
 
@@ -322,9 +322,9 @@ fn interpolate_smoothed_position(
     })
 }
 
-const CURSOR_FRAME_DURATION_MS: f64 = 1000.0 / 60.0;
-const GAP_INTERPOLATION_THRESHOLD_MS: f64 = CURSOR_FRAME_DURATION_MS * 4.0;
-const MIN_CURSOR_TRAVEL_FOR_INTERPOLATION: f64 = 0.02;
+const CURSOR_FRAME_DURATION_MS: f64 = 1000.0 / 120.0;
+const GAP_INTERPOLATION_THRESHOLD_MS: f64 = CURSOR_FRAME_DURATION_MS * 3.0;
+const MIN_CURSOR_TRAVEL_FOR_INTERPOLATION: f64 = 0.008;
 const MAX_INTERPOLATED_STEPS: usize = 120;
 
 fn filter_cursor_shake<'a>(moves: &'a [CursorMoveEvent]) -> Cow<'a, [CursorMoveEvent]> {

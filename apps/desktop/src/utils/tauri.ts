@@ -155,6 +155,9 @@ async updateProjectConfigInMemory(config: ProjectConfiguration, frameNumber: num
 async generateZoomSegmentsFromClicks() : Promise<ZoomSegment[]> {
     return await TAURI_INVOKE("generate_zoom_segments_from_clicks");
 },
+async getCursorPositionAtTime(time: number) : Promise<XY<number> | null> {
+    return await TAURI_INVOKE("get_cursor_position_at_time", { time });
+},
 async openPermissionSettings(permission: OSPermission) : Promise<void> {
     await TAURI_INVOKE("open_permission_settings", { permission });
 },
