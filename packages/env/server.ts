@@ -29,12 +29,20 @@ function createServerEnv() {
 			// Orbit uses Resend for email sending, including sending login code emails
 			RESEND_API_KEY: z.string().optional(),
 			RESEND_FROM_DOMAIN: z.string().optional(),
+			SMTP_HOST: z.string().optional(),
+			SMTP_PORT: z.coerce.number().optional(),
+			SMTP_USER: z.string().optional(),
+			SMTP_PASS: z.string().optional(),
+			SMTP_SECURE: boolString(false),
+			SMTP_FROM_EMAIL: z.string().optional(),
+			SMTP_FROM_NAME: z.string().optional(),
+			ORBIT_ROOT_ADMIN_EMAILS: z.string().optional(),
 
 			/// S3 configuration
 			// Though they are prefixed with `ORBIT_AWS`, these don't have to be
 			// for AWS, and can instead be for any S3-compatible service
-			ORBIT_AWS_BUCKET: z.string(),
-			ORBIT_AWS_REGION: z.string(),
+			ORBIT_AWS_BUCKET: z.string().optional(),
+			ORBIT_AWS_REGION: z.string().optional(),
 			ORBIT_AWS_ACCESS_KEY: z.string().optional(),
 			ORBIT_AWS_SECRET_KEY: z.string().optional(),
 			S3_PUBLIC_ENDPOINT: z

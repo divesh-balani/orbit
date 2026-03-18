@@ -1,0 +1,19 @@
+{
+  "bundle": {
+    "targets": [
+      "dmg"
+    ]
+  },
+  "plugins": {
+    "updater": {
+      "active": false,
+      "pubkey": "",
+      "endpoints": [
+        "https://github.com/divesh-balani/orbit/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}

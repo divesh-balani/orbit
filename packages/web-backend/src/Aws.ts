@@ -1,4 +1,3 @@
-import { fromContainerMetadata, fromSSO } from "@aws-sdk/credential-providers";
 import type {
 	AwsCredentialIdentity,
 	AwsCredentialIdentityProvider,
@@ -35,13 +34,11 @@ export class AwsCredentials extends Effect.Service<AwsCredentials>()(
 						return { accessKeyId, secretAccessKey };
 					}
 
-					if (process.env.NODE_ENV === "development") {
-						yield* Effect.log("Using AWS_DEFAULT_PROFILE");
-						return fromSSO({ profile: process.env.AWS_DEFAULT_PROFILE });
-					}
-
-					yield* Effect.log("Falling back to ECS metadata");
-					return fromContainerMetadata();
+					yield* Effect.log("Cloud storage disabled");
+					return {
+						accessKeyId: "",
+						secretAccessKey: "",
+					};
 				});
 
 			return { credentials };

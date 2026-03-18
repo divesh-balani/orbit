@@ -13,14 +13,6 @@ import {
 	text,
 } from "@clack/prompts";
 
-const DOCKER_S3_ENVS = {
-	accessKey: "capS3root",
-	secretKey: "capS3root",
-	bucket: "capso",
-	region: "us-east-1",
-	endpoint: "http://localhost:9000",
-};
-
 const DOCKER_DB_ENVS = {
 	url: "mysql://root:@localhost:3306/planetscale",
 };
@@ -44,7 +36,7 @@ async function main() {
 		.catch(() => null);
 	let allEnvs = file ? JSON.parse(file) : {};
 
-	let envs = {
+	const envs = {
 		NODE_ENV: "development",
 	};
 
@@ -77,7 +69,7 @@ async function main() {
 		envs.DATABASE_ENCRYPTION_KEY = allEnvs.DATABASE_ENCRYPTION_KEY;
 
 		usingDockerEnvironment = await confirm({
-			message: "Will you be running S3 and MySQL via Docker?",
+			message: "Will you be running MySQL via Docker?",
 		});
 
 		if (isCancel(usingDockerEnvironment)) return;
@@ -99,45 +91,8 @@ async function main() {
 			});
 
 			envs.DATABASE_URL = dbValues.DATABASE_URL;
-
-			log.info("S3 Envs");
-
-			const s3Values = await group(
-				{
-					ORBIT_AWS_ACCESS_KEY: () =>
-						text({
-							message: "ORBIT_AWS_ACCESS_KEY",
-							placeholder: allEnvs.ORBIT_AWS_ACCESS_KEY,
-							defaultValue: allEnvs.ORBIT_AWS_ACCESS_KEY,
-						}),
-					ORBIT_AWS_SECRET_KEY: () =>
-						text({
-							message: "ORBIT_AWS_SECRET_KEY",
-							placeholder: allEnvs.ORBIT_AWS_SECRET_KEY,
-							defaultValue: allEnvs.ORBIT_AWS_SECRET_KEY,
-						}),
-					ORBIT_AWS_BUCKET: () =>
-						text({
-							message: "ORBIT_AWS_BUCKET",
-							defaultValue: allEnvs.ORBIT_AWS_BUCKET,
-							placeholder: allEnvs.ORBIT_AWS_BUCKET,
-						}),
-					ORBIT_AWS_BUCKET_URL: () => text({ message: "ORBIT_AWS_BUCKET_URL" }),
-					ORBIT_CLOUDFRONT_DISTRIBUTION_ID: () =>
-						text({ message: "ORBIT_CLOUDFRONT_DISTRIBUTION_ID" }),
-				},
-				{ onCancel: () => process.exit(0) },
-			);
-
-			envs = { ...envs, ...s3Values };
 		} else {
 			envs.DATABASE_URL = DOCKER_DB_ENVS.url;
-
-			envs.ORBIT_AWS_ACCESS_KEY = DOCKER_S3_ENVS.accessKey;
-			envs.ORBIT_AWS_SECRET_KEY = DOCKER_S3_ENVS.secretKey;
-			envs.ORBIT_AWS_BUCKET = DOCKER_S3_ENVS.bucket;
-			envs.ORBIT_AWS_REGION = DOCKER_S3_ENVS.region;
-			envs.ORBIT_AWS_ENDPOINT = DOCKER_S3_ENVS.endpoint;
 		}
 
 		envs.NEXT_PUBLIC_WEB_URL = envs.WEB_URL;

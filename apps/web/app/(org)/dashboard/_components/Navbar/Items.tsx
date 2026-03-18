@@ -26,10 +26,10 @@ import {
 import { classNames } from "@orbit/utils";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import { Check, ChevronDown, Plus } from "lucide-react";
+import { Check, ChevronDown, MonitorSmartphone, Plus } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { cloneElement, type RefObject, useRef, useState } from "react";
+import { cloneElement, useRef, useState } from "react";
 import { NewOrganization } from "@/components/forms/NewOrganization";
 import { SignedImageUrl } from "@/components/SignedImageUrl";
 import { Tooltip } from "@/components/Tooltip";
@@ -81,6 +81,14 @@ const AdminNavItems = ({ toggleMobileNav }: Props) => {
 			href: `/dashboard/import`,
 			matchChildren: true,
 			icon: <ImportIcon />,
+			subNav: [],
+		},
+		{
+			name: "Desktop Access",
+			href: `/dashboard/access`,
+			matchChildren: true,
+			icon: <MonitorSmartphone />,
+			showCondition: user.isRootAdmin,
 			subNav: [],
 		},
 		{
@@ -292,7 +300,10 @@ const AdminNavItems = ({ toggleMobileNav }: Props) => {
 					)}
 				>
 					{manageNavigation
-						.filter((item) => !item.ownerOnly || isOwner)
+						.filter(
+							(item) =>
+								(item.showCondition ?? true) && (!item.ownerOnly || isOwner),
+						)
 						.map((item) => (
 							<div
 								key={item.name}
@@ -403,29 +414,44 @@ const NavItem = ({
 }: {
 	name: string;
 	href: string;
-	icon: React.ReactElement<{
-		ref: RefObject<CogIconHandle | null>;
-		className: string;
-		size: number;
-	}>;
+	icon: React.ReactElement<{ className?: string; size?: number }>;
 	sidebarCollapsed: boolean;
 	toggleMobileNav?: () => void;
 	isPathActive: (path: string, matchChildren: boolean) => boolean;
 	extraText: number | null | undefined;
 	matchChildren: boolean;
 }) => {
-	const iconRef = useRef<CogIconHandle>(null);
+	const iconRef = useRef<CogIconHandle | SVGSVGElement | null>(null);
+
+	const startAnimation = () => {
+		const iconHandle = iconRef.current;
+		if (
+			iconHandle &&
+			"startAnimation" in iconHandle &&
+			typeof iconHandle.startAnimation === "function"
+		) {
+			iconHandle.startAnimation();
+		}
+	};
+
+	const stopAnimation = () => {
+		const iconHandle = iconRef.current;
+		if (
+			iconHandle &&
+			"stopAnimation" in iconHandle &&
+			typeof iconHandle.stopAnimation === "function"
+		) {
+			iconHandle.stopAnimation();
+		}
+	};
+
 	return (
 		<Tooltip disable={!sidebarCollapsed} content={name} position="right">
 			<Link
 				href={href}
 				onClick={() => toggleMobileNav?.()}
-				onMouseEnter={() => {
-					iconRef.current?.startAnimation();
-				}}
-				onMouseLeave={() => {
-					iconRef.current?.stopAnimation();
-				}}
+				onMouseEnter={startAnimation}
+				onMouseLeave={stopAnimation}
 				prefetch={true}
 				passHref
 				className={classNames(
@@ -439,13 +465,20 @@ const NavItem = ({
 					"flex overflow-hidden justify-start items-center tracking-tight rounded-xl outline-none",
 				)}
 			>
-				{cloneElement(icon, {
-					ref: iconRef,
-					className: clsx(
-						sidebarCollapsed ? "text-gray-12 mx-auto" : "text-gray-10",
-					),
-					size: sidebarCollapsed ? 18 : 16,
-				})}
+				{cloneElement(
+					icon as React.ReactElement<{
+						className?: string;
+						size?: number;
+						ref?: React.Ref<unknown>;
+					}>,
+					{
+						ref: iconRef,
+						className: clsx(
+							sidebarCollapsed ? "text-gray-12 mx-auto" : "text-gray-10",
+						),
+						size: sidebarCollapsed ? 18 : 16,
+					},
+				)}
 				<p
 					className={clsx(
 						"text-sm text-gray-12 truncate",

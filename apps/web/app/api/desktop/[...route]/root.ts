@@ -1,5 +1,6 @@
 import { zValidator } from "@hono/zod-validator";
 import { db } from "@orbit/database";
+import { DESKTOP_OFFLINE_LEASE_MS } from "@orbit/database/auth/desktop-access";
 import { sendEmail } from "@orbit/database/emails/config";
 import { Feedback } from "@orbit/database/emails/feedback";
 import {
@@ -14,6 +15,7 @@ import { Hono } from "hono";
 import { PostHog } from "posthog-node";
 import type Stripe from "stripe";
 import { z } from "zod";
+import { getDesktopAccessStateForUser } from "@/lib/desktop-access";
 import { withAuth, withOptionalAuth } from "../../utils";
 
 export const app = new Hono();
@@ -346,6 +348,22 @@ app.get("/plan", withAuth, async (c) => {
 	return c.json({
 		upgraded: isSubscribed,
 		stripeSubscriptionStatus: user.stripeSubscriptionStatus,
+	});
+});
+
+app.get("/access", withAuth, async (c) => {
+	const user = c.get("user");
+	const access = await getDesktopAccessStateForUser(user);
+
+	return c.json({
+		status: access.status,
+		validUntil: access.validUntil,
+		approvedAt: access.approvedAt,
+		revokedAt: access.revokedAt,
+		approvedByUserId: access.approvedByUserId,
+		isRootAdmin: access.isRootAdmin,
+		checkedAt: access.checkedAt,
+		offlineLeaseMs: DESKTOP_OFFLINE_LEASE_MS,
 	});
 });
 

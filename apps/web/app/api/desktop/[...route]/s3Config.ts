@@ -8,9 +8,9 @@ import { S3Bucket } from "@orbit/web-domain";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
-import { withAuth } from "@/app/api/utils";
+import { withApprovedDesktopAccess } from "@/app/api/utils";
 
-export const app = new Hono().use(withAuth);
+export const app = new Hono().use(withApprovedDesktopAccess);
 
 app.post(
 	"/",

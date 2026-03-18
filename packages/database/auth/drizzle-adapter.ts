@@ -7,6 +7,7 @@ import type Stripe from "stripe";
 import { nanoId } from "../helpers.ts";
 import {
 	accounts,
+	desktopAccessGrants,
 	organizationInvites,
 	organizationMembers,
 	organizations,
@@ -14,6 +15,7 @@ import {
 	users,
 	verificationTokens,
 } from "../schema.ts";
+import { getDefaultDesktopAccessGrant } from "./desktop-access.ts";
 
 export function DrizzleAdapter(db: MySql2Database): Adapter {
 	return {
@@ -39,6 +41,15 @@ export function DrizzleAdapter(db: MySql2Database): Adapter {
 					name: userData.name,
 					image: userData.image,
 					activeOrganizationId: Organisation.OrganisationId.make(""),
+				});
+
+				const defaultAccess = getDefaultDesktopAccessGrant(normalizedEmail);
+				await tx.insert(desktopAccessGrants).values({
+					userId,
+					status: defaultAccess.status,
+					validUntil: defaultAccess.validUntil,
+					approvedAt: defaultAccess.approvedAt,
+					revokedAt: defaultAccess.revokedAt,
 				});
 
 				if (pendingInvite) {

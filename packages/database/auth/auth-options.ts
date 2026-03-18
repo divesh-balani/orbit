@@ -5,10 +5,8 @@ import type { NextAuthOptions } from "next-auth";
 import { getServerSession as _getServerSession } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import EmailProvider from "next-auth/providers/email";
-import GoogleProvider from "next-auth/providers/google";
 import type { Provider } from "next-auth/providers/index";
-import WorkOSProvider from "next-auth/providers/workos";
-import { sendEmail } from "../emails/config.ts";
+import { hasEmailTransport, sendEmail } from "../emails/config.ts";
 import { db } from "../index.ts";
 import { users } from "../schema.ts";
 import { isEmailAllowedForSignup } from "./domain-utils.ts";
@@ -39,33 +37,6 @@ export const authOptions = (): NextAuthOptions => {
 		get providers() {
 			if (_providers) return _providers;
 			_providers = [
-				GoogleProvider({
-					clientId: serverEnv().GOOGLE_CLIENT_ID!,
-					clientSecret: serverEnv().GOOGLE_CLIENT_SECRET!,
-					authorization: {
-						params: {
-							scope: [
-								"https://www.googleapis.com/auth/userinfo.email",
-								"https://www.googleapis.com/auth/userinfo.profile",
-							].join(" "),
-							prompt: "select_account",
-						},
-					},
-				}),
-				WorkOSProvider({
-					clientId: serverEnv().WORKOS_CLIENT_ID as string,
-					clientSecret: serverEnv().WORKOS_API_KEY as string,
-					profile(profile) {
-						return {
-							id: profile.id,
-							name: profile.first_name
-								? `${profile.first_name} ${profile.last_name || ""}`
-								: profile.email?.split("@")[0] || profile.id,
-							email: profile.email,
-							image: profile.profile_picture_url,
-						};
-					},
-				}),
 				EmailProvider({
 					async generateVerificationToken() {
 						return crypto.randomInt(100000, 1000000).toString();
@@ -73,7 +44,7 @@ export const authOptions = (): NextAuthOptions => {
 					async sendVerificationRequest({ identifier, token }) {
 						console.log("sendVerificationRequest");
 
-						if (!serverEnv().RESEND_API_KEY) {
+						if (!hasEmailTransport()) {
 							console.log("\n");
 							console.log(
 								"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
@@ -152,7 +123,7 @@ export const authOptions = (): NextAuthOptions => {
 			async session({ token, session }) {
 				if (!session.user) return session;
 
-				if (token && token.id && typeof token.id === "string") {
+				if (token?.id && typeof token.id === "string") {
 					(session.user as { id: string }).id = token.id;
 					session.user.name = token.name ?? null;
 					session.user.email = token.email ?? null;

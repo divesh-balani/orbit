@@ -7,12 +7,13 @@ import type { Context } from "hono";
 import { cors } from "hono/cors";
 import { createMiddleware } from "hono/factory";
 import { cookies } from "next/headers";
+import { getDesktopAccessStateForUser } from "@/lib/desktop-access";
 
 async function getAuth(c: Context) {
 	console.log("auth header: ", c.req.header("authorization"));
 	const authHeader = c.req.header("authorization")?.split(" ")[1];
 
-	let user;
+	let user: Awaited<ReturnType<typeof getCurrentUser>> | undefined;
 
 	if (authHeader?.length === 36) {
 		console.log("Using API key auth");
@@ -61,6 +62,30 @@ export const withAuth = createMiddleware<{
 }>(async (c, next) => {
 	const auth = await getAuth(c);
 	if (!auth) return c.text("User not authenticated", 401);
+
+	c.set("user", auth.user);
+
+	await next();
+});
+
+export const withApprovedDesktopAccess = createMiddleware<{
+	Variables: {
+		user: NonNullable<Awaited<ReturnType<typeof getCurrentUser>>>;
+	};
+}>(async (c, next) => {
+	const auth = await getAuth(c);
+	if (!auth) return c.text("User not authenticated", 401);
+
+	const desktopAccess = await getDesktopAccessStateForUser(auth.user);
+	if (desktopAccess.status !== "approved") {
+		return c.json(
+			{
+				error: "desktop_access_required",
+				status: desktopAccess.status,
+			},
+			403,
+		);
+	}
 
 	c.set("user", auth.user);
 

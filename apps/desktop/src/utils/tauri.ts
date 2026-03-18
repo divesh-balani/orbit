@@ -256,6 +256,9 @@ async setFail(name: string, value: boolean) : Promise<void> {
 async updateAuthPlan() : Promise<void> {
     await TAURI_INVOKE("update_auth_plan");
 },
+async refreshDesktopAccess() : Promise<DesktopAccessSnapshot> {
+    return await TAURI_INVOKE("refresh_desktop_access");
+},
 async setWindowTransparent(value: boolean) : Promise<void> {
     await TAURI_INVOKE("set_window_transparent", { value });
 },
@@ -415,7 +418,7 @@ export type AudioConfiguration = { mute: boolean; improve: boolean; micVolumeDb:
 export type AudioInputLevelChange = number
 export type AudioMeta = { path: string; start_time?: number | null; device_id?: string | null }
 export type AuthSecret = { api_key: string } | { token: string; expires: number }
-export type AuthStore = { secret: AuthSecret; user_id: string | null; plan: Plan | null; organizations?: Organization[] }
+export type AuthStore = { secret: AuthSecret; user_id: string | null; plan: Plan | null; organizations?: Organization[]; desktop_access?: DesktopAccessSnapshot | null }
 export type BackgroundConfiguration = { source: BackgroundSource; blur: number; padding: number; rounding: number; roundingType: CornerStyle; inset: number; crop: Crop | null; shadow: number; advancedShadow: ShadowConfiguration | null; border: BorderConfiguration | null }
 export type BackgroundSource = { type: "wallpaper"; path: string | null } | { type: "image"; path: string | null } | { type: "color"; value: [number, number, number]; alpha?: number } | { type: "gradient"; from: [number, number, number]; to: [number, number, number]; angle?: number }
 export type BorderConfiguration = { enabled: boolean; width: number; color: [number, number, number]; opacity: number }
@@ -452,6 +455,8 @@ export type CursorConfiguration = { hide: boolean; hideWhenIdle: boolean; hideWh
 export type CursorMeta = { imagePath: string; hotspot: XY<number>; shape?: string | null }
 export type CursorType = "auto" | "pointer" | "circle"
 export type Cursors = { [key in string]: string } | { [key in string]: CursorMeta }
+export type DesktopAccessSnapshot = { status: DesktopAccessStatus; checkedAt: number | null; leaseExpiresAt: number | null; validUntil: number | null; approvedAt: number | null; revokedAt: number | null; offline?: boolean; errorMessage: string | null }
+export type DesktopAccessStatus = "unauthenticated" | "pending" | "approved" | "revoked" | "expired"
 export type DeviceOrModelID = { DeviceID: string } | { ModelID: ModelIDType }
 export type DevicesUpdated = { cameras: CameraInfo[]; microphones: string[]; permissions: OSPermissionsCheck }
 export type DisplayId = string

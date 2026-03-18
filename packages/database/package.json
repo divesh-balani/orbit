@@ -33,6 +33,7 @@
 		"nanoid": "^5.0.4",
 		"next": "15.5.9",
 		"next-auth": "^4.24.5",
+		"nodemailer": "^6.9.8",
 		"react-email": "^4.0.16",
 		"resend": "4.6.0",
 		"zod": "^3"
@@ -45,7 +46,6 @@
 		"@types/react-dom": "19.1.9",
 		"dotenv-cli": "latest",
 		"drizzle-kit": "0.31.0",
-		"nodemailer": "^6.9.8",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
 		"react-router-dom": "^6.18.0",
@@ -58,6 +58,8 @@
 	"exports": {
 		".": "./index.ts",
 		"./auth/auth-options": "./auth/auth-options.ts",
+		"./auth/desktop-access": "./auth/desktop-access.ts",
+		"./auth/root-admin": "./auth/root-admin.ts",
 		"./auth/session": "./auth/session.ts",
 		"./schema": "./schema.ts",
 		"./crypto": "./crypto.ts",
@@ -71,6 +73,8 @@
 		"exports": {
 			".": "./dist/index.js",
 			"./auth/auth-options": "./dist/auth/auth-options.js",
+			"./auth/desktop-access": "./dist/auth/desktop-access.js",
+			"./auth/root-admin": "./dist/auth/root-admin.js",
 			"./auth/session": "./dist/auth/session.js",
 			"./schema": "./dist/schema.js",
 			"./crypto": "./dist/crypto.js",

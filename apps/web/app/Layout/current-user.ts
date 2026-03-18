@@ -1,3 +1,4 @@
+import { isRootAdminEmail } from "@orbit/database/auth/root-admin";
 import { getCurrentUser } from "@orbit/database/auth/session";
 import { userIsPro } from "@orbit/utils";
 import { ImageUploads } from "@orbit/web-backend";
@@ -20,6 +21,7 @@ export const resolveCurrentUser = Effect.gen(function* () {
 						? yield* imageUploads.resolveImageUrl(u.image)
 						: null,
 					isPro: userIsPro(u),
+					isRootAdmin: isRootAdminEmail(u.email),
 				};
 			}),
 		),

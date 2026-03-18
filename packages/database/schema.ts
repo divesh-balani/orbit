@@ -171,6 +171,34 @@ export const verificationTokens = mysqlTable("verification_tokens", {
 	updated_at: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
 });
 
+export type DesktopAccessGrantStatus = "pending" | "approved" | "revoked";
+
+export const desktopAccessGrants = mysqlTable(
+	"desktop_access_grants",
+	{
+		userId: nanoId("userId").notNull().primaryKey().$type<User.UserId>(),
+		status: varchar("status", {
+			length: 32,
+			enum: ["pending", "approved", "revoked"],
+		})
+			.notNull()
+			.$type<DesktopAccessGrantStatus>()
+			.default("pending"),
+		validUntil: timestamp("validUntil"),
+		approvedByUserId: nanoIdNullable("approvedByUserId").$type<User.UserId>(),
+		approvedAt: timestamp("approvedAt"),
+		revokedAt: timestamp("revokedAt"),
+		createdAt: timestamp("createdAt").notNull().defaultNow(),
+		updatedAt: timestamp("updatedAt").notNull().defaultNow().onUpdateNow(),
+	},
+	(table) => ({
+		statusIndex: index("desktop_access_status_idx").on(table.status),
+		validUntilIndex: index("desktop_access_valid_until_idx").on(
+			table.validUntil,
+		),
+	}),
+);
+
 export const organizations = mysqlTable(
 	"organizations",
 	{

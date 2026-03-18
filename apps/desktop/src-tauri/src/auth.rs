@@ -53,10 +53,15 @@ pub enum DesktopAccessStatus {
 #[serde(rename_all = "camelCase")]
 pub struct DesktopAccessSnapshot {
     pub status: DesktopAccessStatus,
+    #[specta(type = Option<f64>)]
     pub checked_at: Option<i64>,
+    #[specta(type = Option<f64>)]
     pub lease_expires_at: Option<i64>,
+    #[specta(type = Option<f64>)]
     pub valid_until: Option<i64>,
+    #[specta(type = Option<f64>)]
     pub approved_at: Option<i64>,
+    #[specta(type = Option<f64>)]
     pub revoked_at: Option<i64>,
     #[serde(default)]
     pub offline: bool,

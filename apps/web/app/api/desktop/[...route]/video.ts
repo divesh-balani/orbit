@@ -22,9 +22,9 @@ import { z } from "zod";
 import { runPromise } from "@/lib/server";
 import { isFromDesktopSemver, UPLOAD_PROGRESS_VERSION } from "@/utils/desktop";
 import { stringOrNumberOptional } from "@/utils/zod";
-import { withAuth } from "../../utils";
+import { withApprovedDesktopAccess } from "../../utils";
 
-export const app = new Hono().use(withAuth);
+export const app = new Hono().use(withApprovedDesktopAccess);
 
 app.get(
 	"/create",

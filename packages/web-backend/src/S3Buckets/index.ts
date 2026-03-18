@@ -1,7 +1,7 @@
 import * as S3 from "@aws-sdk/client-s3";
 import * as CloudFrontPresigner from "@aws-sdk/cloudfront-signer";
 import { decrypt } from "@orbit/database/crypto";
-import type { S3Bucket, User } from "@orbit/web-domain";
+import { type S3Bucket, S3Error, type User } from "@orbit/web-domain";
 import { Config, Effect, Layer, Option } from "effect";
 
 import { AwsCredentials } from "../Aws.ts";
@@ -12,6 +12,50 @@ import { S3BucketsRepo } from "./S3BucketsRepo.ts";
 
 export class S3Buckets extends Effect.Service<S3Buckets>()("S3Buckets", {
 	effect: Effect.gen(function* () {
+		const disabledError = () =>
+			new S3Error({
+				cause: new Error("Cloud storage is disabled in this deployment"),
+			});
+		const disabledBucketAccess = {
+			bucketName: "local-disabled",
+			isPathStyle: true,
+			getSignedObjectUrl: () => Effect.fail(disabledError()),
+			getInternalSignedObjectUrl: () => Effect.fail(disabledError()),
+			getObject: () => Effect.fail(disabledError()),
+			listObjects: () => Effect.fail(disabledError()),
+			headObject: () => Effect.fail(disabledError()),
+			putObject: () => Effect.fail(disabledError()),
+			copyObject: () => Effect.fail(disabledError()),
+			deleteObject: () => Effect.fail(disabledError()),
+			deleteObjects: () => Effect.fail(disabledError()),
+			getPresignedPutUrl: () => Effect.fail(disabledError()),
+			getInternalPresignedPutUrl: () => Effect.fail(disabledError()),
+			getPresignedPostUrl: () => Effect.fail(disabledError()),
+			multipart: {
+				create: () => Effect.fail(disabledError()),
+				getPresignedUploadPartUrl: () => Effect.fail(disabledError()),
+				complete: () => Effect.fail(disabledError()),
+				abort: () => Effect.fail(disabledError()),
+			},
+		};
+		const defaultBucket = yield* Config.option(
+			Config.string("ORBIT_AWS_BUCKET"),
+		);
+		const defaultRegion = yield* Config.option(
+			Config.string("ORBIT_AWS_REGION"),
+		);
+
+		if (Option.isNone(defaultBucket) || Option.isNone(defaultRegion)) {
+			return {
+				getBucketAccess: Effect.fn("S3Buckets.getBucketAccess")(() =>
+					Effect.succeed([disabledBucketAccess, Option.none()] as const),
+				),
+				getBucketAccessForUser: Effect.fn("S3Buckets.getProviderForUser")(() =>
+					Effect.succeed([disabledBucketAccess, Option.none()] as const),
+				),
+			};
+		}
+
 		const repo = yield* S3BucketsRepo;
 		const { credentials } = yield* AwsCredentials;
 
@@ -24,13 +68,13 @@ export class S3Buckets extends Effect.Service<S3Buckets>()("S3Buckets", {
 				Config.orElse(() => Config.string("ORBIT_AWS_ENDPOINT")),
 				Config.option,
 			),
-			region: yield* Config.string("ORBIT_AWS_REGION"),
+			region: defaultRegion.value,
 			credentials,
 			forcePathStyle:
 				Option.getOrNull(
 					yield* Config.boolean("S3_PATH_STYLE").pipe(Config.option),
 				) ?? true,
-			bucket: yield* Config.string("ORBIT_AWS_BUCKET"),
+			bucket: defaultBucket.value,
 		};
 
 		const createDefaultClient = (internal: boolean) =>
