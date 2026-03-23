@@ -1,3 +1,3 @@
 export const clientEnv = {
-	VITE_SERVER_URL: import.meta.env.VITE_SERVER_URL ?? "https://orbit.so",
+	VITE_SERVER_URL: import.meta.env.VITE_SERVER_URL ?? "https://orbit.diveshbalani.com",
 };

@@ -97,9 +97,17 @@ export async function GET(
 
 	const download = downloadUrls[platform];
 
-	// If the platform is not supported, redirect to the main download page
+	const proto =
+		request.headers.get("x-forwarded-proto") ||
+		new URL(request.url).protocol.replace(":", "");
+	const host =
+		request.headers.get("x-forwarded-host") ||
+		request.headers.get("host") ||
+		new URL(request.url).host;
+	const publicBase = `${proto}://${host}`;
+
 	if (!download) {
-		return NextResponse.redirect(new URL("/download", request.url));
+		return NextResponse.redirect(new URL("/download", publicBase));
 	}
 
 	const primary = await checkCrabNebulaDownload(download.url);
@@ -112,5 +120,5 @@ export async function GET(
 		return NextResponse.redirect(fallback);
 	}
 
-	return NextResponse.redirect(new URL("/download/versions", request.url));
+	return NextResponse.redirect(new URL("/download", publicBase));
 }

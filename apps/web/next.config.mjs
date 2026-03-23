@@ -15,6 +15,7 @@ const { version } = packageJson;
 
 const nextConfig = {
 	reactStrictMode: true,
+	allowedDevOrigins: ["orbit.diveshbalani.com"],
 	serverExternalPackages: ["ffmpeg-static", "prettier"],
 	outputFileTracingIncludes: {
 		"/app/.well-known/workflow/v1/step": [

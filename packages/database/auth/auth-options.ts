@@ -4,8 +4,10 @@ import { eq } from "drizzle-orm";
 import type { NextAuthOptions } from "next-auth";
 import { getServerSession as _getServerSession } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
+import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import type { Provider } from "next-auth/providers/index";
+import { hashPassword, verifyPassword } from "../crypto.ts";
 import { hasEmailTransport, sendEmail } from "../emails/config.ts";
 import { db } from "../index.ts";
 import { users } from "../schema.ts";
@@ -37,6 +39,44 @@ export const authOptions = (): NextAuthOptions => {
 		get providers() {
 			if (_providers) return _providers;
 			_providers = [
+				CredentialsProvider({
+					name: "credentials",
+					credentials: {
+						email: { label: "Email", type: "email" },
+						password: { label: "Password", type: "password" },
+					},
+					async authorize(credentials) {
+						if (!credentials?.email || !credentials?.password) return null;
+
+						const email = (credentials.email as string).trim().toLowerCase();
+						const [user] = await db()
+							.select({
+								id: users.id,
+								name: users.name,
+								email: users.email,
+								image: users.image,
+								hashedPassword: users.hashedPassword,
+							})
+							.from(users)
+							.where(eq(users.email, email))
+							.limit(1);
+
+						if (!user?.hashedPassword) return null;
+
+						const valid = await verifyPassword(
+							user.hashedPassword,
+							credentials.password as string,
+						);
+						if (!valid) return null;
+
+						return {
+							id: user.id,
+							name: user.name,
+							email: user.email,
+							image: user.image,
+						};
+					},
+				}),
 				EmailProvider({
 					async generateVerificationToken() {
 						return crypto.randomInt(100000, 1000000).toString();

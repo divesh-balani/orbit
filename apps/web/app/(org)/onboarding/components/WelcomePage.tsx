@@ -41,7 +41,7 @@ export function WelcomePage() {
 			description="Let's get you started"
 			hideBackButton
 		>
-			<form className="space-y-7" onSubmit={handleSubmit}>
+			<form className="space-y-7" onSubmit={handleSubmit} suppressHydrationWarning>
 				<div className="space-y-3">
 					<Input
 						value={firstName}

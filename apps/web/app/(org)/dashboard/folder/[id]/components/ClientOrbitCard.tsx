@@ -1,0 +1,1 @@
+export { registerDropTarget } from "./ClientCapCard";

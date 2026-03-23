@@ -169,7 +169,7 @@ fn default_max_fps() -> u32 {
 
 fn default_server_url() -> String {
     std::option_env!("VITE_SERVER_URL")
-        .unwrap_or("https://orbit.so")
+        .unwrap_or("https://orbit.diveshbalani.com")
         .to_string()
 }
 

@@ -1,0 +1,7 @@
+"use server";
+
+export async function updateSpace(
+	_formData: FormData,
+): Promise<{ success: boolean; error?: string }> {
+	return { success: false, error: "Not implemented" };
+}

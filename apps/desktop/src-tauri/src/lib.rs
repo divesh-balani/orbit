@@ -3379,7 +3379,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
                 } else {
                     (
                         option_env!("VITE_SERVER_URL")
-                            .unwrap_or("https://orbit.so")
+                            .unwrap_or("https://orbit.diveshbalani.com")
                             .to_string(),
                         true,
                     )

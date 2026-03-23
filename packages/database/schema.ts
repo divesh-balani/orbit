@@ -114,6 +114,7 @@ export const users = mysqlTable(
 		inviteQuota: int("inviteQuota").notNull().default(1),
 		defaultOrgId:
 			nanoIdNullable("defaultOrgId").$type<Organisation.OrganisationId>(),
+		hashedPassword: text("hashedPassword"),
 	},
 	(table) => ({
 		emailIndex: uniqueIndex("email_idx").on(table.email),
@@ -912,4 +913,19 @@ export const importedVideos = mysqlTable(
 	(table) => [
 		primaryKey({ columns: [table.orgId, table.source, table.sourceId] }),
 	],
+);
+
+export const licenseKeys = mysqlTable(
+	"license_keys",
+	{
+		id: varchar("id", { length: 36 }).primaryKey(),
+		key: varchar("key", { length: 64 }).notNull(),
+		name: varchar("name", { length: 255 }).notNull(),
+		expiresAt: datetime("expiresAt"),
+		revokedAt: datetime("revokedAt"),
+		createdAt: datetime("createdAt").notNull().default(sql`NOW()`),
+	},
+	(table) => ({
+		keyIndex: uniqueIndex("license_key_idx").on(table.key),
+	}),
 );

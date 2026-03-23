@@ -28,10 +28,6 @@ export default async function DashboardLayout({
 	const user = await getCurrentUser();
 	if (!user) redirect("/login");
 
-	if (!user.name || user.name.length === 0) {
-		redirect("/onboarding/welcome");
-	}
-
 	let organizationSelect: Organization[] = [];
 	let userCapsCount: number | null = 0;
 	let organizationSettings: OrganizationSettings | null = null;
