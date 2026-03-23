@@ -45,7 +45,7 @@ impl DeviceSourcesIterator {
         unsafe {
             attributes.SetGUID(
                 &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE,
-                &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDORBIT_GUID,
+                &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_GUID,
             )?;
         }
 
@@ -148,7 +148,7 @@ impl Device {
         unsafe {
             self.activate
                 .GetAllocatedString(
-                    &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDORBIT_SYMBOLIC_LINK,
+                    &MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK,
                     &mut raw,
                     &mut length,
                 )
@@ -455,9 +455,6 @@ impl SourceReader {
             == MF_SOURCE_READERF_CURRENTMEDIATYPECHANGED.0
         {
             return Ok(None);
-            // selected_format =
-            //     VideoFormat::new(reader.GetCurrentMediaType(stream_index).unwrap())
-            //         .unwrap();
         }
 
         Ok(Some(VideoSample(imf_sample)))
