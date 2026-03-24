@@ -1,0 +1,1 @@
+import{t as e,f as o}from"./web-DD8sXbZF.js";var n=e('<svg width=20 height=20 viewBox="0 0 20 20"fill=none xmlns=http://www.w3.org/2000/svg><path d="M6 8L8.93934 10.9393C9.52513 11.5251 10.4749 11.5251 11.0607 10.9393L14 8"stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>');const i=(t={})=>(()=>{var r=n();return o(r,t,!0,!0),r})();export{i as I};

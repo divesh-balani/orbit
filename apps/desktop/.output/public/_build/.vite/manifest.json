@@ -1,0 +1,3453 @@
+{
+  "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-400-normal.woff": {
+    "file": "assets/geist-sans-latin-400-normal-BOaIZNA2.woff",
+    "src": "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-400-normal.woff"
+  },
+  "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-400-normal.woff2": {
+    "file": "assets/geist-sans-latin-400-normal-gapTbOY8.woff2",
+    "src": "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-400-normal.woff2"
+  },
+  "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-500-normal.woff": {
+    "file": "assets/geist-sans-latin-500-normal-CN2lyvyL.woff",
+    "src": "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-500-normal.woff"
+  },
+  "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-500-normal.woff2": {
+    "file": "assets/geist-sans-latin-500-normal-uokXdC-Q.woff2",
+    "src": "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-500-normal.woff2"
+  },
+  "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-700-normal.woff": {
+    "file": "assets/geist-sans-latin-700-normal-CjScfYeH.woff",
+    "src": "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-700-normal.woff"
+  },
+  "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-700-normal.woff2": {
+    "file": "assets/geist-sans-latin-700-normal-BmN9tIp5.woff2",
+    "src": "../../node_modules/.pnpm/@fontsource+geist-sans@5.2.5/node_modules/@fontsource/geist-sans/files/geist-sans-latin-700-normal.woff2"
+  },
+  "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js": {
+    "file": "assets/index-D3YrNrY8.js",
+    "name": "index",
+    "src": "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_5WXHJDCZ-C3TB6PMj.js": {
+    "file": "assets/5WXHJDCZ-C3TB6PMj.js",
+    "name": "5WXHJDCZ",
+    "imports": [
+      "_solid-m0YymNhn.js",
+      "_index-NTuACfW5.js"
+    ]
+  },
+  "_Button-Dpd35Y_r.js": {
+    "file": "assets/Button-Dpd35Y_r.js",
+    "name": "Button",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_CaptionControlsMacOS-LOjTnYqh.js": {
+    "file": "assets/CaptionControlsMacOS-LOjTnYqh.js",
+    "name": "CaptionControlsMacOS",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_logo-CpEU3jrQ.js",
+      "_solid-m0YymNhn.js",
+      "_window-hgj9ZaxL.js",
+      "_index-M33yfidE.js"
+    ]
+  },
+  "_CaptionControlsWindows11-C_oMkRIy.js": {
+    "file": "assets/CaptionControlsWindows11-C_oMkRIy.js",
+    "name": "CaptionControlsWindows11",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_titlebar-state-Qrd5yMZJ.js"
+    ]
+  },
+  "_Context-D3IH-Pa6.js": {
+    "file": "assets/Context-D3IH-Pa6.js",
+    "name": "Context",
+    "imports": [
+      "_index-DI0hr_e0.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_Cropper-B7wdwx5_.js": {
+    "file": "assets/Cropper-B7wdwx5_.js",
+    "name": "Cropper",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-CSuwbsU5.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_plus-DFPM3MFV.js"
+    ]
+  },
+  "_Editor-o6T048ZZ.js": {
+    "file": "assets/Editor-o6T048ZZ.js",
+    "name": "Editor",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_maximize-BmqslmiH.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_persisted-D-6jA9O8.js",
+      "_event-ByEJuK8t.js",
+      "_window-hgj9ZaxL.js",
+      "_menu-CqkW7Nw7.js",
+      "_index-6r3pxezh.js",
+      "_Cropper-B7wdwx5_.js",
+      "_ui-DKyLIF0d.js",
+      "_ratio-CLnYq6fY.js",
+      "_circle-x-D1CNB4mW.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-M33yfidE.js",
+      "_ui--FEJPUNx.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_index-Ft_z9wjy.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_copy-arSfJrHy.js",
+      "_save-DL7kE5G-.js",
+      "_trash-DYemVZz4.js",
+      "_eye-off-CMrziJHL.js",
+      "_layout-Du6SZSLa.js",
+      "_chevron-down-CKaOalBS.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_Toggle-2dWNWOFq.js",
+      "_enlarge-CjCkr66j.js",
+      "_square-B5TITtaz.js",
+      "_tauri-DDRUzmQ6.js",
+      "_toast-DNJm7Fzz.js",
+      "_x-CPEBzzc2.js",
+      "_index-BRJHV9Qg.js",
+      "_store-_yiH6NTs.js",
+      "_logo-CpEU3jrQ.js"
+    ]
+  },
+  "_FLVHQV4A-MM7aOKek.js": {
+    "file": "assets/FLVHQV4A-MM7aOKek.js",
+    "name": "FLVHQV4A",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_InfoPill-BOFUF8cw.js": {
+    "file": "assets/InfoPill-BOFUF8cw.js",
+    "name": "InfoPill",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_JNCCF6MP-4sxnBYeu.js": {
+    "file": "assets/JNCCF6MP-4sxnBYeu.js",
+    "name": "JNCCF6MP"
+  },
+  "_LoaderIcon-LaLERXrs.js": {
+    "file": "assets/LoaderIcon-LaLERXrs.js",
+    "name": "LoaderIcon",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js",
+      "_toast-DNJm7Fzz.js"
+    ]
+  },
+  "_MicrophoneSelect-CsappB04.js": {
+    "file": "assets/MicrophoneSelect-CsappB04.js",
+    "name": "MicrophoneSelect",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-Bgms6XDi.js",
+      "_menu-CqkW7Nw7.js",
+      "_event-ByEJuK8t.js",
+      "_solid-m0YymNhn.js",
+      "_analytics-BLrn_zha.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_InfoPill-BOFUF8cw.js",
+      "_useRequestPermission-BYKzr4TF.js",
+      "_camera-BDdEg0Us.js",
+      "_eye-off-CMrziJHL.js",
+      "_index-M33yfidE.js",
+      "_createEventListener-BONFFIPI.js",
+      "_microphone-CBvNGKAL.js"
+    ]
+  },
+  "_ModeSelect-BgIiALKn.js": {
+    "file": "assets/ModeSelect-BgIiALKn.js",
+    "name": "ModeSelect",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_check-DUgMIpvx.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js"
+    ]
+  },
+  "_OrbitErrorBoundary-CaI2wej-.js": {
+    "file": "assets/OrbitErrorBoundary-CaI2wej-.js",
+    "name": "OrbitErrorBoundary",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "_index-KN3eljhQ.js",
+      "_logo-CpEU3jrQ.js"
+    ]
+  },
+  "_Setting-BQt5F2nj.js": {
+    "file": "assets/Setting-BQt5F2nj.js",
+    "name": "Setting",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Toggle-2dWNWOFq.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_SwitchTab-CmS7uPYV.js": {
+    "file": "assets/SwitchTab-CmS7uPYV.js",
+    "name": "SwitchTab",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-M33yfidE.js"
+    ]
+  },
+  "_TargetCard-DLDCEKZt.js": {
+    "file": "assets/TargetCard-DLDCEKZt.js",
+    "name": "TargetCard",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_warning-bold-D1pDLPv3.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_event-ByEJuK8t.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_solid-m0YymNhn.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_tauri-DDRUzmQ6.js",
+      "_monitor-jh1cLEAa.js",
+      "_copy-arSfJrHy.js",
+      "_edit-AVnyz9aK.js",
+      "_image-D55pT39k.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_save-DL7kE5G-.js",
+      "_square-play-rq2mD1a2.js",
+      "_link--M5Pz03-.js",
+      "_trash-DYemVZz4.js",
+      "_toast-DNJm7Fzz.js"
+    ]
+  },
+  "_TargetTypeButton-CiPbNP2k.js": {
+    "file": "assets/TargetTypeButton-CiPbNP2k.js",
+    "name": "TargetTypeButton",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js",
+      "_solid-m0YymNhn.js",
+      "_Button-Dpd35Y_r.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CPGiedJt.js",
+      "_index-M33yfidE.js",
+      "_index-6r3pxezh.js",
+      "_arrow-left-DyWnyhmJ.js",
+      "_check-DUgMIpvx.js",
+      "_InfoPill-BOFUF8cw.js",
+      "_monitor-bold-kef6rHj4.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_chevron-down-CKaOalBS.js",
+      "_TargetCard-DLDCEKZt.js",
+      "_image-D55pT39k.js",
+      "_square-play-rq2mD1a2.js"
+    ]
+  },
+  "_Toggle-2dWNWOFq.js": {
+    "file": "assets/Toggle-2dWNWOFq.js",
+    "name": "Toggle",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_index-NTuACfW5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-M33yfidE.js"
+    ]
+  },
+  "_Tooltip-RZDxoH9s.js": {
+    "file": "assets/Tooltip-RZDxoH9s.js",
+    "name": "Tooltip",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-NTuACfW5.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js"
+    ]
+  },
+  "_UF7Y45EJ-DMmOXAHg.js": {
+    "file": "assets/UF7Y45EJ-DMmOXAHg.js",
+    "name": "UF7Y45EJ",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-NTuACfW5.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js"
+    ]
+  },
+  "_UKTBL2JL-DLyNZQCF.js": {
+    "file": "assets/UKTBL2JL-DLyNZQCF.js",
+    "name": "UKTBL2JL",
+    "imports": [
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_index-B9MzQzl-.js"
+    ]
+  },
+  "_VI7QYH27-B5N4hhgJ.js": {
+    "file": "assets/VI7QYH27-B5N4hhgJ.js",
+    "name": "VI7QYH27",
+    "imports": [
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_index-NTuACfW5.js"
+    ]
+  },
+  "_WAUM5GOD-BO3aReIo.js": {
+    "file": "assets/WAUM5GOD-BO3aReIo.js",
+    "name": "WAUM5GOD",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_XZ3MOT5A-CtnZqUlH.js": {
+    "file": "assets/XZ3MOT5A-CtnZqUlH.js",
+    "name": "XZ3MOT5A",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js"
+    ]
+  },
+  "_ZZYKR3VO-BBcuC-FK.js": {
+    "file": "assets/ZZYKR3VO-BBcuC-FK.js",
+    "name": "ZZYKR3VO",
+    "imports": [
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_index-NTuACfW5.js",
+      "_web-DD8sXbZF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-B9MzQzl-.js",
+      "_JNCCF6MP-4sxnBYeu.js"
+    ]
+  },
+  "_alert-triangle-DfZAF7bK.js": {
+    "file": "assets/alert-triangle-DfZAF7bK.js",
+    "name": "alert-triangle",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_analytics-BLrn_zha.js": {
+    "file": "assets/analytics-BLrn_zha.js",
+    "name": "analytics"
+  },
+  "_app-CL6z86Tg.js": {
+    "file": "assets/app-CL6z86Tg.js",
+    "name": "app",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_arrow-left-DyWnyhmJ.js": {
+    "file": "assets/arrow-left-DyWnyhmJ.js",
+    "name": "arrow-left",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_arrows-DPnQvrHD.js": {
+    "file": "assets/arrows-DPnQvrHD.js",
+    "name": "arrows",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_camera-BDdEg0Us.js": {
+    "file": "assets/camera-BDdEg0Us.js",
+    "name": "camera",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_check-DUgMIpvx.js": {
+    "file": "assets/check-DUgMIpvx.js",
+    "name": "check",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_chevron-down-CKaOalBS.js": {
+    "file": "assets/chevron-down-CKaOalBS.js",
+    "name": "chevron-down",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_circle-check-Cw9Lm7BZ.js": {
+    "file": "assets/circle-check-Cw9Lm7BZ.js",
+    "name": "circle-check",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_circle-off-C3_RIPPQ.js": {
+    "file": "assets/circle-off-C3_RIPPQ.js",
+    "name": "circle-off",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_circle-x-D1CNB4mW.js": {
+    "file": "assets/circle-x-D1CNB4mW.js",
+    "name": "circle-x",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_combineProps-oHjLfPsP.js": {
+    "file": "assets/combineProps-oHjLfPsP.js",
+    "name": "combineProps"
+  },
+  "_components-jHDwZhWn.js": {
+    "file": "assets/components-jHDwZhWn.js",
+    "name": "components",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js",
+      "_routing-DhSugqg9.js"
+    ]
+  },
+  "_context-tR9agE1b.js": {
+    "file": "assets/context-tR9agE1b.js",
+    "name": "context",
+    "imports": [
+      "_index-DI0hr_e0.js",
+      "_index-CjXWecUp.js",
+      "_index-NTuACfW5.js",
+      "_solid-m0YymNhn.js",
+      "_index-CPGiedJt.js",
+      "_store-_yiH6NTs.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_socket-CaNetyhe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_event-ByEJuK8t.js",
+      "_window-hgj9ZaxL.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "_copy-arSfJrHy.js": {
+    "file": "assets/copy-arSfJrHy.js",
+    "name": "copy",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_createEventListener-BONFFIPI.js": {
+    "file": "assets/createEventListener-BONFFIPI.js",
+    "name": "createEventListener",
+    "imports": [
+      "_solid-m0YymNhn.js",
+      "_tauri-DDRUzmQ6.js"
+    ]
+  },
+  "_devices-ByykJVlA.js": {
+    "file": "assets/devices-ByykJVlA.js",
+    "name": "devices",
+    "imports": [
+      "_index-CPGiedJt.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_tauri-DDRUzmQ6.js"
+    ]
+  },
+  "_edit-AVnyz9aK.js": {
+    "file": "assets/edit-AVnyz9aK.js",
+    "name": "edit",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_editor-skeleton-C6vL-Kh9.js": {
+    "file": "assets/editor-skeleton-C6vL-Kh9.js",
+    "name": "editor-skeleton",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_maximize-BmqslmiH.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-BRJHV9Qg.js",
+      "_index-CjXWecUp.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_window-hgj9ZaxL.js",
+      "_menu-CqkW7Nw7.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_Cropper-B7wdwx5_.js",
+      "_Toggle-2dWNWOFq.js",
+      "_ui-DKyLIF0d.js",
+      "_createEventListener-BONFFIPI.js",
+      "_tauri-DDRUzmQ6.js",
+      "_layout-Du6SZSLa.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_folder-CgLvMzAo.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_store-Co4lPmqe.js",
+      "_check-DUgMIpvx.js",
+      "_chevron-down-CKaOalBS.js",
+      "_circle-check-Cw9Lm7BZ.js",
+      "_context-tR9agE1b.js",
+      "_toast-DNJm7Fzz.js",
+      "_camera-BDdEg0Us.js",
+      "_volume2-BOgvvJz4.js",
+      "_microphone-CBvNGKAL.js",
+      "_enlarge-CjCkr66j.js",
+      "_hotkeys-BsYTHopP.js",
+      "_trash-DYemVZz4.js",
+      "_circle-x-D1CNB4mW.js",
+      "_settings-B0TUWVLi.js",
+      "_search-C2qX7z9i.js",
+      "_queries-0RkPLikl.js",
+      "_index-Ft_z9wjy.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_alert-triangle-DfZAF7bK.js",
+      "_index-BFV5wmEw.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_analytics-BLrn_zha.js",
+      "_hard-drive-VJdvhQZa.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_image-D55pT39k.js",
+      "_x-CPEBzzc2.js",
+      "_link--M5Pz03-.js",
+      "_arrow-left-DyWnyhmJ.js",
+      "_video-BxEIEdGB.js",
+      "_WAUM5GOD-BO3aReIo.js",
+      "_index-KN3eljhQ.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-DI0hr_e0.js",
+      "_index-B9MzQzl-.js",
+      "_eye-off-CMrziJHL.js",
+      "_plus-DFPM3MFV.js",
+      "_ratio-CLnYq6fY.js",
+      "_logo-CpEU3jrQ.js"
+    ],
+    "css": [
+      "assets/editor-skeleton-sFpFyeUp.css"
+    ]
+  },
+  "_editor-skeleton-sFpFyeUp.css": {
+    "file": "assets/editor-skeleton-sFpFyeUp.css",
+    "src": "_editor-skeleton-sFpFyeUp.css"
+  },
+  "_editor-xd2xEs69.js": {
+    "file": "assets/editor-xd2xEs69.js",
+    "name": "editor",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_enlarge-CjCkr66j.js": {
+    "file": "assets/enlarge-CjCkr66j.js",
+    "name": "enlarge",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_event-ByEJuK8t.js": {
+    "file": "assets/event-ByEJuK8t.js",
+    "name": "event"
+  },
+  "_eventListener-Do7UivV7.js": {
+    "file": "assets/eventListener-Do7UivV7.js",
+    "name": "eventListener",
+    "imports": [
+      "_index-NTuACfW5.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_expand-CeqyHSmM.js": {
+    "file": "assets/expand-CeqyHSmM.js",
+    "name": "expand",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_eye-off-CMrziJHL.js": {
+    "file": "assets/eye-off-CMrziJHL.js",
+    "name": "eye-off",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_film-cut-BgrVV1qh.js": {
+    "file": "assets/film-cut-BgrVV1qh.js",
+    "name": "film-cut",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_floating-ui.dom-DzoQ-s65.js": {
+    "file": "assets/floating-ui.dom-DzoQ-s65.js",
+    "name": "floating-ui.dom"
+  },
+  "_folder-CgLvMzAo.js": {
+    "file": "assets/folder-CgLvMzAo.js",
+    "name": "folder",
+    "imports": [
+      "_event-ByEJuK8t.js",
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_hard-drive-VJdvhQZa.js": {
+    "file": "assets/hard-drive-VJdvhQZa.js",
+    "name": "hard-drive",
+    "imports": [
+      "_event-ByEJuK8t.js",
+      "_tauri-DDRUzmQ6.js",
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_hotkeys-BsYTHopP.js": {
+    "file": "assets/hotkeys-BsYTHopP.js",
+    "name": "hotkeys",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_image-D55pT39k.js": {
+    "file": "assets/image-D55pT39k.js",
+    "name": "image",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_index-6r3pxezh.js": {
+    "file": "assets/index-6r3pxezh.js",
+    "name": "index",
+    "imports": [
+      "_solid-m0YymNhn.js",
+      "_index-B9MzQzl-.js"
+    ]
+  },
+  "_index-B9MzQzl-.js": {
+    "file": "assets/index-B9MzQzl-.js",
+    "name": "index",
+    "imports": [
+      "_index-NTuACfW5.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_index-BFV5wmEw.js": {
+    "file": "assets/index-BFV5wmEw.js",
+    "name": "index",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_index-BRJHV9Qg.js": {
+    "file": "assets/index-BRJHV9Qg.js",
+    "name": "index",
+    "imports": [
+      "_index-CSuwbsU5.js",
+      "_solid-m0YymNhn.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "_index-Bgms6XDi.js": {
+    "file": "assets/index-Bgms6XDi.js",
+    "name": "index",
+    "imports": [
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_index-CPGiedJt.js": {
+    "file": "assets/index-CPGiedJt.js",
+    "name": "index",
+    "imports": [
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "_index-CSuwbsU5.js": {
+    "file": "assets/index-CSuwbsU5.js",
+    "name": "index",
+    "imports": [
+      "_index-NTuACfW5.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_index-CjXWecUp.js": {
+    "file": "assets/index-CjXWecUp.js",
+    "name": "index",
+    "imports": [
+      "_SwitchTab-CmS7uPYV.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "_index-DI0hr_e0.js": {
+    "file": "assets/index-DI0hr_e0.js",
+    "name": "index",
+    "imports": [
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_index-Ft_z9wjy.js": {
+    "file": "assets/index-Ft_z9wjy.js",
+    "name": "index",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_index-KN3eljhQ.js": {
+    "file": "assets/index-KN3eljhQ.js",
+    "name": "index",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_index-M33yfidE.js": {
+    "file": "assets/index-M33yfidE.js",
+    "name": "index"
+  },
+  "_index-NTuACfW5.js": {
+    "file": "assets/index-NTuACfW5.js",
+    "name": "index",
+    "imports": [
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_index-PZVx_YvE.js": {
+    "file": "assets/index-PZVx_YvE.js",
+    "name": "index",
+    "imports": [
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_index-bQ4Y86rB.js": {
+    "file": "assets/index-bQ4Y86rB.js",
+    "name": "index",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_index-imWwvghK.js": {
+    "file": "assets/index-imWwvghK.js",
+    "name": "index",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CjXWecUp.js",
+      "_floating-ui.dom-DzoQ-s65.js"
+    ]
+  },
+  "_index-zbIK3AO9.js": {
+    "file": "assets/index-zbIK3AO9.js",
+    "name": "index",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_info-BtWP_rDv.js": {
+    "file": "assets/info-BtWP_rDv.js",
+    "name": "info",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_layout-Du6SZSLa.js": {
+    "file": "assets/layout-Du6SZSLa.js",
+    "name": "layout",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_solid-m0YymNhn.js",
+      "_index-B9MzQzl-.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-NTuACfW5.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_combineProps-oHjLfPsP.js"
+    ]
+  },
+  "_light-CYcY6Uw5.js": {
+    "file": "assets/light-CYcY6Uw5.js",
+    "name": "light",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ],
+    "assets": [
+      "assets/auto-CPKoGbmb.jpg",
+      "assets/dark-B8-Zfy6_.jpg",
+      "assets/light-BcegqCvt.jpg"
+    ]
+  },
+  "_link--M5Pz03-.js": {
+    "file": "assets/link--M5Pz03-.js",
+    "name": "link",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_logo-CpEU3jrQ.js": {
+    "file": "assets/logo-CpEU3jrQ.js",
+    "name": "logo",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_maximize-BmqslmiH.js": {
+    "file": "assets/maximize-BmqslmiH.js",
+    "name": "maximize",
+    "imports": [
+      "_solid-m0YymNhn.js",
+      "_index-NTuACfW5.js",
+      "_web-DD8sXbZF.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_combineProps-oHjLfPsP.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-B9MzQzl-.js",
+      "_JNCCF6MP-4sxnBYeu.js"
+    ]
+  },
+  "_menu-CqkW7Nw7.js": {
+    "file": "assets/menu-CqkW7Nw7.js",
+    "name": "menu",
+    "imports": [
+      "_event-ByEJuK8t.js",
+      "_window-hgj9ZaxL.js"
+    ]
+  },
+  "_microphone-CBvNGKAL.js": {
+    "file": "assets/microphone-CBvNGKAL.js",
+    "name": "microphone",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_monitor-bold-kef6rHj4.js": {
+    "file": "assets/monitor-bold-kef6rHj4.js",
+    "name": "monitor-bold",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_monitor-jh1cLEAa.js": {
+    "file": "assets/monitor-jh1cLEAa.js",
+    "name": "monitor",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_more-vertical-Bi2Zu0Sn.js": {
+    "file": "assets/more-vertical-Bi2Zu0Sn.js",
+    "name": "more-vertical",
+    "imports": [
+      "_index-BFV5wmEw.js",
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_persisted-D-6jA9O8.js": {
+    "file": "assets/persisted-D-6jA9O8.js",
+    "name": "persisted",
+    "imports": [
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "_plus-DFPM3MFV.js": {
+    "file": "assets/plus-DFPM3MFV.js",
+    "name": "plus",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_queries-0RkPLikl.js": {
+    "file": "assets/queries-0RkPLikl.js",
+    "name": "queries",
+    "imports": [
+      "_persisted-D-6jA9O8.js",
+      "_index-CPGiedJt.js",
+      "_window-hgj9ZaxL.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_ratio-CLnYq6fY.js": {
+    "file": "assets/ratio-CLnYq6fY.js",
+    "name": "ratio",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_record-fill-DU9LFKiL.js": {
+    "file": "assets/record-fill-DU9LFKiL.js",
+    "name": "record-fill",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_rotate-ccw-EIhY-wMN.js": {
+    "file": "assets/rotate-ccw-EIhY-wMN.js",
+    "name": "rotate-ccw",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_routing-DhSugqg9.js": {
+    "file": "assets/routing-DhSugqg9.js",
+    "name": "routing",
+    "imports": [
+      "_solid-m0YymNhn.js",
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_save-DL7kE5G-.js": {
+    "file": "assets/save-DL7kE5G-.js",
+    "name": "save",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_screenshot-nxCO6T7z.js": {
+    "file": "assets/screenshot-nxCO6T7z.js",
+    "name": "screenshot",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_search-C2qX7z9i.js": {
+    "file": "assets/search-C2qX7z9i.js",
+    "name": "search",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_selection-hint-DZxPEW9X.js": {
+    "file": "assets/selection-hint-DZxPEW9X.js",
+    "name": "selection-hint",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_settings-B0TUWVLi.js": {
+    "file": "assets/settings-B0TUWVLi.js",
+    "name": "settings",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_socket-CaNetyhe.js": {
+    "file": "assets/socket-CaNetyhe.js",
+    "name": "socket",
+    "imports": [
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_solid-m0YymNhn.js": {
+    "file": "assets/solid-m0YymNhn.js",
+    "name": "solid"
+  },
+  "_square-B5TITtaz.js": {
+    "file": "assets/square-B5TITtaz.js",
+    "name": "square",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_square-play-rq2mD1a2.js": {
+    "file": "assets/square-play-rq2mD1a2.js",
+    "name": "square-play",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_store-Co4lPmqe.js": {
+    "file": "assets/store-Co4lPmqe.js",
+    "name": "store",
+    "imports": [
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_store-_yiH6NTs.js": {
+    "file": "assets/store-_yiH6NTs.js",
+    "name": "store",
+    "imports": [
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_tauri-DDRUzmQ6.js": {
+    "file": "assets/tauri-DDRUzmQ6.js",
+    "name": "tauri",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_tears-and-fireflies-adi-goldstein--WRLB3l0.js": {
+    "file": "assets/tears-and-fireflies-adi-goldstein--WRLB3l0.js",
+    "name": "tears-and-fireflies-adi-goldstein",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ],
+    "assets": [
+      "assets/cloud-1-0EtYTpJQ.png",
+      "assets/cloud-2-C48ZYBEu.png",
+      "assets/cloud-3-SWvz_Fyk.png",
+      "assets/tears-and-fireflies-adi-goldstein-CggkdS0h.mp3"
+    ]
+  },
+  "_titlebar-state-Qrd5yMZJ.js": {
+    "file": "assets/titlebar-state-Qrd5yMZJ.js",
+    "name": "titlebar-state",
+    "imports": [
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "_toast-DNJm7Fzz.js": {
+    "file": "assets/toast-DNJm7Fzz.js",
+    "name": "toast",
+    "imports": [
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "_trash-DYemVZz4.js": {
+    "file": "assets/trash-DYemVZz4.js",
+    "name": "trash",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_ui--FEJPUNx.js": {
+    "file": "assets/ui--FEJPUNx.js",
+    "name": "ui",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-BRJHV9Qg.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_index-DI0hr_e0.js",
+      "_index-CjXWecUp.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_event-ByEJuK8t.js",
+      "_store-_yiH6NTs.js",
+      "_socket-CaNetyhe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "_ui-DKyLIF0d.js": {
+    "file": "assets/ui-DKyLIF0d.js",
+    "name": "ui",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "_useRequestPermission-BYKzr4TF.js": {
+    "file": "assets/useRequestPermission-BYKzr4TF.js",
+    "name": "useRequestPermission",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js",
+      "_index-CPGiedJt.js",
+      "_devices-ByykJVlA.js",
+      "_tauri-DDRUzmQ6.js"
+    ]
+  },
+  "_video-BxEIEdGB.js": {
+    "file": "assets/video-BxEIEdGB.js",
+    "name": "video",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_volume2-BOgvvJz4.js": {
+    "file": "assets/volume2-BOgvvJz4.js",
+    "name": "volume2",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "_warning-bold-D1pDLPv3.js": {
+    "file": "assets/warning-bold-D1pDLPv3.js",
+    "name": "warning-bold",
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_web-DD8sXbZF.js": {
+    "file": "assets/web-DD8sXbZF.js",
+    "name": "web",
+    "imports": [
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "_webviewWindow-C3hS3OnT.js": {
+    "file": "assets/webviewWindow-C3hS3OnT.js",
+    "name": "webviewWindow",
+    "imports": [
+      "_window-hgj9ZaxL.js",
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_window-hgj9ZaxL.js": {
+    "file": "assets/window-hgj9ZaxL.js",
+    "name": "window",
+    "imports": [
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "_x-CPEBzzc2.js": {
+    "file": "assets/x-CPEBzzc2.js",
+    "name": "x",
+    "imports": [
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "src/assets/illustrations/cloud-1.png": {
+    "file": "assets/cloud-1-0EtYTpJQ.png",
+    "src": "src/assets/illustrations/cloud-1.png"
+  },
+  "src/assets/illustrations/cloud-2.png": {
+    "file": "assets/cloud-2-C48ZYBEu.png",
+    "src": "src/assets/illustrations/cloud-2.png"
+  },
+  "src/assets/illustrations/cloud-3.png": {
+    "file": "assets/cloud-3-SWvz_Fyk.png",
+    "src": "src/assets/illustrations/cloud-3.png"
+  },
+  "src/assets/tears-and-fireflies-adi-goldstein.mp3": {
+    "file": "assets/tears-and-fireflies-adi-goldstein-CggkdS0h.mp3",
+    "src": "src/assets/tears-and-fireflies-adi-goldstein.mp3"
+  },
+  "src/assets/theme-previews/auto.jpg": {
+    "file": "assets/auto-CPKoGbmb.jpg",
+    "src": "src/assets/theme-previews/auto.jpg"
+  },
+  "src/assets/theme-previews/dark.jpg": {
+    "file": "assets/dark-B8-Zfy6_.jpg",
+    "src": "src/assets/theme-previews/dark.jpg"
+  },
+  "src/assets/theme-previews/light.jpg": {
+    "file": "assets/light-BcegqCvt.jpg",
+    "src": "src/assets/theme-previews/light.jpg"
+  },
+  "src/routes/(window-chrome).tsx": {
+    "file": "assets/(window-chrome)-BOl1PEX3.js",
+    "name": "(window-chrome)",
+    "src": "src/routes/(window-chrome).tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_CaptionControlsMacOS-LOjTnYqh.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_Context-D3IH-Pa6.js",
+      "_event-ByEJuK8t.js",
+      "_logo-CpEU3jrQ.js",
+      "_store-_yiH6NTs.js",
+      "_index-DI0hr_e0.js"
+    ]
+  },
+  "src/routes/(window-chrome).tsx?pick=default&pick=$css": {
+    "file": "assets/(window-chrome)-DIorhDkH.js",
+    "name": "(window-chrome)",
+    "src": "src/routes/(window-chrome).tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_CaptionControlsMacOS-LOjTnYqh.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_Context-D3IH-Pa6.js",
+      "_event-ByEJuK8t.js",
+      "_logo-CpEU3jrQ.js",
+      "_store-_yiH6NTs.js",
+      "_index-DI0hr_e0.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/CameraSelect.tsx?pick=default&pick=$css": {
+    "file": "assets/CameraSelect-LGJ_VlBs.js",
+    "name": "CameraSelect",
+    "src": "src/routes/(window-chrome)/new-main/CameraSelect.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-Bgms6XDi.js",
+      "_solid-m0YymNhn.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_InfoPill-BOFUF8cw.js",
+      "_useRequestPermission-BYKzr4TF.js",
+      "_camera-BDdEg0Us.js",
+      "_eye-off-CMrziJHL.js",
+      "_persisted-D-6jA9O8.js",
+      "_store-_yiH6NTs.js",
+      "_index-CPGiedJt.js",
+      "_window-hgj9ZaxL.js",
+      "_event-ByEJuK8t.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-M33yfidE.js",
+      "_devices-ByykJVlA.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/DeviceSelectOverlay.tsx?pick=default&pick=$css": {
+    "file": "assets/DeviceSelectOverlay-Bjk-f461.js",
+    "name": "DeviceSelectOverlay",
+    "src": "src/routes/(window-chrome)/new-main/DeviceSelectOverlay.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_check-DUgMIpvx.js",
+      "_circle-off-C3_RIPPQ.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/InfoPill.tsx?pick=default&pick=$css": {
+    "file": "assets/InfoPill-DR-0qSgO.js",
+    "name": "InfoPill",
+    "src": "src/routes/(window-chrome)/new-main/InfoPill.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/MicrophoneSelect.tsx?pick=default&pick=$css": {
+    "file": "assets/MicrophoneSelect-Bz-ks_T_.js",
+    "name": "MicrophoneSelect",
+    "src": "src/routes/(window-chrome)/new-main/MicrophoneSelect.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js",
+      "_createEventListener-BONFFIPI.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_InfoPill-BOFUF8cw.js",
+      "_useRequestPermission-BYKzr4TF.js",
+      "_microphone-CBvNGKAL.js",
+      "_persisted-D-6jA9O8.js",
+      "_store-_yiH6NTs.js",
+      "_index-CPGiedJt.js",
+      "_window-hgj9ZaxL.js",
+      "_event-ByEJuK8t.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-M33yfidE.js",
+      "_devices-ByykJVlA.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/ModeInfoPanel.tsx?pick=default&pick=$css": {
+    "file": "assets/ModeInfoPanel-y9IPnP2_.js",
+    "name": "ModeInfoPanel",
+    "src": "src/routes/(window-chrome)/new-main/ModeInfoPanel.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_index-6r3pxezh.js",
+      "_tauri-DDRUzmQ6.js",
+      "_arrow-left-DyWnyhmJ.js",
+      "_queries-0RkPLikl.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js",
+      "_check-DUgMIpvx.js",
+      "_index-B9MzQzl-.js",
+      "_index-NTuACfW5.js",
+      "_event-ByEJuK8t.js",
+      "_persisted-D-6jA9O8.js",
+      "_store-_yiH6NTs.js",
+      "_index-CPGiedJt.js",
+      "_window-hgj9ZaxL.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/SystemAudio.tsx?pick=default&pick=$css": {
+    "file": "assets/SystemAudio-D99aLFoy.js",
+    "name": "SystemAudio",
+    "src": "src/routes/(window-chrome)/new-main/SystemAudio.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_InfoPill-BOFUF8cw.js",
+      "_monitor-bold-kef6rHj4.js",
+      "_solid-m0YymNhn.js",
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/TargetCard.tsx?pick=default&pick=$css": {
+    "file": "assets/TargetCard-pHowcDvJ.js",
+    "name": "TargetCard",
+    "src": "src/routes/(window-chrome)/new-main/TargetCard.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_warning-bold-D1pDLPv3.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_event-ByEJuK8t.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_solid-m0YymNhn.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_tauri-DDRUzmQ6.js",
+      "_monitor-jh1cLEAa.js",
+      "_copy-arSfJrHy.js",
+      "_edit-AVnyz9aK.js",
+      "_image-D55pT39k.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_save-DL7kE5G-.js",
+      "_square-play-rq2mD1a2.js",
+      "_link--M5Pz03-.js",
+      "_trash-DYemVZz4.js",
+      "_toast-DNJm7Fzz.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/TargetDropdownButton.tsx?pick=default&pick=$css": {
+    "file": "assets/TargetDropdownButton-CZORRxUD.js",
+    "name": "TargetDropdownButton",
+    "src": "src/routes/(window-chrome)/new-main/TargetDropdownButton.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_chevron-down-CKaOalBS.js",
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/TargetMenuGrid.tsx?pick=default&pick=$css": {
+    "file": "assets/TargetMenuGrid-C8BLbTko.js",
+    "name": "TargetMenuGrid",
+    "src": "src/routes/(window-chrome)/new-main/TargetMenuGrid.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_index-6r3pxezh.js",
+      "_TargetCard-DLDCEKZt.js",
+      "_image-D55pT39k.js",
+      "_square-play-rq2mD1a2.js",
+      "_index-B9MzQzl-.js",
+      "_index-NTuACfW5.js",
+      "_warning-bold-D1pDLPv3.js",
+      "_event-ByEJuK8t.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_tauri-DDRUzmQ6.js",
+      "_monitor-jh1cLEAa.js",
+      "_copy-arSfJrHy.js",
+      "_edit-AVnyz9aK.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_save-DL7kE5G-.js",
+      "_link--M5Pz03-.js",
+      "_trash-DYemVZz4.js",
+      "_toast-DNJm7Fzz.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/TargetSelectInfoPill.tsx?pick=default&pick=$css": {
+    "file": "assets/TargetSelectInfoPill-C-wUa9fS.js",
+    "name": "TargetSelectInfoPill",
+    "src": "src/routes/(window-chrome)/new-main/TargetSelectInfoPill.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/TargetTypeButton.tsx?pick=default&pick=$css": {
+    "file": "assets/TargetTypeButton-BGoj7gWD.js",
+    "name": "TargetTypeButton",
+    "src": "src/routes/(window-chrome)/new-main/TargetTypeButton.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/index.tsx": {
+    "file": "assets/index-DyPoskAm.js",
+    "name": "index",
+    "src": "src/routes/(window-chrome)/new-main/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CPGiedJt.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "_window-hgj9ZaxL.js",
+      "_index-BFV5wmEw.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_warning-bold-D1pDLPv3.js",
+      "_index-bQ4Y86rB.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_TargetTypeButton-CiPbNP2k.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_ui-DKyLIF0d.js",
+      "_createEventListener-BONFFIPI.js",
+      "_devices-ByykJVlA.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_monitor-jh1cLEAa.js",
+      "_arrow-left-DyWnyhmJ.js",
+      "_image-D55pT39k.js",
+      "_search-C2qX7z9i.js",
+      "_square-play-rq2mD1a2.js",
+      "_video-BxEIEdGB.js",
+      "_settings-B0TUWVLi.js",
+      "_Context-D3IH-Pa6.js",
+      "_MicrophoneSelect-CsappB04.js",
+      "_useRequestPermission-BYKzr4TF.js",
+      "_camera-BDdEg0Us.js",
+      "_check-DUgMIpvx.js",
+      "_microphone-CBvNGKAL.js",
+      "_circle-off-C3_RIPPQ.js",
+      "_routing-DhSugqg9.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_event-ByEJuK8t.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js",
+      "_InfoPill-BOFUF8cw.js",
+      "_monitor-bold-kef6rHj4.js",
+      "_chevron-down-CKaOalBS.js",
+      "_TargetCard-DLDCEKZt.js",
+      "_folder-CgLvMzAo.js",
+      "_copy-arSfJrHy.js",
+      "_edit-AVnyz9aK.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_save-DL7kE5G-.js",
+      "_link--M5Pz03-.js",
+      "_trash-DYemVZz4.js",
+      "_toast-DNJm7Fzz.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_socket-CaNetyhe.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-Bgms6XDi.js",
+      "_menu-CqkW7Nw7.js",
+      "_analytics-BLrn_zha.js",
+      "_eye-off-CMrziJHL.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-UdeAv22p.js",
+    "name": "index",
+    "src": "src/routes/(window-chrome)/new-main/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CPGiedJt.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "_window-hgj9ZaxL.js",
+      "_index-BFV5wmEw.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_warning-bold-D1pDLPv3.js",
+      "_index-bQ4Y86rB.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_TargetTypeButton-CiPbNP2k.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_ui-DKyLIF0d.js",
+      "_createEventListener-BONFFIPI.js",
+      "_devices-ByykJVlA.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_monitor-jh1cLEAa.js",
+      "_arrow-left-DyWnyhmJ.js",
+      "_image-D55pT39k.js",
+      "_search-C2qX7z9i.js",
+      "_square-play-rq2mD1a2.js",
+      "_video-BxEIEdGB.js",
+      "_settings-B0TUWVLi.js",
+      "_Context-D3IH-Pa6.js",
+      "_MicrophoneSelect-CsappB04.js",
+      "_useRequestPermission-BYKzr4TF.js",
+      "_camera-BDdEg0Us.js",
+      "_check-DUgMIpvx.js",
+      "_microphone-CBvNGKAL.js",
+      "_circle-off-C3_RIPPQ.js",
+      "_routing-DhSugqg9.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_event-ByEJuK8t.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js",
+      "_InfoPill-BOFUF8cw.js",
+      "_monitor-bold-kef6rHj4.js",
+      "_chevron-down-CKaOalBS.js",
+      "_TargetCard-DLDCEKZt.js",
+      "_folder-CgLvMzAo.js",
+      "_copy-arSfJrHy.js",
+      "_edit-AVnyz9aK.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_save-DL7kE5G-.js",
+      "_link--M5Pz03-.js",
+      "_trash-DYemVZz4.js",
+      "_toast-DNJm7Fzz.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_socket-CaNetyhe.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-Bgms6XDi.js",
+      "_menu-CqkW7Nw7.js",
+      "_analytics-BLrn_zha.js",
+      "_eye-off-CMrziJHL.js"
+    ]
+  },
+  "src/routes/(window-chrome)/new-main/useRequestPermission.ts?pick=default&pick=$css": {
+    "file": "assets/useRequestPermission-GvnbkYUI.js",
+    "name": "useRequestPermission",
+    "src": "src/routes/(window-chrome)/new-main/useRequestPermission.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_index-CPGiedJt.js",
+      "_devices-ByykJVlA.js",
+      "_tauri-DDRUzmQ6.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings.tsx": {
+    "file": "assets/settings-D05GQz7l.js",
+    "name": "settings",
+    "src": "src/routes/(window-chrome)/settings.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_app-CL6z86Tg.js",
+      "_window-hgj9ZaxL.js",
+      "_solid-m0YymNhn.js",
+      "_OrbitErrorBoundary-CaI2wej-.js",
+      "_settings-B0TUWVLi.js",
+      "_hotkeys-BsYTHopP.js",
+      "_square-play-rq2mD1a2.js",
+      "_image-D55pT39k.js",
+      "_components-jHDwZhWn.js",
+      "_event-ByEJuK8t.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "_index-KN3eljhQ.js",
+      "_logo-CpEU3jrQ.js",
+      "_routing-DhSugqg9.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings.tsx?pick=default&pick=$css": {
+    "file": "assets/settings-Bst41N_f.js",
+    "name": "settings",
+    "src": "src/routes/(window-chrome)/settings.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_app-CL6z86Tg.js",
+      "_window-hgj9ZaxL.js",
+      "_solid-m0YymNhn.js",
+      "_OrbitErrorBoundary-CaI2wej-.js",
+      "_settings-B0TUWVLi.js",
+      "_hotkeys-BsYTHopP.js",
+      "_square-play-rq2mD1a2.js",
+      "_image-D55pT39k.js",
+      "_components-jHDwZhWn.js",
+      "_event-ByEJuK8t.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "_index-KN3eljhQ.js",
+      "_logo-CpEU3jrQ.js",
+      "_routing-DhSugqg9.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/experimental.tsx": {
+    "file": "assets/experimental-Bqz6T586.js",
+    "name": "experimental",
+    "src": "src/routes/(window-chrome)/settings/experimental.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_Setting-BQt5F2nj.js",
+      "_window-hgj9ZaxL.js",
+      "_event-ByEJuK8t.js",
+      "_index-CPGiedJt.js",
+      "_Toggle-2dWNWOFq.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-B9MzQzl-.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-M33yfidE.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/experimental.tsx?pick=default&pick=$css": {
+    "file": "assets/experimental-DJAa9tdr.js",
+    "name": "experimental",
+    "src": "src/routes/(window-chrome)/settings/experimental.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_Setting-BQt5F2nj.js",
+      "_window-hgj9ZaxL.js",
+      "_event-ByEJuK8t.js",
+      "_index-CPGiedJt.js",
+      "_Toggle-2dWNWOFq.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-B9MzQzl-.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-M33yfidE.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/general.tsx": {
+    "file": "assets/general-Bm_PObNw.js",
+    "name": "general",
+    "src": "src/routes/(window-chrome)/settings/general.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_light-CYcY6Uw5.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_menu-CqkW7Nw7.js",
+      "_event-ByEJuK8t.js",
+      "_store-_yiH6NTs.js",
+      "_ui-DKyLIF0d.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_plus-DFPM3MFV.js",
+      "_x-CPEBzzc2.js",
+      "_Setting-BQt5F2nj.js",
+      "_chevron-down-CKaOalBS.js",
+      "_logo-CpEU3jrQ.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_window-hgj9ZaxL.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_index-CPGiedJt.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_socket-CaNetyhe.js",
+      "_Toggle-2dWNWOFq.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/general.tsx?pick=default&pick=$css": {
+    "file": "assets/general-B1w44e5L.js",
+    "name": "general",
+    "src": "src/routes/(window-chrome)/settings/general.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_light-CYcY6Uw5.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_menu-CqkW7Nw7.js",
+      "_event-ByEJuK8t.js",
+      "_store-_yiH6NTs.js",
+      "_ui-DKyLIF0d.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_plus-DFPM3MFV.js",
+      "_x-CPEBzzc2.js",
+      "_Setting-BQt5F2nj.js",
+      "_chevron-down-CKaOalBS.js",
+      "_logo-CpEU3jrQ.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_window-hgj9ZaxL.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_index-CPGiedJt.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_socket-CaNetyhe.js",
+      "_Toggle-2dWNWOFq.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/hotkeys.tsx": {
+    "file": "assets/hotkeys-DLGLhaBh.js",
+    "name": "hotkeys",
+    "src": "src/routes/(window-chrome)/settings/hotkeys.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_circle-check-Cw9Lm7BZ.js",
+      "_circle-x-D1CNB4mW.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_index-NTuACfW5.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/hotkeys.tsx?pick=default&pick=$css": {
+    "file": "assets/hotkeys-BN01iwnR.js",
+    "name": "hotkeys",
+    "src": "src/routes/(window-chrome)/settings/hotkeys.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_circle-check-Cw9Lm7BZ.js",
+      "_circle-x-D1CNB4mW.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_index-NTuACfW5.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-De_HYChQ.js",
+    "name": "index",
+    "src": "src/routes/(window-chrome)/settings/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_routing-DhSugqg9.js",
+      "_solid-m0YymNhn.js",
+      "_components-jHDwZhWn.js",
+      "_web-DD8sXbZF.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/recordings.tsx": {
+    "file": "assets/recordings-C7JKpX_7.js",
+    "name": "recordings",
+    "src": "src/routes/(window-chrome)/settings/recordings.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-imWwvghK.js",
+      "_Button-Dpd35Y_r.js",
+      "_warning-bold-D1pDLPv3.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_index-Ft_z9wjy.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_ui-DKyLIF0d.js",
+      "_createEventListener-BONFFIPI.js",
+      "_tauri-DDRUzmQ6.js",
+      "_search-C2qX7z9i.js",
+      "_film-cut-BgrVV1qh.js",
+      "_record-fill-DU9LFKiL.js",
+      "_link--M5Pz03-.js",
+      "_edit-AVnyz9aK.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_trash-DYemVZz4.js",
+      "_index-CjXWecUp.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "_socket-CaNetyhe.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/recordings.tsx?pick=default&pick=$css": {
+    "file": "assets/recordings-my23EXZu.js",
+    "name": "recordings",
+    "src": "src/routes/(window-chrome)/settings/recordings.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-imWwvghK.js",
+      "_Button-Dpd35Y_r.js",
+      "_warning-bold-D1pDLPv3.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_index-Ft_z9wjy.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_ui-DKyLIF0d.js",
+      "_createEventListener-BONFFIPI.js",
+      "_tauri-DDRUzmQ6.js",
+      "_search-C2qX7z9i.js",
+      "_film-cut-BgrVV1qh.js",
+      "_trash-DYemVZz4.js",
+      "_record-fill-DU9LFKiL.js",
+      "_link--M5Pz03-.js",
+      "_edit-AVnyz9aK.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_index-CjXWecUp.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "_socket-CaNetyhe.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/screenshots.tsx": {
+    "file": "assets/screenshots-CiJOvUJD.js",
+    "name": "screenshots",
+    "src": "src/routes/(window-chrome)/settings/screenshots.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-imWwvghK.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_ui-DKyLIF0d.js",
+      "_createEventListener-BONFFIPI.js",
+      "_tauri-DDRUzmQ6.js",
+      "_copy-arSfJrHy.js",
+      "_edit-AVnyz9aK.js",
+      "_search-C2qX7z9i.js",
+      "_trash-DYemVZz4.js",
+      "_index-CjXWecUp.js",
+      "_store-_yiH6NTs.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_index-M33yfidE.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "_socket-CaNetyhe.js"
+    ]
+  },
+  "src/routes/(window-chrome)/settings/screenshots.tsx?pick=default&pick=$css": {
+    "file": "assets/screenshots-DEq3pbco.js",
+    "name": "screenshots",
+    "src": "src/routes/(window-chrome)/settings/screenshots.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-imWwvghK.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_ui-DKyLIF0d.js",
+      "_createEventListener-BONFFIPI.js",
+      "_tauri-DDRUzmQ6.js",
+      "_copy-arSfJrHy.js",
+      "_edit-AVnyz9aK.js",
+      "_search-C2qX7z9i.js",
+      "_trash-DYemVZz4.js",
+      "_index-CjXWecUp.js",
+      "_store-_yiH6NTs.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_index-M33yfidE.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "_socket-CaNetyhe.js"
+    ]
+  },
+  "src/routes/(window-chrome)/setup.tsx": {
+    "file": "assets/setup-DQ-i_CSw.js",
+    "name": "setup",
+    "src": "src/routes/(window-chrome)/setup.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-Bgms6XDi.js",
+      "_window-hgj9ZaxL.js",
+      "_index-BFV5wmEw.js",
+      "_index-zbIK3AO9.js",
+      "_store-_yiH6NTs.js",
+      "_ModeSelect-BgIiALKn.js",
+      "_tauri-DDRUzmQ6.js",
+      "_tears-and-fireflies-adi-goldstein--WRLB3l0.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_store-Co4lPmqe.js",
+      "_logo-CpEU3jrQ.js",
+      "_volume2-BOgvvJz4.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_event-ByEJuK8t.js",
+      "_queries-0RkPLikl.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_check-DUgMIpvx.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js",
+      "_titlebar-state-Qrd5yMZJ.js"
+    ]
+  },
+  "src/routes/(window-chrome)/setup.tsx?pick=default&pick=$css": {
+    "file": "assets/setup-28ZrsMO7.js",
+    "name": "setup",
+    "src": "src/routes/(window-chrome)/setup.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-Bgms6XDi.js",
+      "_window-hgj9ZaxL.js",
+      "_index-BFV5wmEw.js",
+      "_index-zbIK3AO9.js",
+      "_store-_yiH6NTs.js",
+      "_ModeSelect-BgIiALKn.js",
+      "_tauri-DDRUzmQ6.js",
+      "_tears-and-fireflies-adi-goldstein--WRLB3l0.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_store-Co4lPmqe.js",
+      "_logo-CpEU3jrQ.js",
+      "_volume2-BOgvvJz4.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_event-ByEJuK8t.js",
+      "_queries-0RkPLikl.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_check-DUgMIpvx.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js",
+      "_titlebar-state-Qrd5yMZJ.js"
+    ]
+  },
+  "src/routes/(window-chrome)/update.tsx": {
+    "file": "assets/update-Cu_p-Ead.js",
+    "name": "update",
+    "src": "src/routes/(window-chrome)/update.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_window-hgj9ZaxL.js",
+      "_index-zbIK3AO9.js",
+      "_index-bQ4Y86rB.js",
+      "_logo-CpEU3jrQ.js",
+      "_routing-DhSugqg9.js",
+      "_index-M33yfidE.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "src/routes/(window-chrome)/update.tsx?pick=default&pick=$css": {
+    "file": "assets/update-DhMZ57XC.js",
+    "name": "update",
+    "src": "src/routes/(window-chrome)/update.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_window-hgj9ZaxL.js",
+      "_index-zbIK3AO9.js",
+      "_index-bQ4Y86rB.js",
+      "_logo-CpEU3jrQ.js",
+      "_routing-DhSugqg9.js",
+      "_index-M33yfidE.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "src/routes/(window-chrome)/upgrade.tsx": {
+    "file": "assets/upgrade-JcMseeNy.js",
+    "name": "upgrade",
+    "src": "src/routes/(window-chrome)/upgrade.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "src/routes/(window-chrome)/upgrade.tsx?pick=default&pick=$css": {
+    "file": "assets/upgrade-DpiqgrhW.js",
+    "name": "upgrade",
+    "src": "src/routes/(window-chrome)/upgrade.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_solid-m0YymNhn.js"
+    ]
+  },
+  "src/routes/camera.tsx": {
+    "file": "assets/camera-DWD8NuIl.js",
+    "name": "camera",
+    "src": "src/routes/camera.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_WAUM5GOD-BO3aReIo.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_store-Co4lPmqe.js",
+      "_createEventListener-BONFFIPI.js",
+      "_queries-0RkPLikl.js",
+      "_socket-CaNetyhe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_circle-x-D1CNB4mW.js",
+      "_enlarge-CjCkr66j.js",
+      "_arrows-DPnQvrHD.js",
+      "_square-B5TITtaz.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-B9MzQzl-.js",
+      "_event-ByEJuK8t.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "src/routes/camera.tsx?pick=default&pick=$css": {
+    "file": "assets/camera-CUG8PUWo.js",
+    "name": "camera",
+    "src": "src/routes/camera.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_WAUM5GOD-BO3aReIo.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_store-Co4lPmqe.js",
+      "_createEventListener-BONFFIPI.js",
+      "_queries-0RkPLikl.js",
+      "_socket-CaNetyhe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_circle-x-D1CNB4mW.js",
+      "_enlarge-CjCkr66j.js",
+      "_arrows-DPnQvrHD.js",
+      "_square-B5TITtaz.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-B9MzQzl-.js",
+      "_event-ByEJuK8t.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "src/routes/capture-area.tsx": {
+    "file": "assets/capture-area-BcLUEykC.js",
+    "name": "capture-area",
+    "src": "src/routes/capture-area.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "_menu-CqkW7Nw7.js",
+      "_event-ByEJuK8t.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_Cropper-B7wdwx5_.js",
+      "_selection-hint-DZxPEW9X.js",
+      "_queries-0RkPLikl.js",
+      "_expand-CeqyHSmM.js",
+      "_x-CPEBzzc2.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_ratio-CLnYq6fY.js",
+      "_check-DUgMIpvx.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-B9MzQzl-.js",
+      "_index-NTuACfW5.js",
+      "_index-CSuwbsU5.js",
+      "_tauri-DDRUzmQ6.js",
+      "_plus-DFPM3MFV.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js"
+    ]
+  },
+  "src/routes/capture-area.tsx?pick=default&pick=$css": {
+    "file": "assets/capture-area-DNyoisRT.js",
+    "name": "capture-area",
+    "src": "src/routes/capture-area.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "_menu-CqkW7Nw7.js",
+      "_event-ByEJuK8t.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_Cropper-B7wdwx5_.js",
+      "_selection-hint-DZxPEW9X.js",
+      "_queries-0RkPLikl.js",
+      "_expand-CeqyHSmM.js",
+      "_x-CPEBzzc2.js",
+      "_rotate-ccw-EIhY-wMN.js",
+      "_check-DUgMIpvx.js",
+      "_ratio-CLnYq6fY.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-B9MzQzl-.js",
+      "_index-NTuACfW5.js",
+      "_index-CSuwbsU5.js",
+      "_tauri-DDRUzmQ6.js",
+      "_plus-DFPM3MFV.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js"
+    ]
+  },
+  "src/routes/debug.tsx": {
+    "file": "assets/debug-Vpk63efH.js",
+    "name": "debug",
+    "src": "src/routes/debug.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-CPGiedJt.js",
+      "_app-CL6z86Tg.js",
+      "_index-BFV5wmEw.js",
+      "_index-bQ4Y86rB.js",
+      "_solid-m0YymNhn.js",
+      "_tauri-DDRUzmQ6.js",
+      "_routing-DhSugqg9.js",
+      "_store-_yiH6NTs.js",
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "src/routes/debug.tsx?pick=default&pick=$css": {
+    "file": "assets/debug-3Pp_-DIj.js",
+    "name": "debug",
+    "src": "src/routes/debug.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-CPGiedJt.js",
+      "_app-CL6z86Tg.js",
+      "_index-BFV5wmEw.js",
+      "_index-bQ4Y86rB.js",
+      "_solid-m0YymNhn.js",
+      "_tauri-DDRUzmQ6.js",
+      "_routing-DhSugqg9.js",
+      "_store-_yiH6NTs.js",
+      "_event-ByEJuK8t.js"
+    ]
+  },
+  "src/routes/editor/AspectRatioSelect.tsx?pick=default&pick=$css": {
+    "file": "assets/AspectRatioSelect-DQLUxe2V.js",
+    "name": "AspectRatioSelect",
+    "src": "src/routes/editor/AspectRatioSelect.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_layout-Du6SZSLa.js",
+      "_solid-m0YymNhn.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_context-tR9agE1b.js",
+      "_ui-DKyLIF0d.js",
+      "_circle-check-Cw9Lm7BZ.js",
+      "_chevron-down-CKaOalBS.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-M33yfidE.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_index-CjXWecUp.js",
+      "_store-_yiH6NTs.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_event-ByEJuK8t.js",
+      "_index-DI0hr_e0.js",
+      "_index-CPGiedJt.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "_tauri-DDRUzmQ6.js",
+      "_socket-CaNetyhe.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-BRJHV9Qg.js"
+    ]
+  },
+  "src/routes/editor/PresetsDropdown.tsx?pick=default&pick=$css": {
+    "file": "assets/PresetsDropdown-LCBqfjaO.js",
+    "name": "PresetsDropdown",
+    "src": "src/routes/editor/PresetsDropdown.tsx?pick=default&pick=$css",
+    "isEntry": true
+  },
+  "src/routes/editor/ShadowSettings.tsx?pick=default&pick=$css": {
+    "file": "assets/ShadowSettings-BIW4dNO_.js",
+    "name": "ShadowSettings",
+    "src": "src/routes/editor/ShadowSettings.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_ui-DKyLIF0d.js",
+      "_chevron-down-CKaOalBS.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_event-ByEJuK8t.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_index-CjXWecUp.js",
+      "_store-_yiH6NTs.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-BRJHV9Qg.js",
+      "_context-tR9agE1b.js",
+      "_index-DI0hr_e0.js",
+      "_index-CPGiedJt.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_window-hgj9ZaxL.js",
+      "_tauri-DDRUzmQ6.js",
+      "_socket-CaNetyhe.js"
+    ]
+  },
+  "src/routes/editor/index.tsx": {
+    "file": "assets/index-CK-oQHxA.js",
+    "name": "index",
+    "src": "src/routes/editor/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_editor-skeleton-C6vL-Kh9.js",
+      "_event-ByEJuK8t.js",
+      "_index-CPGiedJt.js",
+      "_store-_yiH6NTs.js",
+      "_maximize-BmqslmiH.js",
+      "_index-NTuACfW5.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-BRJHV9Qg.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_menu-CqkW7Nw7.js",
+      "_index-6r3pxezh.js",
+      "_Cropper-B7wdwx5_.js",
+      "_queries-0RkPLikl.js",
+      "_index-DI0hr_e0.js",
+      "_plus-DFPM3MFV.js",
+      "_Toggle-2dWNWOFq.js",
+      "_ui-DKyLIF0d.js",
+      "_context-tR9agE1b.js",
+      "_socket-CaNetyhe.js",
+      "_createEventListener-BONFFIPI.js",
+      "_layout-Du6SZSLa.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_folder-CgLvMzAo.js",
+      "_check-DUgMIpvx.js",
+      "_chevron-down-CKaOalBS.js",
+      "_circle-check-Cw9Lm7BZ.js",
+      "_toast-DNJm7Fzz.js",
+      "_camera-BDdEg0Us.js",
+      "_volume2-BOgvvJz4.js",
+      "_microphone-CBvNGKAL.js",
+      "_enlarge-CjCkr66j.js",
+      "_hotkeys-BsYTHopP.js",
+      "_trash-DYemVZz4.js",
+      "_circle-x-D1CNB4mW.js",
+      "_settings-B0TUWVLi.js",
+      "_search-C2qX7z9i.js",
+      "_index-Ft_z9wjy.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_alert-triangle-DfZAF7bK.js",
+      "_index-BFV5wmEw.js",
+      "_analytics-BLrn_zha.js",
+      "_hard-drive-VJdvhQZa.js",
+      "_image-D55pT39k.js",
+      "_x-CPEBzzc2.js",
+      "_link--M5Pz03-.js",
+      "_arrow-left-DyWnyhmJ.js",
+      "_video-BxEIEdGB.js",
+      "_WAUM5GOD-BO3aReIo.js",
+      "_index-KN3eljhQ.js",
+      "_eye-off-CMrziJHL.js",
+      "_ratio-CLnYq6fY.js",
+      "_logo-CpEU3jrQ.js"
+    ]
+  },
+  "src/routes/editor/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-CJHhBBoo.js",
+    "name": "index",
+    "src": "src/routes/editor/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_editor-skeleton-C6vL-Kh9.js",
+      "_event-ByEJuK8t.js",
+      "_index-CPGiedJt.js",
+      "_store-_yiH6NTs.js",
+      "_maximize-BmqslmiH.js",
+      "_index-NTuACfW5.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-BRJHV9Qg.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_menu-CqkW7Nw7.js",
+      "_index-6r3pxezh.js",
+      "_Cropper-B7wdwx5_.js",
+      "_queries-0RkPLikl.js",
+      "_index-DI0hr_e0.js",
+      "_plus-DFPM3MFV.js",
+      "_Toggle-2dWNWOFq.js",
+      "_ui-DKyLIF0d.js",
+      "_context-tR9agE1b.js",
+      "_socket-CaNetyhe.js",
+      "_createEventListener-BONFFIPI.js",
+      "_layout-Du6SZSLa.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_folder-CgLvMzAo.js",
+      "_check-DUgMIpvx.js",
+      "_chevron-down-CKaOalBS.js",
+      "_circle-check-Cw9Lm7BZ.js",
+      "_toast-DNJm7Fzz.js",
+      "_camera-BDdEg0Us.js",
+      "_volume2-BOgvvJz4.js",
+      "_microphone-CBvNGKAL.js",
+      "_enlarge-CjCkr66j.js",
+      "_hotkeys-BsYTHopP.js",
+      "_trash-DYemVZz4.js",
+      "_circle-x-D1CNB4mW.js",
+      "_settings-B0TUWVLi.js",
+      "_search-C2qX7z9i.js",
+      "_index-Ft_z9wjy.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_alert-triangle-DfZAF7bK.js",
+      "_index-BFV5wmEw.js",
+      "_analytics-BLrn_zha.js",
+      "_hard-drive-VJdvhQZa.js",
+      "_image-D55pT39k.js",
+      "_x-CPEBzzc2.js",
+      "_link--M5Pz03-.js",
+      "_arrow-left-DyWnyhmJ.js",
+      "_video-BxEIEdGB.js",
+      "_WAUM5GOD-BO3aReIo.js",
+      "_index-KN3eljhQ.js",
+      "_eye-off-CMrziJHL.js",
+      "_ratio-CLnYq6fY.js",
+      "_logo-CpEU3jrQ.js"
+    ]
+  },
+  "src/routes/in-progress-recording.tsx": {
+    "file": "assets/in-progress-recording-DGa5xFvi.js",
+    "name": "in-progress-recording",
+    "src": "src/routes/in-progress-recording.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-BRJHV9Qg.js",
+      "_index-Bgms6XDi.js",
+      "_index-CPGiedJt.js",
+      "_window-hgj9ZaxL.js",
+      "_menu-CqkW7Nw7.js",
+      "_event-ByEJuK8t.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "_index-BFV5wmEw.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_store-Co4lPmqe.js",
+      "_createEventListener-BONFFIPI.js",
+      "_queries-0RkPLikl.js",
+      "_more-vertical-Bi2Zu0Sn.js",
+      "_tauri-DDRUzmQ6.js",
+      "_alert-triangle-DfZAF7bK.js",
+      "_x-CPEBzzc2.js",
+      "_microphone-CBvNGKAL.js",
+      "_trash-DYemVZz4.js",
+      "_settings-B0TUWVLi.js",
+      "_index-CSuwbsU5.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-B9MzQzl-.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-DI0hr_e0.js"
+    ]
+  },
+  "src/routes/in-progress-recording.tsx?pick=default&pick=$css": {
+    "file": "assets/in-progress-recording-CmsFNKQQ.js",
+    "name": "in-progress-recording",
+    "src": "src/routes/in-progress-recording.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-BRJHV9Qg.js",
+      "_index-Bgms6XDi.js",
+      "_index-CPGiedJt.js",
+      "_window-hgj9ZaxL.js",
+      "_menu-CqkW7Nw7.js",
+      "_event-ByEJuK8t.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "_index-BFV5wmEw.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_store-Co4lPmqe.js",
+      "_createEventListener-BONFFIPI.js",
+      "_queries-0RkPLikl.js",
+      "_more-vertical-Bi2Zu0Sn.js",
+      "_tauri-DDRUzmQ6.js",
+      "_alert-triangle-DfZAF7bK.js",
+      "_x-CPEBzzc2.js",
+      "_microphone-CBvNGKAL.js",
+      "_trash-DYemVZz4.js",
+      "_settings-B0TUWVLi.js",
+      "_index-CSuwbsU5.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-B9MzQzl-.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-DI0hr_e0.js"
+    ]
+  },
+  "src/routes/mode-select.tsx": {
+    "file": "assets/mode-select-COtKA6KA.js",
+    "name": "mode-select",
+    "src": "src/routes/mode-select.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_solid-m0YymNhn.js",
+      "_ModeSelect-BgIiALKn.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_event-ByEJuK8t.js",
+      "_index-M33yfidE.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_store-_yiH6NTs.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_check-DUgMIpvx.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js"
+    ]
+  },
+  "src/routes/mode-select.tsx?pick=default&pick=$css": {
+    "file": "assets/mode-select-gTM4Nx0L.js",
+    "name": "mode-select",
+    "src": "src/routes/mode-select.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_solid-m0YymNhn.js",
+      "_ModeSelect-BgIiALKn.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_event-ByEJuK8t.js",
+      "_index-M33yfidE.js",
+      "_queries-0RkPLikl.js",
+      "_persisted-D-6jA9O8.js",
+      "_store-_yiH6NTs.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_check-DUgMIpvx.js",
+      "_film-cut-BgrVV1qh.js",
+      "_screenshot-nxCO6T7z.js"
+    ]
+  },
+  "src/routes/notifications.tsx": {
+    "file": "assets/notifications-IBHv-Fex.js",
+    "name": "notifications",
+    "src": "src/routes/notifications.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_createEventListener-BONFFIPI.js",
+      "_tauri-DDRUzmQ6.js",
+      "_toast-DNJm7Fzz.js",
+      "_solid-m0YymNhn.js",
+      "_LoaderIcon-LaLERXrs.js",
+      "_event-ByEJuK8t.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "src/routes/notifications.tsx?pick=default&pick=$css": {
+    "file": "assets/notifications-BCS8RvBq.js",
+    "name": "notifications",
+    "src": "src/routes/notifications.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_createEventListener-BONFFIPI.js",
+      "_tauri-DDRUzmQ6.js",
+      "_solid-m0YymNhn.js",
+      "_toast-DNJm7Fzz.js",
+      "_LoaderIcon-LaLERXrs.js",
+      "_event-ByEJuK8t.js",
+      "_store-_yiH6NTs.js"
+    ]
+  },
+  "src/routes/recordings-overlay.tsx": {
+    "file": "assets/recordings-overlay-C3HX8x8C.js",
+    "name": "recordings-overlay",
+    "src": "src/routes/recordings-overlay.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-imWwvghK.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-BRJHV9Qg.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_createEventListener-BONFFIPI.js",
+      "_hard-drive-VJdvhQZa.js",
+      "_tauri-DDRUzmQ6.js",
+      "_editor-xd2xEs69.js",
+      "_context-tR9agE1b.js",
+      "_circle-x-D1CNB4mW.js",
+      "_camera-BDdEg0Us.js",
+      "_index-CjXWecUp.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_window-hgj9ZaxL.js",
+      "_socket-CaNetyhe.js"
+    ]
+  },
+  "src/routes/recordings-overlay.tsx?pick=default&pick=$css": {
+    "file": "assets/recordings-overlay-BCNVFBWb.js",
+    "name": "recordings-overlay",
+    "src": "src/routes/recordings-overlay.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-imWwvghK.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-BRJHV9Qg.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_store-_yiH6NTs.js",
+      "_index-6r3pxezh.js",
+      "_createEventListener-BONFFIPI.js",
+      "_hard-drive-VJdvhQZa.js",
+      "_tauri-DDRUzmQ6.js",
+      "_editor-xd2xEs69.js",
+      "_context-tR9agE1b.js",
+      "_circle-x-D1CNB4mW.js",
+      "_camera-BDdEg0Us.js",
+      "_index-CjXWecUp.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_queries-0RkPLikl.js",
+      "_window-hgj9ZaxL.js",
+      "_socket-CaNetyhe.js"
+    ]
+  },
+  "src/routes/screenshot-editor/index.tsx": {
+    "file": "assets/index-BHCDpglZ.js",
+    "name": "index",
+    "src": "src/routes/screenshot-editor/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_ui--FEJPUNx.js",
+      "_Editor-o6T048ZZ.js",
+      "_event-ByEJuK8t.js",
+      "_index-CPGiedJt.js",
+      "_store-_yiH6NTs.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_index-DI0hr_e0.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_socket-CaNetyhe.js",
+      "_maximize-BmqslmiH.js",
+      "_Button-Dpd35Y_r.js",
+      "_menu-CqkW7Nw7.js",
+      "_index-6r3pxezh.js",
+      "_Cropper-B7wdwx5_.js",
+      "_queries-0RkPLikl.js",
+      "_plus-DFPM3MFV.js",
+      "_ui-DKyLIF0d.js",
+      "_context-tR9agE1b.js",
+      "_ratio-CLnYq6fY.js",
+      "_circle-x-D1CNB4mW.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_index-Ft_z9wjy.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_copy-arSfJrHy.js",
+      "_save-DL7kE5G-.js",
+      "_trash-DYemVZz4.js",
+      "_eye-off-CMrziJHL.js",
+      "_layout-Du6SZSLa.js",
+      "_chevron-down-CKaOalBS.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_Toggle-2dWNWOFq.js",
+      "_enlarge-CjCkr66j.js",
+      "_square-B5TITtaz.js",
+      "_toast-DNJm7Fzz.js",
+      "_x-CPEBzzc2.js",
+      "_logo-CpEU3jrQ.js"
+    ]
+  },
+  "src/routes/screenshot-editor/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-Cr0fn9z-.js",
+    "name": "index",
+    "src": "src/routes/screenshot-editor/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_ui--FEJPUNx.js",
+      "_Editor-o6T048ZZ.js",
+      "_event-ByEJuK8t.js",
+      "_index-CPGiedJt.js",
+      "_store-_yiH6NTs.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_index-CjXWecUp.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_index-DI0hr_e0.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_socket-CaNetyhe.js",
+      "_maximize-BmqslmiH.js",
+      "_Button-Dpd35Y_r.js",
+      "_menu-CqkW7Nw7.js",
+      "_index-6r3pxezh.js",
+      "_Cropper-B7wdwx5_.js",
+      "_queries-0RkPLikl.js",
+      "_plus-DFPM3MFV.js",
+      "_ui-DKyLIF0d.js",
+      "_context-tR9agE1b.js",
+      "_ratio-CLnYq6fY.js",
+      "_circle-x-D1CNB4mW.js",
+      "_index-BFV5wmEw.js",
+      "_folder-CgLvMzAo.js",
+      "_index-Ft_z9wjy.js",
+      "_CaptionControlsWindows11-C_oMkRIy.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_copy-arSfJrHy.js",
+      "_save-DL7kE5G-.js",
+      "_trash-DYemVZz4.js",
+      "_eye-off-CMrziJHL.js",
+      "_layout-Du6SZSLa.js",
+      "_chevron-down-CKaOalBS.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_Toggle-2dWNWOFq.js",
+      "_enlarge-CjCkr66j.js",
+      "_square-B5TITtaz.js",
+      "_toast-DNJm7Fzz.js",
+      "_x-CPEBzzc2.js",
+      "_logo-CpEU3jrQ.js"
+    ]
+  },
+  "src/routes/screenshot-editor/popovers/ShadowSettings.tsx?pick=default&pick=$css": {
+    "file": "assets/ShadowSettings-D1aWxIzz.js",
+    "name": "ShadowSettings",
+    "src": "src/routes/screenshot-editor/popovers/ShadowSettings.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_XZ3MOT5A-CtnZqUlH.js",
+      "_index-M33yfidE.js",
+      "_solid-m0YymNhn.js",
+      "_chevron-down-CKaOalBS.js",
+      "_ui--FEJPUNx.js",
+      "_Tooltip-RZDxoH9s.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_floating-ui.dom-DzoQ-s65.js",
+      "_JNCCF6MP-4sxnBYeu.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_event-ByEJuK8t.js",
+      "_UKTBL2JL-DLyNZQCF.js",
+      "_VI7QYH27-B5N4hhgJ.js",
+      "_UF7Y45EJ-DMmOXAHg.js",
+      "_index-CjXWecUp.js",
+      "_store-_yiH6NTs.js",
+      "_ZZYKR3VO-BBcuC-FK.js",
+      "_index-BRJHV9Qg.js",
+      "_index-DI0hr_e0.js",
+      "_index-PZVx_YvE.js",
+      "_persisted-D-6jA9O8.js",
+      "_socket-CaNetyhe.js",
+      "_tauri-DDRUzmQ6.js"
+    ]
+  },
+  "src/routes/target-select-overlay.tsx": {
+    "file": "assets/target-select-overlay-Bp9Flraw.js",
+    "name": "target-select-overlay",
+    "src": "src/routes/target-select-overlay.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CSuwbsU5.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_window-hgj9ZaxL.js",
+      "_menu-CqkW7Nw7.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_store-_yiH6NTs.js",
+      "_Cropper-B7wdwx5_.js",
+      "_ModeSelect-BgIiALKn.js",
+      "_selection-hint-DZxPEW9X.js",
+      "_store-Co4lPmqe.js",
+      "_devices-ByykJVlA.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_MicrophoneSelect-CsappB04.js",
+      "_InfoPill-BOFUF8cw.js",
+      "_camera-BDdEg0Us.js",
+      "_film-cut-BgrVV1qh.js",
+      "_info-BtWP_rDv.js",
+      "_routing-DhSugqg9.js",
+      "_toast-DNJm7Fzz.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-M33yfidE.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-6r3pxezh.js",
+      "_plus-DFPM3MFV.js",
+      "_check-DUgMIpvx.js",
+      "_screenshot-nxCO6T7z.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-DI0hr_e0.js",
+      "_index-Bgms6XDi.js",
+      "_analytics-BLrn_zha.js",
+      "_useRequestPermission-BYKzr4TF.js",
+      "_eye-off-CMrziJHL.js",
+      "_createEventListener-BONFFIPI.js",
+      "_microphone-CBvNGKAL.js"
+    ]
+  },
+  "src/routes/target-select-overlay.tsx?pick=default&pick=$css": {
+    "file": "assets/target-select-overlay-Bis6QNyX.js",
+    "name": "target-select-overlay",
+    "src": "src/routes/target-select-overlay.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_Button-Dpd35Y_r.js",
+      "_solid-m0YymNhn.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_index-CSuwbsU5.js",
+      "_index-CPGiedJt.js",
+      "_event-ByEJuK8t.js",
+      "_window-hgj9ZaxL.js",
+      "_menu-CqkW7Nw7.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_store-_yiH6NTs.js",
+      "_Cropper-B7wdwx5_.js",
+      "_ModeSelect-BgIiALKn.js",
+      "_selection-hint-DZxPEW9X.js",
+      "_store-Co4lPmqe.js",
+      "_devices-ByykJVlA.js",
+      "_queries-0RkPLikl.js",
+      "_tauri-DDRUzmQ6.js",
+      "_MicrophoneSelect-CsappB04.js",
+      "_InfoPill-BOFUF8cw.js",
+      "_camera-BDdEg0Us.js",
+      "_film-cut-BgrVV1qh.js",
+      "_info-BtWP_rDv.js",
+      "_routing-DhSugqg9.js",
+      "_toast-DNJm7Fzz.js",
+      "_eventListener-Do7UivV7.js",
+      "_index-M33yfidE.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-6r3pxezh.js",
+      "_plus-DFPM3MFV.js",
+      "_check-DUgMIpvx.js",
+      "_screenshot-nxCO6T7z.js",
+      "_persisted-D-6jA9O8.js",
+      "_index-DI0hr_e0.js",
+      "_index-Bgms6XDi.js",
+      "_analytics-BLrn_zha.js",
+      "_useRequestPermission-BYKzr4TF.js",
+      "_eye-off-CMrziJHL.js",
+      "_createEventListener-BONFFIPI.js",
+      "_microphone-CBvNGKAL.js"
+    ]
+  },
+  "src/routes/window-capture-occluder.tsx": {
+    "file": "assets/window-capture-occluder-BqDzRr_Y.js",
+    "name": "window-capture-occluder",
+    "src": "src/routes/window-capture-occluder.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "_solid-m0YymNhn.js",
+      "_queries-0RkPLikl.js",
+      "_event-ByEJuK8t.js",
+      "_persisted-D-6jA9O8.js",
+      "_store-_yiH6NTs.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "src/routes/window-capture-occluder.tsx?pick=default&pick=$css": {
+    "file": "assets/window-capture-occluder-CI3hrndY.js",
+    "name": "window-capture-occluder",
+    "src": "src/routes/window-capture-occluder.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_window-hgj9ZaxL.js",
+      "_solid-m0YymNhn.js",
+      "_queries-0RkPLikl.js",
+      "_event-ByEJuK8t.js",
+      "_persisted-D-6jA9O8.js",
+      "_store-_yiH6NTs.js",
+      "_index-CPGiedJt.js",
+      "_index-DI0hr_e0.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js"
+    ]
+  },
+  "virtual:$vinxi/handler/client": {
+    "file": "assets/client-C9Sp2rRv.js",
+    "name": "client",
+    "src": "virtual:$vinxi/handler/client",
+    "isEntry": true,
+    "imports": [
+      "_web-DD8sXbZF.js",
+      "_index-CPGiedJt.js",
+      "_webviewWindow-C3hS3OnT.js",
+      "_index-BFV5wmEw.js",
+      "_solid-m0YymNhn.js",
+      "_OrbitErrorBoundary-CaI2wej-.js",
+      "_store-Co4lPmqe.js",
+      "_tauri-DDRUzmQ6.js",
+      "_titlebar-state-Qrd5yMZJ.js",
+      "_LoaderIcon-LaLERXrs.js",
+      "_routing-DhSugqg9.js",
+      "_store-_yiH6NTs.js",
+      "_window-hgj9ZaxL.js",
+      "_event-ByEJuK8t.js",
+      "_Button-Dpd35Y_r.js",
+      "_index-M33yfidE.js",
+      "_SwitchTab-CmS7uPYV.js",
+      "_5WXHJDCZ-C3TB6PMj.js",
+      "_index-NTuACfW5.js",
+      "_eventListener-Do7UivV7.js",
+      "_FLVHQV4A-MM7aOKek.js",
+      "_index-CSuwbsU5.js",
+      "_index-B9MzQzl-.js",
+      "_combineProps-oHjLfPsP.js",
+      "_index-KN3eljhQ.js",
+      "_logo-CpEU3jrQ.js",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js",
+      "_toast-DNJm7Fzz.js"
+    ],
+    "dynamicImports": [
+      "src/routes/(window-chrome).tsx",
+      "src/routes/(window-chrome)/new-main/index.tsx",
+      "src/routes/(window-chrome)/setup.tsx",
+      "src/routes/(window-chrome)/settings.tsx",
+      "src/routes/(window-chrome)/settings/general.tsx",
+      "src/routes/(window-chrome)/settings/recordings.tsx",
+      "src/routes/(window-chrome)/settings/screenshots.tsx",
+      "src/routes/(window-chrome)/settings/hotkeys.tsx",
+      "src/routes/(window-chrome)/settings/experimental.tsx",
+      "src/routes/(window-chrome)/upgrade.tsx",
+      "src/routes/(window-chrome)/update.tsx",
+      "src/routes/camera.tsx",
+      "src/routes/capture-area.tsx",
+      "src/routes/debug.tsx",
+      "src/routes/editor/index.tsx",
+      "src/routes/in-progress-recording.tsx",
+      "src/routes/mode-select.tsx",
+      "src/routes/notifications.tsx",
+      "src/routes/recordings-overlay.tsx",
+      "src/routes/screenshot-editor/index.tsx",
+      "src/routes/target-select-overlay.tsx",
+      "src/routes/window-capture-occluder.tsx",
+      "../../node_modules/.pnpm/@tauri-apps+plugin-os@2.3.0/node_modules/@tauri-apps/plugin-os/dist-js/index.js"
+    ],
+    "css": [
+      "assets/client-ag8I0CO6.css"
+    ],
+    "assets": [
+      "assets/geist-sans-latin-400-normal-gapTbOY8.woff2",
+      "assets/geist-sans-latin-400-normal-BOaIZNA2.woff",
+      "assets/geist-sans-latin-500-normal-uokXdC-Q.woff2",
+      "assets/geist-sans-latin-500-normal-CN2lyvyL.woff",
+      "assets/geist-sans-latin-700-normal-BmN9tIp5.woff2",
+      "assets/geist-sans-latin-700-normal-CjScfYeH.woff"
+    ]
+  }
+}

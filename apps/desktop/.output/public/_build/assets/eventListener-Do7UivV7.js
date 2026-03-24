@@ -1,0 +1,1 @@
+import{c as s,a as f,t as o}from"./index-NTuACfW5.js";import{j as E,k as m}from"./solid-m0YymNhn.js";function u(e,n,t,r){return e.addEventListener(n,t,r),o(e.removeEventListener.bind(e,n,t,r))}function d(e,n,t,r){const a=()=>{s(f(e)).forEach(c=>{c&&s(f(n)).forEach(i=>u(c,i,t,r))})};typeof e=="function"?E(a):m(a)}export{d as c,u as m};

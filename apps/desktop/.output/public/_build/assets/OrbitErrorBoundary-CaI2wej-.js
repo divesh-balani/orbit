@@ -1,0 +1,7 @@
+import{t as s,i as r,m as p}from"./web-DD8sXbZF.js";import{B as a}from"./Button-Dpd35Y_r.js";import{b as e,E as u}from"./solid-m0YymNhn.js";import"./SwitchTab-CmS7uPYV.js";import{g as f}from"./webviewWindow-C3hS3OnT.js";import{w as g}from"./index-KN3eljhQ.js";import{I as h}from"./logo-CpEU3jrQ.js";var b=s(`<div class="w-full h-full flex flex-col justify-center items-center bg-gray-2 border-gray-3 max-h-screen overflow-hidden transition-[border-radius] duration-200 text-[--text-secondary] gap-y-4 max-sm:gap-y-2 px-8 text-center"><h1 class="text-[--text-primary] text-3xl max-sm:text-xl font-bold">An Error Occured</h1><p class="mb-2 max-sm:text-sm">We're very sorry, but something has gone wrong.</p><div class="flex flex-row gap-4 max-sm:flex-col max-sm:gap-2">`),v=s('<div class="h-0 text-sm"><pre class="text-left mt-8">');function S(m){return e(u,{fallback:t=>(console.error(t),(()=>{var l=b(),n=l.firstChild,c=n.nextSibling,o=c.nextSibling;return r(l,e(h,{class:"max-sm:size-16"}),n),r(o,e(a,{onClick:()=>{g(`${t.toString()}
+
+${t.stack}`)},children:"Copy Error to Clipboard"}),null),r(o,e(a,{onClick:()=>{location.reload()},variant:"gray",children:"Reload"}),null),r(o,e(a,{onClick:()=>f().close(),variant:"destructive",children:"Close"}),null),r(l,(()=>{var x=p(()=>!1);return()=>x()&&(()=>{var i=v(),d=i.firstChild;return r(d,()=>`${t.toString()}
+
+${t.stack?.toString().split(`
+`).slice(0,10).join(`
+`)}`),i})()})(),null),l})()),get children(){return m.children}})}export{S as O};

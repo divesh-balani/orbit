@@ -1,0 +1,1 @@
+import{t,f as a}from"./web-DD8sXbZF.js";var o=t('<svg viewBox="0 0 256 256"width=1.2em height=1.2em><path fill=currentColor d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88m72-88a72 72 0 1 1-72-72a72.08 72.08 0 0 1 72 72">');const m=(r={})=>(()=>{var e=o();return a(e,r,!0,!0),e})();export{m as I};

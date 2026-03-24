@@ -2992,15 +2992,9 @@ async fn set_license_key(app: AppHandle, key: String) -> Result<LicenseStatus, S
         .map(|s| s.server_url)
         .unwrap_or_else(|| "https://orbit.so".to_string());
 
-    let mut store = LicenseStore::get(&app).unwrap_or(LicenseStore {
-        key: None,
-        last_validated_at: None,
-        last_status: None,
-    });
-    store.key = Some(key.trim().to_uppercase());
-    store.last_validated_at = None;
-    store.last_status = None;
-    LicenseStore::set(&app, &store)?;
+    LicenseStore::set(&app, &LicenseStore {
+        key: Some(key.trim().to_uppercase()),
+    })?;
 
     LicenseStore::refresh(&app, &server_url).await
 }

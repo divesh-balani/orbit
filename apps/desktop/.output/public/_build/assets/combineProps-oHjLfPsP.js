@@ -1,0 +1,1 @@
+const c=/((?:--)?(?:\w+-?)+)\s*:\s*([^;]*)/g;function r(e){const t={};let n;for(;n=c.exec(e);)t[n[1]]=n[2];return t}function i(e,t){if(typeof e=="string"){if(typeof t=="string")return`${e};${t}`;e=r(e)}else typeof t=="string"&&(t=r(t));return{...e,...t}}export{i as c};

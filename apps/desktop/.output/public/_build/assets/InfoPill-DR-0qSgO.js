@@ -1,0 +1,1 @@
+import{t as r,f as a}from"./web-DD8sXbZF.js";import{c as l}from"./index-M33yfidE.js";import{m as o}from"./solid-m0YymNhn.js";var u=r("<button>");function p(t){return(()=>{var e=u();return a(e,o(t,{type:"button",get class(){return l("px-2 py-0.5 rounded-full text-white text-[11px]",t.variant==="blue"?"bg-blue-9":"bg-red-9")}}),!1,!1),e})()}export{p as default};

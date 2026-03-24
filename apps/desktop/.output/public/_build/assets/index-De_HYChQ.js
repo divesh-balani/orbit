@@ -1,0 +1,1 @@
+import{i as e}from"./routing-DhSugqg9.js";import{b as t}from"./solid-m0YymNhn.js";import{N as o}from"./components-jHDwZhWn.js";import"./web-DD8sXbZF.js";function p(){const[a]=e(),r=a.page||"general";return t(o,{href:r})}export{p as default};

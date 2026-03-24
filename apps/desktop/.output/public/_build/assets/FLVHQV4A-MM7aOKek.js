@@ -1,0 +1,1 @@
+import{D as t}from"./web-DD8sXbZF.js";import{t as e,b as a,m as i}from"./solid-m0YymNhn.js";function p(r){const[o,s]=e(r,["as"]);if(!o.as)throw new Error("[kobalte]: Polymorphic is missing the required `as` prop.");return a(t,i(s,{get component(){return o.as}}))}export{p as P};
