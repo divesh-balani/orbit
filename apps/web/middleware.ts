@@ -43,6 +43,7 @@ export async function middleware(request: NextRequest) {
 				path.startsWith("/s/") ||
 				path.startsWith("/middleware") ||
 				path.startsWith("/dashboard") ||
+				path.startsWith("/admin") ||
 				path.startsWith("/onboarding") ||
 				path.startsWith("/api") ||
 				path.startsWith("/login") ||
