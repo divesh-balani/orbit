@@ -1,0 +1,22 @@
+name: Check Windows
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cargo-check:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ". -> target"
+
+      - name: Check
+        run: cargo check -p orbit-camera-mediafoundation -p orbit-camera-directshow
