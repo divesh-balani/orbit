@@ -1,0 +1,100 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.5.2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ". -> target"
+
+      - name: Install cmake
+        run: brew install cmake
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download native deps
+        run: node scripts/setup.js
+
+      - name: Build
+        env:
+          VITE_SERVER_URL: https://orbit.diveshbalani.com
+        run: cd apps/desktop && pnpm build:release
+
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-dmg
+          path: target/release/bundle/dmg/*.dmg
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.5.2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ". -> target"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download FFmpeg and configure env
+        run: node scripts/setup.js
+
+      - name: Build
+        env:
+          VITE_SERVER_URL: https://orbit.diveshbalani.com
+        run: cd apps/desktop && pnpm build:release
+
+      - name: Upload NSIS installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: target/release/bundle/nsis/*.exe
+
+  release:
+    needs: [build-macos, build-windows]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            macos-dmg/*.dmg
+            windows-installer/*.exe

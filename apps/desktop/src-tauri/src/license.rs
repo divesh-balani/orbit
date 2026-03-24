@@ -21,8 +21,6 @@ pub enum LicenseStatus {
 #[serde(rename_all = "camelCase")]
 pub struct LicenseStore {
     pub key: Option<String>,
-    pub last_validated_at: Option<i64>,
-    pub last_status: Option<LicenseStatus>,
 }
 
 impl LicenseStore {
@@ -40,11 +38,7 @@ impl LicenseStore {
     }
 
     pub async fn refresh(app: &AppHandle, server_url: &str) -> Result<LicenseStatus, String> {
-        let current = Self::get(app).unwrap_or(LicenseStore {
-            key: None,
-            last_validated_at: None,
-            last_status: None,
-        });
+        let current = Self::get(app).unwrap_or(LicenseStore { key: None });
 
         let key = match &current.key {
             Some(k) => k.clone(),
@@ -85,28 +79,12 @@ impl LicenseStore {
                     },
                 };
 
-                let updated = LicenseStore {
-                    key: current.key,
-                    last_validated_at: Some(chrono::Utc::now().timestamp()),
-                    last_status: Some(status.clone()),
-                };
-                Self::set(app, &updated)?;
+                Self::set(app, &LicenseStore { key: current.key })?;
                 Ok(status)
             }
-            Err(_) => {
-                if let Some(last_validated) = current.last_validated_at {
-                    let now = chrono::Utc::now().timestamp();
-                    let seven_days: i64 = 7 * 24 * 60 * 60;
-                    if now - last_validated < seven_days {
-                        if let Some(cached) = current.last_status {
-                            return Ok(cached);
-                        }
-                    }
-                }
-                Ok(LicenseStatus::Invalid {
-                    error: "Could not reach license server".into(),
-                })
-            }
+            Err(_) => Ok(LicenseStatus::Invalid {
+                error: "Could not reach license server".into(),
+            }),
         }
     }
 }
