@@ -17,6 +17,7 @@ mod general_settings;
 mod hotkeys;
 mod http_client;
 mod import;
+mod license;
 mod logging;
 mod notifications;
 mod panel_manager;
@@ -47,6 +48,7 @@ use editor_window::{EditorInstances, WindowEditorInstance};
 use ffmpeg::ffi::AV_TIME_BASE;
 use general_settings::GeneralSettingsStore;
 use kameo::{Actor, actor::ActorRef};
+use license::{LicenseStatus, LicenseStore};
 use notifications::NotificationType;
 use orbit_editor::{EditorInstance, EditorState};
 use orbit_project::{
@@ -2980,6 +2982,42 @@ async fn update_auth_plan(app: AppHandle) {
     AuthStore::update_auth_plan(&app).await.ok();
 }
 
+#[tauri::command]
+#[specta::specta]
+#[instrument(skip(app))]
+async fn set_license_key(app: AppHandle, key: String) -> Result<LicenseStatus, String> {
+    let server_url = GeneralSettingsStore::get(&app)
+        .ok()
+        .flatten()
+        .map(|s| s.server_url)
+        .unwrap_or_else(|| "https://orbit.so".to_string());
+
+    let mut store = LicenseStore::get(&app).unwrap_or(LicenseStore {
+        key: None,
+        last_validated_at: None,
+        last_status: None,
+    });
+    store.key = Some(key.trim().to_uppercase());
+    store.last_validated_at = None;
+    store.last_status = None;
+    LicenseStore::set(&app, &store)?;
+
+    LicenseStore::refresh(&app, &server_url).await
+}
+
+#[tauri::command]
+#[specta::specta]
+#[instrument(skip(app))]
+async fn get_license_status(app: AppHandle) -> Result<LicenseStatus, String> {
+    let server_url = GeneralSettingsStore::get(&app)
+        .ok()
+        .flatten()
+        .map(|s| s.server_url)
+        .unwrap_or_else(|| "https://orbit.so".to_string());
+
+    LicenseStore::refresh(&app, &server_url).await
+}
+
 pub async fn open_target_picker(
     app: &tauri::AppHandle,
     target_mode: recording_settings::RecordingTargetMode,
@@ -3115,6 +3153,8 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
             list_fails,
             set_fail,
             update_auth_plan,
+            set_license_key,
+            get_license_status,
             set_window_transparent,
             get_editor_meta,
             get_recording_meta_by_path,
@@ -3174,6 +3214,7 @@ pub async fn run(recording_logging_handle: LoggingHandle, logs_dir: PathBuf) {
         .error_handling(tauri_specta::ErrorHandlingMode::Throw)
         .typ::<ProjectConfiguration>()
         .typ::<AuthStore>()
+        .typ::<LicenseStatus>()
         .typ::<presets::PresetsStore>()
         .typ::<hotkeys::HotkeysStore>()
         .typ::<general_settings::GeneralSettingsStore>()

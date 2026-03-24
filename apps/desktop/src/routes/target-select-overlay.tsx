@@ -821,6 +821,13 @@ function Inner() {
 									JSON.stringify(target, null, 2),
 								);
 
+								const areaLicenseStatus = await commands.getLicenseStatus();
+								if (areaLicenseStatus.type !== "valid") {
+									await commands.closeTargetSelectOverlays();
+									commands.showWindow({ Main: { init_target_mode: null } });
+									return;
+								}
+
 								try {
 									const allWindows = await WebviewWindow.getAll();
 									for (const win of allWindows) {
@@ -1319,6 +1326,13 @@ function RecordingControls(props: {
 									return;
 								}
 								if (startDisabled()) return;
+
+								const licenseStatus = await commands.getLicenseStatus();
+								if (licenseStatus.type !== "valid") {
+									await commands.closeTargetSelectOverlays();
+									commands.showWindow({ Main: { init_target_mode: null } });
+									return;
+								}
 
 								if (props.target.variant === "area") {
 									setOptions(

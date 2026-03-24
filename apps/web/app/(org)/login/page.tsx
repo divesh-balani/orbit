@@ -1,5 +1,3 @@
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getCurrentUser } from "@orbit/database/auth/session";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -7,22 +5,23 @@ import { LoginForm } from "./form";
 
 export const dynamic = "force-dynamic";
 
-export default async function LoginPage() {
-	const session = await getCurrentUser();
+export default async function LoginPage({
+	searchParams,
+}: {
+	searchParams: Promise<{ callbackUrl?: string }>;
+}) {
+	const [session, params] = await Promise.all([getCurrentUser(), searchParams]);
 	if (session) {
-		redirect("/dashboard");
+		redirect(params.callbackUrl || "/dashboard");
 	}
 	return (
-		<div className="flex relative justify-center items-center w-full h-screen bg-gray-2">
-			<div className="flex absolute top-10 left-10 gap-2 justify-center items-center transition-opacity hover:opacity-75">
-				<FontAwesomeIcon
-					className="opacity-75 size-3 text-gray-12"
-					icon={faArrowLeft}
-				/>
-				<Link className="text-gray-12" href="/">
-					Home
-				</Link>
-			</div>
+		<div className="relative flex h-screen w-full items-center justify-center bg-gray-2">
+			<Link
+				href="/"
+				className="absolute left-10 top-10 text-sm text-gray-10 hover:text-gray-12"
+			>
+				← Home
+			</Link>
 			<LoginForm />
 		</div>
 	);

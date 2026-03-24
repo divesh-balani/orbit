@@ -4,10 +4,12 @@ import { eq } from "drizzle-orm";
 import type { NextAuthOptions } from "next-auth";
 import { getServerSession as _getServerSession } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
+import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 import type { Provider } from "next-auth/providers/index";
 import WorkOSProvider from "next-auth/providers/workos";
+import { verifyPassword } from "../crypto.ts";
 import { sendEmail } from "../emails/config.ts";
 import { db } from "../index.ts";
 import { users } from "../schema.ts";
@@ -39,6 +41,29 @@ export const authOptions = (): NextAuthOptions => {
 		get providers() {
 			if (_providers) return _providers;
 			_providers = [
+				CredentialsProvider({
+					name: "Credentials",
+					credentials: {
+						email: { label: "Email", type: "email" },
+						password: { label: "Password", type: "password" },
+					},
+					async authorize(credentials) {
+						if (!credentials?.email || !credentials?.password) return null;
+						const email = (credentials.email as string).toLowerCase().trim();
+						const [user] = await db()
+							.select()
+							.from(users)
+							.where(eq(users.email, email))
+							.limit(1);
+						if (!user?.passwordHash) return null;
+						const valid = await verifyPassword(
+							user.passwordHash,
+							credentials.password as string,
+						);
+						if (!valid) return null;
+						return { id: user.id, email: user.email, name: user.name };
+					},
+				}),
 				GoogleProvider({
 					clientId: serverEnv().GOOGLE_CLIENT_ID!,
 					clientSecret: serverEnv().GOOGLE_CLIENT_SECRET!,

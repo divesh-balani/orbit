@@ -114,6 +114,7 @@ export const users = mysqlTable(
 		inviteQuota: int("inviteQuota").notNull().default(1),
 		defaultOrgId:
 			nanoIdNullable("defaultOrgId").$type<Organisation.OrganisationId>(),
+		passwordHash: varchar("passwordHash", { length: 255 }),
 	},
 	(table) => ({
 		emailIndex: uniqueIndex("email_idx").on(table.email),
@@ -885,3 +886,27 @@ export const importedVideos = mysqlTable(
 		primaryKey({ columns: [table.orgId, table.source, table.sourceId] }),
 	],
 );
+
+export const licenseKeys = mysqlTable("licenseKeys", {
+	id: varchar("id", { length: 21 }).notNull().primaryKey(),
+	key: varchar("key", { length: 255 }).notNull().unique(),
+	name: varchar("name", { length: 255 }).notNull(),
+	createdAt: datetime("createdAt").notNull().default(sql`now()`),
+	expiresAt: datetime("expiresAt"),
+	revokedAt: datetime("revokedAt"),
+});
+
+export const admins = mysqlTable("admins", {
+	id: varchar("id", { length: 21 }).notNull().primaryKey(),
+	email: varchar("email", { length: 255 }).notNull().unique(),
+	addedAt: datetime("addedAt").notNull().default(sql`now()`),
+	addedBy: varchar("addedBy", { length: 255 }),
+});
+
+export const passwordResetTokens = mysqlTable("passwordResetTokens", {
+	id: varchar("id", { length: 21 }).notNull().primaryKey(),
+	email: varchar("email", { length: 255 }).notNull(),
+	token: varchar("token", { length: 255 }).notNull().unique(),
+	expiresAt: datetime("expiresAt").notNull(),
+	usedAt: datetime("usedAt"),
+});

@@ -17,7 +17,7 @@
 		"dev": "(pnpm run docker:up > /dev/null &) && sleep 5 && trap 'pnpm run docker:stop' EXIT && dotenv -e .env -- turbo run dev --env-mode=loose --ui tui",
 		"dev:desktop": "pnpm run --filter=@orbit/desktop dev",
 		"dev:manual": "pnpm run docker:up && trap 'pnpm run docker:stop' EXIT && dotenv -e .env -- turbo run dev --filter=!@orbit/storybook --no-cache --concurrency 1",
-		"dev:web": "pnpm dev --filter=!@orbit/desktop",
+		"dev:web": "dotenv -e .env -- pnpm --filter=@orbit/web dev",
 		"dev:windows": "start /b cmd /c \"pnpm run docker:up > nul\" && timeout /t 5 /nobreak > nul && dotenv -e .env -- turbo run dev --env-mode=loose --ui tui",
 		"docker:clean": "turbo run docker:clean",
 		"docker:stop": "turbo run docker:stop",

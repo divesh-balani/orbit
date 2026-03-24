@@ -33,8 +33,8 @@ function createServerEnv() {
 			/// S3 configuration
 			// Though they are prefixed with `ORBIT_AWS`, these don't have to be
 			// for AWS, and can instead be for any S3-compatible service
-			ORBIT_AWS_BUCKET: z.string(),
-			ORBIT_AWS_REGION: z.string(),
+			ORBIT_AWS_BUCKET: z.string().optional(),
+			ORBIT_AWS_REGION: z.string().optional(),
 			ORBIT_AWS_ACCESS_KEY: z.string().optional(),
 			ORBIT_AWS_SECRET_KEY: z.string().optional(),
 			S3_PUBLIC_ENDPOINT: z

@@ -256,6 +256,12 @@ async setFail(name: string, value: boolean) : Promise<void> {
 async updateAuthPlan() : Promise<void> {
     await TAURI_INVOKE("update_auth_plan");
 },
+async setLicenseKey(key: string) : Promise<LicenseStatus> {
+    return await TAURI_INVOKE("set_license_key", { key });
+},
+async getLicenseStatus() : Promise<LicenseStatus> {
+    return await TAURI_INVOKE("get_license_status");
+},
 async setWindowTransparent(value: boolean) : Promise<void> {
     await TAURI_INVOKE("set_window_transparent", { value });
 },
@@ -489,6 +495,7 @@ export type ImportStage = "Probing" | "Converting" | "Finalizing" | "Complete" |
 export type IncompleteRecordingInfo = { projectPath: string; prettyName: string; segmentCount: number; estimatedDurationSecs: number }
 export type InstantRecordingMeta = { recording: boolean } | { error: string } | { fps: number; sample_rate: number | null }
 export type JsonValue<T> = [T]
+export type LicenseStatus = { type: "valid"; name: string; expires_at: string | null } | { type: "invalid"; error: string } | { type: "notSet" }
 export type LogicalBounds = { position: LogicalPosition; size: LogicalSize }
 export type LogicalPosition = { x: number; y: number }
 export type LogicalSize = { width: number; height: number }
