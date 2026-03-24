@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 function LoginFormInner() {
 	const searchParams = useSearchParams();
-	const callbackUrl = searchParams?.get("callbackUrl") || "/dashboard/caps";
+	const callbackUrl = searchParams?.get("callbackUrl") || "/admin";
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
