@@ -11,13 +11,7 @@ const { version } = packageJson;
 
 const nextConfig = {
 	reactStrictMode: true,
-	serverExternalPackages: ["ffmpeg-static", "prettier"],
-	outputFileTracingIncludes: {
-		"/app/.well-known/workflow/v1/step": [
-			"./node_modules/ffmpeg-static/ffmpeg",
-			"./node_modules/.pnpm/ffmpeg-static@5.3.0/node_modules/ffmpeg-static/ffmpeg",
-		],
-	},
+	serverExternalPackages: ["ffmpeg-static"],
 	transpilePackages: [
 		"@orbit/ui",
 		"@orbit/utils",
@@ -74,53 +68,6 @@ const nextConfig = {
 				pathname: "**",
 			},
 		].filter(Boolean),
-	},
-	async rewrites() {
-		return [
-			{
-				source: "/r/:path*",
-				destination: "https://dub.orbit.link/:path*",
-			},
-			{
-				source: "/api/commercial/:path*",
-				destination: "https://l.orbit.so/api/commercial/:path*",
-			},
-			{
-				source: "/s/:videoId",
-				destination: "/s/:videoId",
-				has: [
-					{
-						type: "host",
-						value: "(?!orbit.so|orbit.link).*",
-					},
-				],
-			},
-		];
-	},
-	async redirects() {
-		return [
-			{
-				source: "/roadmap",
-				destination:
-					"https://capso.notion.site/7aac740edeee49b5a23be901a7cb734e?v=9d4a3bf3d72d488cad9b899ab73116a1",
-				permanent: true,
-			},
-			{
-				source: "/updates",
-				destination: "/blog",
-				permanent: true,
-			},
-			{
-				source: "/updates/:slug",
-				destination: "/blog/:slug",
-				permanent: true,
-			},
-			{
-				source: "/docs/s3-config",
-				destination: "/docs",
-				permanent: true,
-			},
-		];
 	},
 	env: {
 		appVersion: version,

@@ -23,7 +23,7 @@ if (existing) {
 	console.log("Updated admin user password hash.");
 } else {
 	await db().insert(users).values({
-		id: nanoid(),
+		id: nanoid(15),
 		email: ADMIN_EMAIL,
 		name: "Admin",
 		passwordHash,
@@ -39,7 +39,7 @@ const [existingAdmin] = await db()
 
 if (!existingAdmin) {
 	await db().insert(admins).values({
-		id: nanoid(),
+		id: nanoid(15),
 		email: ADMIN_EMAIL,
 		addedBy: null,
 	});
