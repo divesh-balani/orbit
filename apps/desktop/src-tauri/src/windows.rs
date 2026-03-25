@@ -1119,7 +1119,7 @@ impl ShowCapWindow {
                 {
                     app.run_on_main_thread({
                         let window = window.clone();
-                        let app = app.clone();
+                        let _app = app.clone();
                         move || {
                             use tauri::ActivationPolicy;
                             use tauri_nspanel::cocoa::appkit::NSWindowCollectionBehavior;

@@ -37,15 +37,25 @@ jobs:
         run: node scripts/setup.js
 
       - name: Write signing key
-        shell: bash
+        shell: python
         env:
           KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-        run: printf '%s\n' "$KEY" | grep -v '^untrusted comment' | tr -d '\r\n' > "$RUNNER_TEMP/tauri.key"
+        run: |
+          import os
+          key = os.environ.get('KEY', '')
+          lines = key.replace('\r\n', '\n').replace('\r', '\n').split('\n')
+          comment = next((l for l in lines if l.strip().startswith('untrusted comment')), 'untrusted comment: minisign secret key')
+          b64 = ''.join(l.strip() for l in lines if l.strip() and not l.strip().startswith('untrusted comment'))
+          key_path = os.path.join(os.environ['RUNNER_TEMP'], 'tauri.key')
+          with open(key_path, 'w', newline='\n') as f:
+              f.write(comment + '\n' + b64 + '\n')
+          with open(os.environ['GITHUB_ENV'], 'a') as f:
+              f.write(f'TAURI_KEY_PATH={key_path}\n')
 
       - name: Build
         env:
           VITE_SERVER_URL: https://orbit.diveshbalani.com
-          TAURI_SIGNING_PRIVATE_KEY: ${{ runner.temp }}/tauri.key
+          TAURI_SIGNING_PRIVATE_KEY: ${{ env.TAURI_KEY_PATH }}
         run: cd apps/desktop && pnpm build:release
 
       - name: Upload DMG
@@ -88,15 +98,25 @@ jobs:
         run: node scripts/setup.js
 
       - name: Write signing key
-        shell: bash
+        shell: python
         env:
           KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-        run: printf '%s\n' "$KEY" | grep -v '^untrusted comment' | tr -d '\r\n' > "$RUNNER_TEMP/tauri.key"
+        run: |
+          import os
+          key = os.environ.get('KEY', '')
+          lines = key.replace('\r\n', '\n').replace('\r', '\n').split('\n')
+          comment = next((l for l in lines if l.strip().startswith('untrusted comment')), 'untrusted comment: minisign secret key')
+          b64 = ''.join(l.strip() for l in lines if l.strip() and not l.strip().startswith('untrusted comment'))
+          key_path = os.path.join(os.environ['RUNNER_TEMP'], 'tauri.key')
+          with open(key_path, 'w', newline='\n') as f:
+              f.write(comment + '\n' + b64 + '\n')
+          with open(os.environ['GITHUB_ENV'], 'a') as f:
+              f.write(f'TAURI_KEY_PATH={key_path}\n')
 
       - name: Build
         env:
           VITE_SERVER_URL: https://orbit.diveshbalani.com
-          TAURI_SIGNING_PRIVATE_KEY: ${{ runner.temp }}/tauri.key
+          TAURI_SIGNING_PRIVATE_KEY: ${{ env.TAURI_KEY_PATH }}
         run: cd apps/desktop && pnpm build:release
 
       - name: Upload NSIS installer
