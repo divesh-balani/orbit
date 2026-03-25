@@ -40,7 +40,7 @@ jobs:
         shell: bash
         env:
           KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-        run: printf '%s' "$KEY" | tr -d '\n\r' > "$RUNNER_TEMP/tauri.key"
+        run: printf '%s\n' "$KEY" | grep -v '^untrusted comment' | tr -d '\r\n' > "$RUNNER_TEMP/tauri.key"
 
       - name: Build
         env:
@@ -91,7 +91,7 @@ jobs:
         shell: bash
         env:
           KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-        run: printf '%s' "$KEY" | tr -d '\n\r' > "$RUNNER_TEMP/tauri.key"
+        run: printf '%s\n' "$KEY" | grep -v '^untrusted comment' | tr -d '\r\n' > "$RUNNER_TEMP/tauri.key"
 
       - name: Build
         env:
