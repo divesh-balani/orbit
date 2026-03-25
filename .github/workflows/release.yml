@@ -6,31 +6,7 @@ on:
       - "v*"
 
 jobs:
-  verify-signing-key:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Write and verify signing key
-        shell: python
-        env:
-          KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-        run: |
-          import os, base64, sys
-          key = os.environ.get('KEY', '')
-          lines = key.replace('\r\n', '\n').replace('\r', '\n').split('\n')
-          b64 = ''.join(l.strip() for l in lines if l.strip() and not l.strip().startswith('untrusted comment'))
-          if not b64:
-              print("ERROR: No base64 key content found in secret")
-              sys.exit(1)
-          try:
-              decoded = base64.b64decode(b64)
-              print(f"OK: key decoded successfully ({len(b64)} base64 chars, {len(decoded)} raw bytes)")
-          except Exception as e:
-              print(f"ERROR: base64 decode failed: {e}")
-              print(f"First 20 chars of b64: {repr(b64[:20])}")
-              sys.exit(1)
-
   build-macos:
-    needs: verify-signing-key
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
@@ -60,25 +36,20 @@ jobs:
       - name: Download native deps
         run: node scripts/setup.js
 
-      - name: Write signing key
+      - name: Set signing key
         shell: python
         env:
           KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         run: |
-          import os
+          import os, re
           key = os.environ.get('KEY', '')
-          lines = key.replace('\r\n', '\n').replace('\r', '\n').split('\n')
-          b64 = ''.join(l.strip() for l in lines if l.strip() and not l.strip().startswith('untrusted comment'))
-          key_path = os.path.join(os.environ['RUNNER_TEMP'], 'tauri.key')
-          with open(key_path, 'w', newline='') as f:
-              f.write(b64)
+          b64 = re.sub(r'[^A-Za-z0-9+/=]', '', key)
           with open(os.environ['GITHUB_ENV'], 'a') as f:
-              f.write(f'TAURI_KEY_PATH={key_path}\n')
+              f.write(f'TAURI_SIGNING_PRIVATE_KEY={b64}\n')
 
       - name: Build
         env:
           VITE_SERVER_URL: https://orbit.diveshbalani.com
-          TAURI_SIGNING_PRIVATE_KEY: ${{ env.TAURI_KEY_PATH }}
         run: cd apps/desktop && pnpm build:release
 
       - name: Upload DMG
@@ -94,7 +65,6 @@ jobs:
           path: target/release/bundle/macos/*.tar.gz*
 
   build-windows:
-    needs: verify-signing-key
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -121,25 +91,20 @@ jobs:
       - name: Download FFmpeg and configure env
         run: node scripts/setup.js
 
-      - name: Write signing key
+      - name: Set signing key
         shell: python
         env:
           KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         run: |
-          import os
+          import os, re
           key = os.environ.get('KEY', '')
-          lines = key.replace('\r\n', '\n').replace('\r', '\n').split('\n')
-          b64 = ''.join(l.strip() for l in lines if l.strip() and not l.strip().startswith('untrusted comment'))
-          key_path = os.path.join(os.environ['RUNNER_TEMP'], 'tauri.key')
-          with open(key_path, 'w', newline='') as f:
-              f.write(b64)
+          b64 = re.sub(r'[^A-Za-z0-9+/=]', '', key)
           with open(os.environ['GITHUB_ENV'], 'a') as f:
-              f.write(f'TAURI_KEY_PATH={key_path}\n')
+              f.write(f'TAURI_SIGNING_PRIVATE_KEY={b64}\n')
 
       - name: Build
         env:
           VITE_SERVER_URL: https://orbit.diveshbalani.com
-          TAURI_SIGNING_PRIVATE_KEY: ${{ env.TAURI_KEY_PATH }}
         run: cd apps/desktop && pnpm build:release
 
       - name: Upload NSIS installer
