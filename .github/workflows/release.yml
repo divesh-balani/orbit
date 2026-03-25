@@ -39,8 +39,8 @@ jobs:
       - name: Write signing key
         shell: bash
         env:
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-        run: printf '%s' "$TAURI_SIGNING_PRIVATE_KEY" > "$RUNNER_TEMP/tauri.key"
+          KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: printf '%s' "$KEY" | tr -d '\n\r' > "$RUNNER_TEMP/tauri.key"
 
       - name: Build
         env:
@@ -90,8 +90,8 @@ jobs:
       - name: Write signing key
         shell: bash
         env:
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-        run: printf '%s' "$TAURI_SIGNING_PRIVATE_KEY" > "$RUNNER_TEMP/tauri.key"
+          KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: printf '%s' "$KEY" | tr -d '\n\r' > "$RUNNER_TEMP/tauri.key"
 
       - name: Build
         env:
