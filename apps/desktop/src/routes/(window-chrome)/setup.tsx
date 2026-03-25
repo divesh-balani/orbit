@@ -115,9 +115,7 @@ export default function () {
 	);
 
 	const handleContinue = () => {
-		commands.showWindow({ Main: { init_target_mode: null } }).then(() => {
-			getCurrentWindow().close();
-		});
+		commands.showWindow({ Main: { init_target_mode: null } });
 	};
 
 	return (
@@ -542,7 +540,6 @@ function Startup(props: { onClose: () => void }) {
 										await commands.showWindow({
 											Main: { init_target_mode: null },
 										});
-										getCurrentWindow().close();
 									}}
 								>
 									Continue to Orbit
