@@ -1,8 +1,6 @@
 use crate::{
     SharedPauseState,
-    feeds::microphone::MicrophoneFeedLock,
     output_pipeline::*,
-    sources,
     sources::screen_capture::{self, CropBounds, ScreenCaptureFormat, ScreenCaptureTarget},
 };
 
@@ -14,8 +12,10 @@ use anyhow::anyhow;
 #[cfg(windows)]
 use orbit_enc_ffmpeg::h264::H264Preset;
 use orbit_timestamp::Timestamps;
-use std::{path::PathBuf, sync::Arc};
+use std::path::PathBuf;
 
+#[cfg(windows)]
+use std::sync::Arc;
 #[cfg(windows)]
 use std::sync::atomic::{AtomicBool, Ordering};
 
@@ -61,18 +61,6 @@ pub trait MakeCapturePipeline: ScreenCaptureFormat + std::fmt::Debug + 'static {
     ) -> anyhow::Result<OutputPipeline>
     where
         Self: Sized;
-
-    async fn make_instant_mode_pipeline(
-        screen_capture: screen_capture::VideoSourceConfig,
-        system_audio: Option<screen_capture::SystemAudioSourceConfig>,
-        mic_feed: Option<Arc<MicrophoneFeedLock>>,
-        output_path: PathBuf,
-        output_resolution: (u32, u32),
-        start_time: Timestamps,
-        #[cfg(windows)] encoder_preferences: EncoderPreferences,
-    ) -> anyhow::Result<OutputPipeline>
-    where
-        Self: Sized;
 }
 
 pub struct Stop;
@@ -108,38 +96,9 @@ impl MakeCapturePipeline for screen_capture::CMSampleBufferCapture {
                 .with_timestamps(start_time)
                 .build::<AVFoundationMp4Muxer>(AVFoundationMp4MuxerConfig {
                     output_height: output_size.map(|(_, h)| h),
-                    instant_mode: false,
                 })
                 .await
         }
-    }
-
-    async fn make_instant_mode_pipeline(
-        screen_capture: screen_capture::VideoSourceConfig,
-        system_audio: Option<screen_capture::SystemAudioSourceConfig>,
-        mic_feed: Option<Arc<MicrophoneFeedLock>>,
-        output_path: PathBuf,
-        output_resolution: (u32, u32),
-        start_time: Timestamps,
-    ) -> anyhow::Result<OutputPipeline> {
-        let mut output = OutputPipeline::builder(output_path.clone())
-            .with_video::<screen_capture::VideoSource>(screen_capture)
-            .with_timestamps(start_time);
-
-        if let Some(system_audio) = system_audio {
-            output = output.with_audio_source::<screen_capture::SystemAudioSource>(system_audio);
-        }
-
-        if let Some(mic_feed) = mic_feed {
-            output = output.with_audio_source::<sources::Microphone>(mic_feed);
-        }
-
-        output
-            .build::<AVFoundationMp4Muxer>(AVFoundationMp4MuxerConfig {
-                output_height: Some(output_resolution.1),
-                instant_mode: true,
-            })
-            .await
     }
 }
 
@@ -191,46 +150,6 @@ impl MakeCapturePipeline for screen_capture::Direct3DCapture {
                 })
                 .await
         }
-    }
-
-    async fn make_instant_mode_pipeline(
-        screen_capture: screen_capture::VideoSourceConfig,
-        system_audio: Option<screen_capture::SystemAudioSourceConfig>,
-        mic_feed: Option<Arc<MicrophoneFeedLock>>,
-        output_path: PathBuf,
-        output_resolution: (u32, u32),
-        start_time: Timestamps,
-        encoder_preferences: EncoderPreferences,
-    ) -> anyhow::Result<OutputPipeline> {
-        let d3d_device = screen_capture.d3d_device.clone();
-        let mut output_builder = OutputPipeline::builder(output_path.clone())
-            .with_video::<screen_capture::VideoSource>(screen_capture)
-            .with_timestamps(start_time);
-
-        if let Some(mic_feed) = mic_feed {
-            output_builder = output_builder.with_audio_source::<sources::Microphone>(mic_feed);
-        }
-
-        if let Some(system_audio) = system_audio {
-            output_builder =
-                output_builder.with_audio_source::<screen_capture::SystemAudioSource>(system_audio);
-        }
-
-        output_builder
-            .build::<WindowsMuxer>(WindowsMuxerConfig {
-                pixel_format: screen_capture::Direct3DCapture::PIXEL_FORMAT.as_dxgi(),
-                bitrate_multiplier: 0.055f32,
-                frame_rate: 30u32,
-                d3d_device,
-                output_size: Some(windows::Graphics::SizeInt32 {
-                    Width: output_resolution.0 as i32,
-                    Height: output_resolution.1 as i32,
-                }),
-                encoder_preferences,
-                fragmented: false,
-                frag_duration_us: 2_000_000,
-            })
-            .await
     }
 }
 

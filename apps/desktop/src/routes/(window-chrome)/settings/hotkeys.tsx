@@ -22,7 +22,6 @@ import {
 
 const ACTION_TEXT = {
 	startStudioRecording: "Start studio recording",
-	startInstantRecording: "Start instant recording",
 	restartRecording: "Restart recording",
 	stopRecording: "Stop recording",
 	togglePauseRecording: "Pause/resume recording",

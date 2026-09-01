@@ -1,4 +1,3 @@
-import { ProgressCircle } from "@orbit/ui-solid";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { ask, save } from "@tauri-apps/plugin-dialog";
 import { remove } from "@tauri-apps/plugin-fs";
@@ -20,7 +19,6 @@ import IconLucideCopy from "~icons/lucide/copy";
 import IconLucideEdit from "~icons/lucide/edit";
 import IconLucideFolder from "~icons/lucide/folder";
 import IconLucideImage from "~icons/lucide/image";
-import IconLucideRotateCcw from "~icons/lucide/rotate-ccw";
 import IconLucideSave from "~icons/lucide/save";
 import IconLucideSquarePlay from "~icons/lucide/square-play";
 import IconMdiMonitor from "~icons/mdi/monitor";
@@ -136,7 +134,7 @@ export default function TargetCard(props: TargetCardProps) {
 		if (target) return target.owner_name;
 		const recording = recordingTarget();
 		if (recording) {
-			return recording.mode === "studio" ? "Studio Mode" : "Instant Mode";
+			return "Studio Mode";
 		}
 		return undefined;
 	});
@@ -273,7 +271,7 @@ export default function TargetCard(props: TargetCardProps) {
 		const recording = recordingTarget();
 		if (!recording) return;
 		const path =
-			recording.mode === "instant"
+			"fps" in recording
 				? `${recording.path}/content/output.mp4`
 				: recording.path;
 		commands.openFilePath(path);
@@ -288,13 +286,6 @@ export default function TargetCard(props: TargetCardProps) {
 		recordingProps()?.onRefetch?.();
 	};
 
-	const handleReupload = (e: MouseEvent) => {
-		e.stopPropagation();
-		const recording = recordingTarget();
-		if (!recording) return;
-		recordingProps()?.onReupload?.(recording.path);
-	};
-
 	const recordingUploadFailed = createMemo(() => {
 		const recording = recordingTarget();
 		if (!recording) return false;
@@ -306,10 +297,6 @@ export default function TargetCard(props: TargetCardProps) {
 		if (!recording) return false;
 		return recording.status.status === "Failed";
 	});
-
-	const getUploadProgress = () => recordingProps()?.uploadProgress;
-
-	const getIsReuploading = () => recordingProps()?.isReuploading ?? false;
 
 	return (
 		<button
@@ -426,11 +413,8 @@ export default function TargetCard(props: TargetCardProps) {
 					{(() => {
 						const recording = recordingTarget();
 						if (!recording) return null;
-						const isStudio = recording.mode === "studio";
-						const uploadFailed = recordingUploadFailed();
-						const progress = getUploadProgress();
-						const reuploading = getIsReuploading();
-						const hasProgress = progress !== undefined || reuploading;
+						const isStudio =
+							recording.mode === "studio" && !("fps" in recording);
 
 						return (
 							<div class="flex items-center justify-between px-2 pb-1.5 pt-0.5 gap-1">
@@ -445,33 +429,6 @@ export default function TargetCard(props: TargetCardProps) {
 											<IconLucideEdit class="size-3.5" />
 										</div>
 									</Tooltip>
-								</Show>
-								<Show when={!isStudio}>
-									<Show
-										when={hasProgress}
-										fallback={
-											<Tooltip
-												content={uploadFailed ? "Retry upload" : "Reupload"}
-											>
-												<div
-													role="button"
-													tabIndex={-1}
-													onClick={handleReupload}
-													class="flex-1 flex items-center justify-center p-1 rounded hover:bg-gray-5 text-gray-11 hover:text-gray-12 transition-colors"
-												>
-													<IconLucideRotateCcw class="size-3.5" />
-												</div>
-											</Tooltip>
-										}
-									>
-										<div class="flex-1 flex items-center justify-center p-1">
-											<ProgressCircle
-												variant="primary"
-												progress={progress ?? 0}
-												size="xs"
-											/>
-										</div>
-									</Show>
 								</Show>
 								<Show when={recording.sharing}>
 									<Tooltip content="Open link">

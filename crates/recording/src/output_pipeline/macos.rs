@@ -20,32 +20,12 @@ use std::{
 use tracing::*;
 
 const DEFAULT_MP4_MUXER_BUFFER_SIZE: usize = 60;
-const DEFAULT_MP4_MUXER_BUFFER_SIZE_INSTANT: usize = 240;
 
-const DISK_SPACE_MIN_START_MB: u64 = 500;
-const DISK_SPACE_CRITICAL_MB: u64 = 200;
-const DISK_SPACE_CHECK_INTERVAL: Duration = Duration::from_secs(10);
-
-fn get_available_disk_space_mb(path: &std::path::Path) -> Option<u64> {
-    use std::ffi::CString;
-    let c_path = CString::new(path.parent().unwrap_or(path).to_str()?).ok()?;
-    let mut stat: libc::statvfs = unsafe { std::mem::zeroed() };
-    let result = unsafe { libc::statvfs(c_path.as_ptr(), &mut stat) };
-    if result != 0 {
-        return None;
-    }
-    Some((stat.f_bavail as u64).saturating_mul(stat.f_frsize) / (1024 * 1024))
-}
-
-fn get_mp4_muxer_buffer_size(instant_mode: bool) -> usize {
+fn get_mp4_muxer_buffer_size() -> usize {
     std::env::var("ORBIT_MP4_MUXER_BUFFER_SIZE")
         .ok()
         .and_then(|s| s.parse().ok())
-        .unwrap_or(if instant_mode {
-            DEFAULT_MP4_MUXER_BUFFER_SIZE_INSTANT
-        } else {
-            DEFAULT_MP4_MUXER_BUFFER_SIZE
-        })
+        .unwrap_or(DEFAULT_MP4_MUXER_BUFFER_SIZE)
 }
 
 type SharedFatalError = Arc<Mutex<Option<String>>>;
@@ -87,43 +67,6 @@ fn wait_for_worker(
         }
 
         std::thread::sleep(Duration::from_millis(50));
-    }
-}
-
-struct ChannelPressureTracker {
-    depth: Arc<std::sync::atomic::AtomicUsize>,
-    capacity: usize,
-    last_warning: std::time::Instant,
-}
-
-impl ChannelPressureTracker {
-    fn new(capacity: usize) -> (Self, Arc<std::sync::atomic::AtomicUsize>) {
-        let depth = Arc::new(std::sync::atomic::AtomicUsize::new(0));
-        (
-            Self {
-                depth: depth.clone(),
-                capacity,
-                last_warning: std::time::Instant::now(),
-            },
-            depth,
-        )
-    }
-
-    fn on_send(&mut self) {
-        let current = self
-            .depth
-            .fetch_add(1, std::sync::atomic::Ordering::Relaxed)
-            + 1;
-        let threshold = (self.capacity * 4) / 5;
-        if current > threshold && self.last_warning.elapsed() >= Duration::from_secs(5) {
-            self.last_warning = std::time::Instant::now();
-            warn!(
-                depth = current,
-                capacity = self.capacity,
-                fill_pct = format!("{:.0}%", 100.0 * current as f64 / self.capacity as f64),
-                "Encoder channel pressure high (>80%)"
-            );
-        }
     }
 }
 
@@ -227,7 +170,6 @@ pub struct AVFoundationMp4Muxer {
     state: Option<Mp4EncoderState>,
     pause_flag: Arc<AtomicBool>,
     frame_drops: FrameDropTracker,
-    channel_pressure: Option<ChannelPressureTracker>,
     was_paused: bool,
     fatal_error: SharedFatalError,
 }
@@ -235,7 +177,6 @@ pub struct AVFoundationMp4Muxer {
 #[derive(Default)]
 pub struct AVFoundationMp4MuxerConfig {
     pub output_height: Option<u32>,
-    pub instant_mode: bool,
 }
 
 impl Muxer for AVFoundationMp4Muxer {
@@ -252,59 +193,24 @@ impl Muxer for AVFoundationMp4Muxer {
         let video_config =
             video_config.ok_or_else(|| anyhow!("Invariant: No video source provided"))?;
 
-        if config.instant_mode
-            && let Some(available_mb) = get_available_disk_space_mb(&output_path)
-        {
-            info!(available_mb, "Disk space check before recording start");
-            if available_mb < DISK_SPACE_MIN_START_MB {
-                return Err(anyhow!(
-                    "Insufficient disk space to start recording: {}MB available, {}MB required",
-                    available_mb,
-                    DISK_SPACE_MIN_START_MB
-                ));
-            }
-        }
-
-        let buffer_size = get_mp4_muxer_buffer_size(config.instant_mode);
-        debug!(
-            buffer_size,
-            instant_mode = config.instant_mode,
-            "MP4 muxer encoder channel buffer size"
-        );
+        let buffer_size = get_mp4_muxer_buffer_size();
+        debug!(buffer_size, "MP4 muxer encoder channel buffer size");
 
         let (video_tx, video_rx) = sync_channel::<Option<VideoFrameMessage>>(buffer_size);
         let (ready_tx, ready_rx) = sync_channel::<anyhow::Result<()>>(1);
 
-        let encoder = if config.instant_mode {
-            orbit_enc_avfoundation::MP4Encoder::init_instant_mode(
-                output_path.clone(),
-                video_config,
-                audio_config,
-                config.output_height,
-            )
-        } else {
-            orbit_enc_avfoundation::MP4Encoder::init(
-                output_path.clone(),
-                video_config,
-                audio_config,
-                config.output_height,
-            )
-        }
+        let encoder = orbit_enc_avfoundation::MP4Encoder::init(
+            output_path.clone(),
+            video_config,
+            audio_config,
+            config.output_height,
+        )
         .map_err(|e| anyhow!("{e}"))?;
 
         let encoder = Arc::new(Mutex::new(encoder));
         let encoder_clone = encoder.clone();
         let fatal_error = Arc::new(Mutex::new(None));
         let video_fatal_error = fatal_error.clone();
-        let disk_check_path = output_path.clone();
-        let is_instant = config.instant_mode;
-
-        let (channel_pressure, channel_depth) = if is_instant {
-            let (tracker, depth) = ChannelPressureTracker::new(buffer_size);
-            (Some(tracker), Some(depth))
-        } else {
-            (None, None)
-        };
 
         let video_frame_count = Arc::new(AtomicU64::new(0));
         let audio_frame_count = Arc::new(AtomicU64::new(0));
@@ -318,28 +224,10 @@ impl Muxer for AVFoundationMp4Muxer {
                 }
 
                 let mut encoder_busy_count = 0u64;
-                let mut last_disk_check = std::time::Instant::now();
 
                 while let Ok(Some(msg)) = video_rx.recv() {
-                    if let Some(ref depth) = channel_depth {
-                        depth.fetch_sub(1, std::sync::atomic::Ordering::Relaxed);
-                    }
                     if fatal_error_message(&video_fatal_error).is_some() {
                         break;
-                    }
-
-                    if is_instant && last_disk_check.elapsed() >= DISK_SPACE_CHECK_INTERVAL {
-                        last_disk_check = std::time::Instant::now();
-                        if let Some(available_mb) = get_available_disk_space_mb(&disk_check_path)
-                            && available_mb < DISK_SPACE_CRITICAL_MB
-                        {
-                            let message = format!(
-                                "Disk space critically low ({}MB), stopping recording to preserve output",
-                                available_mb
-                            );
-                            set_fatal_error(&video_fatal_error, message.clone());
-                            return Err(anyhow!(message));
-                        }
                     }
 
                     match msg {
@@ -569,7 +457,6 @@ impl Muxer for AVFoundationMp4Muxer {
             }),
             pause_flag,
             frame_drops: FrameDropTracker::new(),
-            channel_pressure,
             was_paused: false,
             fatal_error,
         })
@@ -711,9 +598,6 @@ impl VideoMuxer for AVFoundationMp4Muxer {
             {
                 Ok(()) => {
                     self.frame_drops.record_frame();
-                    if let Some(ref mut pressure) = self.channel_pressure {
-                        pressure.on_send();
-                    }
                 }
                 Err(std::sync::mpsc::TrySendError::Full(_)) => {
                     self.frame_drops.record_drop();
@@ -801,7 +685,7 @@ impl Muxer for AVFoundationCameraMuxer {
         let video_config =
             video_config.ok_or_else(|| anyhow!("Invariant: No video source provided"))?;
 
-        let buffer_size = get_mp4_muxer_buffer_size(false);
+        let buffer_size = get_mp4_muxer_buffer_size();
         debug!(buffer_size, "Camera MP4 muxer encoder channel buffer size");
 
         let (video_tx, video_rx) = sync_channel::<Option<CameraFrameMessage>>(buffer_size);
@@ -1075,21 +959,6 @@ mod tests {
         use super::*;
 
         #[test]
-        fn instant_mode_buffer_is_larger_than_normal() {
-            assert!(
-                DEFAULT_MP4_MUXER_BUFFER_SIZE_INSTANT > DEFAULT_MP4_MUXER_BUFFER_SIZE,
-                "Instant mode buffer ({}) should be larger than normal mode buffer ({})",
-                DEFAULT_MP4_MUXER_BUFFER_SIZE_INSTANT,
-                DEFAULT_MP4_MUXER_BUFFER_SIZE
-            );
-        }
-
-        #[test]
-        fn instant_mode_default_is_240() {
-            assert_eq!(DEFAULT_MP4_MUXER_BUFFER_SIZE_INSTANT, 240);
-        }
-
-        #[test]
         fn normal_mode_default_is_60() {
             assert_eq!(DEFAULT_MP4_MUXER_BUFFER_SIZE, 60);
         }
@@ -1099,13 +968,11 @@ mod tests {
             unsafe {
                 std::env::set_var("ORBIT_MP4_MUXER_BUFFER_SIZE", "500");
             }
-            let normal = get_mp4_muxer_buffer_size(false);
-            let instant = get_mp4_muxer_buffer_size(true);
+            let size = get_mp4_muxer_buffer_size();
             unsafe {
                 std::env::remove_var("ORBIT_MP4_MUXER_BUFFER_SIZE");
             }
-            assert_eq!(normal, 500);
-            assert_eq!(instant, 500);
+            assert_eq!(size, 500);
         }
 
         #[test]
@@ -1113,13 +980,11 @@ mod tests {
             unsafe {
                 std::env::set_var("ORBIT_MP4_MUXER_BUFFER_SIZE", "not_a_number");
             }
-            let normal = get_mp4_muxer_buffer_size(false);
-            let instant = get_mp4_muxer_buffer_size(true);
+            let size = get_mp4_muxer_buffer_size();
             unsafe {
                 std::env::remove_var("ORBIT_MP4_MUXER_BUFFER_SIZE");
             }
-            assert_eq!(normal, DEFAULT_MP4_MUXER_BUFFER_SIZE);
-            assert_eq!(instant, DEFAULT_MP4_MUXER_BUFFER_SIZE_INSTANT);
+            assert_eq!(size, DEFAULT_MP4_MUXER_BUFFER_SIZE);
         }
     }
 }

@@ -4,7 +4,6 @@ pub mod cursor;
 pub mod diagnostics;
 pub mod feeds;
 pub mod fragmentation;
-pub mod instant_recording;
 mod output_pipeline;
 pub mod recovery;
 mod resolution_limits;
@@ -36,7 +35,6 @@ use crate::{feeds::camera::CameraFeedLock, sources::screen_capture::ScreenCaptur
 pub enum RecordingMode {
     #[default]
     Studio,
-    Instant,
     Screenshot,
 }
 

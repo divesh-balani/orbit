@@ -36,7 +36,6 @@ use std::borrow::Cow;
 use std::error::Error as StdError;
 use std::{
     any::Any,
-    collections::HashMap,
     panic::AssertUnwindSafe,
     path::{Path, PathBuf},
     str::FromStr,
@@ -454,7 +453,6 @@ pub fn format_project_name<'a>(
     // Get recording mode information
     let (recording_mode, mode) = match recording_mode {
         RecordingMode::Studio => ("Studio", "studio"),
-        RecordingMode::Instant => ("Studio", "studio"),
         RecordingMode::Screenshot => ("Screenshot", "screenshot"),
     };
 
@@ -586,10 +584,6 @@ pub async fn start_recording(
 
     if let Some(window) = OrbitWindowId::Camera.get(&app) {
         let _ = window.set_content_protected(matches!(inputs.mode, RecordingMode::Studio));
-    }
-
-    if matches!(inputs.mode, RecordingMode::Instant) {
-        return Err("Instant mode is not available in local-only mode".to_string());
     }
 
     if matches!(inputs.mode, RecordingMode::Screenshot) {
@@ -822,9 +816,6 @@ pub async fn start_recording(
                                 common: common.clone(),
                                 camera_feed: camera_feed.clone(),
                             })
-                        }
-                        RecordingMode::Instant => {
-                            Err(anyhow!("Instant mode is not available in local-only mode"))
                         }
                         RecordingMode::Screenshot => Err(anyhow!(
                             "Screenshot mode should be handled via take_screenshot"
@@ -1697,18 +1688,22 @@ async fn finalize_studio_recording(
 /// Core logic for generating zoom segments based on mouse click events.
 /// This is an experimental feature that automatically creates zoom effects
 /// around user interactions to highlight important moments.
+///
+/// Each click gets its own fixed-duration zoom segment that follows the
+/// click, then glides back out. If a segment would overlap the previous
+/// one (rapid clicks), the previous segment is trimmed to end where the
+/// new one starts rather than merging the two into one long segment. The
+/// user can still manually drag a segment's edges in the editor to make
+/// it longer or shorter after the fact.
 fn generate_zoom_segments_from_clicks_impl(
     mut clicks: Vec<CursorClickEvent>,
-    mut moves: Vec<CursorMoveEvent>,
+    _moves: Vec<CursorMoveEvent>,
     max_duration: f64,
 ) -> Vec<ZoomSegment> {
     const STOP_PADDING_SECONDS: f64 = 0.5;
-    const CLICK_GROUP_TIME_THRESHOLD_SECS: f64 = 2.5;
-    const CLICK_GROUP_SPATIAL_THRESHOLD: f64 = 0.15;
     const CLICK_PRE_PADDING: f64 = 0.4;
-    const CLICK_POST_PADDING: f64 = 1.8;
-    const MERGE_GAP_THRESHOLD: f64 = 0.8;
-    const MIN_SEGMENT_DURATION: f64 = 1.0;
+    const DEFAULT_ZOOM_DURATION: f64 = 2.2;
+    const MIN_SEGMENT_DURATION: f64 = 0.3;
     const AUTO_ZOOM_AMOUNT: f64 = 1.5;
 
     if max_duration <= 0.0 {
@@ -1730,135 +1725,47 @@ fn generate_zoom_segments_from_clicks_impl(
             .partial_cmp(&b.time_ms)
             .unwrap_or(std::cmp::Ordering::Equal)
     });
-    moves.sort_by(|a, b| {
-        a.time_ms
-            .partial_cmp(&b.time_ms)
-            .unwrap_or(std::cmp::Ordering::Equal)
-    });
 
-    while let Some(index) = clicks.iter().rposition(|c| c.down) {
-        let time_secs = clicks[index].time_ms / 1000.0;
-        if time_secs > activity_end_limit {
-            clicks.remove(index);
-        } else {
-            break;
-        }
-    }
+    let mut segments: Vec<ZoomSegment> = Vec::new();
 
-    let click_positions: HashMap<usize, (f64, f64)> = clicks
-        .iter()
-        .enumerate()
-        .filter(|(_, c)| c.down)
-        .filter_map(|(idx, click)| {
-            let click_time = click.time_ms;
-            moves
-                .iter()
-                .rfind(|m| m.time_ms <= click_time)
-                .map(|m| (idx, (m.x, m.y)))
-        })
-        .collect();
-
-    let mut click_groups: Vec<Vec<usize>> = Vec::new();
-    let down_clicks: Vec<(usize, &CursorClickEvent)> = clicks
-        .iter()
-        .enumerate()
-        .filter(|(_, c)| c.down && c.time_ms / 1000.0 < activity_end_limit)
-        .collect();
-
-    for (idx, click) in &down_clicks {
+    for click in clicks.iter().filter(|c| c.down) {
         let click_time = click.time_ms / 1000.0;
-        let click_pos = click_positions.get(idx);
-
-        let mut found_group = false;
-        for group in click_groups.iter_mut() {
-            let can_join = group.iter().any(|&group_idx| {
-                let group_click = &clicks[group_idx];
-                let group_time = group_click.time_ms / 1000.0;
-                let time_close = (click_time - group_time).abs() < CLICK_GROUP_TIME_THRESHOLD_SECS;
-
-                let spatial_close = match (click_pos, click_positions.get(&group_idx)) {
-                    (Some((x1, y1)), Some((x2, y2))) => {
-                        let dx = x1 - x2;
-                        let dy = y1 - y2;
-                        (dx * dx + dy * dy).sqrt() < CLICK_GROUP_SPATIAL_THRESHOLD
-                    }
-                    _ => true,
-                };
-
-                time_close && spatial_close
-            });
-
-            if can_join {
-                group.push(*idx);
-                found_group = true;
-                break;
-            }
-        }
-
-        if !found_group {
-            click_groups.push(vec![*idx]);
-        }
-    }
-
-    let mut intervals: Vec<(f64, f64)> = Vec::new();
-
-    for group in click_groups {
-        if group.is_empty() {
+        if click_time >= activity_end_limit {
             continue;
         }
 
-        let times: Vec<f64> = group
-            .iter()
-            .map(|&idx| clicks[idx].time_ms / 1000.0)
-            .collect();
-        let group_start = times.iter().cloned().fold(f64::INFINITY, f64::min);
-        let group_end = times.iter().cloned().fold(f64::NEG_INFINITY, f64::max);
+        let start = (click_time - CLICK_PRE_PADDING).max(0.0);
+        let end = (start + DEFAULT_ZOOM_DURATION).min(activity_end_limit);
 
-        let start = (group_start - CLICK_PRE_PADDING).max(0.0);
-        let end = (group_end + CLICK_POST_PADDING).min(activity_end_limit);
-
-        if end > start {
-            intervals.push((start, end));
-        }
-    }
-
-    if intervals.is_empty() {
-        return Vec::new();
-    }
-
-    intervals.sort_by(|a, b| a.0.partial_cmp(&b.0).unwrap_or(std::cmp::Ordering::Equal));
-
-    let mut merged: Vec<(f64, f64)> = Vec::new();
-    for interval in intervals {
-        if let Some(last) = merged.last_mut()
-            && interval.0 <= last.1 + MERGE_GAP_THRESHOLD
+        if let Some(prev) = segments.last_mut()
+            && start < prev.end
         {
-            last.1 = last.1.max(interval.1);
+            prev.end = start;
+        }
+
+        if let Some(prev) = segments.last()
+            && prev.end - prev.start < MIN_SEGMENT_DURATION
+        {
+            segments.pop();
+        }
+
+        if end - start < MIN_SEGMENT_DURATION {
             continue;
         }
-        merged.push(interval);
+
+        segments.push(ZoomSegment {
+            start,
+            end,
+            amount: AUTO_ZOOM_AMOUNT,
+            mode: ZoomMode::Auto,
+            glide_direction: GlideDirection::None,
+            glide_speed: 0.5,
+            instant_animation: false,
+            edge_snap_ratio: 0.25,
+        });
     }
 
-    merged
-        .into_iter()
-        .filter_map(|(start, end)| {
-            let duration = end - start;
-            if duration < MIN_SEGMENT_DURATION {
-                return None;
-            }
-
-            Some(ZoomSegment {
-                start,
-                end,
-                amount: AUTO_ZOOM_AMOUNT,
-                mode: ZoomMode::Auto,
-                glide_direction: GlideDirection::None,
-                glide_speed: 0.5,
-                instant_animation: false,
-                edge_snap_ratio: 0.25,
-            })
-        })
-        .collect()
+    segments
 }
 
 fn offset_cursor_events(
@@ -2069,38 +1976,41 @@ mod tests {
     }
 
     #[test]
-    fn generates_segment_for_click_group() {
-        let clicks = vec![click_event(1_200.0), click_event(2_400.0)];
-        let moves = vec![
-            move_event(1_500.0, 0.10, 0.12),
-            move_event(2_300.0, 0.12, 0.14),
-        ];
+    fn generates_one_segment_per_click_when_spaced_out() {
+        let clicks = vec![click_event(1_000.0), click_event(10_000.0)];
 
-        let segments = generate_zoom_segments_from_clicks_impl(clicks, moves, 20.0);
+        let segments = generate_zoom_segments_from_clicks_impl(clicks, vec![], 20.0);
 
-        assert_eq!(segments.len(), 1, "expected one click group");
-        let first = &segments[0];
-        assert!(first.start < first.end);
-        assert!(first.end - first.start >= 3.0);
-        assert!(first.end <= 19.5);
+        assert_eq!(
+            segments.len(),
+            2,
+            "expected an independent segment per click"
+        );
+        assert!(
+            segments[0].end < segments[1].start,
+            "expected a gap between well-separated clicks, not a merge"
+        );
+        assert!(segments[0].end - segments[0].start > 1.0);
+        assert!(segments[1].end - segments[1].start > 1.0);
     }
 
     #[test]
-    fn ignores_cursor_jitter() {
-        let jitter_moves = (0..30)
-            .map(|i| {
-                let t = 1_000.0 + (i as f64) * 30.0;
-                let delta = (i as f64) * 0.0004;
-                move_event(t, 0.5 + delta, 0.5)
-            })
-            .collect::<Vec<_>>();
+    fn rapid_clicks_trim_instead_of_merging() {
+        let clicks = vec![click_event(1_200.0), click_event(2_400.0)];
 
-        let segments = generate_zoom_segments_from_clicks_impl(Vec::new(), jitter_moves, 15.0);
+        let segments = generate_zoom_segments_from_clicks_impl(clicks, vec![], 20.0);
 
-        assert!(
-            segments.is_empty(),
-            "small jitter should not generate segments"
+        assert_eq!(
+            segments.len(),
+            2,
+            "rapid clicks should still produce two independent segments"
         );
+        assert!(
+            (segments[0].end - segments[1].start).abs() < f64::EPSILON,
+            "the earlier segment should be trimmed to end exactly where the next one starts"
+        );
+        assert!(segments[0].start < segments[0].end);
+        assert!(segments[1].start < segments[1].end);
     }
 
     #[test]

@@ -1,12 +1,11 @@
 import Tooltip from "@corvu/tooltip";
 import { Button, ProgressCircle } from "@orbit/ui-solid";
 import {
-	createMutation,
 	createQuery,
 	queryOptions,
 	useQueryClient,
 } from "@tanstack/solid-query";
-import { Channel, convertFileSrc } from "@tauri-apps/api/core";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { ask, confirm } from "@tauri-apps/plugin-dialog";
 import { remove } from "@tauri-apps/plugin-fs";
 import { revealItemInDir } from "@tauri-apps/plugin-opener";
@@ -30,7 +29,6 @@ import {
 	commands,
 	events,
 	type RecordingMetaWithMetadata,
-	type UploadProgress,
 } from "~/utils/tauri";
 import IconLucideSearch from "~icons/lucide/search";
 
@@ -45,11 +43,6 @@ const Tabs = [
 	{
 		id: "all",
 		label: "Show all",
-	},
-	{
-		id: "instant",
-		icon: <IconOrbitInstant class="invert size-3 dark:invert-0" />,
-		label: "Instant",
 	},
 	{
 		id: "studio",
@@ -301,12 +294,15 @@ function RecordingItem(props: {
 }) {
 	const [imageExists, setImageExists] = createSignal(true);
 	const mode = () => props.recording.meta.mode;
+	const isLegacyInstantRecording = () => "fps" in props.recording.meta;
 	const firstLetterUpperCase = () =>
 		mode().charAt(0).toUpperCase() + mode().slice(1);
 
 	const queryClient = useQueryClient();
 	const studioCompleteCheck = () =>
-		mode() === "studio" && props.recording.meta.status.status === "Complete";
+		mode() === "studio" &&
+		!isLegacyInstantRecording() &&
+		props.recording.meta.status.status === "Complete";
 
 	return (
 		<li
@@ -339,17 +335,8 @@ function RecordingItem(props: {
 				<div class="flex flex-col gap-2">
 					<span>{props.recording.prettyName}</span>
 					<div class="flex space-x-1">
-						<div
-							class={cx(
-								"px-2 py-0.5 flex items-center gap-1.5 font-medium text-[11px] text-gray-12 rounded-full w-fit",
-								mode() === "instant" ? "bg-blue-100" : "bg-gray-4",
-							)}
-						>
-							{mode() === "instant" ? (
-								<IconOrbitInstant class="invert size-2.5 dark:invert-0" />
-							) : (
-								<IconOrbitFilmCut class="invert size-2.5 dark:invert-0" />
-							)}
+						<div class="px-2 py-0.5 flex items-center gap-1.5 font-medium text-[11px] text-gray-12 rounded-full w-fit bg-gray-4">
+							<IconOrbitFilmCut class="invert size-2.5 dark:invert-0" />
 							<p>{firstLetterUpperCase()}</p>
 						</div>
 
@@ -388,7 +375,7 @@ function RecordingItem(props: {
 				</div>
 			</div>
 			<div class="flex gap-2 items-center">
-				<Show when={mode() === "studio"}>
+				<Show when={mode() === "studio" && !isLegacyInstantRecording()}>
 					<Show when={props.uploadProgress}>
 						<CapTooltip content={`${(props.uploadProgress || 0).toFixed(2)}%`}>
 							<ProgressCircle
@@ -429,59 +416,12 @@ function RecordingItem(props: {
 						<IconLucideEdit class="size-4" />
 					</TooltipIconButton>
 				</Show>
-				<Show when={mode() === "instant"}>
-					{(_) => {
-						const reupload = createMutation(() => ({
-							mutationFn: () =>
-								commands.uploadExportedVideo(
-									props.recording.path,
-									"Reupload",
-									new Channel<UploadProgress>((_progress) => {}),
-									null,
-								),
-						}));
-
-						return (
-							<>
-								<Show
-									when={props.uploadProgress || reupload.isPending}
-									fallback={
-										<TooltipIconButton
-											tooltipText="Reupload"
-											onClick={() => reupload.mutate()}
-										>
-											<IconLucideRotateCcw class="size-4" />
-										</TooltipIconButton>
-									}
-								>
-									<ProgressCircle
-										variant="primary"
-										progress={props.uploadProgress || 0}
-										size="sm"
-									/>
-								</Show>
-
-								<Show when={props.recording.meta.sharing}>
-									{(sharing) => (
-										<TooltipIconButton
-											tooltipText="Open link"
-											onClick={() => shell.open(sharing().link)}
-										>
-											<IconOrbitLink class="size-4" />
-										</TooltipIconButton>
-									)}
-								</Show>
-							</>
-						);
-					}}
-				</Show>
 				<TooltipIconButton
 					tooltipText="Open recording bundle"
 					onClick={() => {
-						const path =
-							mode() === "instant"
-								? `${props.recording.path}/content/output.mp4`
-								: `${props.recording.path}/`;
+						const path = isLegacyInstantRecording()
+							? `${props.recording.path}/content/output.mp4`
+							: `${props.recording.path}/`;
 						revealItemInDir(path);
 					}}
 				>

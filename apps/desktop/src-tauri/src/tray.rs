@@ -44,7 +44,6 @@ pub enum TrayItem {
     Quit,
     PreviousItem(String),
     ModeStudio,
-    ModeInstant,
     ModeScreenshot,
     RequestPermissions,
 }
@@ -67,7 +66,6 @@ impl From<TrayItem> for MenuId {
                 return format!("{PREVIOUS_ITEM_PREFIX}{id}").into();
             }
             TrayItem::ModeStudio => "mode_studio",
-            TrayItem::ModeInstant => "mode_instant",
             TrayItem::ModeScreenshot => "mode_screenshot",
             TrayItem::RequestPermissions => "request_permissions",
         }
@@ -98,7 +96,6 @@ impl TryFrom<MenuId> for TrayItem {
             "upload_logs" => Ok(TrayItem::UploadLogs),
             "quit" => Ok(TrayItem::Quit),
             "mode_studio" => Ok(TrayItem::ModeStudio),
-            "mode_instant" => Ok(TrayItem::ModeInstant),
             "mode_screenshot" => Ok(TrayItem::ModeScreenshot),
             "request_permissions" => Ok(TrayItem::RequestPermissions),
             value => Err(format!("Invalid tray item id {value}")),
@@ -341,7 +338,6 @@ fn create_mode_submenu(app: &AppHandle) -> tauri::Result<Submenu<tauri::Wry>> {
 
     let modes = [
         (TrayItem::ModeStudio, RecordingMode::Studio, "Studio"),
-        (TrayItem::ModeInstant, RecordingMode::Instant, "Instant"),
         (
             TrayItem::ModeScreenshot,
             RecordingMode::Screenshot,
@@ -611,7 +607,6 @@ pub fn get_mode_icon(mode: RecordingMode) -> &'static [u8] {
     }
     match mode {
         RecordingMode::Studio => include_bytes!("../icons/tray-default-icon-studio.png"),
-        RecordingMode::Instant => include_bytes!("../icons/tray-default-icon-instant.png"),
         RecordingMode::Screenshot => include_bytes!("../icons/tray-default-icon-screenshot.png"),
     }
 }
@@ -796,9 +791,6 @@ pub fn create_tray(app: &AppHandle) -> tauri::Result<()> {
                 }
                 Ok(TrayItem::ModeStudio) => {
                     handle_mode_selection(app, RecordingMode::Studio, &cache);
-                }
-                Ok(TrayItem::ModeInstant) => {
-                    handle_mode_selection(app, RecordingMode::Instant, &cache);
                 }
                 Ok(TrayItem::ModeScreenshot) => {
                     handle_mode_selection(app, RecordingMode::Screenshot, &cache);

@@ -9,7 +9,6 @@ import {
 	type PhysicalPosition,
 	type PhysicalSize,
 } from "@tauri-apps/api/dpi";
-import { emit } from "@tauri-apps/api/event";
 import {
 	CheckMenuItem,
 	Menu,
@@ -42,7 +41,7 @@ import {
 } from "~/components/Cropper";
 import ModeSelect from "~/components/ModeSelect";
 import SelectionHint from "~/components/selection-hint";
-import { authStore, generalSettingsStore } from "~/store";
+import { generalSettingsStore } from "~/store";
 import { createDevicesQuery } from "~/utils/devices";
 import {
 	createCameraMutation,
@@ -332,7 +331,6 @@ function Inner() {
 							setToggleModeSelect={setToggleModeSelect}
 							target={{ variant: "display", id: displayId() }}
 						/>
-						<ShowCapFreeWarning isInstantMode={options.mode === "instant"} />
 					</div>
 				)}
 			</Match>
@@ -434,9 +432,6 @@ function Inner() {
 								>
 									Adjust recording area
 								</Button>
-								<ShowCapFreeWarning
-									isInstantMode={options.mode === "instant"}
-								/>
 							</div>
 						</div>
 					)}
@@ -821,13 +816,6 @@ function Inner() {
 									JSON.stringify(target, null, 2),
 								);
 
-								const areaLicenseStatus = await commands.getLicenseStatus();
-								if (areaLicenseStatus.type !== "valid") {
-									await commands.closeTargetSelectOverlays();
-									commands.showWindow({ Main: { init_target_mode: null } });
-									return;
-								}
-
 								try {
 									const allWindows = await WebviewWindow.getAll();
 									for (const win of allWindows) {
@@ -897,11 +885,6 @@ function Inner() {
 												is too small
 											</small>
 										</div>
-									</Show>
-									<Show when={isValid()}>
-										<ShowCapFreeWarning
-											isInstantMode={options.mode === "instant"}
-										/>
 									</Show>
 								</div>
 							</div>
@@ -1170,7 +1153,6 @@ function RecordingControls(props: {
 	disabled?: boolean;
 	onRecordingStart?: () => void;
 }) {
-	const auth = authStore.createQuery();
 	const { setOptions, rawOptions } = useRecordingOptions();
 
 	const generalSetings = generalSettingsStore.createQuery();
@@ -1237,14 +1219,6 @@ function RecordingControls(props: {
 						commands.setRecordingMode("studio");
 					},
 					checked: rawOptions.mode === "studio",
-				}),
-				await CheckMenuItem.new({
-					text: "Instant Mode",
-					action: () => {
-						setOptions("mode", "instant");
-						commands.setRecordingMode("instant");
-					},
-					checked: rawOptions.mode === "instant",
 				}),
 				await CheckMenuItem.new({
 					text: "Screenshot Mode",
@@ -1317,22 +1291,10 @@ function RecordingControls(props: {
 							<IconOrbitX class="invert will-change-transform size-3 dark:invert-0" />
 						</div>
 						<div
-							data-inactive={rawOptions.mode === "instant" && !auth.data}
 							data-disabled={startDisabled()}
 							class="flex flex-1 min-w-0 max-w-[18rem] overflow-hidden flex-row h-11 rounded-full text-white bg-gradient-to-r from-blue-10 via-blue-10 to-blue-11 dark:from-blue-9 dark:via-blue-9 dark:to-blue-10 group"
 							onClick={async () => {
-								if (rawOptions.mode === "instant" && !auth.data) {
-									emit("start-sign-in");
-									return;
-								}
 								if (startDisabled()) return;
-
-								const licenseStatus = await commands.getLicenseStatus();
-								if (licenseStatus.type !== "valid") {
-									await commands.closeTargetSelectOverlays();
-									commands.showWindow({ Main: { init_target_mode: null } });
-									return;
-								}
 
 								if (props.target.variant === "area") {
 									setOptions(
@@ -1389,9 +1351,6 @@ function RecordingControls(props: {
 									<Match when={rawOptions.mode === "studio"}>
 										<IconOrbitFilmCut class="size-4 flex-shrink-0" />
 									</Match>
-									<Match when={rawOptions.mode === "instant"}>
-										<IconOrbitInstant class="size-4 flex-shrink-0" />
-									</Match>
 									<Match when={(rawOptions.mode as string) === "screenshot"}>
 										<IconOrbitCamera class="size-4 flex-shrink-0" />
 									</Match>
@@ -1399,8 +1358,6 @@ function RecordingControls(props: {
 								<div class="flex flex-col mr-2 ml-3 min-w-0">
 									<span class="text-[0.95rem] font-medium text-white text-nowrap">
 										{(() => {
-											if (rawOptions.mode === "instant" && !auth.data)
-												return "Sign In To Use";
 											if (rawOptions.mode === "screenshot")
 												return "Take Screenshot";
 											return "Start Recording";
@@ -1488,25 +1445,5 @@ function RecordingControls(props: {
 				</div>
 			</div>
 		</>
-	);
-}
-
-function ShowCapFreeWarning(props: { isInstantMode: boolean }) {
-	const auth = authStore.createQuery();
-
-	return (
-		<Suspense>
-			<Show when={props.isInstantMode && auth.data?.plan?.upgraded === false}>
-				<p class="text-sm text-center max-w-64">
-					Instant Mode recordings are limited to 5 mins,{" "}
-					<button
-						class="underline"
-						onClick={() => commands.showWindow("Upgrade")}
-					>
-						Upgrade to Pro
-					</button>
-				</p>
-			</Show>
-		</Suspense>
 	);
 }

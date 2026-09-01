@@ -579,7 +579,7 @@ function DefaultProjectNameCard(props: {
 			val,
 			macos ? "Safari" : "Chrome",
 			"Window",
-			"instant",
+			"studio",
 			datetime,
 		);
 		setPreview(formatted);
@@ -591,7 +591,7 @@ function DefaultProjectNameCard(props: {
 				MOMENT_EXAMPLE_TEMPLATE,
 				macos ? "Safari" : "Chrome",
 				"Window",
-				"instant",
+				"studio",
 				datetime,
 			)
 			.then(setMomentExample);
@@ -699,12 +699,11 @@ function DefaultProjectNameCard(props: {
 						<div class="space-y-1">
 							<p class="font-medium text-foreground">Recording Mode</p>
 							<p>
-								<CodeView>{"{recording_mode}"}</CodeView> → "Studio", "Instant",
-								or "Screenshot"
+								<CodeView>{"{recording_mode}"}</CodeView> → "Studio" or
+								"Screenshot"
 							</p>
 							<p>
-								<CodeView>{"{mode}"}</CodeView> → "studio", "instant", or
-								"screenshot"
+								<CodeView>{"{mode}"}</CodeView> → "studio" or "screenshot"
 							</p>
 						</div>
 
